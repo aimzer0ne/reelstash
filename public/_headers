@@ -1,0 +1,11 @@
+# Cloudflare Pages — do not keep stale CSS/HTML from older uploads
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  CDN-Cache-Control: no-store
+
+/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+  CDN-Cache-Control: no-store
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable

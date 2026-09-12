@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "app/api/resolve/route.js": {
+      "maxDuration": 60,
+      "includeFiles": "{vendor/**,node_modules/ffmpeg-static/**}"
+    },
+    "app/api/download/route.js": {
+      "maxDuration": 60,
+      "includeFiles": "{vendor/**,node_modules/ffmpeg-static/**}"
+    },
+    "app/api/health/route.js": {
+      "maxDuration": 10,
+      "includeFiles": "vendor/**"
+    }
+  }
+}
