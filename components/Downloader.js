@@ -42,7 +42,11 @@ export function Downloader({
     try {
       const response = await fetch(apiUrl('/api/resolve'), {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        credentials: 'include',
+        headers: {
+          'content-type': 'application/json',
+          'x-reelsdl-client': 'web'
+        },
         body: JSON.stringify(mode === 'audio' ? { url: value, mode: 'audio' } : { url: value })
       });
       const body = await response.json().catch(() => ({}));
@@ -277,7 +281,7 @@ function MediaCard({ item, index, total, mode }) {
               alt={isAudio ? `Instagram reel cover ${itemNumber}` : kind === 'video' ? `Instagram video cover ${itemNumber}` : `Instagram photo ${itemNumber}`}
               loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
-              referrerPolicy="no-referrer"
+              referrerPolicy={isApiAsset(thumb) ? 'origin' : 'no-referrer'}
               onLoad={clearShimmer}
               onError={() => setPreviewFailed(true)}
             />
@@ -303,6 +307,10 @@ function MediaCard({ item, index, total, mode }) {
       </div>
     </article>
   );
+}
+
+function isApiAsset(url) {
+  return /\/api\/download(?:\?|$)/.test(url) || /(?:^|\/\/)get\.reelsdl\.net\//i.test(url);
 }
 
 function lightPreview(item) {

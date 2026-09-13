@@ -1,6 +1,9 @@
+import { API_SECURITY_HEADERS, SITE_SECURITY_HEADERS, headerList } from './lib/security.js';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   agentRules: false,
+  poweredByHeader: false,
   async redirects() {
     return [
       { source: '/audio.html', destination: '/instagram-audio-downloader', permanent: true },
@@ -20,16 +23,21 @@ const nextConfig = {
         ]
       },
       {
-        source: '/((?!_next/static|_next/image).*)',
-        headers: [
+        source: '/((?!_next/static|_next/image|api/).*)',
+        headers: headerList(SITE_SECURITY_HEADERS).concat([
           { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }
-        ]
+        ])
       },
       {
         source: '/_next/static/:path*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' }
         ]
+      },
+      {
+        source: '/api/:path*',
+        headers: headerList(API_SECURITY_HEADERS)
       }
     ];
   }

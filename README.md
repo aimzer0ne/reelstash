@@ -25,13 +25,27 @@ Then visit [http://localhost:3000](http://localhost:3000). Set a long random `DO
 
 1. Install the [Vercel CLI](https://vercel.com/docs/cli) and log in.
 2. From this folder: `vercel` for a preview, or `vercel --prod` for production.
-3. Add `DOWNLOAD_TOKEN_SECRET` and optionally `SITE_URL` (the public origin) in the Vercel project settings.
+3. In the Vercel project settings add:
+   - `DOWNLOAD_TOKEN_SECRET` — long random string that signs download tickets
+   - `SITE_URL=https://reelsdl.net`
+   - `NEXT_PUBLIC_API_URL=https://get.reelsdl.net`
 
 The deploy bundles `vendor/yt-dlp` into the serverless functions. Video downloads can take up to 60 seconds while yt-dlp merges audio and video.
 
 There is a dedicated Instagram audio page at `/instagram-audio-downloader` that extracts MP3 soundtracks from public reels (ffmpeg) or downloads direct audio streams when available.
 
-Cloudflare Workers cannot run `yt-dlp`/ffmpeg. The included Worker proxies the whole Next.js site to the Vercel origin. Set `API_ORIGIN` in **Cloudflare → Workers & Pages → reelsdl → Settings → Variables and Secrets** to `https://reelsdl.net`. Then redeploy the Worker.
+## Domains
+
+| Host | Role |
+|------|------|
+| `https://reelsdl.net` | Public website (Cloudflare Worker → Vercel) |
+| `https://get.reelsdl.net` | API only (`/api/resolve`, `/api/download`, `/api/health`) |
+
+Add `get.reelsdl.net` as a domain on the same Vercel project. In Cloudflare DNS create a **CNAME** `get` → `cname.vercel-dns.com` and leave the proxy **DNS only** (grey cloud) so API traffic hits Vercel directly.
+
+The API only accepts traffic on `get.reelsdl.net` and only from `https://reelsdl.net`: locked CORS, a signed `__Secure-` site cookie, a required `x-reelsdl-client` header, JSON-only resolve bodies, and HMAC download tickets scoped to this API. Other websites, the Vercel hostname, and raw `curl` calls are rejected. Health does not expose internals.
+
+Cloudflare Workers cannot run `yt-dlp`/ffmpeg. The included Worker proxies the public site to the Vercel origin. Keep `API_ORIGIN` in **Cloudflare → Workers & Pages → reelsdl → Settings → Variables and Secrets** as the Vercel URL (`https://reelstash-three.vercel.app`), never `https://reelsdl.net` (that loops). If `get.reelsdl.net` is accidentally routed through the Worker, non-`/api` paths redirect to the site.
 
 Do not set `INSTAGRAM_COOKIES_FROM_BROWSER` on Vercel. If Instagram blocks anonymous extraction, you can store Netscape-format cookies in the `INSTAGRAM_COOKIES` environment variable on a private deployment only.
 

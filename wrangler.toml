@@ -1,3 +1,8 @@
+# Worker backend only — the real Vercel deployment, not a public hostname.
+# Do not set this to https://reelsdl.net (the Worker would proxy to itself).
+# Do not set this to https://get.reelsdl.net (that host is API-only and
+# would bounce the website back to reelsdl.net).
+# Browsers call get.reelsdl.net directly; this Worker never needs that URL.
 name = "reelstash"
 main = "worker.js"
 compatibility_date = "2026-09-12"

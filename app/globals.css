@@ -81,7 +81,7 @@ h3 {
 }
 
 p {
-  font-weight: 700;
+  font-weight: 300;
 }
 
 [hidden] {
@@ -610,7 +610,7 @@ a.ig-username:hover {
   line-height: 1.65;
 }
 
-.article-copy p + p {
+.article-copy p+p {
   margin-top: 16px;
 }
 
@@ -783,7 +783,7 @@ a.ig-username:hover {
   font-weight: 700;
 }
 
-.faq-answer p + p,
+.faq-answer p+p,
 .faq-answer ul {
   margin-top: 12px;
 }
@@ -864,7 +864,7 @@ a.ig-username:hover {
   list-style: none;
 }
 
-.how-steps li + li {
+.how-steps li+li {
   border-left: 1px solid var(--line);
 }
 
@@ -1067,7 +1067,7 @@ footer p {
     grid-template-columns: 1fr;
   }
 
-  .how-steps li + li {
+  .how-steps li+li {
     border-left: 0;
     border-top: 1px solid var(--line);
   }

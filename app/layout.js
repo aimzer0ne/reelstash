@@ -68,6 +68,7 @@ export const metadata = {
       'max-video-preview': -1
     }
   },
+  referrer: 'origin',
   other: {
     'format-detection': 'telephone=no',
     'mobile-web-app-capable': 'yes'
