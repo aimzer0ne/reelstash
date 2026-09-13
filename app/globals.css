@@ -121,9 +121,11 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-fraunces), Fraunces, Georgia, serif;
-  font-size: 22px;
-  font-weight: 600;
+  font-family: var(--font-logo), Yellowtail, cursive;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1.15;
 }
 
 .wordmark .icon,
@@ -574,18 +576,6 @@ a.ig-username:hover {
   margin: 88px auto 0;
 }
 
-.home-feature img {
-  width: auto;
-  max-width: min(100%, 680px);
-  height: auto;
-  max-height: min(72vh, 760px);
-  display: block;
-  margin-inline: auto;
-  object-fit: contain;
-  border: 1px solid var(--line);
-  background: var(--paper);
-}
-
 .home-feature p {
   margin: 18px 0 0;
   color: var(--muted);
@@ -964,9 +954,11 @@ footer p {
   gap: 8px;
   margin-bottom: 16px;
   color: var(--text);
-  font-family: var(--font-fraunces), Fraunces, Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--font-logo), Yellowtail, cursive;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1.15;
 }
 
 .footer-logo {
@@ -1044,7 +1036,7 @@ footer p {
   }
 
   .wordmark {
-    font-size: clamp(18px, 5vw, 22px);
+    font-size: clamp(24px, 7vw, 30px);
   }
 
   .install-app {
@@ -1097,10 +1089,6 @@ footer p {
 
   .media-grid.is-single {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .home-feature img {
-    max-height: min(58vh, 420px);
   }
 
   h2,

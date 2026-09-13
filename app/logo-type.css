@@ -1,0 +1,21 @@
+.wordmark,
+.footer-brand {
+  font-family: var(--font-logo), Yellowtail, cursive;
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1.15;
+}
+
+.wordmark {
+  font-size: 30px;
+}
+
+.footer-brand {
+  font-size: 22px;
+}
+
+@media (max-width: 720px) {
+  .wordmark {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+}

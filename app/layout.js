@@ -1,5 +1,6 @@
-import { Fraunces, Inter } from 'next/font/google';
-import './globals.css?v=10';
+import { Fraunces, Inter, Yellowtail } from 'next/font/google';
+import './globals.css?v=11';
+import './logo-type.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -12,6 +13,13 @@ const fraunces = Fraunces({
   subsets: ['latin'],
   weight: ['500', '600'],
   variable: '--font-fraunces',
+  display: 'swap'
+});
+
+const logo = Yellowtail({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-logo',
   display: 'swap'
 });
 
@@ -72,7 +80,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${logo.variable}`}>
       <body>{children}</body>
     </html>
   );

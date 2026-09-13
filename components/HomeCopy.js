@@ -35,15 +35,6 @@ export function HomeCopy({ page }) {
       <HowToGuide heading={page.how.heading} type="reels" />
 
       <section className="home-feature" aria-labelledby="reels-downloader-heading">
-        <img
-          src={page.feature.image}
-          alt={page.feature.alt}
-          width="682"
-          height="1024"
-          loading="lazy"
-          decoding="async"
-          sizes="(max-width: 720px) 100vw, 680px"
-        />
         <div className="home-feature-copy article-copy">
           <h2 id="reels-downloader-heading">Reels Downloader :</h2>
           <p>

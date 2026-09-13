@@ -111,6 +111,15 @@ export function IconAlert({ className }) {
   );
 }
 
+/** X — clear field */
+export function IconClear({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M6 6l12 12M18 6L6 18" />
+    </Svg>
+  );
+}
+
 /** Boxy loop — download again */
 export function IconAgain({ className }) {
   return (
@@ -132,6 +141,7 @@ const ICONS = {
   copy: IconCopy,
   wave: IconWave,
   alert: IconAlert,
+  clear: IconClear,
   again: IconAgain
 };
 

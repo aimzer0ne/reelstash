@@ -19,6 +19,8 @@ export function Downloader({
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
   const resultsRef = useRef(null);
+  const inputRef = useRef(null);
+  const hasUrl = Boolean(url.trim());
 
   async function resolveUrl(nextUrl) {
     const value = (nextUrl ?? url).trim();
@@ -69,6 +71,12 @@ export function Downloader({
     }
   }
 
+  function clearField() {
+    setUrl('');
+    setError('');
+    inputRef.current?.focus();
+  }
+
   function onPaste(event) {
     const text = event.clipboardData?.getData('text')?.trim();
     if (!text || !looksLikeInstagramUrl(text)) return;
@@ -100,6 +108,7 @@ export function Downloader({
           <div className={loading ? 'input-wrap is-loading' : 'input-wrap'}>
             <Icon name="link" className="input-icon" />
             <input
+              ref={inputRef}
               id="instagram-url"
               name="url"
               type="url"
@@ -112,10 +121,17 @@ export function Downloader({
               onChange={(event) => setUrl(event.target.value)}
               onPaste={onPaste}
             />
-            <button className="paste-button" type="button" disabled={loading} onClick={() => void pasteLink()}>
-              <Icon name="paste" />
-              Paste
-            </button>
+            {hasUrl ? (
+              <button className="paste-button" type="button" disabled={loading} onClick={clearField}>
+                <Icon name="clear" />
+                Clear
+              </button>
+            ) : (
+              <button className="paste-button" type="button" disabled={loading} onClick={() => void pasteLink()}>
+                <Icon name="paste" />
+                Paste
+              </button>
+            )}
           </div>
           <div
             className={loading ? 'ig-loading-track is-active' : 'ig-loading-track'}
@@ -233,7 +249,8 @@ function MediaCard({ item, index, total, mode }) {
     : isAudio
       ? `ReelsDl-audio-${itemNumber}.mp3`
       : `ReelsDl-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
-  const thumb = lightPreview(item);
+  const [previewFailed, setPreviewFailed] = useState(false);
+  const thumb = previewFailed ? null : lightPreview(item);
 
   return (
     <article className="media-card">
@@ -246,8 +263,9 @@ function MediaCard({ item, index, total, mode }) {
               alt={isAudio ? `Instagram reel cover ${itemNumber}` : kind === 'video' ? `Instagram video cover ${itemNumber}` : `Instagram photo ${itemNumber}`}
               loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
+              referrerPolicy="no-referrer"
               onLoad={clearShimmer}
-              onError={clearShimmer}
+              onError={() => setPreviewFailed(true)}
             />
           </>
         ) : (
@@ -275,7 +293,7 @@ function MediaCard({ item, index, total, mode }) {
 
 function lightPreview(item) {
   const url = item.coverUrl || item.previewUrl;
-  if (!url || /\/api\/download/i.test(url) || /\.(mp4|webm|mov|m4v|mp3|m4a)(\?|$)/i.test(url)) return null;
+  if (!url || /\.(mp4|webm|mov|m4v|mp3|m4a)(\?|$)/i.test(url)) return null;
   return url;
 }
 

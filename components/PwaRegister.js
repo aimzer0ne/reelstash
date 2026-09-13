@@ -7,7 +7,7 @@ export function PwaRegister() {
   const [installEvent, setInstallEvent] = useState(null);
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {});
     }
 
