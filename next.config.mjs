@@ -4,6 +4,8 @@ import { API_SECURITY_HEADERS, SITE_SECURITY_HEADERS, headerList } from './lib/s
 const nextConfig = {
   agentRules: false,
   poweredByHeader: false,
+  compress: true,
+  productionBrowserSourceMaps: false,
   async redirects() {
     return [
       { source: '/audio.html', destination: '/instagram-audio-downloader', permanent: true },

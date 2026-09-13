@@ -1,13 +1,9 @@
 import { NextResponse } from 'next/server';
-import { attachSiteLockCookie, isAllowedApiPath, isLocalDevHost } from './lib/api-guard.js';
+import { attachSiteLockCookie, isAllowedApiPath, isLocalDevHost, publicHostname } from './lib/api-guard.js';
 import { API_SECURITY_HEADERS, SITE_SECURITY_HEADERS, applyHeaders } from './lib/security.js';
 
 const SITE_ORIGIN = 'https://reelsdl.net';
-
-function hostnameOf(request) {
-  const host = request.headers.get('host') || '';
-  return host.split(':')[0].toLowerCase();
-}
+const SITE_HOSTS = new Set(['reelsdl.net', 'www.reelsdl.net']);
 
 function withHeaders(response, map) {
   applyHeaders(response.headers, map);
@@ -15,7 +11,7 @@ function withHeaders(response, map) {
 }
 
 export function proxy(request) {
-  const hostname = hostnameOf(request);
+  const hostname = publicHostname(request);
   const { pathname } = request.nextUrl;
 
   if (hostname === 'get.reelsdl.net') {
@@ -30,13 +26,13 @@ export function proxy(request) {
     return withHeaders(NextResponse.next(), API_SECURITY_HEADERS);
   }
 
-  if (pathname.startsWith('/api/') && (hostname === 'reelsdl.net' || hostname === 'www.reelsdl.net')) {
+  if (pathname.startsWith('/api/') && SITE_HOSTS.has(hostname)) {
     return withHeaders(NextResponse.json({ error: 'Use https://get.reelsdl.net' }, { status: 404 }), API_SECURITY_HEADERS);
   }
 
   const response = NextResponse.next();
   applyHeaders(response.headers, SITE_SECURITY_HEADERS);
-  if (hostname === 'reelsdl.net' || hostname === 'www.reelsdl.net') {
+  if (SITE_HOSTS.has(hostname)) {
     attachSiteLockCookie(response);
   } else if (isLocalDevHost(hostname)) {
     attachSiteLockCookie(response, { local: true });

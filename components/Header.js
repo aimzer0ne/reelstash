@@ -1,6 +1,11 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Logo } from './Logo';
-import { PwaRegister } from './PwaRegister';
+
+const PwaRegister = dynamic(
+  () => import('./PwaRegister').then((mod) => mod.PwaRegister),
+  { ssr: false }
+);
 
 export function Header() {
   return (

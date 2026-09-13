@@ -1,27 +1,31 @@
 import { Fraunces, Inter, Yellowtail } from 'next/font/google';
-import './globals.css?v=13';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import './globals.css';
 import './logo-type.css';
 import './input-hit.css';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: ['400', '600', '700'],
   variable: '--font-inter',
-  display: 'swap'
+  display: 'swap',
+  preload: true
 });
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['500', '600'],
+  weight: ['600'],
   variable: '--font-fraunces',
-  display: 'swap'
+  display: 'swap',
+  preload: true
 });
 
 const logo = Yellowtail({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-logo',
-  display: 'swap'
+  display: 'swap',
+  preload: true
 });
 
 export const metadata = {
@@ -83,7 +87,10 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${logo.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }
