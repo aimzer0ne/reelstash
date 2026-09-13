@@ -4,10 +4,10 @@ export function DisclaimerCopy() {
   return (
     <div className="legal-copy">
       <p>
-        Welcome! to <Link href="/">Reelstash</Link>
+        Welcome! to <Link href="/">ReelsDl.net</Link>
       </p>
       <p>
-        Let us clear for all the users of <b>Reelstash</b> that we DO NOT host any of
+        Let us clear for all the users of <b>ReelsDl.net</b> that we DO NOT host any of
         instagram content on our server, Downloading links for videos/images are
         provided by Instagram CDN servers
       </p>
@@ -18,7 +18,7 @@ export function DisclaimerCopy() {
       </p>
       <p>
         Email :{' '}
-        <a href="mailto:hello@reelstash.net">hello@reelstash.net</a>
+        <a href="mailto:hello@reelsdl.net">hello@reelsdl.net</a>
       </p>
     </div>
   );

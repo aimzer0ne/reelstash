@@ -1,9 +1,9 @@
 import { Fraunces, Inter } from 'next/font/google';
-import './globals.css?v=9';
+import './globals.css?v=10';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['500', '600', '700'],
   variable: '--font-inter',
   display: 'swap'
 });
@@ -16,11 +16,11 @@ const fraunces = Fraunces({
 });
 
 export const metadata = {
-  metadataBase: new URL(process.env.SITE_URL || 'http://localhost:3000'),
-  applicationName: 'Reelstash',
+  metadataBase: new URL(process.env.SITE_URL || 'https://reelsdl.net'),
+  applicationName: 'ReelsDl.net',
   appleWebApp: {
     capable: true,
-    title: 'Reelstash',
+    title: 'ReelsDl.net',
     statusBarStyle: 'default'
   },
   icons: {
@@ -32,11 +32,32 @@ export const metadata = {
     shortcut: '/favicon.svg',
     apple: '/apple-touch-icon.png'
   },
-  authors: [{ name: 'Reelstash' }],
+  authors: [{ name: 'ReelsDl.net', url: 'https://reelsdl.net' }],
+  creator: 'ReelsDl.net',
+  publisher: 'ReelsDl.net',
+  category: 'utilities',
+  keywords: [
+    'Instagram reel downloader',
+    'Instagram video downloader',
+    'Instagram audio downloader',
+    'download Instagram reels',
+    'ReelsDl.net'
+  ],
+  alternates: {
+    types: {
+      'text/plain': '/llms.txt'
+    }
+  },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true }
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1
+    }
   },
   other: {
     'format-detection': 'telephone=no',

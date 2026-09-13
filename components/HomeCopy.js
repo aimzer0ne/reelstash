@@ -9,14 +9,20 @@ export function HomeCopy({ page }) {
       </p>
 
       <section className="panel article-panel" aria-labelledby="home-intro-heading">
-        <h2 id="home-intro-heading" className="sr-only">About Reelstash</h2>
+        <h2 id="home-intro-heading" className="sr-only">About ReelsDl.net</h2>
         <div className="article-copy">
           <p>
-            <b>Reelstash :</b> Are you one of those people who posts
+            <b>ReelsDl.net</b> is a free Instagram Reels downloader.
+            Paste a public Instagram link to save Reels as MP4, photos as JPG,
+            carousel posts, or convert Reel audio to MP3. No Instagram login
+            is required. Private posts cannot be downloaded.
+          </p>
+          <p>
+            <b>ReelsDl.net :</b> Are you one of those people who posts
             Photos & Reels videos and spent time on Instagram on a daily basis?
             If so. Well, there&apos;s good news: there are ways to{' '}
             <b>Download Instagram Reels</b> so you can watch them offline!
-            [<Link href="/">Reelstash</Link>],
+            [<Link href="/">ReelsDl.net</Link>],
           </p>
           <p>
             we&apos;ll show
@@ -34,6 +40,8 @@ export function HomeCopy({ page }) {
           alt={page.feature.alt}
           width="682"
           height="1024"
+          loading="lazy"
+          decoding="async"
           sizes="(max-width: 720px) 100vw, 680px"
         />
         <div className="home-feature-copy article-copy">
@@ -57,13 +65,13 @@ export function HomeCopy({ page }) {
       </section>
 
       <section className="panel article-panel" aria-labelledby="why-heading">
-        <h2 id="why-heading">Why Reelstash is Best ?</h2>
+        <h2 id="why-heading">Why ReelsDl.net is Best ?</h2>
         <div className="article-copy">
           <p>
-            <b>Reelstash : </b> is the best #1 WebApp for Fast
+            <b>ReelsDl.net : </b> is the best #1 WebApp for Fast
             Downloading or <b>save Instagram videos</b>{' '}
             <i> Reels, Photos, videos & Stories</i> etc. on one place 😜 -
-            Reelstash
+            ReelsDl.net
           </p>
           <ul>
             <li>We Get & Download Reels Videos as fast as possible.</li>
@@ -79,10 +87,10 @@ export function HomeCopy({ page }) {
       </section>
 
       <section className="panel article-panel" aria-labelledby="offers-heading">
-        <h2 id="offers-heading">What Reelstash offers ?</h2>
+        <h2 id="offers-heading">What ReelsDl.net offers ?</h2>
         <div className="article-copy">
           <p>
-            <b>Reelstash : </b> offers everything you want to
+            <b>ReelsDl.net : </b> offers everything you want to
             download from &quot;Instagram&quot; in <b>HD</b> quality 😜 You can
             download Instagram Reels | Videos | Photos | Carousel etc.
           </p>

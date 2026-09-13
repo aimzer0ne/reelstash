@@ -1,12 +1,7 @@
-const CACHE = 'reelstash-v1';
+const CACHE = 'reelsdl-v1';
 const PRECACHE = [
-  '/',
-  '/instagram-audio-downloader',
   '/favicon.svg',
-  '/logo.svg',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/apple-touch-icon.png'
+  '/icon-192.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -32,6 +27,9 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.startsWith('/api/')) return;
+  if (request.destination === 'video' || request.destination === 'audio') return;
+  if (/\.(mp4|webm|mov|mp3|m4a)$/i.test(url.pathname)) return;
+  if (url.pathname === '/reelsdl-home.jpg' || url.pathname === '/reelstash-home.jpg') return;
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request));
@@ -48,7 +46,7 @@ async function networkFirst(request) {
     if (response.ok) cache.put(request, response.clone());
     return response;
   } catch {
-    return (await cache.match(request)) || (await cache.match('/')) || Response.error();
+    return (await cache.match(request)) || Response.error();
   }
 }
 

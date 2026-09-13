@@ -18,7 +18,7 @@ async function proxyToOrigin(request, configuredOrigin) {
   const incoming = new URL(request.url);
   const target = new URL(`${incoming.pathname}${incoming.search}`, origin);
   const headers = new Headers(request.headers);
-  headers.set('x-reelstash-proxy', 'cloudflare');
+  headers.set('x-reelsdl-proxy', 'cloudflare');
   headers.delete('host');
 
   const hashedAsset = incoming.pathname.startsWith('/_next/static/');

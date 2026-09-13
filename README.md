@@ -1,4 +1,4 @@
-# Reelstash
+# ReelsDl.net
 
 A Next.js app for saving media from publicly accessible Instagram reels, photo posts, and public carousels. It never signs into Instagram and does not attempt to access private, login-gated, deleted, or otherwise unavailable content.
 
@@ -31,7 +31,7 @@ The deploy bundles `vendor/yt-dlp` into the serverless functions. Video download
 
 There is a dedicated Instagram audio page at `/instagram-audio-downloader` that extracts MP3 soundtracks from public reels (ffmpeg) or downloads direct audio streams when available.
 
-Cloudflare Workers cannot run `yt-dlp`/ffmpeg. The included Worker proxies the whole Next.js site to the Vercel origin. Set `API_ORIGIN` in **Cloudflare → Workers & Pages → reelstash → Settings → Variables and Secrets** to the production Vercel origin only, for example `https://your-reelstash-project.vercel.app`. Then redeploy the Worker.
+Cloudflare Workers cannot run `yt-dlp`/ffmpeg. The included Worker proxies the whole Next.js site to the Vercel origin. Set `API_ORIGIN` in **Cloudflare → Workers & Pages → reelsdl → Settings → Variables and Secrets** to `https://reelsdl.net`. Then redeploy the Worker.
 
 Do not set `INSTAGRAM_COOKIES_FROM_BROWSER` on Vercel. If Instagram blocks anonymous extraction, you can store Netscape-format cookies in the `INSTAGRAM_COOKIES` environment variable on a private deployment only.
 

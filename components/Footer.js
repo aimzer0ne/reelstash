@@ -8,7 +8,7 @@ export function Footer({ lead }) {
     <footer>
       <Link className="footer-brand" href="/">
         <Logo className="footer-logo" />
-        Reelstash
+        ReelsDl.net
       </Link>
       <nav className="legal-nav" aria-label="Legal">
         {LEGAL_LINKS.map((item) => (
@@ -22,7 +22,7 @@ export function Footer({ lead }) {
             {' · '}
           </>
         ) : null}
-        Not affiliated with Instagram or Meta · © {year} Reelstash
+        Not affiliated with Instagram or Meta · © {year} ReelsDl.net
       </p>
     </footer>
   );

@@ -12,9 +12,13 @@ export function AudioCopy({ page }) {
         <h2 id="audio-intro-heading" className="sr-only">Instagram Reels Audio Downloader</h2>
         <div className="article-copy">
           <p>
-            <b>Reelstash</b> is a webApp that offers an easy way to
-            convert and download <b>Instagram Reels Videos in mp3</b> format
-            online without any hassle!
+            <b>ReelsDl.net</b> is a free Instagram audio downloader.
+            Paste a public Reel or video link to extract the soundtrack and
+            save it as an MP3. No Instagram login. Private posts cannot be converted.
+          </p>
+          <p>
+            The tool offers an easy way to convert and download{' '}
+            <b>Instagram Reels Videos in mp3</b> format online without any hassle.
           </p>
           <p>
             Instagram has launched a new feature that allows users to create
@@ -28,7 +32,7 @@ export function AudioCopy({ page }) {
               Instagram Reels
             </a>{' '}
             for good reason! ;) So Feel Free Download Instagram reels music on{' '}
-            <Link href="/">Reelstash</Link>
+            <Link href="/">ReelsDl.net</Link>
           </p>
         </div>
       </section>
@@ -52,6 +56,7 @@ export function AudioCopy({ page }) {
             width={400}
             height={400}
             loading="lazy"
+            decoding="async"
             sizes="(max-width: 720px) 92vw, 400px"
             src="/assets/reelsaudiodownload-1.webp"
             alt="Reels Audio Download"
@@ -70,6 +75,7 @@ export function AudioCopy({ page }) {
             width={400}
             height={400}
             loading="lazy"
+            decoding="async"
             sizes="(max-width: 720px) 92vw, 400px"
             src="/assets/reelsaudiodownload-2.webp"
             alt="Reels Audio Download"
@@ -85,7 +91,7 @@ export function AudioCopy({ page }) {
               clipboard.
             </li>
             <li>
-              Now visit <Link href="/instagram-audio-downloader">Reelstash Audio MP3</Link>{' '}
+              Now visit <Link href="/instagram-audio-downloader">ReelsDl.net Audio MP3</Link>{' '}
               Paste the Link/URL and click &quot;GET&quot; Button Boom !!
             </li>
             <li>
@@ -113,7 +119,7 @@ export function AudioCopy({ page }) {
           <ul>
             <li>Get the Reels video link</li>
             <li>
-              Go to &quot;<Link href="/instagram-audio-downloader">Reelstash Audio MP3</Link>&quot;
+              Go to &quot;<Link href="/instagram-audio-downloader">ReelsDl.net Audio MP3</Link>&quot;
             </li>
             <li>Paste link into input Box</li>
             <li>Click &quot;GET&quot; Button</li>

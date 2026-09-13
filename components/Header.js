@@ -7,7 +7,7 @@ export function Header() {
     <header className="site-header">
       <Link className="wordmark" href="/">
         <Logo className="wordmark-logo" />
-        Reelstash
+        ReelsDl.net
       </Link>
       <PwaRegister />
     </header>

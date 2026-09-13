@@ -26,12 +26,14 @@ export function PageCopy({ page }) {
       ) : null}
 
       {page.feature ? (
-        <section className="home-feature" aria-label="About Reelstash">
+        <section className="home-feature" aria-label="About ReelsDl.net">
           <img
             src={page.feature.image}
             alt={page.feature.alt}
             width="682"
             height="1024"
+            loading="lazy"
+            decoding="async"
             sizes="(max-width: 720px) 100vw, 680px"
           />
           <div className="home-feature-copy">{page.feature.text}</div>

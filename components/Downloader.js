@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { apiUrl, withApiHost } from '@/lib/api';
 import { Icon } from './Icons';
-import './audio-preview.css';
 
 export function Downloader({
   mode,
@@ -31,7 +31,7 @@ export function Downloader({
     setResult(null);
 
     try {
-      const response = await fetch('/api/resolve', {
+      const response = await fetch(apiUrl('/api/resolve'), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(mode === 'audio' ? { url: value, mode: 'audio' } : { url: value })
@@ -39,7 +39,16 @@ export function Downloader({
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error || messages.resolveFailed);
       setUrl('');
-      setResult(body);
+      setResult({
+        ...body,
+        media: Array.isArray(body.media) ? body.media.map((item) => ({
+          ...item,
+          previewUrl: withApiHost(item.previewUrl),
+          coverUrl: withApiHost(item.coverUrl),
+          sourceUrl: item.sourceUrl?.startsWith('/') ? withApiHost(item.sourceUrl) : item.sourceUrl,
+          downloadUrl: withApiHost(item.downloadUrl)
+        })) : []
+      });
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     } catch (caught) {
       setError(caught.message || messages.unexpected);
@@ -211,8 +220,8 @@ function profileHref(result) {
 function MediaCard({ item, index, total, mode }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
-  const isOriginalAudio = item.type === 'audio' && (item.original || /\/api\/download/.test(item.previewUrl || ''));
   const isAudio = mode === 'audio' || item.type === 'audio';
+  const isOriginalAudio = isAudio && item.original;
   const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
   const label = isOriginalAudio
     ? `Download audio${suffix}`
@@ -220,45 +229,34 @@ function MediaCard({ item, index, total, mode }) {
       ? `Download MP3${suffix}`
       : `Download ${kind}${suffix}`;
   const downloadName = isOriginalAudio
-    ? `Reelstash-audio-${itemNumber}`
+    ? `ReelsDl-audio-${itemNumber}`
     : isAudio
-      ? `Reelstash-audio-${itemNumber}.mp3`
-      : `Reelstash-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
-  const audioSrc = `${item.downloadUrl}${item.downloadUrl.includes('?') ? '&' : '?'}inline=1`;
+      ? `ReelsDl-audio-${itemNumber}.mp3`
+      : `ReelsDl-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
+  const thumb = lightPreview(item);
 
   return (
     <article className="media-card">
-      <div className={isOriginalAudio ? 'media-preview is-audio' : 'media-preview'}>
-        <div className="loading-shimmer" />
-        {isOriginalAudio ? (
-          <audio
-            src={audioSrc}
-            controls
-            preload="metadata"
-            controlsList="nodownload"
-            onLoadedData={clearShimmer}
-            onError={clearShimmer}
-          />
-        ) : isAudio || item.type !== 'video' ? (
-          <img
-            src={item.previewUrl || item.sourceUrl}
-            alt={isAudio ? `Instagram reel cover ${itemNumber}` : `Instagram photo ${itemNumber}`}
-            loading={index > 1 ? 'lazy' : 'eager'}
-            onLoad={clearShimmer}
-            onError={clearShimmer}
-          />
+      <div className={kind === 'video' ? 'media-preview is-video' : isAudio ? 'media-preview is-audio' : 'media-preview'}>
+        {thumb ? (
+          <>
+            <div className="loading-shimmer" />
+            <img
+              src={thumb}
+              alt={isAudio ? `Instagram reel cover ${itemNumber}` : kind === 'video' ? `Instagram video cover ${itemNumber}` : `Instagram photo ${itemNumber}`}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              onLoad={clearShimmer}
+              onError={clearShimmer}
+            />
+          </>
         ) : (
-          <video
-            src={item.sourceUrl || item.previewUrl}
-            poster={item.previewUrl && item.previewUrl !== item.sourceUrl ? item.previewUrl : undefined}
-            controls
-            playsInline
-            preload="metadata"
-            controlsList="nodownload"
-            onLoadedData={clearShimmer}
-            onError={clearShimmer}
-          />
+          <div className="media-placeholder" aria-hidden="true">
+            <Icon name={isAudio ? 'audio' : kind === 'video' ? 'reels' : 'download'} />
+          </div>
         )}
+        {kind === 'video' ? <span className="media-kind">Video</span> : null}
+        {isAudio ? <span className="media-kind">MP3</span> : null}
       </div>
       <div className="media-footer">
         <a
@@ -273,6 +271,12 @@ function MediaCard({ item, index, total, mode }) {
       </div>
     </article>
   );
+}
+
+function lightPreview(item) {
+  const url = item.coverUrl || item.previewUrl;
+  if (!url || /\/api\/download/i.test(url) || /\.(mp4|webm|mov|m4v|mp3|m4a)(\?|$)/i.test(url)) return null;
+  return url;
 }
 
 function clearShimmer(event) {

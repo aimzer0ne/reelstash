@@ -4,12 +4,12 @@ export function PrivacyCopy() {
   return (
     <div className="legal-copy">
       <p>
-        Welcome! to <Link href="/">Reelstash</Link>
+        Welcome! to <Link href="/">ReelsDl.net</Link>
       </p>
       <p>
-        At Reelstash, accessible from this website, one of our main priorities is the
+        At ReelsDl.net, accessible from this website, one of our main priorities is the
         privacy of our visitors. This Privacy Policy document contains types of
-        information that is collected and recorded by Reelstash and how we use it.
+        information that is collected and recorded by ReelsDl.net and how we use it.
       </p>
       <p>
         If you have additional questions or require more information about our Privacy
@@ -18,7 +18,7 @@ export function PrivacyCopy() {
       <p>
         This Privacy Policy applies only to our online activities and is valid for
         visitors to our website with regards to the information that they shared
-        and/or collect in Reelstash. This policy is not applicable to any information
+        and/or collect in ReelsDl.net. This policy is not applicable to any information
         collected offline or via channels other than this website.
       </p>
 
@@ -29,7 +29,7 @@ export function PrivacyCopy() {
 
       <h2>Information we collect</h2>
       <p>
-        Reelstash does not ask you to create an account. The personal information that
+        ReelsDl.net does not ask you to create an account. The personal information that
         you are asked to provide, and the reasons why you are asked to provide it, will
         be made clear to you at the point we ask you to provide your personal information.
       </p>
@@ -57,7 +57,7 @@ export function PrivacyCopy() {
 
       <h2>Log Files</h2>
       <p>
-        Reelstash follows a standard procedure of using log files. These files log
+        ReelsDl.net follows a standard procedure of using log files. These files log
         visitors when they visit websites. All hosting companies do this and a part of
         hosting services&apos; analytics. The information collected by log files include
         internet protocol (IP) addresses, browser type, Internet Service Provider (ISP),
@@ -69,7 +69,7 @@ export function PrivacyCopy() {
 
       <h2>Cookies and Web Beacons</h2>
       <p>
-        Like any other website, Reelstash uses &apos;cookies&apos;. These cookies are used
+        Like any other website, ReelsDl.net uses &apos;cookies&apos;. These cookies are used
         to store information including visitors&apos; preferences, and the pages on the
         website that the visitor accessed or visited. The information is used to optimize
         the users&apos; experience by customizing our web page content based on visitors&apos;
@@ -113,24 +113,24 @@ export function PrivacyCopy() {
       <h2>Advertising Partners Privacy Policies</h2>
       <p>
         You may consult this list to find the Privacy Policy for each of the advertising
-        partners of Reelstash.
+        partners of ReelsDl.net.
       </p>
       <p>
         Third-party ad servers or ad networks uses technologies like cookies, JavaScript,
         or Web Beacons that are used in their respective advertisements and links that
-        appear on Reelstash, which are sent directly to users&apos; browser. They
+        appear on ReelsDl.net, which are sent directly to users&apos; browser. They
         automatically receive your IP address when this occurs. These technologies are
         used to measure the effectiveness of their advertising campaigns and/or to
         personalize the advertising content that you see on websites that you visit.
       </p>
       <p>
-        Note that Reelstash has no access to or control over these cookies that are used
+        Note that ReelsDl.net has no access to or control over these cookies that are used
         by third-party advertisers.
       </p>
 
       <h2>Third Party Privacy Policies</h2>
       <p>
-        Reelstash&apos;s Privacy Policy does not apply to other advertisers or websites.
+        ReelsDl.net&apos;s Privacy Policy does not apply to other advertisers or websites.
         Thus, we are advising you to consult the respective Privacy Policies of these
         third-party ad servers for more detailed information. It may include their
         practices and instructions about how to opt-out of certain options.
@@ -204,7 +204,7 @@ export function PrivacyCopy() {
         monitor and guide their online activity.
       </p>
       <p>
-        Reelstash does not knowingly collect any Personal Identifiable Information from
+        ReelsDl.net does not knowingly collect any Personal Identifiable Information from
         children under the age of 13. If you think that your child provided this kind of
         information on our website, we strongly encourage you to contact us immediately
         and we will do our best efforts to promptly remove such information from our records.
@@ -217,7 +217,7 @@ export function PrivacyCopy() {
       </p>
       <p>
         Email :{' '}
-        <a href="mailto:hello@reelstash.net">hello@reelstash.net</a>
+        <a href="mailto:hello@reelsdl.net">hello@reelsdl.net</a>
       </p>
     </div>
   );

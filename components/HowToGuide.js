@@ -53,6 +53,8 @@ export function HowToGuide({ heading, type = 'reels' }) {
                 title="Copy Instagram Link"
                 width="480"
                 height="160"
+                loading="lazy"
+                decoding="async"
                 sizes="(max-width: 720px) 92vw, 360px"
               />
             </div>
@@ -67,6 +69,8 @@ export function HowToGuide({ heading, type = 'reels' }) {
                 title="Paste Link !"
                 width="480"
                 height="160"
+                loading="lazy"
+                decoding="async"
                 sizes="(max-width: 720px) 92vw, 360px"
               />
             </div>
@@ -87,6 +91,7 @@ export function HowToGuide({ heading, type = 'reels' }) {
               width="480"
               height="120"
               loading="lazy"
+              decoding="async"
               sizes="(max-width: 720px) 92vw, 420px"
             />
           </div>

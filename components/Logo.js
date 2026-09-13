@@ -1,4 +1,4 @@
-export function Logo({ className, title = 'Reelstash' }) {
+export function Logo({ className, title = 'ReelsDl.net' }) {
   return (
     <svg
       className={className ? `logo ${className}` : 'logo'}

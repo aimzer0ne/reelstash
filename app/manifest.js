@@ -1,8 +1,8 @@
 export default function manifest() {
   return {
     id: '/',
-    name: 'Reelstash',
-    short_name: 'Reelstash',
+    name: 'ReelsDl.net',
+    short_name: 'ReelsDl',
     description: 'Download public Instagram reels, photos, carousels, and audio as MP3.',
     start_url: '/',
     scope: '/',
