@@ -32,7 +32,7 @@ export function PageCopy({ page }) {
             alt={page.feature.alt}
             width="682"
             height="1024"
-            style={{ width: '100%', maxWidth: '100%', height: 'auto', display: 'block' }}
+            sizes="(max-width: 720px) 100vw, 680px"
           />
           <div className="home-feature-copy">{page.feature.text}</div>
         </section>

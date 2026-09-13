@@ -20,6 +20,12 @@
   box-sizing: border-box;
 }
 
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 html {
   scroll-behavior: smooth;
   color-scheme: light;
@@ -68,6 +74,7 @@ h1,
 h2,
 h3 {
   margin: 0;
+  overflow-wrap: anywhere;
   font-family: var(--font-fraunces), Fraunces, Georgia, serif;
   font-weight: 550;
   letter-spacing: -.03em;
@@ -94,12 +101,13 @@ p {
 }
 
 .site-header {
+  position: relative;
   width: min(100%, var(--wrap));
   margin: 0 auto;
-  padding: 28px 24px 0;
+  padding: max(28px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right), 24px) 0 max(16px, env(safe-area-inset-left), 24px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .icon {
@@ -127,29 +135,29 @@ p {
   flex: 0 0 auto;
 }
 
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.header-link {
+.install-app {
+  position: absolute;
+  top: max(28px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right), 24px);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.header-link .icon {
-  width: 16px;
-  height: 16px;
-}
-
-.header-link:hover,
-.header-link.is-active {
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
   color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.install-app .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.install-app:hover {
+  border-color: var(--text);
 }
 
 .panel-lede {
@@ -182,7 +190,8 @@ p {
 main {
   width: min(100%, var(--wrap));
   margin: 0 auto;
-  padding: 0 24px;
+  padding-left: max(16px, env(safe-area-inset-left), 24px);
+  padding-right: max(16px, env(safe-area-inset-right), 24px);
 }
 
 .hero {
@@ -201,8 +210,20 @@ main {
 
 h1 {
   margin: 0 auto;
-  font-size: clamp(40px, 3vw, 30px);
-  line-height: 1.02;
+  max-width: 16ch;
+  font-size: clamp(28px, 8vw, 56px);
+  line-height: 1.08;
+}
+
+.hero-title {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.08em 0.08em;
+  background-image: url("/assets/hero-underline.svg");
+  background-repeat: no-repeat;
+  background-position: left 100%;
+  background-size: 100% 0.42em;
+  line-height: 1.42;
 }
 
 .lede {
@@ -450,12 +471,12 @@ a.ig-username:hover {
 .media-grid {
   margin-top: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
   gap: 18px;
 }
 
 .media-grid.is-single {
-  grid-template-columns: minmax(240px, 360px);
+  grid-template-columns: minmax(0, min(100%, 360px));
   justify-content: center;
 }
 
@@ -531,10 +552,12 @@ a.ig-username:hover {
 }
 
 .home-feature img {
-  width: 100%;
-  max-width: 100%;
+  width: auto;
+  max-width: min(100%, 680px);
   height: auto;
+  max-height: min(72vh, 760px);
   display: block;
+  margin-inline: auto;
   object-fit: contain;
   border: 1px solid var(--line);
   background: var(--paper);
@@ -560,9 +583,186 @@ a.ig-username:hover {
   line-height: 1.65;
 }
 
-.article-copy strong {
+.article-copy p + p {
+  margin-top: 16px;
+}
+
+.article-copy a,
+.faq-answer a,
+.home-copy li a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.article-copy a:hover,
+.faq-answer a:hover,
+.home-copy li a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.article-copy b,
+.article-copy strong,
+.faq-answer b,
+.faq-answer strong {
   color: var(--text);
   font-weight: 700;
+}
+
+.article-copy i {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.home-audio-cta {
+  margin: 36px 0 0;
+  text-align: center;
+}
+
+.home-audio-cta a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.home-audio-cta a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.home-feature-copy {
+  max-width: 62ch;
+  padding-top: 28px;
+}
+
+.home-feature-copy h2,
+.article-panel h2 {
+  margin-bottom: 14px;
+  font-size: clamp(22px, 5.2vw, 34px);
+}
+
+.guide-image {
+  display: block;
+  width: min(100%, 400px);
+  max-width: 100%;
+  height: auto;
+  margin: 18px auto 8px;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.how-guide-panel h2 {
+  font-size: clamp(22px, 5.2vw, 34px);
+}
+
+.how-guide {
+  margin-top: 28px;
+}
+
+.how-guide-top {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 4vw, 40px);
+  align-items: start;
+}
+
+.how-guide-step {
+  min-width: 0;
+  text-align: center;
+}
+
+.how-guide-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  margin-bottom: 16px;
+}
+
+.how-guide-visual img {
+  display: block;
+  width: 100%;
+  max-width: min(100%, 360px);
+  height: auto;
+  object-fit: contain;
+}
+
+.how-guide-visual.is-download img {
+  max-width: min(100%, 420px);
+}
+
+.how-guide-step h3 {
+  margin: 0 0 10px;
+  font-size: clamp(16px, 4vw, 20px);
+}
+
+.how-guide-step p {
+  max-width: 36ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(13px, 3.4vw, 15px);
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.how-guide-step p b {
+  color: var(--text);
+}
+
+.how-guide-paste-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: -5px;
+}
+
+.how-guide-download {
+  width: min(100%, 28em);
+  max-width: 100%;
+  margin: 36px auto 0;
+}
+
+@media (max-width: 720px) {
+  .how-guide-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.home-copy ul {
+  margin: 14px 0 0;
+  padding-left: 1.25em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.home-copy li {
+  margin: 8px 0;
+}
+
+.faq-answer {
+  max-width: 62ch;
+  padding: 0 0 18px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.faq-answer p {
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.faq-answer p + p,
+.faq-answer ul {
+  margin-top: 12px;
+}
+
+.faq-answer ul {
+  padding-left: 1.25em;
 }
 
 .panel {
@@ -570,7 +770,7 @@ a.ig-username:hover {
 }
 
 .panel h2 {
-  font-size: clamp(26px, 3vw, 34px);
+  font-size: clamp(22px, 5.2vw, 34px);
 }
 
 .steps,
@@ -772,26 +972,41 @@ footer p {
   font-size: clamp(32px, 6vw, 48px);
 }
 
-.legal-updated {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.legal-section {
+.legal-copy {
   max-width: 62ch;
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
-.legal-section h2 {
+.legal-copy h2 {
+  margin-top: 36px;
   font-size: 22px;
 }
 
-.legal-section p {
+.legal-copy p,
+.legal-copy li {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 16px;
   font-weight: 700;
+}
+
+.legal-copy ul {
+  margin: 8px 0 0;
+  padding-left: 1.25em;
+}
+
+.legal-copy a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.legal-copy a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.legal-copy b {
+  color: var(--text);
 }
 
 @keyframes shimmer {
@@ -801,6 +1016,18 @@ footer p {
 }
 
 @media (max-width: 720px) {
+  .site-header {
+    padding-top: max(18px, env(safe-area-inset-top));
+  }
+
+  .wordmark {
+    font-size: clamp(18px, 5vw, 22px);
+  }
+
+  .install-app {
+    top: max(18px, env(safe-area-inset-top));
+  }
+
   .hero {
     padding: 52px 0 4px;
   }
@@ -841,8 +1068,24 @@ footer p {
   }
 
   .media-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
+  }
+
+  .media-grid.is-single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-feature img {
+    max-height: min(58vh, 420px);
+  }
+
+  h2,
+  .panel h2,
+  .how-guide-panel h2,
+  .home-feature-copy h2,
+  .article-panel h2 {
+    font-size: clamp(22px, 6.4vw, 30px);
   }
 
   .home-feature,
@@ -853,6 +1096,19 @@ footer p {
   footer {
     margin-top: 68px;
   }
+}
+
+@media (max-width: 420px) {
+  .media-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-header,
+  main {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

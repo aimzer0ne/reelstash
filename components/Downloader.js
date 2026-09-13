@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { Icon } from './Icons';
+import './audio-preview.css';
 
 export function Downloader({
   mode,
@@ -73,7 +74,9 @@ export function Downloader({
     <>
       <section className="hero" aria-labelledby="hero-heading">
         {kicker ? <p className="kicker">{kicker}</p> : null}
-        <h1 id="hero-heading">{heading}</h1>
+        <h1 id="hero-heading">
+          <span className="hero-title">{heading}</span>
+        </h1>
         <p className="lede">{lede}</p>
 
         <form
@@ -208,15 +211,35 @@ function profileHref(result) {
 function MediaCard({ item, index, total, mode }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
-  const isAudio = mode === 'audio';
-  const kind = item.type === 'video' ? 'video' : 'photo';
-  const label = isAudio ? `Download MP3${suffix}` : `Download ${kind}${suffix}`;
+  const isOriginalAudio = item.type === 'audio' && (item.original || /\/api\/download/.test(item.previewUrl || ''));
+  const isAudio = mode === 'audio' || item.type === 'audio';
+  const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
+  const label = isOriginalAudio
+    ? `Download audio${suffix}`
+    : isAudio
+      ? `Download MP3${suffix}`
+      : `Download ${kind}${suffix}`;
+  const downloadName = isOriginalAudio
+    ? `Reelstash-audio-${itemNumber}`
+    : isAudio
+      ? `Reelstash-audio-${itemNumber}.mp3`
+      : `Reelstash-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
+  const audioSrc = `${item.downloadUrl}${item.downloadUrl.includes('?') ? '&' : '?'}inline=1`;
 
   return (
     <article className="media-card">
-      <div className="media-preview">
+      <div className={isOriginalAudio ? 'media-preview is-audio' : 'media-preview'}>
         <div className="loading-shimmer" />
-        {isAudio || item.type !== 'video' ? (
+        {isOriginalAudio ? (
+          <audio
+            src={audioSrc}
+            controls
+            preload="metadata"
+            controlsList="nodownload"
+            onLoadedData={clearShimmer}
+            onError={clearShimmer}
+          />
+        ) : isAudio || item.type !== 'video' ? (
           <img
             src={item.previewUrl || item.sourceUrl}
             alt={isAudio ? `Instagram reel cover ${itemNumber}` : `Instagram photo ${itemNumber}`}
@@ -241,7 +264,7 @@ function MediaCard({ item, index, total, mode }) {
         <a
           className="download-button"
           href={item.downloadUrl}
-          download={isAudio ? `Reelstash-audio-${itemNumber}.mp3` : `Reelstash-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`}
+          download={downloadName}
           aria-label={label}
         >
           <Icon name="download" />

@@ -1,0 +1,25 @@
+import Link from 'next/link';
+
+export function DisclaimerCopy() {
+  return (
+    <div className="legal-copy">
+      <p>
+        Welcome! to <Link href="/">Reelstash</Link>
+      </p>
+      <p>
+        Let us clear for all the users of <b>Reelstash</b> that we DO NOT host any of
+        instagram content on our server, Downloading links for videos/images are
+        provided by Instagram CDN servers
+      </p>
+      <p>All the videos/images content are the copyright of their respective owners</p>
+      <p>
+        If you have any questions, query or Any Feedback 😃 related to our website, then
+        please let us know
+      </p>
+      <p>
+        Email :{' '}
+        <a href="mailto:hello@reelstash.net">hello@reelstash.net</a>
+      </p>
+    </div>
+  );
+}
