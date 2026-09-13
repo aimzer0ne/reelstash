@@ -1,6 +1,7 @@
 import { Fraunces, Inter, Yellowtail } from 'next/font/google';
-import './globals.css?v=11';
+import './globals.css?v=13';
 import './logo-type.css';
+import './input-hit.css';
 
 const inter = Inter({
   subsets: ['latin'],

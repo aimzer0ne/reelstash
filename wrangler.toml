@@ -3,4 +3,4 @@ main = "worker.js"
 compatibility_date = "2026-09-12"
 
 [vars]
-API_ORIGIN = "https://reels-azure.vercel.app"
+API_ORIGIN = "https://reelstash-three.vercel.app"

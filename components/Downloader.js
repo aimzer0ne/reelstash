@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
+import { SITE_EMAIL } from '@/lib/seo';
 import { Icon } from './Icons';
 
 export function Downloader({
@@ -21,6 +22,12 @@ export function Downloader({
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
   const hasUrl = Boolean(url.trim());
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!desktop) return;
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   async function resolveUrl(nextUrl) {
     const value = (nextUrl ?? url).trim();
@@ -98,6 +105,7 @@ export function Downloader({
 
         <form
           className="link-form"
+          autoComplete="off"
           onSubmit={(event) => {
             event.preventDefault();
             void resolveUrl();
@@ -105,15 +113,27 @@ export function Downloader({
           noValidate
         >
           <label className="sr-only" htmlFor="instagram-url">{inputLabel}</label>
-          <div className={loading ? 'input-wrap is-loading' : 'input-wrap'}>
+          <div
+            className={loading ? 'input-wrap is-loading' : 'input-wrap'}
+            aria-busy={loading}
+            onClick={(event) => {
+              if (event.target.closest('button, a')) return;
+              inputRef.current?.focus();
+            }}
+          >
             <Icon name="link" className="input-icon" />
             <input
               ref={inputRef}
               id="instagram-url"
-              name="url"
-              type="url"
+              name="ig-link"
+              type="text"
               inputMode="url"
-              autoComplete="url"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
+              data-1p-ignore="true"
+              data-lpignore="true"
               placeholder={placeholder}
               required
               value={url}
@@ -133,15 +153,9 @@ export function Downloader({
               </button>
             )}
           </div>
-          <div
-            className={loading ? 'ig-loading-track is-active' : 'ig-loading-track'}
-            role="progressbar"
-            aria-hidden={!loading}
-            aria-busy={loading}
-            aria-label={messages.loaderStatus}
-          >
-            <span className="ig-loading-bar" />
-          </div>
+          <a className="report-issue" href={reportIssueHref(url, mode)}>
+            Report an issue
+          </a>
         </form>
 
         {error ? (
@@ -299,6 +313,15 @@ function lightPreview(item) {
 
 function clearShimmer(event) {
   event.currentTarget.parentElement?.querySelector('.loading-shimmer')?.remove();
+}
+
+function reportIssueHref(url, mode) {
+  const page = mode === 'audio' ? 'Audio MP3' : 'Reels Downloader';
+  const subject = `ReelsDl.net issue — ${page}`;
+  const parts = ['What went wrong:', ''];
+  const trimmed = url.trim();
+  if (trimmed) parts.push(`Instagram link: ${trimmed}`, '');
+  return `mailto:${SITE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(parts.join('\n'))}`;
 }
 
 function looksLikeInstagramUrl(value) {
