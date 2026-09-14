@@ -1,5 +1,5 @@
 import { cookies, headers } from 'next/headers';
-import { Fraunces, Inter, Yellowtail } from 'next/font/google';
+import { Fraunces, Inter, Poppins, Yellowtail } from 'next/font/google';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { I18nProvider } from '@/components/I18nProvider';
 import { LANG_COOKIE, localeFromAccept, localeFromValue, localeMeta } from '@/lib/i18n';
@@ -19,6 +19,14 @@ const fraunces = Fraunces({
   subsets: ['latin'],
   weight: ['600'],
   variable: '--font-fraunces',
+  display: 'swap',
+  preload: true
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-poppins',
   display: 'swap',
   preload: true
 });
@@ -96,7 +104,7 @@ export default async function RootLayout({ children }) {
   const { dir } = localeMeta(locale);
 
   return (
-    <html lang={locale} dir={dir} className={`${inter.variable} ${fraunces.variable} ${logo.variable}`}>
+    <html lang={locale} dir={dir} className={`${inter.variable} ${fraunces.variable} ${poppins.variable} ${logo.variable}`}>
       <body>
         <I18nProvider initialLocale={locale}>
           {children}

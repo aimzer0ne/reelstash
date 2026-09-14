@@ -44,7 +44,8 @@ export function Downloader({
   }, []);
 
   async function resolveUrl(nextUrl) {
-    const value = (nextUrl ?? url).trim();
+    const value = extractInstagramUrl(nextUrl ?? url);
+    if (value && value !== String(nextUrl ?? url).trim()) setUrl(value);
     setError('');
     if (!value) return setError(copy.emptyUrl);
     if (!looksLikeInstagramUrl(value)) return setError(copy.invalidUrl);
@@ -89,7 +90,8 @@ export function Downloader({
     try {
       const text = await navigator.clipboard.readText();
       if (!text?.trim()) return;
-      const next = text.trim();
+      const next = extractInstagramUrl(text);
+      if (!next) return;
       setUrl(next);
       await resolveUrl(next);
     } catch {
@@ -104,8 +106,11 @@ export function Downloader({
   }
 
   function onPaste(event) {
-    const text = event.clipboardData?.getData('text')?.trim();
-    if (!text || !looksLikeInstagramUrl(text)) return;
+    const raw = event.clipboardData?.getData('text');
+    if (!raw?.trim()) return;
+    const text = extractInstagramUrl(raw);
+    if (!looksLikeInstagramUrl(text)) return;
+    event.preventDefault();
     setUrl(text);
     requestAnimationFrame(() => void resolveUrl(text));
   }
@@ -161,6 +166,11 @@ export function Downloader({
               suppressHydrationWarning
               onChange={(event) => setUrl(event.target.value)}
               onPaste={onPaste}
+              onKeyDown={(event) => {
+                if (event.key !== 'Enter' || event.nativeEvent.isComposing) return;
+                event.preventDefault();
+                void resolveUrl();
+              }}
             />
             {hasUrl ? (
               <button className="paste-button" type="button" disabled={loading} onClick={clearField}>
@@ -174,6 +184,9 @@ export function Downloader({
               </button>
             )}
           </div>
+          <button className="sr-only" type="submit" tabIndex={-1}>
+            Get
+          </button>
           <a className="report-issue" href={reportIssueHref(url, mode, t('reportIssue'))}>
             {t('reportIssue')}
           </a>
@@ -358,6 +371,17 @@ function reportIssueHref(url, mode, subjectLabel) {
   const trimmed = url.trim();
   if (trimmed) parts.push(`Instagram link: ${trimmed}`, '');
   return `mailto:${SITE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(parts.join('\n'))}`;
+}
+
+function extractInstagramUrl(value) {
+  const text = String(value || '').trim();
+  if (!text) return '';
+  const parts = text.split(/(?=https?:\/\/)/i).map((part) => part.trim()).filter(Boolean);
+  if (parts.length > 1) {
+    const urls = parts.filter((part) => looksLikeInstagramUrl(part));
+    if (urls.length) return urls[urls.length - 1];
+  }
+  return text;
 }
 
 function looksLikeInstagramUrl(value) {

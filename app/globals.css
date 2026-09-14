@@ -80,6 +80,36 @@ h3 {
   letter-spacing: -.03em;
 }
 
+.home-copy,
+.article-copy,
+.home-feature-copy,
+.legal-copy,
+.legal-article,
+.faq-list,
+.how-guide,
+.how-steps,
+.copy-split,
+.copy-grid,
+.copy-stack,
+.copy-lede,
+.copy-note {
+  font-family: var(--font-poppins), Poppins, sans-serif;
+}
+
+.home-copy h2,
+.home-copy h3,
+.article-panel h2,
+.how-guide-panel h2,
+.how-guide-step h3,
+.how-steps h3,
+.copy-split h2,
+.panel h2,
+.legal-article h1,
+.legal-copy h2 {
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-weight: 600;
+}
+
 p {
   font-weight: 400;
 }
@@ -748,6 +778,147 @@ a.ig-username:hover {
   text-decoration: underline;
 }
 
+.home-jump {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 28px 0 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.home-jump a {
+  display: block;
+  padding: 12px 8px;
+  border-right: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.home-jump a:last-child {
+  border-right: 0;
+}
+
+.home-jump a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+.copy-lede,
+.copy-note {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.copy-note {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.copy-table {
+  width: 100%;
+  margin-top: 22px;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.copy-table th,
+.copy-table td {
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.copy-table th {
+  width: 34%;
+  color: var(--text);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.copy-table td {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.copy-table a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.copy-table a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.copy-table-links th {
+  width: 48%;
+}
+
+.copy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.copy-grid li {
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  margin-top: -1px;
+  margin-left: -1px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.copy-grid-links li {
+  font-weight: 700;
+}
+
+.copy-split {
+  display: grid;
+  grid-template-columns: minmax(11em, 0.85fr) minmax(0, 1.15fr);
+  margin-top: 88px;
+  scroll-margin-top: 20px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.copy-split h2 {
+  margin: 0;
+  padding: 28px 24px;
+  border-right: 1px solid var(--line);
+  font-size: clamp(22px, 4.2vw, 30px);
+}
+
+.copy-split p {
+  margin: 0;
+  padding: 28px 24px;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
 .home-feature-copy {
   max-width: 62ch;
   padding-top: 28px;
@@ -775,19 +946,35 @@ a.ig-username:hover {
 }
 
 .how-guide {
-  margin-top: 28px;
-}
-
-.how-guide-top {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 4vw, 40px);
-  align-items: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
 }
 
 .how-guide-step {
   min-width: 0;
+  padding: 24px 18px 28px;
   text-align: center;
+}
+
+.how-guide-step+.how-guide-step {
+  border-left: 1px solid var(--line);
+}
+
+.how-guide-num {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .16em;
 }
 
 .how-guide-visual {
@@ -796,32 +983,32 @@ a.ig-username:hover {
   justify-content: center;
   width: 100%;
   min-height: 0;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .how-guide-visual img {
   display: block;
   width: 100%;
-  max-width: min(100%, 360px);
+  max-width: min(100%, 220px);
   height: auto;
   object-fit: contain;
 }
 
 .how-guide-visual.is-download img {
-  max-width: min(100%, 420px);
+  max-width: min(100%, 240px);
 }
 
 .how-guide-step h3 {
-  margin: 0 0 10px;
-  font-size: clamp(16px, 4vw, 20px);
+  margin: 0 0 8px;
+  font-size: clamp(16px, 2.2vw, 20px);
 }
 
 .how-guide-step p {
-  max-width: 36ch;
+  max-width: 28ch;
   margin: 0 auto;
   color: var(--muted);
-  font-size: clamp(13px, 3.4vw, 15px);
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.55;
 }
 
@@ -831,19 +1018,126 @@ a.ig-username:hover {
 
 .how-guide-paste-icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  vertical-align: -5px;
+  width: 18px;
+  height: 18px;
+  vertical-align: -4px;
 }
 
-.how-guide-download {
-  width: min(100%, 28em);
-  max-width: 100%;
-  margin: 36px auto 0;
+.how-guide-key {
+  display: inline-block;
+  margin-left: 2px;
+  padding: 1px 8px 2px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.copy-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.copy-stack li {
+  margin: 0;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.copy-stack li:last-child {
+  border-bottom: 0;
+}
+
+.home-copy .copy-grid,
+.home-copy .copy-stack {
+  padding: 0;
+  list-style: none;
+}
+
+.home-copy {
+  margin-top: 20em;
+}
+
+.home-copy .copy-grid li,
+.home-copy .copy-stack li {
+  margin: 0;
+}
+
+.copy-follow {
+  margin-top: 22px;
 }
 
 @media (max-width: 720px) {
-  .how-guide-top {
+  .home-jump {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-jump a:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+
+  .home-jump a:nth-child(even) {
+    border-right: 0;
+  }
+
+  .home-jump a:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
+  .home-jump a:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .copy-split,
+  .how-guide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .copy-split h2 {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 22px 20px 16px;
+  }
+
+  .copy-split p {
+    padding: 20px;
+  }
+
+  .how-guide-step+.how-guide-step {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .copy-table th,
+  .copy-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .copy-table th {
+    padding-bottom: 4px;
+    border-bottom: 0;
+  }
+
+  .copy-table td {
+    padding-top: 0;
+  }
+
+  .copy-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -886,6 +1180,7 @@ a.ig-username:hover {
 
 .panel {
   margin-top: 88px;
+  scroll-margin-top: 20px;
 }
 
 .panel h2 {
@@ -964,7 +1259,7 @@ a.ig-username:hover {
   display: block;
   margin-bottom: 22px;
   color: var(--accent);
-  font-family: var(--font-fraunces), Fraunces, Georgia, serif;
+  font-family: var(--font-poppins), Poppins, sans-serif;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: .16em;
@@ -1209,6 +1504,7 @@ footer p {
   }
 
   .home-feature,
+  .copy-split,
   .panel {
     margin-top: 68px;
   }

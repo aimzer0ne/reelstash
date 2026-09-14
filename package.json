@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "postinstall": "node scripts/install-ytdlp.mjs"
+    "start": "next start"
   },
   "engines": {
     "node": ">=20"
