@@ -31,7 +31,9 @@ export function proxy(request) {
   }
 
   const response = NextResponse.next();
-  applyHeaders(response.headers, SITE_SECURITY_HEADERS);
+  if (process.env.NODE_ENV === 'production') {
+    applyHeaders(response.headers, SITE_SECURITY_HEADERS);
+  }
   if (SITE_HOSTS.has(hostname)) {
     attachSiteLockCookie(response);
   } else if (isLocalDevHost(hostname)) {

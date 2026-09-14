@@ -1,4 +1,4 @@
-const CACHE = 'reelsdl-v2';
+const CACHE = 'reelsdl-v3';
 const PRECACHE = [
   '/favicon.svg',
   '/icon-192.png'

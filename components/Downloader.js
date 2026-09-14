@@ -59,7 +59,8 @@ export function Downloader({
           previewUrl: withApiHost(item.previewUrl),
           coverUrl: withApiHost(item.coverUrl),
           sourceUrl: item.sourceUrl?.startsWith('/') ? withApiHost(item.sourceUrl) : item.sourceUrl,
-          downloadUrl: withApiHost(item.downloadUrl)
+          downloadUrl: withApiHost(item.downloadUrl),
+          directUrl: item.directUrl && /^https:\/\//i.test(item.directUrl) ? item.directUrl : null
         })) : []
       });
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
@@ -110,6 +111,7 @@ export function Downloader({
         <form
           className="link-form"
           autoComplete="off"
+          suppressHydrationWarning
           onSubmit={(event) => {
             event.preventDefault();
             void resolveUrl();
@@ -142,6 +144,7 @@ export function Downloader({
               required
               value={url}
               disabled={loading}
+              suppressHydrationWarning
               onChange={(event) => setUrl(event.target.value)}
               onPaste={onPaste}
             />
@@ -304,6 +307,17 @@ function MediaCard({ item, index, total, mode }) {
           <Icon name="download" />
           {label}
         </a>
+        {item.directUrl ? (
+          <a
+            className="download-direct"
+            href={item.directUrl}
+            rel="noreferrer"
+            referrerPolicy="no-referrer"
+          >
+            <Icon name="link" />
+            Direct Instagram file
+          </a>
+        ) : null}
       </div>
     </article>
   );

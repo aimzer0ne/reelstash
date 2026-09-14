@@ -212,8 +212,8 @@ main {
 
 h1 {
   margin: 0 auto;
-  max-width: 16ch;
-  font-size: clamp(28px, 8vw, 56px);
+  max-width: 30ch;
+  font-size: clamp(28px, 4vw, 46px);
   line-height: 1.08;
 }
 
@@ -582,6 +582,28 @@ a.ig-username:hover {
 
 .download-button:hover {
   background: #111;
+}
+
+.download-direct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.download-direct .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.download-direct:hover {
+  color: var(--text);
+  text-decoration: underline;
 }
 
 .home-feature {

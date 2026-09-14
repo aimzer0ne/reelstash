@@ -6,6 +6,7 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   productionBrowserSourceMaps: false,
+  allowedDevOrigins: ['127.0.0.1'],
   async redirects() {
     return [
       { source: '/audio.html', destination: '/instagram-audio-downloader', permanent: true },
@@ -16,6 +17,7 @@ const nextConfig = {
     ];
   },
   async headers() {
+    if (process.env.NODE_ENV !== 'production') return [];
     return [
       {
         source: '/sw.js',
