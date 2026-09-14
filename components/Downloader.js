@@ -79,7 +79,7 @@ export function Downloader({
         })) : []
       };
       setResult(mapped);
-      if (mapped.media.length === 1) startAutoDownload(mapped.media[0]);
+      if (mapped.media.length === 1) void startAutoDownload(mapped.media[0], mode);
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     } catch (caught) {
       setError(caught.message || copy.unexpected);
@@ -128,6 +128,10 @@ export function Downloader({
           <span className="hero-title">{headingText}</span>
         </h1>
         <p className="lede">{ledeText}</p>
+        <p className="bookmark-hint">
+          <span className="bookmark-emoji" aria-hidden="true">📌</span>
+          {t('bookmarkHint')}
+        </p>
 
         <form
           className="link-form"
@@ -283,16 +287,32 @@ function profileHref(result) {
   return username ? `https://www.instagram.com/${username}/` : 'https://www.instagram.com/';
 }
 
-function startAutoDownload(item) {
+async function startAutoDownload(item, mode) {
   const href = item?.downloadUrl;
   if (!href) return;
-  const frame = document.createElement('iframe');
-  frame.src = href;
-  frame.setAttribute('aria-hidden', 'true');
-  frame.tabIndex = -1;
-  frame.style.cssText = 'position:fixed;width:0;height:0;border:0;left:-9999px';
-  document.body.appendChild(frame);
-  window.setTimeout(() => frame.remove(), 120_000);
+  const filename = downloadFilename(item, 0, mode);
+  try {
+    const response = await fetch(href, { credentials: 'include' });
+    if (!response.ok) throw new Error('auto-download failed');
+    const blob = await response.blob();
+    if (!blob.size) throw new Error('empty download');
+    const objectUrl = URL.createObjectURL(blob);
+    triggerFileSave(objectUrl, filename);
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
+  } catch {
+    triggerFileSave(href, filename);
+  }
+}
+
+function triggerFileSave(href, filename) {
+  const link = document.createElement('a');
+  link.href = href;
+  link.download = filename;
+  link.rel = 'noopener';
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
 }
 
 function downloadFilename(item, index, mode) {

@@ -330,9 +330,31 @@ h1 {
 
 .lede {
   max-width: 40ch;
-  margin: 18px auto 40px;
+  margin: 18px auto 16px;
   color: var(--muted);
   font-weight: 700;
+}
+
+.bookmark-hint {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  max-width: min(42ch, 100%);
+  margin: 0 auto 28px;
+  padding: 8px 14px 8px 12px;
+  border-radius: 999px;
+  background: #fff4cf;
+  color: #5c4816;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  box-shadow: 0 2px 0 #efd27a;
+}
+
+.bookmark-emoji {
+  font-size: 15px;
+  line-height: 1;
 }
 
 .link-form {
