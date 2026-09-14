@@ -67,7 +67,7 @@ export function Downloader({
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error || copy.resolveFailed);
       setUrl('');
-      setResult({
+      const mapped = {
         ...body,
         media: Array.isArray(body.media) ? body.media.map((item) => ({
           ...item,
@@ -77,7 +77,9 @@ export function Downloader({
           downloadUrl: withApiHost(item.downloadUrl),
           directUrl: item.directUrl && /^https:\/\//i.test(item.directUrl) ? item.directUrl : null
         })) : []
-      });
+      };
+      setResult(mapped);
+      if (mapped.media.length === 1) startAutoDownload(mapped.media[0]);
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     } catch (caught) {
       setError(caught.message || copy.unexpected);
@@ -281,6 +283,27 @@ function profileHref(result) {
   return username ? `https://www.instagram.com/${username}/` : 'https://www.instagram.com/';
 }
 
+function startAutoDownload(item) {
+  const href = item?.downloadUrl;
+  if (!href) return;
+  const frame = document.createElement('iframe');
+  frame.src = href;
+  frame.setAttribute('aria-hidden', 'true');
+  frame.tabIndex = -1;
+  frame.style.cssText = 'position:fixed;width:0;height:0;border:0;left:-9999px';
+  document.body.appendChild(frame);
+  window.setTimeout(() => frame.remove(), 120_000);
+}
+
+function downloadFilename(item, index, mode) {
+  const itemNumber = index + 1;
+  const isAudio = mode === 'audio' || item.type === 'audio';
+  const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
+  if (isAudio && item.original) return `ReelsDl-audio-${itemNumber}`;
+  if (isAudio) return `ReelsDl-audio-${itemNumber}.mp3`;
+  return `ReelsDl-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
+}
+
 function MediaCard({ item, index, total, mode, t }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
@@ -288,11 +311,7 @@ function MediaCard({ item, index, total, mode, t }) {
   const isOriginalAudio = isAudio && item.original;
   const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
   const label = `${isOriginalAudio ? t('downloadAudio') : isAudio ? t('downloadMp3') : kind === 'video' ? t('downloadVideo') : t('downloadPhoto')}${suffix}`;
-  const downloadName = isOriginalAudio
-    ? `ReelsDl-audio-${itemNumber}`
-    : isAudio
-      ? `ReelsDl-audio-${itemNumber}.mp3`
-      : `ReelsDl-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
+  const downloadName = downloadFilename(item, index, mode);
   const [previewFailed, setPreviewFailed] = useState(false);
   const thumb = previewFailed ? null : lightPreview(item);
   const isPhoto = kind === 'photo';
