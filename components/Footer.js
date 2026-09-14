@@ -1,8 +1,11 @@
+'use client';
+
 import Link from 'next/link';
-import { LEGAL_LINKS } from '@/lib/site';
 import { Logo } from './Logo';
+import { useI18n } from './I18nProvider';
 
 export function Footer({ lead }) {
+  const { t } = useI18n();
   const year = new Date().getFullYear();
   return (
     <footer>
@@ -10,10 +13,9 @@ export function Footer({ lead }) {
         <Logo className="footer-logo" />
         ReelsDl.net
       </Link>
-      <nav className="legal-nav" aria-label="Legal">
-        {LEGAL_LINKS.map((item) => (
-          <Link key={item.href} href={item.href}>{item.label}</Link>
-        ))}
+      <nav className="legal-nav" aria-label={t('legal')}>
+        <Link href="/privacy">{t('privacy')}</Link>
+        <Link href="/disclaimer">{t('disclaimer')}</Link>
       </nav>
       <p>
         {lead ? (
@@ -22,7 +24,7 @@ export function Footer({ lead }) {
             {' · '}
           </>
         ) : null}
-        Not affiliated with Instagram or Meta · © {year} ReelsDl.net
+        {t('notAffiliated')} · © {year} ReelsDl.net
       </p>
     </footer>
   );

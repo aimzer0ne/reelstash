@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
 import { SITE_EMAIL } from '@/lib/seo';
 import { Icon } from './Icons';
+import { useI18n } from './I18nProvider';
 
 export function Downloader({
   mode,
@@ -15,6 +16,7 @@ export function Downloader({
   messages,
   summary
 }) {
+  const { t } = useI18n();
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,6 +24,18 @@ export function Downloader({
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
   const hasUrl = Boolean(url.trim());
+  const audio = mode === 'audio';
+  const headingText = t(audio ? 'audioHeading' : 'mediaHeading');
+  const ledeText = t(audio ? 'audioLede' : 'mediaLede');
+  const placeholderText = t(audio ? 'audioPlaceholder' : 'mediaPlaceholder');
+  const inputLabelText = t(audio ? 'audioInputLabel' : 'mediaInputLabel');
+  const copy = {
+    emptyUrl: t(audio ? 'emptyUrlAudio' : 'emptyUrl'),
+    invalidUrl: t('invalidUrl'),
+    resolveFailed: t(audio ? 'resolveFailedAudio' : 'resolveFailed'),
+    unexpected: t(audio ? 'unexpectedAudio' : 'unexpected'),
+    clipboardBlocked: t('clipboardBlocked')
+  };
 
   useEffect(() => {
     const desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -32,8 +46,8 @@ export function Downloader({
   async function resolveUrl(nextUrl) {
     const value = (nextUrl ?? url).trim();
     setError('');
-    if (!value) return setError(messages.emptyUrl);
-    if (!looksLikeInstagramUrl(value)) return setError(messages.invalidUrl);
+    if (!value) return setError(copy.emptyUrl);
+    if (!looksLikeInstagramUrl(value)) return setError(copy.invalidUrl);
     if (loading) return;
 
     setLoading(true);
@@ -50,7 +64,7 @@ export function Downloader({
         body: JSON.stringify(mode === 'audio' ? { url: value, mode: 'audio' } : { url: value })
       });
       const body = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(body.error || messages.resolveFailed);
+      if (!response.ok) throw new Error(body.error || copy.resolveFailed);
       setUrl('');
       setResult({
         ...body,
@@ -65,7 +79,7 @@ export function Downloader({
       });
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     } catch (caught) {
-      setError(caught.message || messages.unexpected);
+      setError(caught.message || copy.unexpected);
     } finally {
       setLoading(false);
     }
@@ -79,7 +93,7 @@ export function Downloader({
       setUrl(next);
       await resolveUrl(next);
     } catch {
-      setError(messages.clipboardBlocked);
+      setError(copy.clipboardBlocked);
     }
   }
 
@@ -104,9 +118,9 @@ export function Downloader({
       <section className="hero" aria-labelledby="hero-heading">
         {kicker ? <p className="kicker">{kicker}</p> : null}
         <h1 id="hero-heading">
-          <span className="hero-title">{heading}</span>
+          <span className="hero-title">{headingText}</span>
         </h1>
-        <p className="lede">{lede}</p>
+        <p className="lede">{ledeText}</p>
 
         <form
           className="link-form"
@@ -118,7 +132,7 @@ export function Downloader({
           }}
           noValidate
         >
-          <label className="sr-only" htmlFor="instagram-url">{inputLabel}</label>
+          <label className="sr-only" htmlFor="instagram-url">{inputLabelText}</label>
           <div
             className={loading ? 'input-wrap is-loading' : 'input-wrap'}
             aria-busy={loading}
@@ -140,7 +154,7 @@ export function Downloader({
               spellCheck={false}
               data-1p-ignore="true"
               data-lpignore="true"
-              placeholder={placeholder}
+              placeholder={placeholderText}
               required
               value={url}
               disabled={loading}
@@ -151,17 +165,17 @@ export function Downloader({
             {hasUrl ? (
               <button className="paste-button" type="button" disabled={loading} onClick={clearField}>
                 <Icon name="clear" />
-                Clear
+                {t('clear')}
               </button>
             ) : (
               <button className="paste-button" type="button" disabled={loading} onClick={() => void pasteLink()}>
                 <Icon name="paste" />
-                Paste
+                {t('paste')}
               </button>
             )}
           </div>
-          <a className="report-issue" href={reportIssueHref(url, mode)}>
-            Report an issue
+          <a className="report-issue" href={reportIssueHref(url, mode, t('reportIssue'))}>
+            {t('reportIssue')}
           </a>
         </form>
 
@@ -180,7 +194,7 @@ export function Downloader({
               <PostByline result={result} fallbackTitle={summary.defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
-                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} />
+                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} />
                 ))}
               </div>
               {postCaption(result) ? (
@@ -202,7 +216,7 @@ export function Downloader({
             </article>
             <a className="clear-button" href="/">
               <Icon name="again" />
-              Download again
+              {t('downloadAgain')}
             </a>
           </>
         ) : null}
@@ -254,17 +268,13 @@ function profileHref(result) {
   return username ? `https://www.instagram.com/${username}/` : 'https://www.instagram.com/';
 }
 
-function MediaCard({ item, index, total, mode }) {
+function MediaCard({ item, index, total, mode, t }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
   const isAudio = mode === 'audio' || item.type === 'audio';
   const isOriginalAudio = isAudio && item.original;
   const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
-  const label = isOriginalAudio
-    ? `Download audio${suffix}`
-    : isAudio
-      ? `Download MP3${suffix}`
-      : `Download ${kind}${suffix}`;
+  const label = `${isOriginalAudio ? t('downloadAudio') : isAudio ? t('downloadMp3') : kind === 'video' ? t('downloadVideo') : t('downloadPhoto')}${suffix}`;
   const downloadName = isOriginalAudio
     ? `ReelsDl-audio-${itemNumber}`
     : isAudio
@@ -272,6 +282,9 @@ function MediaCard({ item, index, total, mode }) {
       : `ReelsDl-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
   const [previewFailed, setPreviewFailed] = useState(false);
   const thumb = previewFailed ? null : lightPreview(item);
+  const isPhoto = kind === 'photo';
+  const primaryUrl = isPhoto && item.directUrl ? item.directUrl : item.downloadUrl;
+  const showDirect = Boolean(item.directUrl) && !isPhoto;
 
   return (
     <article className="media-card">
@@ -300,14 +313,15 @@ function MediaCard({ item, index, total, mode }) {
       <div className="media-footer">
         <a
           className="download-button"
-          href={item.downloadUrl}
+          href={primaryUrl}
           download={downloadName}
           aria-label={label}
+          {...(isPhoto && item.directUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
         >
           <Icon name="download" />
           {label}
         </a>
-        {item.directUrl ? (
+        {showDirect ? (
           <a
             className="download-direct"
             href={item.directUrl}
@@ -315,7 +329,7 @@ function MediaCard({ item, index, total, mode }) {
             referrerPolicy="no-referrer"
           >
             <Icon name="link" />
-            Direct Instagram file
+            {t('directFile')}
           </a>
         ) : null}
       </div>
@@ -337,9 +351,9 @@ function clearShimmer(event) {
   event.currentTarget.parentElement?.querySelector('.loading-shimmer')?.remove();
 }
 
-function reportIssueHref(url, mode) {
+function reportIssueHref(url, mode, subjectLabel) {
   const page = mode === 'audio' ? 'Audio MP3' : 'Reels Downloader';
-  const subject = `ReelsDl.net issue — ${page}`;
+  const subject = `ReelsDl.net — ${subjectLabel || page}`;
   const parts = ['What went wrong:', ''];
   const trimmed = url.trim();
   if (trimmed) parts.push(`Instagram link: ${trimmed}`, '');

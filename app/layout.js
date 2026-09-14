@@ -1,5 +1,8 @@
+import { cookies, headers } from 'next/headers';
 import { Fraunces, Inter, Yellowtail } from 'next/font/google';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import { I18nProvider } from '@/components/I18nProvider';
+import { LANG_COOKIE, localeFromAccept, localeFromValue, localeMeta } from '@/lib/i18n';
 import './globals.css';
 import './logo-type.css';
 import './input-hit.css';
@@ -84,11 +87,20 @@ export const viewport = {
   viewportFit: 'cover'
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const jar = await cookies();
+  const headerStore = await headers();
+  const locale = localeFromValue(jar.get(LANG_COOKIE)?.value)
+    || localeFromAccept(headerStore.get('accept-language'))
+    || 'en';
+  const { dir } = localeMeta(locale);
+
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${logo.variable}`}>
+    <html lang={locale} dir={dir} className={`${inter.variable} ${fraunces.variable} ${logo.variable}`}>
       <body>
-        {children}
+        <I18nProvider initialLocale={locale}>
+          {children}
+        </I18nProvider>
         <GoogleAnalytics />
       </body>
     </html>

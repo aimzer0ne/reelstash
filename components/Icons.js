@@ -131,6 +131,16 @@ export function IconAgain({ className }) {
   );
 }
 
+function IconShare({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M12 3v11" />
+      <path d="M8 7l4-4 4 4" />
+      <path d="M5 13v6h14v-6" />
+    </Svg>
+  );
+}
+
 const ICONS = {
   mark: IconMark,
   reels: IconReels,
@@ -142,7 +152,8 @@ const ICONS = {
   wave: IconWave,
   alert: IconAlert,
   clear: IconClear,
-  again: IconAgain
+  again: IconAgain,
+  share: IconShare
 };
 
 export function Icon({ name, className }) {

@@ -13,7 +13,7 @@ export function DownloadPage({ page }) {
       {page.jsonLd.map((block, index) => (
         <JsonLd key={index} data={block} />
       ))}
-      <Header current={page.path} />
+      <Header />
       <main id="home">
         <Downloader
           mode={page.mode}
