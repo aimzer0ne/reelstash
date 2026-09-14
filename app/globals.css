@@ -239,7 +239,7 @@ p {
   align-items: center;
 }
 
-  .lang-select select {
+.lang-select select {
   height: 36px;
   max-width: 168px;
   margin: 0;
@@ -343,13 +343,12 @@ h1 {
   max-width: min(42ch, 100%);
   margin: 0 auto 28px;
   padding: 8px 14px 8px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   background: #fff4cf;
   color: #5c4816;
   font-size: 13px;
   font-weight: 700;
   line-height: 1.25;
-  box-shadow: 0 2px 0 #efd27a;
 }
 
 .bookmark-emoji {

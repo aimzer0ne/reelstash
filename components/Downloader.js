@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
 import { SITE_EMAIL } from '@/lib/seo';
 import { Icon } from './Icons';
@@ -323,13 +323,18 @@ function triggerFileSave(href, filename) {
   link.remove();
 }
 
+function randomFileId() {
+  return crypto.randomUUID().slice(0, 8);
+}
+
 function downloadFilename(item, index, mode) {
   const itemNumber = index + 1;
   const isAudio = mode === 'audio' || item.type === 'audio';
   const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
+  if (kind === 'video') return `ReelsDl.net-${randomFileId()}.mp4`;
   if (isAudio && item.original) return `ReelsDl-audio-${itemNumber}`;
   if (isAudio) return `ReelsDl-audio-${itemNumber}.mp3`;
-  return `ReelsDl-${kind}-${itemNumber}.${kind === 'video' ? 'mp4' : 'jpg'}`;
+  return `ReelsDl-photo-${itemNumber}.jpg`;
 }
 
 function MediaCard({ item, index, total, mode, t }) {
@@ -339,13 +344,13 @@ function MediaCard({ item, index, total, mode, t }) {
   const isOriginalAudio = isAudio && item.original;
   const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
   const label = `${isOriginalAudio ? t('downloadAudio') : isAudio ? t('downloadMp3') : kind === 'video' ? t('downloadVideo') : t('downloadPhoto')}${suffix}`;
-  const downloadName = downloadFilename(item, index, mode);
+  const downloadName = useMemo(() => downloadFilename(item, index, mode), [item, index, mode]);
   const [previewFailed, setPreviewFailed] = useState(false);
   const thumb = previewFailed ? null : lightPreview(item);
   const cdnUrl = item.directUrl || null;
   const apiHref = item.downloadUrl;
   const primaryUrl = cdnUrl || apiHref;
-  const showApiFallback = Boolean(cdnUrl && apiHref);
+  const showApiFallback = Boolean(cdnUrl && apiHref && kind !== 'photo');
 
   return (
     <article className="media-card">
