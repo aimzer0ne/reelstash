@@ -239,9 +239,9 @@ p {
   align-items: center;
 }
 
-.lang-select select {
+  .lang-select select {
   height: 36px;
-  max-width: 140px;
+  max-width: 168px;
   margin: 0;
   padding: 0 22px 0 4px;
   border: 0;

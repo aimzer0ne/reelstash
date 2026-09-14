@@ -288,19 +288,27 @@ function profileHref(result) {
 }
 
 async function startAutoDownload(item, mode) {
-  const href = item?.downloadUrl;
-  if (!href) return;
   const filename = downloadFilename(item, 0, mode);
+  const cdn = item?.directUrl;
+  const api = item?.downloadUrl;
+  if (cdn && await saveDownloadBlob(cdn, filename, { credentials: 'omit', referrerPolicy: 'no-referrer' })) return;
+  if (api && await saveDownloadBlob(api, filename, { credentials: 'include' })) return;
+  triggerFileSave(cdn || api, filename);
+}
+
+async function saveDownloadBlob(href, filename, fetchInit) {
+  if (!href) return false;
   try {
-    const response = await fetch(href, { credentials: 'include' });
-    if (!response.ok) throw new Error('auto-download failed');
+    const response = await fetch(href, fetchInit);
+    if (!response.ok) return false;
     const blob = await response.blob();
-    if (!blob.size) throw new Error('empty download');
+    if (!blob.size) return false;
     const objectUrl = URL.createObjectURL(blob);
     triggerFileSave(objectUrl, filename);
     window.setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
+    return true;
   } catch {
-    triggerFileSave(href, filename);
+    return false;
   }
 }
 
@@ -334,9 +342,10 @@ function MediaCard({ item, index, total, mode, t }) {
   const downloadName = downloadFilename(item, index, mode);
   const [previewFailed, setPreviewFailed] = useState(false);
   const thumb = previewFailed ? null : lightPreview(item);
-  const isPhoto = kind === 'photo';
-  const primaryUrl = isPhoto && item.directUrl ? item.directUrl : item.downloadUrl;
-  const showDirect = Boolean(item.directUrl) && !isPhoto;
+  const cdnUrl = item.directUrl || null;
+  const apiHref = item.downloadUrl;
+  const primaryUrl = cdnUrl || apiHref;
+  const showApiFallback = Boolean(cdnUrl && apiHref);
 
   return (
     <article className="media-card">
@@ -368,20 +377,19 @@ function MediaCard({ item, index, total, mode, t }) {
           href={primaryUrl}
           download={downloadName}
           aria-label={label}
-          {...(isPhoto && item.directUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
+          {...(cdnUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
         >
           <Icon name="download" />
           {label}
         </a>
-        {showDirect ? (
+        {showApiFallback ? (
           <a
             className="download-direct"
-            href={item.directUrl}
-            rel="noreferrer"
-            referrerPolicy="no-referrer"
+            href={apiHref}
+            download={downloadName}
           >
             <Icon name="link" />
-            {t('directFile')}
+            {t('viaSite')}
           </a>
         ) : null}
       </div>
