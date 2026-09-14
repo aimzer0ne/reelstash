@@ -55,29 +55,19 @@ export function Downloader({
     setResult(null);
 
     try {
-      const response = await fetch(apiUrl('/api/resolve'), {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
-          'x-reelsdl-client': 'web'
-        },
-        body: JSON.stringify(mode === 'audio' ? { url: value, mode: 'audio' } : { url: value })
-      });
-      const body = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(body.error || copy.resolveFailed);
+      const cached = readClientPostCache(value, mode);
+      const mapped = cached || await fetchResolvedPost(value, mode, copy.resolveFailed);
+      if (cached) {
+        void fetchResolvedPost(value, mode, copy.resolveFailed)
+          .then((fresh) => {
+            writeClientPostCache(value, mode, fresh);
+            setResult(fresh);
+          })
+          .catch(() => {});
+      } else {
+        writeClientPostCache(value, mode, mapped);
+      }
       setUrl('');
-      const mapped = {
-        ...body,
-        media: Array.isArray(body.media) ? body.media.map((item) => ({
-          ...item,
-          previewUrl: withApiHost(item.previewUrl),
-          coverUrl: withApiHost(item.coverUrl),
-          sourceUrl: item.sourceUrl?.startsWith('/') ? withApiHost(item.sourceUrl) : item.sourceUrl,
-          downloadUrl: withApiHost(item.downloadUrl),
-          directUrl: item.directUrl && /^https:\/\//i.test(item.directUrl) ? item.directUrl : null
-        })) : []
-      };
       setResult(mapped);
       if (mapped.media.length === 1) void startAutoDownload(mapped.media[0], mode);
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
@@ -423,6 +413,84 @@ function reportIssueHref(url, mode, subjectLabel) {
   const trimmed = url.trim();
   if (trimmed) parts.push(`Instagram link: ${trimmed}`, '');
   return `mailto:${SITE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(parts.join('\n'))}`;
+}
+
+function fetchResolvedPost(value, mode, resolveFailed) {
+  return fetch(apiUrl('/api/resolve'), {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'content-type': 'application/json',
+      'x-reelsdl-client': 'web'
+    },
+    body: JSON.stringify(mode === 'audio' ? { url: value, mode: 'audio' } : { url: value })
+  }).then(async (response) => {
+    const body = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(body.error || resolveFailed);
+    const mapped = {
+      ...body,
+      media: Array.isArray(body.media) ? body.media.map((item) => ({
+        ...item,
+        previewUrl: withApiHost(item.previewUrl),
+        coverUrl: withApiHost(item.coverUrl),
+        sourceUrl: item.sourceUrl?.startsWith('/') ? withApiHost(item.sourceUrl) : item.sourceUrl,
+        downloadUrl: withApiHost(item.downloadUrl),
+        directUrl: item.directUrl && /^https:\/\//i.test(item.directUrl) ? item.directUrl : null
+      })) : []
+    };
+    if (!mapped.media.length) throw new Error(resolveFailed);
+    return mapped;
+  });
+}
+
+const CLIENT_CACHE_MS = 45 * 60 * 1000;
+const POST_PATH_KINDS = new Set(['p', 'reel', 'reels', 'tv']);
+
+function instagramPostCacheId(value) {
+  try {
+    const parsed = new URL(value.startsWith('http') ? value : `https://${value}`);
+    const parts = parsed.pathname.split('/').filter(Boolean);
+    if (!parts.length) return null;
+    const first = parts[0].toLowerCase();
+    const second = (parts[1] || '').toLowerCase();
+    if (POST_PATH_KINDS.has(first) && parts[1] && second !== 'audio') return parts[1];
+    if (first === 'share' && POST_PATH_KINDS.has(second) && parts[2]) return parts[2];
+    if (POST_PATH_KINDS.has(second) && parts[2]) return parts[2];
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function clientCacheStorageKey(value, mode) {
+  const id = instagramPostCacheId(value);
+  if (!id) return null;
+  return `reelsdl_post_${mode}_${id}`;
+}
+
+function readClientPostCache(value, mode) {
+  const key = clientCacheStorageKey(value, mode);
+  if (!key) return null;
+  try {
+    const raw = sessionStorage.getItem(key);
+    if (!raw) return null;
+    const entry = JSON.parse(raw);
+    if (!entry?.at || Date.now() - entry.at > CLIENT_CACHE_MS) return null;
+    if (!Array.isArray(entry.result?.media) || !entry.result.media.length) return null;
+    return entry.result;
+  } catch {
+    return null;
+  }
+}
+
+function writeClientPostCache(value, mode, result) {
+  const key = clientCacheStorageKey(value, mode);
+  if (!key || !result?.media?.length) return;
+  try {
+    sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), result }));
+  } catch {
+    /* ignore quota */
+  }
 }
 
 function extractInstagramUrl(value) {
