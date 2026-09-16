@@ -69,7 +69,6 @@ export function Downloader({
       }
       setUrl('');
       setResult(mapped);
-      if (mapped.media.length === 1) void startAutoDownload(mapped.media[0], mode);
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     } catch (caught) {
       setError(caught.message || copy.unexpected);
@@ -275,42 +274,6 @@ function profileHref(result) {
   const username = postUsername(result);
   if (result.profileUrl) return result.profileUrl;
   return username ? `https://www.instagram.com/${username}/` : 'https://www.instagram.com/';
-}
-
-async function startAutoDownload(item, mode) {
-  const filename = downloadFilename(item, 0, mode);
-  const cdn = item?.directUrl;
-  const api = item?.downloadUrl;
-  if (cdn && await saveDownloadBlob(cdn, filename, { credentials: 'omit', referrerPolicy: 'no-referrer' })) return;
-  if (api && await saveDownloadBlob(api, filename, { credentials: 'include' })) return;
-  triggerFileSave(cdn || api, filename);
-}
-
-async function saveDownloadBlob(href, filename, fetchInit) {
-  if (!href) return false;
-  try {
-    const response = await fetch(href, fetchInit);
-    if (!response.ok) return false;
-    const blob = await response.blob();
-    if (!blob.size) return false;
-    const objectUrl = URL.createObjectURL(blob);
-    triggerFileSave(objectUrl, filename);
-    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function triggerFileSave(href, filename) {
-  const link = document.createElement('a');
-  link.href = href;
-  link.download = filename;
-  link.rel = 'noopener';
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
 }
 
 function randomFileId() {
