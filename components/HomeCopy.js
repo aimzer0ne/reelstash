@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FeatureShowcase } from './FeatureShowcase';
 import { HowToGuide } from './HowToGuide';
 import './page-arrange.css';
 
@@ -9,7 +10,10 @@ export function HomeCopy({ page }) {
         <Link href="/instagram-audio-downloader">+ Reels Audio - mp3 Download</Link>
       </p>
 
+      <FeatureShowcase />
+
       <nav className="home-jump" aria-label="On this page">
+        <a href="#features">Features</a>
         <a href="#about">About</a>
         <a href="#how-it-works">How to</a>
         <a href="#why">Why</a>

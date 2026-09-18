@@ -141,6 +141,24 @@ function IconShare({ className }) {
   );
 }
 
+function IconUnlock({ className }) {
+  return (
+    <Svg className={className}>
+      <rect x="5" y="12" width="14" height="9" />
+      <path d="M16 12V7.2a4.2 4.2 0 0 0-8.4-.2" />
+    </Svg>
+  );
+}
+
+function IconDevice({ className }) {
+  return (
+    <Svg className={className}>
+      <rect x="7" y="3" width="10" height="18" />
+      <path d="M11 18h2" />
+    </Svg>
+  );
+}
+
 const ICONS = {
   mark: IconMark,
   reels: IconReels,
@@ -153,7 +171,9 @@ const ICONS = {
   alert: IconAlert,
   clear: IconClear,
   again: IconAgain,
-  share: IconShare
+  share: IconShare,
+  unlock: IconUnlock,
+  device: IconDevice
 };
 
 export function Icon({ name, className }) {

@@ -801,7 +801,7 @@ a.ig-username:hover {
 
 .home-jump {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   margin: 28px 0 0;
   border: 1px solid var(--line);
   background: var(--paper);
@@ -1104,23 +1104,19 @@ a.ig-username:hover {
 
 @media (max-width: 720px) {
   .home-jump {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .home-jump a:nth-child(odd) {
-    border-right: 1px solid var(--line);
-  }
-
-  .home-jump a:nth-child(even) {
+  .home-jump a:nth-child(3n) {
     border-right: 0;
   }
 
-  .home-jump a:nth-child(n + 3) {
+  .home-jump a:nth-child(n + 4) {
     border-top: 1px solid var(--line);
   }
 
   .home-jump a:last-child {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
   .copy-split,
@@ -1526,7 +1522,8 @@ footer p {
 
   .home-feature,
   .copy-split,
-  .panel {
+  .panel,
+  .feature-showcase {
     margin-top: 68px;
   }
 
