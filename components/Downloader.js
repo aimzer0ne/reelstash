@@ -23,6 +23,7 @@ export function Downloader({
   const [result, setResult] = useState(null);
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
+  const directDownloadRef = useRef(null);
   const hasUrl = Boolean(url.trim());
   const audio = mode === 'audio';
   const headingText = t(audio ? 'audioHeading' : 'mediaHeading');
@@ -53,6 +54,7 @@ export function Downloader({
 
     setLoading(true);
     setResult(null);
+    resetDirectVideoDownload();
 
     try {
       const cached = readClientPostCache(value, mode);
@@ -107,7 +109,20 @@ export function Downloader({
   }
 
   const media = Array.isArray(result?.media) ? result.media : [];
-  const count = media.length === 1 ? summary.one : `${media.length}${summary.manySuffix}`;
+  const directVideo = singleVideoItem(result, mode);
+  const cdnUrl = directVideo?.directUrl || null;
+  const autoHref = cdnUrl || directVideo?.downloadUrl || '';
+  const directName = useMemo(
+    () => (directVideo ? downloadFilename(directVideo, 0, mode) : ''),
+    [directVideo, mode]
+  );
+
+  useEffect(() => {
+    if (!directVideo) return;
+    const anchor = directDownloadRef.current;
+    if (!anchor) return;
+    beginDirectVideoDownload(directVideo, anchor);
+  }, [directVideo]);
 
   return (
     <>
@@ -196,37 +211,52 @@ export function Downloader({
       </section>
 
       <section className="results-section" ref={resultsRef} aria-live="polite" hidden={!result}>
-        {result ? (
-          <>
-            <article className={media.length === 1 ? 'ig-post is-single' : 'ig-post'}>
-              <PostByline result={result} fallbackTitle={summary.defaultTitle} />
-              <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
-                {media.map((item, index) => (
-                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} />
-                ))}
-              </div>
-              {postCaption(result) ? (
-                <p className="ig-caption">
-                  {postUsername(result) ? (
-                    <a
-                      className="ig-username"
-                      href={profileHref(result)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {postUsername(result)}
-                    </a>
-                  ) : null}
-                  {' '}
-                  {postCaption(result)}
-                </p>
-              ) : null}
-            </article>
-            <a className="clear-button" href="/">
-              <Icon name="again" />
-              {t('downloadAgain')}
+        {result && directVideo ? (
+          <div className="download-started">
+            <p role="status">{t('downloadStarted')}</p>
+            <a
+              ref={directDownloadRef}
+              className="download-button"
+              href={autoHref}
+              download={directName}
+              {...(cdnUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
+            >
+              <Icon name="download" />
+              {t('downloadVideo')}
             </a>
-          </>
+          </div>
+        ) : null}
+        {result && !directVideo ? (
+          <article className={media.length === 1 ? 'ig-post is-single' : 'ig-post'}>
+            <PostByline result={result} fallbackTitle={summary.defaultTitle} />
+            <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
+              {media.map((item, index) => (
+                <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} />
+              ))}
+            </div>
+            {postCaption(result) ? (
+              <p className="ig-caption">
+                {postUsername(result) ? (
+                  <a
+                    className="ig-username"
+                    href={profileHref(result)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {postUsername(result)}
+                  </a>
+                ) : null}
+                {' '}
+                {postCaption(result)}
+              </p>
+            ) : null}
+          </article>
+        ) : null}
+        {result ? (
+          <a className="clear-button" href="/">
+            <Icon name="again" />
+            {t('downloadAgain')}
+          </a>
         ) : null}
       </section>
     </>
@@ -274,6 +304,28 @@ function profileHref(result) {
   const username = postUsername(result);
   if (result.profileUrl) return result.profileUrl;
   return username ? `https://www.instagram.com/${username}/` : 'https://www.instagram.com/';
+}
+
+let lastAutoVideoKey = '';
+
+function singleVideoItem(result, mode) {
+  if (mode === 'audio' || !result) return null;
+  const media = result.media;
+  if (!Array.isArray(media) || media.length !== 1) return null;
+  const item = media[0];
+  if (item?.type !== 'video' || !item.downloadUrl) return null;
+  return item;
+}
+
+function resetDirectVideoDownload() {
+  lastAutoVideoKey = '';
+}
+
+function beginDirectVideoDownload(item, anchor) {
+  const key = item.sourceUrl || item.downloadUrl;
+  if (!key || lastAutoVideoKey === key) return;
+  lastAutoVideoKey = key;
+  anchor.click();
 }
 
 function randomFileId() {
