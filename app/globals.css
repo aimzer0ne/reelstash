@@ -504,19 +504,6 @@ h1 {
   margin-top: 64px;
 }
 
-.download-started {
-  max-width: 360px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.download-started p {
-  margin: 0 0 16px;
-  color: var(--text);
-  font-size: 16px;
-  font-weight: 700;
-}
-
 .section-bar {
   display: flex;
   align-items: baseline;
