@@ -117,10 +117,6 @@ export function Downloader({
           <span className="hero-title">{headingText}</span>
         </h1>
         <p className="lede">{ledeText}</p>
-        <p className="bookmark-hint">
-          <span className="bookmark-emoji" aria-hidden="true">📌</span>
-          {t('bookmarkHint')}
-        </p>
 
         <form
           className="link-form"

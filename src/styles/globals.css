@@ -1,4 +1,8 @@
 :root {
+  --font-inter: "Inter";
+  --font-fraunces: "Fraunces";
+  --font-poppins: "Poppins";
+  --font-logo: "Yellowtail";
   --bg: #f2f6fa;
   --paper: #ffffff;
   --line: #d7e0ea;
@@ -318,42 +322,27 @@ h1 {
 }
 
 .hero-title {
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  padding: 0 0.08em 0.08em;
-  background-image: url("/assets/hero-underline.svg");
-  background-repeat: no-repeat;
-  background-position: left 100%;
-  background-size: 100% 0.42em;
-  line-height: 1.42;
+  display: inline;
+  padding: 0;
+  line-height: 1.12;
+  background-image: linear-gradient(
+    108deg,
+    #f6c453 0%,
+    #f58529 24%,
+    #e1306c 52%,
+    #833ab4 78%,
+    #4f5bd5 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .lede {
   max-width: 40ch;
-  margin: 18px auto 16px;
+  margin: 18px auto 28px;
   color: var(--muted);
   font-weight: 700;
-}
-
-.bookmark-hint {
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  gap: 8px;
-  max-width: min(42ch, 100%);
-  margin: 0 auto 28px;
-  padding: 8px 14px 8px 12px;
-  border-radius: 0;
-  background: #fff4cf;
-  color: #5c4816;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.bookmark-emoji {
-  font-size: 15px;
-  line-height: 1;
 }
 
 .link-form {

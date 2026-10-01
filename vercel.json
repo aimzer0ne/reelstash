@@ -13,15 +13,15 @@
     }
   ],
   "functions": {
-    "app/api/resolve/route.js": {
+    "src/pages/api/resolve.js": {
       "maxDuration": 60,
       "includeFiles": "{vendor/**,node_modules/ffmpeg-static/**}"
     },
-    "app/api/download/route.js": {
+    "src/pages/api/download.js": {
       "maxDuration": 60,
       "includeFiles": "{vendor/**,node_modules/ffmpeg-static/**}"
     },
-    "app/api/health/route.js": {
+    "src/pages/api/health.js": {
       "maxDuration": 10,
       "includeFiles": "vendor/**"
     }

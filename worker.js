@@ -42,7 +42,7 @@ async function proxyToOrigin(request, configuredOrigin) {
   headers.set('x-forwarded-host', incoming.hostname);
   headers.delete('host');
 
-  const hashedAsset = incoming.pathname.startsWith('/_next/static/');
+  const hashedAsset = incoming.pathname.startsWith('/_astro/');
 
   try {
     const upstream = await fetch(new Request(target, {
@@ -76,7 +76,7 @@ function cachedResponse(pathname, upstream) {
     headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     headers.set('CDN-Cache-Control', 'no-store');
     headers.set('x-robots-tag', 'noindex, nofollow, noarchive');
-  } else if (pathname.startsWith('/_next/static/')) {
+  } else if (pathname.startsWith('/_astro/')) {
     headers.set('Cache-Control', 'public, max-age=31536000, immutable');
     headers.set('CDN-Cache-Control', 'public, max-age=31536000, immutable');
   } else {

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from './Link';
 import { HowToGuide } from './HowToGuide';
 import './page-arrange.css';
 

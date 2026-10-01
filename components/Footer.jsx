@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from './Link';
 import { Logo } from './Logo';
 import { useI18n } from './I18nProvider';
 
