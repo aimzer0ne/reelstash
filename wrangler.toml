@@ -6,6 +6,6 @@
 name = "reelstash"
 main = "worker.js"
 compatibility_date = "2026-09-12"
-
+workers_dev = false
 [vars]
 API_ORIGIN = "https://reelstash-three.vercel.app"

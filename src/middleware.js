@@ -20,7 +20,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
       }), API_SECURITY_HEADERS);
     }
     if (!isAllowedApiPath(pathname)) {
-      return withHeaders(Response.redirect(new URL('/', SITE_ORIGIN), 302), API_SECURITY_HEADERS);
+      // Response.redirect() has immutable headers; build the redirect by hand so headers can be applied.
+      return withHeaders(new Response(null, {
+        status: 302,
+        headers: { location: new URL('/', SITE_ORIGIN).toString() }
+      }), API_SECURITY_HEADERS);
     }
     const response = await next();
     return withHeaders(response, API_SECURITY_HEADERS);
