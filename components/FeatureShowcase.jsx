@@ -4,7 +4,7 @@ const FEATURES = [
   {
     icon: 'reels',
     title: 'HD Reels & videos',
-    text: 'Save public Reels and Instagram videos as MP4 — no watermark.'
+    text: 'Save public Reels and Instagram videos as MP4 — No watermark.'
   },
   {
     icon: 'download',
