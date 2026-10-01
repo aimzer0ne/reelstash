@@ -64,14 +64,14 @@ export function AudioCopy({ page }) {
       </ul>
       <img
         className="guide-image"
-        width={400}
-        height={400}
+        width={1440}
+        height={1039}
         loading="lazy"
         decoding="async"
         sizes="(max-width: 720px) 92vw, 400px"
-        src="/assets/reelsaudiodownload-1.webp"
-        alt="Reels Audio Download"
-        title="Reels Audio Downloader"
+        src="/assets/instagram-reel-audio-track-reelsdl-net.webp"
+        alt="Instagram Reel audio track to copy before saving the MP3 on ReelsDl.net"
+        title="Instagram Reel audio track on ReelsDl.net"
       />
       <ul className="copy-stack">
         <li>
@@ -83,14 +83,14 @@ export function AudioCopy({ page }) {
       </ul>
       <img
         className="guide-image"
-        width={400}
-        height={400}
+        width={1440}
+        height={920}
         loading="lazy"
         decoding="async"
         sizes="(max-width: 720px) 92vw, 400px"
-        src="/assets/reelsaudiodownload-2.webp"
-        alt="Reels Audio Download"
-        title="Reels Audio Downloader"
+        src="/assets/instagram-audio-copy-link-reelsdl-net.webp"
+        alt="Instagram audio page menu used to copy a Reel link for the ReelsDl.net MP3 downloader"
+        title="Copy an Instagram audio link for ReelsDl.net"
       />
       <ul className="copy-stack">
         <li>

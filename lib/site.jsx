@@ -1,4 +1,4 @@
-import { SITE_ORIGIN, absUrl, organizationJsonLd, homeHowToJsonLd, audioHowToJsonLd, DEFAULT_OG_IMAGE } from './seo';
+import { SITE_ORIGIN, absUrl, organizationJsonLd, homeHowToJsonLd, audioHowToJsonLd, DEFAULT_OG_IMAGE, OG_IMAGE_PATH } from './seo';
 
 export const NAV = [
   { href: '/', label: 'Reels Downloader', icon: 'reels' },
@@ -34,8 +34,8 @@ export const homePage = {
     manySuffix: ' items ready'
   },
   feature: {
-    image: '/reelsdl-home.jpg',
-    alt: 'ReelsDl.net Instagram Reels downloader — paste a public link on your phone and save the file',
+    image: OG_IMAGE_PATH,
+    alt: 'Instagram Reels downloader on ReelsDl.net — paste a public link on your phone and save the video',
     text: (
       <>
         <h2>Instagram Video Downloader</h2>
@@ -171,7 +171,7 @@ export const homePage = {
           browserRequirements: 'Requires JavaScript',
           isAccessibleForFree: true,
           inLanguage: 'en-US',
-          image: absUrl('/reelsdl-home.jpg'),
+          image: absUrl(OG_IMAGE_PATH),
           publisher: { '@id': absUrl('/#organization') },
           description: 'Download publicly accessible Instagram reels, videos, photos, and carousel posts. Paste a public link and save MP4 or JPG. No Instagram login.',
           featureList: [

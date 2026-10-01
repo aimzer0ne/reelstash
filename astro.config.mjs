@@ -19,7 +19,14 @@ export default defineConfig({
     '/instagram-audio-downloader.html': { status: 301, destination: '/instagram-audio-downloader' },
     '/privacy-policy': { status: 301, destination: '/privacy' },
     '/terms': { status: 301, destination: '/privacy' },
-    '/copyright': { status: 301, destination: '/disclaimer' }
+    '/copyright': { status: 301, destination: '/disclaimer' },
+    '/reelsdl-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.jpg' },
+    '/reelstash-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.jpg' },
+    '/assets/link-ReelsDownloader-io.avif': { status: 301, destination: '/assets/copy-instagram-reel-link-reelsdl-net.avif' },
+    '/assets/paste-ReelsDownloader-io.avif': { status: 301, destination: '/assets/paste-instagram-link-reelsdl-net.avif' },
+    '/assets/download-ReelsDownloader-io.avif': { status: 301, destination: '/assets/download-instagram-reel-reelsdl-net.avif' },
+    '/assets/reelsaudiodownload-1.webp': { status: 301, destination: '/assets/instagram-reel-audio-track-reelsdl-net.webp' },
+    '/assets/reelsaudiodownload-2.webp': { status: 301, destination: '/assets/instagram-audio-copy-link-reelsdl-net.webp' }
   },
   vite: {
     define: {

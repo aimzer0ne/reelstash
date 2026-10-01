@@ -29,7 +29,11 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/api/')) return;
   if (request.destination === 'video' || request.destination === 'audio') return;
   if (/\.(mp4|webm|mov|mp3|m4a)$/i.test(url.pathname)) return;
-  if (url.pathname === '/reelsdl-home.jpg' || url.pathname === '/reelstash-home.jpg') return;
+  if (
+    url.pathname === '/instagram-reels-downloader-reelsdl-net.jpg'
+    || url.pathname === '/reelsdl-home.jpg'
+    || url.pathname === '/reelstash-home.jpg'
+  ) return;
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request));
