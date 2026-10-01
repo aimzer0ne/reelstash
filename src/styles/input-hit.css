@@ -4,7 +4,7 @@
   border: 0;
   align-items: stretch;
   cursor: text;
-  box-shadow: 0 4px 18px rgba(15, 23, 32, .1), 0 10px 32px rgba(15, 23, 32, .08);
+  box-shadow: var(--input-shadow);
 }
 
 .input-wrap::after {
@@ -14,7 +14,7 @@
   right: 0;
   bottom: 0;
   height: 3px;
-  background: #0f1720;
+  background: var(--input-line);
   pointer-events: none;
 }
 

@@ -159,6 +159,23 @@ function IconDevice({ className }) {
   );
 }
 
+function IconSun({ className }) {
+  return (
+    <Svg className={className}>
+      <rect x="8" y="8" width="8" height="8" />
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" />
+    </Svg>
+  );
+}
+
+function IconMoon({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
+    </Svg>
+  );
+}
+
 const ICONS = {
   mark: IconMark,
   reels: IconReels,
@@ -173,7 +190,9 @@ const ICONS = {
   again: IconAgain,
   share: IconShare,
   unlock: IconUnlock,
-  device: IconDevice
+  device: IconDevice,
+  sun: IconSun,
+  moon: IconMoon
 };
 
 export function Icon({ name, className }) {

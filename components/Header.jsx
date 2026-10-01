@@ -3,6 +3,7 @@
 import Link from './Link';
 import { Logo } from './Logo';
 import { PwaRegister } from './PwaRegister';
+import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icons';
 import { useI18n } from './I18nProvider';
 
@@ -44,6 +45,7 @@ export function Header() {
         ReelsDl.net
       </Link>
       <div className="header-tools header-tools-end">
+        <ThemeToggle label={t('themeToggle')} />
         <button className="share-btn" type="button" onClick={shareSite} aria-label={t('share')}>
           <Icon name="share" />
         </button>
