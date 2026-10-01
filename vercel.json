@@ -11,19 +11,5 @@
         { "key": "Cross-Origin-Resource-Policy", "value": "same-site" }
       ]
     }
-  ],
-  "functions": {
-    "src/pages/api/resolve.js": {
-      "maxDuration": 60,
-      "includeFiles": "{vendor/**,node_modules/ffmpeg-static/**}"
-    },
-    "src/pages/api/download.js": {
-      "maxDuration": 60,
-      "includeFiles": "{vendor/**,node_modules/ffmpeg-static/**}"
-    },
-    "src/pages/api/health.js": {
-      "maxDuration": 10,
-      "includeFiles": "vendor/**"
-    }
-  }
+  ]
 }

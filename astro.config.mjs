@@ -7,6 +7,7 @@ export default defineConfig({
   site: 'https://reelsdl.net',
   output: 'server',
   adapter: vercel({
+    maxDuration: 60,
     includeFiles: ['./node_modules/ffmpeg-static/ffmpeg']
   }),
   integrations: [react()],
