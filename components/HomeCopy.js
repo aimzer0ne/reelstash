@@ -22,25 +22,28 @@ export function HomeCopy({ page }) {
       </nav>
 
       <section className="panel article-panel" id="about" aria-labelledby="home-intro-heading">
-        <h2 id="home-intro-heading" className="sr-only">About ReelsDl.net</h2>
+        <h2 id="home-intro-heading">About ReelsDl.net</h2>
         <div className="article-copy">
           <p>
             <b>ReelsDl.net</b> is a free Instagram Reels downloader.
             Paste a public Instagram link to save Reels as MP4, photos as JPG,
-            carousel posts, or convert Reel audio to MP3. No Instagram login
-            is required. Private posts cannot be downloaded.
+            carousel posts, or convert Reel audio to MP3. No login is required.
+            Private posts cannot be downloaded.
           </p>
           <p>
-            <b>ReelsDl.net :</b> Are you one of those people who posts
-            Photos & Reels videos and spent time on Instagram on a daily basis?
-            If so. Well, there&apos;s good news: there are ways to{' '}
-            <b>Download Instagram Reels</b> so you can watch them offline!
-            [<Link href="/">ReelsDl.net</Link>],
+            If you post photos and Reels every day, you can{' '}
+            <b>download Instagram Reels</b> and watch them offline on{' '}
+            <Link href="/">ReelsDl.net</Link>.
+            The guide below shows how to <b>save Instagram Reels videos</b>{' '}
+            and download <b>Instagram to MP4</b>.
           </p>
           <p>
-            we&apos;ll show
-            you how to <i>Save Instagram Reels Videos </i>. Download videos{' '}
-            <b>Instagram to MP4</b> So, Stay tuned!
+            Once the video is saved, a lot of people still rewrite the caption
+            or bio before they post again. A{' '}
+            <a href="https://cursivee.app" target="_blank" rel="noopener noreferrer">
+              cursive text generator
+            </a>{' '}
+            turns ordinary typing into script you can paste into Instagram.
           </p>
         </div>
       </section>
@@ -48,58 +51,52 @@ export function HomeCopy({ page }) {
       <HowToGuide heading={page.how.heading} type="reels" />
 
       <section className="copy-split" aria-labelledby="reels-downloader-heading">
-        <h2 id="reels-downloader-heading">Reels Downloader :</h2>
+        <h2 id="reels-downloader-heading">Reels Downloader</h2>
         <p>
-          Have you ever wanted to save Instagram Videos/Reels/Photos etc. from{' '}
+          Save videos, Reels, and photos from{' '}
           <a
             href="https://about.instagram.com/blog/announcements/introducing-instagram-reels-announcement"
             target="_blank"
             rel="noopener noreferrer"
           >
             Instagram
-          </a>
-          , so you can watch them offline? Or maybe you just want to have a
-          collection of all of your favorite videos to share with friends?
-          Either way, there&apos;s an easy way to do it – & 😉 I&apos;m going to show
-          you how. Keep reading for instructions on how to use the{' '}
-          <b>Instagram Reels Downloader</b>. Also Instagram video download MP4
+          </a>{' '}
+          so you can watch them offline, or keep a collection to share later.
+          Use the <b>Instagram Reels Downloader</b> above: paste a public link,
+          then save the file. That is <b>Instagram video download MP4</b>.
         </p>
       </section>
 
       <section className="panel article-panel" id="why" aria-labelledby="why-heading">
-        <h2 id="why-heading">Why ReelsDl.net is Best ?</h2>
+        <h2 id="why-heading">Why ReelsDl.net</h2>
         <div className="article-copy">
           <p>
-            <b>ReelsDl.net : </b> is the best #1 WebApp for Fast
-            Downloading or <b>save Instagram videos</b>{' '}
-            <i> Reels, Photos, videos & Stories</i> etc. on one place 😜 -
-            ReelsDl.net
+            <b>ReelsDl.net</b> is a fast way to <b>save Instagram videos</b> —
+            Reels, photos, videos, and Stories — in one place.
           </p>
         </div>
         <ul className="copy-grid">
-          <li>We Get & Download Reels Videos as fast as possible.</li>
-          <li>Download Instagram Reels Videos without watermark.</li>
-          <li>Instagram Reels Download by link</li>
-          <li>We offer convert Video to Audio (mp3) Feature Also !</li>
-          <li>NO Login Needed !</li>
-          <li>Download Anonymously Reels/Video/Stories etc.</li>
-          <li>HD Quality Videos & Photos</li>
-          <li>Much More... 😜</li>
+          <li>Download Reels as fast as the link allows.</li>
+          <li>Save Instagram Reels without a watermark.</li>
+          <li>Instagram Reels download by link.</li>
+          <li>Convert video to audio (MP3).</li>
+          <li>No login needed.</li>
+          <li>Download Reels, videos, and Stories anonymously.</li>
+          <li>HD quality videos and photos.</li>
+          <li>Photos, carousels, and more.</li>
         </ul>
       </section>
 
       <section className="panel article-panel" id="offers" aria-labelledby="offers-heading">
-        <h2 id="offers-heading">What ReelsDl.net offers ?</h2>
+        <h2 id="offers-heading">What ReelsDl.net offers</h2>
         <div className="article-copy">
           <p>
-            <b>ReelsDl.net : </b> offers everything you want to
-            download from &quot;Instagram&quot; in <b>HD</b> quality 😜 You can
-            download Instagram Reels | Videos | Photos | Carousel etc.
+            <b>ReelsDl.net</b> downloads public Instagram posts in <b>HD</b>.
+            That covers Reels, videos, photos, and carousels.
           </p>
           <p>
-            <b>Carousel / Multiple Posts : </b> Download posts with
-            multiple photos/videos in a post or mixed content in a post on
-            instagram
+            <b>Carousel posts</b> can include several photos, several videos,
+            or a mix of both in one Instagram post.
           </p>
         </div>
         <ul className="copy-grid copy-grid-links">

@@ -337,7 +337,8 @@
   line-height: 1.55;
 }
 
-.feature-showcase > .feature-showcase-kicker {
+.feature-showcase > .feature-showcase-kicker,
+.home-copy .feature-showcase > .feature-showcase-kicker {
   margin: 0 0 8px;
   color: var(--accent);
   font-size: 12px;
@@ -399,5 +400,112 @@
   .home-copy .feature-showcase-grid li:last-child,
   .feature-showcase-grid li:last-child {
     border-bottom: 0;
+  }
+}
+
+.home-copy .article-panel,
+.home-copy #faq {
+  padding: 32px 28px 28px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.home-copy .panel,
+.home-copy .copy-split {
+  margin-top: 36px;
+}
+
+.home-copy .article-panel h2,
+.home-copy .how-guide-panel h2,
+.home-copy .copy-split h2,
+.home-copy #faq h2,
+.home-copy .feature-showcase h2 {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+}
+
+.home-copy .article-copy {
+  max-width: 68ch;
+  margin-top: 0;
+}
+
+.home-copy .article-copy p,
+.home-copy .copy-split p,
+.home-copy .faq-answer,
+.home-copy .faq-answer p,
+.home-copy .how-guide-step p,
+.home-copy .feature-showcase p {
+  color: #44525f;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.home-copy .article-copy p:first-child {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.home-copy .article-copy b,
+.home-copy .article-copy strong,
+.home-copy .copy-split b,
+.home-copy .copy-split strong,
+.home-copy .how-guide-step p b,
+.home-copy .faq-answer b,
+.home-copy .faq-answer strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.home-copy .article-copy i {
+  color: var(--text);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.home-copy .article-copy a,
+.home-copy .copy-split a,
+.home-copy .faq-answer a,
+.home-copy .copy-grid-links a,
+.home-audio-cta a {
+  font-weight: 600;
+}
+
+.home-copy .copy-grid li,
+.home-copy .copy-stack li {
+  color: #44525f;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.home-copy .feature-showcase h3,
+.home-copy .how-guide-step h3 {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.home-copy .faq-list summary {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.home-audio-cta {
+  font-size: 15px;
+}
+
+@media (max-width: 720px) {
+  .home-copy .article-panel,
+  .home-copy #faq {
+    padding: 24px 20px 20px;
   }
 }

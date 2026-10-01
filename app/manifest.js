@@ -8,7 +8,7 @@ export default function manifest() {
     scope: '/',
     display: 'standalone',
     background_color: '#f2f6fa',
-    theme_color: '#0395f6',
+    theme_color: '#f26b1d',
     lang: 'en',
     dir: 'ltr',
     categories: ['utilities', 'photo', 'entertainment'],
