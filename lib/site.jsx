@@ -57,7 +57,7 @@ export const homePage = {
     ]
   },
   how: {
-    heading: 'How to Download Insta Reels ?',
+    heading: 'How to download Instagram Reels',
     steps: [
       {
         icon: 'copy',
@@ -77,7 +77,7 @@ export const homePage = {
     ]
   },
   faq: {
-    heading: 'Questions',
+    heading: 'Frequently asked questions',
     items: [
       {
         q: 'What is ReelsDl.net?',
@@ -261,7 +261,7 @@ export const audioPage = {
     manySuffix: ' MP3 files ready'
   },
   how: {
-    heading: 'How to Download Reels Audio ?',
+    heading: 'How to download Instagram Reel audio as MP3',
     steps: [
       {
         icon: 'copy',
@@ -281,77 +281,68 @@ export const audioPage = {
     ]
   },
   faq: {
-    heading: 'Questions',
+    heading: 'Frequently asked questions',
     items: [
       {
-        q: 'Convert Reels/Video into Audio ?',
+        q: 'Can I convert an Instagram Reel or video into audio?',
         open: true,
-        text: 'YES, You can Download Instagram Reels audio only (mp3). if you want get background Song, Music, Voice, then this feature is really helpful for you. Just Enter the URL Link into the input box, It will get the mp3 file for you.',
+        text: 'Yes. You can download only the audio of an Instagram Reel as an MP3. It is useful when you want the background song, music, or voice. Enter the Reel or video link in the input box and the tool gets the MP3 file for you.',
         a: (
           <>
             <p>
-              YES, You can <b>Download Instagram Reels audio</b> only (mp3).
-              if you want get <i>background Song, Music, Voice</i>, then
-              this feature is really helpful for you.
+              Yes. You can <b>download Instagram Reels audio</b> only, as an
+              MP3. It is useful when you want the <i>background song, music,
+              or voice</i>.
             </p>
             <p>
-              <b>Insta Audio Download : </b>You can download Reels/Videos
-              video&apos;s <a href="/instagram-audio-downloader">audio mp3</a>. Just Enter the{' '}
-              <b>&quot;URL Link&quot;</b> into the input box, It will get the mp3 file
-              for you.
+              Enter the Reel or video link in the input box of the{' '}
+              <a href="/instagram-audio-downloader">Instagram audio downloader</a>{' '}
+              and the tool gets the MP3 file for you.
             </p>
           </>
         )
       },
       {
-        q: 'How to Download MP3 File ?',
+        q: 'How do I download the MP3 file?',
         open: true,
-        text: 'Input the Reels URL then Click the Download Audio Button. Reels Audio MP3 file will be saved to your Downloads Folder. You can use this tool on iPhone, Android, PC & MAC.',
+        text: 'Paste the Reel URL, then click the Download Audio button. The Reel audio MP3 file is saved to your Downloads folder. The tool works on iPhone, Android, PC, and Mac.',
         a: (
           <>
             <p>
-              Input the <b>Reels URL</b> then Click the{' '}
-              <b>&quot;Download Audio&quot;</b> Button. <b>Reels Audio MP3</b> 😁 file
-              will be saved to your &quot;Downloads Folder&quot;
+              Paste the <b>Reel URL</b>, then click the{' '}
+              <b>&quot;Download Audio&quot;</b> button. The <b>Reel audio MP3</b>{' '}
+              file is saved to your Downloads folder.
             </p>
             <p>
-              <b>Reels Downloader: </b>You can use this tool for Downloading
-              Reels/Video into Audio in any of devices 😝 like iPhone,
-              Android, PC & MAC etc. This Website [
-              <a href="/">ReelsDl.net</a>] supports all of these
-              devices
+              The tool works on iPhone, Android, PC, and Mac. To save the
+              video instead, use the <a href="/">Reels Downloader</a>.
             </p>
           </>
         )
       },
       {
-        q: 'Limit for Reels Audio MP3 Download ?',
-        text: 'There is Absolutely no limit for Downloading Reels, Stories, Videos, Photos & Audio MP3. You can download as much as you want.',
+        q: 'Is there a limit on Reels audio MP3 downloads?',
+        text: 'No. There is no limit for downloading Reels, Stories, videos, photos, or audio MP3. You can download as much as you want.',
         a: (
           <p>
-            <b>ReelsDl.net :</b> There is Absolutely no limit for
-            Downloading Reels, Stories, Videos, Photos & Audio MP3. You
-            can download as much as you want. There is no restrictions of
-            any kind at all. So Enjoy 😊
+            No. There is no limit for downloading Reels, Stories, videos,
+            photos, or audio MP3. You can download as much as you want.
           </p>
         )
       },
       {
-        q: 'Install App for Reels Audio Downloader ?',
-        text: 'Yes you can install ReelsDl.net on your smartphone for android & iOS, and directly access the Audio MP3 downloader.',
+        q: 'Can I install the Reels audio downloader as an app?',
+        text: 'Yes. You can install ReelsDl.net as a web app on Android and iOS and open the audio MP3 downloader directly. Use the Install button when your browser offers it, or choose Add to Home Screen from the browser menu.',
         a: (
           <>
             <p>
-              Yes ! 😀 you can install our mini app for android & iOS,
-              and directly access our App.
+              Yes. You can install ReelsDl.net as a web app on Android and
+              iOS and open the audio MP3 downloader directly.
             </p>
             <p>
-              <b>To Install ReelsDl.net App :</b>
-            </p>
-            <p>
-              <b>Reels Downloader: </b>We offer Downloading{' '}
-              <b>Instagram Reels/Videos/Photos & Stories</b>. This is our
-              Best #1 WebApp 😉 to save instagram Stories, Reels etc.
+              <b>To install the ReelsDl.net app:</b> use the{' '}
+              <b>Install</b> button when your browser offers it, or choose{' '}
+              <b>Add to Home Screen</b> from the browser menu.
             </p>
           </>
         )

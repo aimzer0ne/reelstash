@@ -8,46 +8,48 @@ const PASTE_ICON = (
 
 const COPY = {
   reels: {
-    copyTitle: 'Copy Reels Link',
-    pasteTitle: 'Paste Reels Link',
-    downloadTitle: 'Download Reels',
+    copyTitle: 'Copy the Reel link',
+    pasteTitle: 'Paste the link',
+    downloadTitle: 'Download the Reel',
+    downloadAlt: 'Download an Instagram Reel as MP4 on ReelsDl.net',
     copy: (
       <p>
-        Copy Reels Video Link from instagram by taping on 3 Dots Button (&#8942;) and then Click on <b>&quot;Copy Link&quot;</b>
+        In Instagram, tap the three dots (&#8942;) on the Reel, then tap <b>&quot;Copy Link&quot;</b>.
       </p>
     ),
     paste: (
       <p>
-        Paste the &quot;copied link&quot; in Input Box (Paste directly, tap on Paste {PASTE_ICON} icon).
+        Paste the copied link into the box above, or tap the Paste {PASTE_ICON} icon.
         <br />
         Then press <kbd className="how-guide-key">Enter</kbd>
       </p>
     ),
     download: (
       <p>
-        Wait a bit to get Reels Video & then Click <b>&quot;Download Video&quot;</b> to Save Reels (mp4) video
+        Wait a moment for the Reel to load, then click <b>&quot;Download Video&quot;</b> to save it as MP4.
       </p>
     )
   },
   audio: {
-    copyTitle: 'Copy Reels/Video Link',
-    pasteTitle: 'Paste Reels/Video Link',
-    downloadTitle: 'Download Audio',
+    copyTitle: 'Copy the Reel or video link',
+    pasteTitle: 'Paste the link',
+    downloadTitle: 'Download the audio',
+    downloadAlt: 'Download Instagram Reel audio as MP3 on ReelsDl.net',
     copy: (
       <p>
-        Copy Reels/Video Link for Audio from instagram by taping on 3 Dots Button (&#8942;) and then Click on <b>&quot;Copy Link&quot;</b>
+        In Instagram, tap the three dots (&#8942;) on the Reel or video, then tap <b>&quot;Copy Link&quot;</b>.
       </p>
     ),
     paste: (
       <p>
-        Paste the &quot;copied link&quot; in Input Box (Paste directly, tap on Paste {PASTE_ICON} icon).
+        Paste the copied link into the box above, or tap the Paste {PASTE_ICON} icon.
         <br />
         Then press <kbd className="how-guide-key">Enter</kbd>
       </p>
     ),
     download: (
       <p>
-        Wait a Few seconds to convert audio File & then Click <b>&quot;Download Audio&quot;</b> to Save <b>Reels Video to Audio </b> (mp3) file
+        Wait a few seconds for the conversion, then click <b>&quot;Download Audio&quot;</b> to save the <b>Reel audio</b> as MP3.
       </p>
     )
   }
@@ -99,7 +101,7 @@ export function HowToGuide({ heading, type = 'reels' }) {
           <div className="how-guide-visual is-download">
             <img
               src="/assets/download-instagram-reel-reelsdl-net.avif"
-              alt="Download an Instagram Reel as MP4 on ReelsDl.net"
+              alt={copy.downloadAlt}
               title="Download an Instagram Reel on ReelsDl.net"
               width="941"
               height="187"
