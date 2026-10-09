@@ -3,7 +3,7 @@
 import { Icon } from './Icons';
 
 const STORAGE_KEY = 'reelsdl-theme';
-const THEME_COLORS = { light: '#faf8fc', dark: '#0e0c13' };
+const THEME_COLORS = { light: '#ffffff', dark: '#0a0a0b' };
 
 function currentTheme() {
   const explicit = document.documentElement.getAttribute('data-theme');
