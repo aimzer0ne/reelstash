@@ -18,6 +18,11 @@ function redirectToSite(url, headers = {}) {
   });
 }
 
+function isPageRequest(request, pathname) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return false;
+  return !/\.[a-z0-9]+$/i.test(pathname);
+}
+
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url } = context;
   const { pathname } = url;
@@ -48,6 +53,14 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
 
   const response = await next();
+  // Unknown pages go to the homepage. Missing files (anything with an extension) and
+  // non-GET requests keep their real 404 so broken assets stay visible.
+  if (response.status === 404 && isPageRequest(context.request, pathname)) {
+    return new Response(null, {
+      status: 302,
+      headers: { location: '/', 'cache-control': 'no-store' }
+    });
+  }
   if (import.meta.env.PROD) {
     applyHeaders(response.headers, SITE_SECURITY_HEADERS);
     if (pathname === '/sw.js') {
