@@ -7,7 +7,7 @@ import { HomeCopy } from './HomeCopy';
 import { PageCopy } from './PageCopy';
 import { Downloader } from './Downloader';
 
-export function DownloadPage({ page }) {
+export function DownloadPage({ page, guides = [] }) {
   return (
     <>
       {page.jsonLd.map((block, index) => (
@@ -26,9 +26,9 @@ export function DownloadPage({ page }) {
           summary={page.summary}
         />
         {page.path === '/' ? (
-          <HomeCopy page={page} />
+          <HomeCopy page={page} guides={guides} />
         ) : page.path === '/instagram-audio-downloader' ? (
-          <AudioCopy page={page} />
+          <AudioCopy page={page} guides={guides} />
         ) : (
           <>
             {page.why ? (

@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { BlogShell } from '../../../components/BlogShell.jsx';
+import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../../lib/i18n.js';
+import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE, blogIndexJsonLd, formatDate, getPosts, postImage, postPath, readingMinutes } from '../../../lib/blog.js';
+import '../../styles/blog.css';
+
+const uiLocale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
+  || localeFromAccept(Astro.request.headers.get('accept-language'))
+  || 'en';
+const posts = await getPosts();
+---
+<Base
+  locale="en"
+  title={BLOG_TITLE}
+  description={BLOG_DESCRIPTION}
+  keywords={['Instagram download guides', 'how to save Instagram Reels', 'Instagram Reels tips', 'ReelsDl.net blog']}
+  canonical={BLOG_PATH}
+>
+  {blogIndexJsonLd(posts).map((block) => (
+    <script type="application/ld+json" set:html={JSON.stringify(block)} />
+  ))}
+  <BlogShell client:load initialLocale={uiLocale}>
+    <div class="blog-index">
+      <nav class="blog-crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Blog</span>
+      </nav>
+      <h1>Instagram download guides</h1>
+      <p class="blog-lede">
+        Plain, tested answers on saving Reels, photos, carousels, and Reel audio —
+        on iPhone, Android, and computer — and what to do when a download fails.
+      </p>
+      <ol class="blog-list">
+        {posts.map((post, index) => {
+          const image = postImage(post);
+          return (
+            <li>
+              <article class="blog-card">
+                {image ? (
+                  <a class="blog-card-thumb" href={postPath(post)} tabindex="-1" aria-hidden="true">
+                    <img
+                      src={image.thumb}
+                      width="720"
+                      height={Math.round(720 * image.height / image.width)}
+                      alt={image.alt}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </a>
+                ) : null}
+                <div class="blog-card-text">
+                  <h2><a href={postPath(post)}>{post.data.title}</a></h2>
+                  <p>{post.data.excerpt}</p>
+                  <p class="blog-meta">
+                    <time datetime={post.data.updated.toISOString()}>{formatDate(post.data.updated)}</time>
+                    <span aria-hidden="true">·</span>
+                    {readingMinutes(post)} min read
+                  </p>
+                </div>
+              </article>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  </BlogShell>
+</Base>

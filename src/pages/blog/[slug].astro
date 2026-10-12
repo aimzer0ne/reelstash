@@ -1,0 +1,116 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { BlogShell } from '../../../components/BlogShell.jsx';
+import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../../lib/i18n.js';
+import { BLOG_PATH, OG_SIZE, formatDate, getPost, getPosts, postImage, postJsonLd, postPath, postTool, readingMinutes } from '../../../lib/blog.js';
+import '../../styles/blog.css';
+
+const post = await getPost(Astro.params.slug);
+if (!post) return new Response('Not found', { status: 404 });
+
+const uiLocale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
+  || localeFromAccept(Astro.request.headers.get('accept-language'))
+  || 'en';
+const { Content, headings } = await render(post);
+const sections = headings.filter((heading) => heading.depth === 2);
+const tool = postTool(post);
+const related = (await getPosts()).filter((item) => item.id !== post.id);
+const { data } = post;
+const hero = postImage(post);
+const social = hero ? { image: hero.og, imageAlt: hero.alt, imageWidth: OG_SIZE.width, imageHeight: OG_SIZE.height } : {};
+---
+<Base
+  locale="en"
+  title={`${data.seoTitle} | ReelsDl.net`}
+  description={data.description}
+  keywords={data.keywords}
+  canonical={postPath(post)}
+  ogTitle={data.title}
+  twitterTitle={data.title}
+  ogType="article"
+  publishedTime={data.published.toISOString()}
+  modifiedTime={data.updated.toISOString()}
+  {...social}
+>
+  {postJsonLd(post).map((block) => (
+    <script type="application/ld+json" set:html={JSON.stringify(block)} />
+  ))}
+  <BlogShell client:load initialLocale={uiLocale}>
+    <article class="blog-post">
+      <nav class="blog-crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href={BLOG_PATH}>Blog</a>
+      </nav>
+      <h1>{data.title}</h1>
+      <p class="blog-meta">
+        By ReelsDl.net
+        <span aria-hidden="true">·</span>
+        Updated <time datetime={data.updated.toISOString()}>{formatDate(data.updated)}</time>
+        <span aria-hidden="true">·</span>
+        {readingMinutes(post)} min read
+      </p>
+
+      {hero ? (
+        <figure class="blog-hero">
+          <img
+            src={hero.src}
+            srcset={`${hero.thumb} 720w, ${hero.src} ${hero.width}w`}
+            sizes="(max-width: 880px) 100vw, 832px"
+            width={hero.width}
+            height={hero.height}
+            alt={hero.alt}
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      ) : null}
+
+      {sections.length > 2 ? (
+        <nav class="blog-toc" aria-label="In this guide">
+          <p>In this guide</p>
+          <ol>
+            {sections.map((heading) => (
+              <li><a href={`#${heading.slug}`}>{heading.text}</a></li>
+            ))}
+          </ol>
+        </nav>
+      ) : null}
+
+      <div class="blog-body">
+        <Content />
+      </div>
+
+      <aside class="blog-cta" aria-label={tool.name}>
+        <p>
+          <b>{tool.name}.</b> Free, no login, public posts only. Paste a link and save the file.
+        </p>
+        <a class="blog-cta-btn" href={tool.href}>{tool.label}</a>
+      </aside>
+
+      {data.faq.length ? (
+        <section class="blog-faq" aria-labelledby="blog-faq-heading">
+          <h2 id="blog-faq-heading">Frequently asked questions</h2>
+          <div class="faq-list">
+            {data.faq.map((item) => (
+              <details>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section class="blog-related" aria-labelledby="blog-related-heading">
+        <h2 id="blog-related-heading">More guides</h2>
+        <ul>
+          {related.map((item) => (
+            <li><a href={postPath(item)}>{item.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  </BlogShell>
+</Base>

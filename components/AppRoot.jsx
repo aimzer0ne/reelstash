@@ -6,7 +6,7 @@ import { PrivacyCopy } from './PrivacyCopy';
 import { legalPages } from '@/lib/legal.js';
 import { audioPage, homePage } from '@/lib/site.jsx';
 
-export function AppRoot({ pageId = 'home', initialLocale = 'en' }) {
+export function AppRoot({ pageId = 'home', initialLocale = 'en', guides = [] }) {
   return (
     <I18nProvider initialLocale={initialLocale}>
       {pageId === 'privacy' ? (
@@ -19,8 +19,8 @@ export function AppRoot({ pageId = 'home', initialLocale = 'en' }) {
           <DisclaimerCopy />
         </LegalPage>
       ) : null}
-      {pageId === 'audio' ? <DownloadPage page={audioPage} /> : null}
-      {pageId === 'home' ? <DownloadPage page={homePage} /> : null}
+      {pageId === 'audio' ? <DownloadPage page={audioPage} guides={guides} /> : null}
+      {pageId === 'home' ? <DownloadPage page={homePage} guides={guides} /> : null}
     </I18nProvider>
   );
 }

@@ -20,7 +20,10 @@ const {
   image = OG_IMAGE_PATH,
   imageAlt = DEFAULT_OG_IMAGE.alt,
   imageWidth = DEFAULT_OG_IMAGE.width,
-  imageHeight = DEFAULT_OG_IMAGE.height
+  imageHeight = DEFAULT_OG_IMAGE.height,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime
 } = Astro.props;
 
 const origin = Astro.site?.href?.replace(/\/$/, '') || 'https://reelsdl.net';
@@ -59,7 +62,7 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="ReelsDl.net" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="ReelsDl.net" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={ogTitle} />
@@ -69,6 +72,8 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:image:width" content={imageWidth} />
     <meta property="og:image:height" content={imageHeight} />
+    {publishedTime ? <meta property="article:published_time" content={publishedTime} /> : null}
+    {modifiedTime ? <meta property="article:modified_time" content={modifiedTime} /> : null}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={twitterTitle} />
     <meta name="twitter:description" content={twitterDescription} />

@@ -14,6 +14,7 @@ export function Footer({ lead }) {
         ReelsDl.net
       </Link>
       <nav className="legal-nav" aria-label={t('legal')}>
+        <Link href="/blog">{t('blog')}</Link>
         <Link href="/privacy">{t('privacy')}</Link>
         <Link href="/disclaimer">{t('disclaimer')}</Link>
       </nav>

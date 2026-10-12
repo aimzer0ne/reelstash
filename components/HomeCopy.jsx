@@ -1,9 +1,10 @@
 import Link from './Link';
 import { FeatureShowcase } from './FeatureShowcase';
+import { GuideLinks } from './GuideLinks';
 import { HowToGuide } from './HowToGuide';
 import './page-arrange.css';
 
-export function HomeCopy({ page }) {
+export function HomeCopy({ page, guides }) {
   return (
     <div className="home-copy">
       <p className="home-audio-cta">
@@ -16,6 +17,7 @@ export function HomeCopy({ page }) {
         <a href="#features">Features</a>
         <a href="#formats">Formats</a>
         <a href="#why">Why</a>
+        <a href="#guides">Guides</a>
         <a href="#faq">FAQ</a>
       </nav>
 
@@ -117,6 +119,8 @@ export function HomeCopy({ page }) {
           </p>
         </div>
       </section>
+
+      <GuideLinks guides={guides} />
 
       <section className="panel" id="faq" aria-labelledby="faq-heading">
         <h2 id="faq-heading">{page.faq.heading}</h2>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { AppRoot } from '../../components/AppRoot.jsx';
+import { getGuideLinks } from '../../lib/blog.js';
 import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../lib/i18n.js';
 import { homePage } from '../../lib/site.jsx';
 
@@ -8,6 +9,7 @@ const locale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
   || localeFromAccept(Astro.request.headers.get('accept-language'))
   || 'en';
 const meta = homePage.metadata;
+const guides = await getGuideLinks();
 ---
 <Base
   locale={locale}
@@ -20,5 +22,5 @@ const meta = homePage.metadata;
   twitterTitle={meta.twitter.title}
   twitterDescription={meta.twitter.description}
 >
-  <AppRoot client:load pageId="home" initialLocale={locale} />
+  <AppRoot client:load pageId="home" initialLocale={locale} guides={guides} />
 </Base>

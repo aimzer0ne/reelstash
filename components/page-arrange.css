@@ -370,6 +370,193 @@
   margin: 16px 0 0;
 }
 
+/* --- Guides from the blog --- */
+
+.guides-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+.guides-kicker {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.home-copy .guides-panel h2 {
+  margin: 0;
+}
+
+.guides-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color .15s ease;
+}
+
+.guides-all:hover {
+  border-color: var(--text);
+}
+
+.home-copy .guide-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-copy .guide-cards li {
+  display: flex;
+  min-width: 0;
+  margin: 0;
+}
+
+.guide-cards .guide-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--text);
+  font-weight: 400;
+  text-decoration: none;
+  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+/* Instagram-gradient hairline that draws in on hover. */
+.guide-cards .guide-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 2px;
+  background: var(--ig);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+.guide-cards .guide-card:hover,
+.guide-cards .guide-card:focus-visible {
+  border-color: var(--subtle);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+
+.guide-cards .guide-card:hover::before,
+.guide-cards .guide-card:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.guide-card-thumb {
+  display: block;
+  margin: -24px -24px 22px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.guide-card-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+
+.guide-card:hover .guide-card-thumb img {
+  transform: scale(1.03);
+}
+
+.guide-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--subtle);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.guide-card-num {
+  letter-spacing: .14em;
+}
+
+.home-copy .guide-card h3 {
+  margin: 18px 0 0;
+  color: var(--text);
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+
+.home-copy .guide-card p {
+  display: -webkit-box;
+  margin: 10px 0 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.guide-card-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.guide-card-arrow {
+  flex: 0 0 auto;
+  transition: transform .2s ease;
+}
+
+.guide-card:hover .guide-card-arrow,
+.guides-all:hover .guide-card-arrow {
+  transform: translateX(3px);
+}
+
+[dir="rtl"] .guide-card-arrow {
+  transform: scaleX(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-cards .guide-card,
+  .guide-cards .guide-card::before,
+  .guide-card-arrow {
+    transition: none;
+  }
+
+  .guide-cards .guide-card:hover {
+    transform: none;
+  }
+}
+
 @media (max-width: 720px) {
   .home-jump {
     gap: 4px 22px;
@@ -377,6 +564,7 @@
 
   .copy-split,
   .how-guide,
+  .home-copy .guide-cards,
   .home-copy .copy-grid,
   .home-copy .feature-showcase-grid,
   .feature-showcase-grid {
