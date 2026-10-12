@@ -15,6 +15,7 @@ export function HomeCopy({ page, guides }) {
         <a href="#about">About</a>
         <a href="#how-it-works">How to</a>
         <a href="#features">Features</a>
+        <a href="#video">Video</a>
         <a href="#formats">Formats</a>
         <a href="#why">Why</a>
         <a href="#guides">Guides</a>
@@ -25,16 +26,17 @@ export function HomeCopy({ page, guides }) {
         <h2 id="home-intro-heading">Free Instagram Reels Downloader</h2>
         <div className="article-copy">
           <p>
-            <b>ReelsDl.net</b> is a free Instagram Reels downloader.
-            Paste a public Instagram link to save Reels as MP4, photos as JPG,
-            carousel posts, or convert Reel audio to MP3. No login is required.
-            Private posts cannot be downloaded.
+            <b>ReelsDl.net</b> is a free <b>Instagram Reels downloader</b> and{' '}
+            <b>Instagram video downloader</b>. Paste a public Instagram link to
+            save Reels and videos as MP4, photos as JPG, carousel posts, or
+            convert Reel audio to MP3. No login is required. Private posts
+            cannot be downloaded.
           </p>
           <p>
-            Use it to <b>download Instagram Reels</b> and watch them offline,
-            or to keep a collection you can share later. The three steps below
-            show how to <b>save Instagram Reels videos</b> and download{' '}
-            <b>Instagram to MP4</b> on any phone or computer.
+            Use the <b>Reels downloader</b> to watch Reels offline or to keep a
+            collection you can share later. The three steps below show how to{' '}
+            <b>download Instagram Reels</b> and save any{' '}
+            <b>Instagram video as MP4</b> on a phone or computer.
           </p>
         </div>
       </section>
@@ -43,11 +45,47 @@ export function HomeCopy({ page, guides }) {
 
       <FeatureShowcase />
 
+      <section className="panel article-panel" id="video" aria-labelledby="video-heading">
+        <h2 id="video-heading">Instagram Video Downloader</h2>
+        <div className="article-copy">
+          <p>
+            Not every Instagram video is a Reel. The <b>Instagram video downloader</b>{' '}
+            also saves ordinary video posts and the video clips inside
+            carousels. Paste the post link and each video is listed as an MP4
+            with its own download button.
+          </p>
+          <p>
+            Videos are saved in the quality Instagram serves, with their sound
+            and without an added watermark. Long videos work the same way as
+            short Reels; they only take a little longer to load.
+          </p>
+        </div>
+        <table className="copy-table">
+          <tbody>
+            <tr>
+              <th scope="row">Reels downloader</th>
+              <td>Links that contain <b>/reel/</b> or <b>/reels/</b>. Vertical short videos, saved as MP4.</td>
+            </tr>
+            <tr>
+              <th scope="row">Video post downloader</th>
+              <td>Links that contain <b>/p/</b>. Feed videos and video slides in carousels, saved as MP4.</td>
+            </tr>
+            <tr>
+              <th scope="row">Audio only</th>
+              <td>
+                Use the <Link href="/instagram-audio-downloader">Reel audio downloader</Link>{' '}
+                to keep the sound as MP3.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <section className="panel article-panel" id="formats" aria-labelledby="formats-heading">
         <h2 id="formats-heading">What you can download from Instagram</h2>
         <div className="article-copy">
           <p>
-            The <b>Instagram Reels Downloader</b> saves public posts in{' '}
+            The <b>Reels downloader</b> saves public posts in{' '}
             <b>HD</b>, in the same quality{' '}
             <a
               href="https://about.instagram.com/blog/announcements/introducing-instagram-reels-announcement"
@@ -93,7 +131,7 @@ export function HomeCopy({ page, guides }) {
       </section>
 
       <section className="panel article-panel" id="why" aria-labelledby="why-heading">
-        <h2 id="why-heading">Why use ReelsDl.net</h2>
+        <h2 id="why-heading">Why use the ReelsDl Reels Downloader</h2>
         <div className="article-copy">
           <p>
             <b>ReelsDl.net</b> is a fast way to <b>save Instagram videos</b> —

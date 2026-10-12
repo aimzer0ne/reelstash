@@ -15,7 +15,7 @@ export const homePage = {
   mode: 'media',
   kicker: null,
   heading: 'Instagram Reels Downloader',
-  lede: 'Download any reel, photo, or carousel | get the link. click download ;) ',
+  lede: 'Free Instagram video downloader. Paste a link to save any Reel, video, photo, or carousel.',
   inputLabel: 'Instagram reel or post URL',
   placeholder: 'Paste an Instagram URL',
   downloadLabel: 'Download',
@@ -57,7 +57,7 @@ export const homePage = {
     ]
   },
   how: {
-    heading: 'How to download Instagram Reels',
+    heading: 'How to use the Instagram Reels Downloader',
     steps: [
       {
         icon: 'copy',
@@ -88,6 +88,21 @@ export const homePage = {
         q: 'How do I download an Instagram Reel?',
         text: 'Copy the public Instagram Reel link, paste it into ReelsDl.net, and click the download button. Your Reel will be ready to save in seconds.',
         a: <>Copy the public Instagram Reel link, paste it into ReelsDl.net, and click the <strong>download</strong> button. Your Reel will be ready to save in seconds.</>
+      },
+      {
+        q: 'Is this an Instagram video downloader or a Reels downloader?',
+        text: 'Both. ReelsDl.net is an Instagram video downloader and a Reels downloader in one tool. Paste the link of a public Reel or a public video post and it saves the MP4. The same box also handles photos and carousels.',
+        a: <>Both. ReelsDl.net is an <strong>Instagram video downloader</strong> and a <strong>Reels downloader</strong> in one tool. Paste the link of a public Reel or a public video post and it saves the MP4. The same box also handles photos and carousels.</>
+      },
+      {
+        q: 'What quality does the Instagram video downloader save?',
+        text: 'The Instagram video downloader saves the highest-quality MP4 that Instagram serves for that post, with its original sound. Most Reels are 1080 pixels wide. No tool can give you a higher resolution than the one Instagram stores.',
+        a: <>The Instagram video downloader saves the <strong>highest-quality MP4</strong> that Instagram serves for that post, with its original sound. Most Reels are 1080 pixels wide. No tool can give you a higher resolution than the one Instagram stores.</>
+      },
+      {
+        q: 'Does the Reels downloader need an app or extension?',
+        text: 'No. The Reels downloader runs in your browser on iPhone, Android, Windows, and Mac. There is nothing to install, and you never enter your Instagram password.',
+        a: <>No. The Reels downloader runs in your browser on iPhone, Android, Windows, and Mac. There is <strong>nothing to install</strong>, and you never enter your Instagram password.</>
       },
       {
         q: 'Can I download Instagram photos?',
@@ -151,7 +166,8 @@ export const homePage = {
           '@id': absUrl('/#website'),
           url: absUrl('/'),
           name: 'ReelsDl.net',
-          description: 'Free Instagram Reels, photo, carousel, and MP3 audio downloader for public posts. No login.',
+          alternateName: ['ReelsDl', 'ReelsDl Instagram Video Downloader', 'ReelsDl Reels Downloader'],
+          description: 'Free Instagram video downloader and Reels downloader for public posts: Reels, videos, photos, carousels, and MP3 audio. No login.',
           inLanguage: 'en-US',
           publisher: { '@id': absUrl('/#organization') },
           potentialAction: {
@@ -164,16 +180,17 @@ export const homePage = {
           '@type': ['WebApplication', 'SoftwareApplication'],
           '@id': absUrl('/#app'),
           url: absUrl('/'),
-          name: 'ReelsDl.net Instagram Media Downloader',
+          name: 'ReelsDl.net Instagram Video Downloader',
+          alternateName: ['Instagram Reels Downloader', 'Reels Downloader', 'Instagram Video Downloader'],
           applicationCategory: 'MultimediaApplication',
-          applicationSubCategory: 'Instagram downloader',
+          applicationSubCategory: 'Instagram video downloader',
           operatingSystem: 'Any',
           browserRequirements: 'Requires JavaScript',
           isAccessibleForFree: true,
           inLanguage: 'en-US',
           image: absUrl(OG_IMAGE_PATH),
           publisher: { '@id': absUrl('/#organization') },
-          description: 'Download publicly accessible Instagram reels, videos, photos, and carousel posts. Paste a public link and save MP4 or JPG. No Instagram login.',
+          description: 'Instagram video downloader and Reels downloader. Paste a public Instagram link to save Reels and videos as MP4, or photos and carousel posts as JPG. No Instagram login.',
           featureList: [
             'Instagram reel downloads',
             'Instagram video downloads',
@@ -191,22 +208,24 @@ export const homePage = {
           '@type': 'WebPage',
           '@id': absUrl('/#webpage'),
           url: absUrl('/'),
-          name: 'Instagram Video Downloader — Save Reels, Photos, Stories',
+          name: 'Instagram Video Downloader – Reels Downloader | ReelsDl.net',
           isPartOf: { '@id': absUrl('/#website') },
           about: { '@id': absUrl('/#app') },
           inLanguage: 'en-US',
-          description: 'Paste a link. Save the Reel. HD videos, photos, carousels, and Stories — free, no login, no watermark.'
+          description: 'Free Instagram video downloader and Reels downloader. Paste a link to save Reels, videos, photos, and carousels in HD — no login, no app, no watermark.'
         }
       ]
     },
     homeHowToJsonLd
   ],
   metadata: {
-    title: 'Instagram Video Downloader — Save Reels, Photos, Stories',
-    description: 'Paste a link. Save the Reel. HD videos, photos, carousels, and Stories — free, no login, no watermark.',
+    title: 'Instagram Video Downloader – Reels Downloader | ReelsDl.net',
+    description: 'Free Instagram video downloader and Reels downloader. Paste a link to save Reels, videos, photos, and carousels in HD — no login, no app, no watermark.',
     keywords: [
-      'Instagram reel downloader',
       'Instagram video downloader',
+      'Instagram Reels downloader',
+      'Reels downloader',
+      'Instagram reel downloader',
       'Instagram photo downloader',
       'Instagram carousel downloader',
       'download Instagram reels',
@@ -217,13 +236,13 @@ export const homePage = {
     ],
     alternates: { canonical: '/' },
     openGraph: {
-      title: 'Instagram Video Downloader — Save Reels, Photos, Stories',
-      description: 'Paste a link. Save the Reel. HD videos, photos, carousels, and Stories — free, no login, no watermark.',
+      title: 'Instagram Video Downloader – Reels Downloader | ReelsDl.net',
+      description: 'Free Instagram video downloader and Reels downloader. Paste a link to save Reels, videos, photos, and carousels in HD — no login, no app, no watermark.',
       url: '/'
     },
     twitter: {
-      title: 'Instagram Video Downloader — Save Reels, Photos, Stories',
-      description: 'Paste a link. Save the Reel. HD videos, photos, carousels, and Stories — free, no login, no watermark.'
+      title: 'Instagram Video Downloader – Reels Downloader | ReelsDl.net',
+      description: 'Free Instagram video downloader and Reels downloader. Paste a link to save Reels, videos, photos, and carousels in HD — no login, no app, no watermark.'
     }
   }
 };

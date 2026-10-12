@@ -2,7 +2,7 @@
   "id": "/",
   "name": "ReelsDl.net",
   "short_name": "ReelsDl",
-  "description": "Download public Instagram reels, photos, carousels, and audio as MP3.",
+  "description": "Instagram video downloader and Reels downloader: save public Reels, videos, photos, carousels, and audio as MP3.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

@@ -35,7 +35,7 @@ faq:
     a: "Be careful. A download extension usually asks for permission to read and change data on the sites you visit, which includes your logged-in Instagram session. A web-based downloader needs no such access."
 ---
 
-On a laptop or desktop, Instagram gives you no way to save a Reel: the **Download** option only exists in the phone app. The simple workaround is to copy the Reel's address from your browser, paste it into the [Instagram Reels Downloader](/), and save the MP4. It works on Windows, macOS, Linux, and ChromeOS, in any modern browser, and the music stays in the file.
+On a laptop or desktop, Instagram gives you no way to save a Reel: the **Download** option only exists in the phone app. The simple workaround is to copy the Reel's address from your browser, paste it into the [Instagram video downloader](/), and save the MP4. It works on Windows, macOS, Linux, and ChromeOS, in any modern browser, and the music stays in the file.
 
 ## Step by step
 

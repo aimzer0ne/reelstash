@@ -42,7 +42,7 @@ export function AudioCopy({ page, guides }) {
             are short videos made with audio, AR effects, and more. When you
             only want the song, music, or voice from one, download the
             Instagram Reels music here. To save the video itself, use the{' '}
-            <Link href="/">Reels Downloader</Link>.
+            <Link href="/">Instagram Reels Downloader</Link>.
           </p>
         </div>
       </section>

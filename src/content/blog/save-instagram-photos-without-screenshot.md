@@ -36,7 +36,7 @@ faq:
     a: "Turn on Save original photos in Instagram's settings to keep a copy of everything you post from now on. For older posts, use Download your information in Accounts Center to export your whole archive."
 ---
 
-Instagram has no download button for photos. The fastest way to save one without a screenshot is to copy the post's link, paste it into the [Instagram downloader](/), and save the JPG. You get the real image file at the largest size Instagram stores, and for carousel posts you get every slide.
+Instagram has no download button for photos. The fastest way to save one without a screenshot is to copy the post's link, paste it into the [Instagram video and photo downloader](/), and save the JPG. You get the real image file at the largest size Instagram stores, and for carousel posts you get every slide.
 
 ## Why a screenshot is the worst option
 
