@@ -33,6 +33,7 @@ const social = hero ? { image: hero.og, imageAlt: hero.alt, imageWidth: OG_SIZE.
   modifiedTime={data.updated.toISOString()}
   {...social}
 >
+  <link slot="head" rel="alternate" type="text/markdown" href={`${postPath(post)}.md`} title="Markdown version" />
   {postJsonLd(post).map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
@@ -65,6 +66,15 @@ const social = hero ? { image: hero.og, imageAlt: hero.alt, imageWidth: OG_SIZE.
             decoding="async"
           />
         </figure>
+      ) : null}
+
+      {data.takeaways.length ? (
+        <section class="blog-takeaways" aria-labelledby="blog-takeaways-heading">
+          <h2 id="blog-takeaways-heading">Key takeaways</h2>
+          <ul>
+            {data.takeaways.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
       ) : null}
 
       {sections.length > 2 ? (

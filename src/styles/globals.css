@@ -417,24 +417,6 @@ h1 {
   text-wrap: balance;
 }
 
-.report-issue {
-  display: block;
-  width: fit-content;
-  margin: 16px auto 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--subtle);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.2;
-  transition: color .15s ease;
-}
-
-.report-issue:hover {
-  color: var(--text);
-}
-
 .error-message {
   max-width: 640px;
   margin: 20px auto 0;

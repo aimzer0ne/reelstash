@@ -11,6 +11,11 @@ keywords:
   - why can't i download instagram video with music
   - instagram reel draft not saving to camera roll
   - can't download instagram reels
+takeaways:
+  - "The Download option is missing when the account is private, the creator turned downloads off, or the account holder is under 18 with the default setting."
+  - "A Reel that saves without sound usually uses a licensed song that Instagram removes from the downloaded copy."
+  - "If nothing saves at all, check Instagram's Photos permission and the phone's free storage."
+  - "Files downloaded in Safari go to the Files app, not Photos, until you use Share → Save Video."
 image:
   width: 1774
   height: 887

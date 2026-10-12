@@ -85,6 +85,7 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs" />
+    <slot name="head" />
     {import.meta.env.PROD ? (
       <>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EEDJDHHW4"></script>

@@ -12,6 +12,7 @@ const blog = defineCollection({
     keywords: z.array(z.string()).default([]),
     // Files live in public/assets/blog/<slug>.webp, with -720.webp and -og.jpg variants.
     image: z.object({ width: z.number(), height: z.number(), alt: z.string() }).optional(),
+    takeaways: z.array(z.string()).default([]),
     published: z.coerce.date(),
     updated: z.coerce.date(),
     tool: z.enum(['reels', 'audio']).default('reels'),

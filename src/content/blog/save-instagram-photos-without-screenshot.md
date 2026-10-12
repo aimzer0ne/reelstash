@@ -11,6 +11,11 @@ keywords:
   - instagram carousel download images
   - how to save instagram photos on pc
   - how to save instagram photos to camera roll
+takeaways:
+  - "Instagram has no download button for photos, and the bookmark icon only saves a post inside the app."
+  - "A link downloader returns the actual JPG at the largest size Instagram stores, typically 1080 pixels wide."
+  - "One post link covers a whole carousel: every photo and video in it can be saved separately."
+  - "No tool can produce a true 4K copy, because Instagram resizes photos on upload."
 image:
   width: 1536
   height: 1024

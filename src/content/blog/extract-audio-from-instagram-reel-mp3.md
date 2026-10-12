@@ -11,6 +11,11 @@ keywords:
   - how to save instagram audio as alarm
   - how to use instagram reel audio as ringtone
   - how to extract music from instagram reel
+takeaways:
+  - "Instagram's Save audio button only bookmarks a sound inside the app; it does not create a file."
+  - "Pasting a public Reel link into an audio downloader returns the Reel's soundtrack as an MP3."
+  - "On iOS 26, an MP3 under 30 seconds can be set as a ringtone from Files → Share → Use as Ringtone."
+  - "On Android, add the MP3 under Settings → Sound & vibration → Phone ringtone."
 image:
   width: 1672
   height: 941

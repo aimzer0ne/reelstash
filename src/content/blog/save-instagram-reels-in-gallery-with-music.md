@@ -10,6 +10,11 @@ keywords:
   - how to save instagram reels with music without posting
   - save instagram reels in gallery android
   - save instagram reels in iphone gallery
+takeaways:
+  - "Instagram's in-app Download can save a Reel without sound when it uses a licensed song from Instagram's music library."
+  - "Downloading a public Reel by its link saves the MP4 with the same audio that plays on Instagram."
+  - "On iPhone, Safari saves the file to Files → Downloads; use Share → Save Video to move it to the camera roll."
+  - "Drafts and private Reels have no public link, so no link downloader can save them."
 image:
   width: 1672
   height: 941

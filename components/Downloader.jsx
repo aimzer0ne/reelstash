@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
-import { SITE_EMAIL } from '@/lib/seo';
 import { Icon } from './Icons';
 import { useI18n } from './I18nProvider';
 
@@ -178,9 +177,6 @@ export function Downloader({
           <button className="sr-only" type="submit" tabIndex={-1}>
             Get
           </button>
-          <a className="report-issue" href={reportIssueHref(url, mode, t('reportIssue'))}>
-            {t('reportIssue')}
-          </a>
         </form>
 
         {error ? (
@@ -363,15 +359,6 @@ function lightPreview(item) {
 
 function clearShimmer(event) {
   event.currentTarget.parentElement?.querySelector('.loading-shimmer')?.remove();
-}
-
-function reportIssueHref(url, mode, subjectLabel) {
-  const page = mode === 'audio' ? 'Audio MP3' : 'Reels Downloader';
-  const subject = `ReelsDl.net — ${subjectLabel || page}`;
-  const parts = ['What went wrong:', ''];
-  const trimmed = url.trim();
-  if (trimmed) parts.push(`Instagram link: ${trimmed}`, '');
-  return `mailto:${SITE_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(parts.join('\n'))}`;
 }
 
 function fetchResolvedPost(value, mode, resolveFailed) {
