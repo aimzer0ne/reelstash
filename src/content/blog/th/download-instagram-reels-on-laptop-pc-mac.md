@@ -79,7 +79,7 @@ faq:
 - เปิดไฟล์ในโปรแกรมเล่นอื่น **VLC** เล่น MP4 ได้เกือบทุกไฟล์
 - ตรวจสอบว่า Reels ต้นฉบับยังมีเสียงบน Instagram
 
-เมื่อต้องการแค่เพลง [ตัวดาวน์โหลดเสียง Reels](/th/instagram-audio-downloader) จะบันทึกลิงก์เดียวกันเป็น MP3 ดู[วิธีดึงเสียงจาก Reels Instagram](/th/blog/extract-audio-from-instagram-reel-mp3)
+เมื่อต้องการแค่เพลง [ตัวดาวน์โหลดเสียง Reels](/th/audio) จะบันทึกลิงก์เดียวกันเป็น MP3 ดู[วิธีดึงเสียงจาก Reels Instagram](/th/blog/extract-audio-from-instagram-reel-mp3)
 
 ## วิธีอื่น และเหตุผลที่ด้อยกว่า
 

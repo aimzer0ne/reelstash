@@ -36,7 +36,7 @@ faq:
     a: "Reels'lerdeki şarkılar telif hakkıyla korunur. Bir klibi kişisel olarak dinlemek için saklamak, onu yeniden yüklemekten veya kendi içeriğinizde kullanmaktan farklıdır; bunlar genellikle lisans ya da hak sahibinin iznini gerektirir. Bu genel bilgidir, hukuki tavsiye değildir."
 ---
 
-Bir Instagram Reels'ten sesi çıkarmak için Reels bağlantısını kopyalayın, [Instagram Reels ses indiricisine](/tr/instagram-audio-downloader) yapıştırın ve **MP3 indir**'e dokunun. Reels'in tüm sesini — şarkıyı, seslendirmeyi veya orijinal sesi — saklayabileceğiniz, her yerde çalabileceğiniz ya da zil sesi yapabileceğiniz normal bir MP3 dosyası olarak alırsınız.
+Bir Instagram Reels'ten sesi çıkarmak için Reels bağlantısını kopyalayın, [Instagram Reels ses indiricisine](/tr/audio) yapıştırın ve **MP3 indir**'e dokunun. Reels'in tüm sesini — şarkıyı, seslendirmeyi veya orijinal sesi — saklayabileceğiniz, her yerde çalabileceğiniz ya da zil sesi yapabileceğiniz normal bir MP3 dosyası olarak alırsınız.
 
 ## Instagram'daki "Sesi kaydet" bir indirme değildir
 
@@ -55,7 +55,7 @@ Yani sesi Instagram içinde hazırlayacağınız yeni bir Reels için istiyorsan
 ## Üç adımda Reels'ten ses çıkarma
 
 1. **Bağlantıyı kopyalayın.** Reels'te **üç noktaya** veya **paylaş okuna**, ardından **Bağlantıyı kopyala**'ya dokunun.
-2. **Yapıştırın.** [Ses indiricisini](/tr/instagram-audio-downloader) açın, bağlantıyı kutuya yapıştırın ve Enter'a basın.
+2. **Yapıştırın.** [Ses indiricisini](/tr/audio) açın, bağlantıyı kutuya yapıştırın ve Enter'a basın.
 3. **MP3'ü kaydedin.** Birkaç saniye sonra **MP3 indir**'e dokunun.
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Ses sayfasını açmak için Instagram Reels'teki ses adına dokunun" width="1440" height="1039" loading="lazy" decoding="async" />

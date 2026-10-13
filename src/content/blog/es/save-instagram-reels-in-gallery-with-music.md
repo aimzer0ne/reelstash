@@ -105,7 +105,7 @@ Hay más soluciones en la guía sobre [Reels de Instagram que no se guardan en e
 
 ## ¿Solo quieres la canción?
 
-Si lo que buscas es la música y no el video, sáltate el paso de la galería. El [descargador de audio de Reels](/es/instagram-audio-downloader) convierte el mismo enlace en un MP3. El recorrido completo, incluido cómo usarlo de tono de llamada, está en [cómo extraer el audio de un Reel de Instagram](/es/blog/extract-audio-from-instagram-reel-mp3).
+Si lo que buscas es la música y no el video, sáltate el paso de la galería. El [descargador de audio de Reels](/es/audio) convierte el mismo enlace en un MP3. El recorrido completo, incluido cómo usarlo de tono de llamada, está en [cómo extraer el audio de un Reel de Instagram](/es/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Una nota sobre el uso de los Reels guardados
 

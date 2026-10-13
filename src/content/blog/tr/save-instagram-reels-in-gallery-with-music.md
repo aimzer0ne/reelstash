@@ -105,7 +105,7 @@ Daha fazla çözüm için [Instagram Reels galeriye kaydedilmiyor](/tr/blog/inst
 
 ## Yalnızca şarkıyı mı istiyorsunuz?
 
-İstediğiniz video değil de müzikse galeri adımını atlayın. [Reels ses indiricisi](/tr/instagram-audio-downloader) aynı bağlantıyı MP3'e çevirir. Zil sesi olarak kullanma dahil tüm adımlar [Instagram Reels'ten ses nasıl çıkarılır](/tr/blog/extract-audio-from-instagram-reel-mp3) rehberinde.
+İstediğiniz video değil de müzikse galeri adımını atlayın. [Reels ses indiricisi](/tr/audio) aynı bağlantıyı MP3'e çevirir. Zil sesi olarak kullanma dahil tüm adımlar [Instagram Reels'ten ses nasıl çıkarılır](/tr/blog/extract-audio-from-instagram-reel-mp3) rehberinde.
 
 ## Kaydedilen Reels'lerin kullanımı hakkında bir not
 

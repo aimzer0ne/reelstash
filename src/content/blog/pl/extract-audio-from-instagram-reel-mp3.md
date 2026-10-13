@@ -36,7 +36,7 @@ faq:
     a: "Utwory w rolkach są chronione prawem autorskim. Zachowanie klipu do własnego słuchania to coś innego niż ponowne przesłanie go lub użycie we własnych treściach, co zwykle wymaga licencji albo zgody właściciela. To informacja ogólna, a nie porada prawna."
 ---
 
-Aby wyodrębnić dźwięk z rolki na Instagramie, skopiuj link do rolki, wklej go w [narzędziu do pobierania dźwięku z rolek na Instagramie](/pl/instagram-audio-downloader) i stuknij **Pobierz MP3**. Dostajesz całą ścieżkę dźwiękową rolki — piosenkę, lektora lub oryginalny dźwięk — jako zwykły plik MP3, który możesz zachować, odtwarzać gdziekolwiek albo ustawić jako dzwonek.
+Aby wyodrębnić dźwięk z rolki na Instagramie, skopiuj link do rolki, wklej go w [narzędziu do pobierania dźwięku z rolek na Instagramie](/pl/audio) i stuknij **Pobierz MP3**. Dostajesz całą ścieżkę dźwiękową rolki — piosenkę, lektora lub oryginalny dźwięk — jako zwykły plik MP3, który możesz zachować, odtwarzać gdziekolwiek albo ustawić jako dzwonek.
 
 ## „Zapisz dźwięk” w Instagramie to nie pobieranie
 
@@ -55,7 +55,7 @@ Jeśli więc potrzebujesz dźwięku do nowej rolki tworzonej w Instagramie, *Zap
 ## Wyodrębnianie dźwięku z rolki w trzech krokach
 
 1. **Skopiuj link.** Przy rolce stuknij **trzy kropki** lub **strzałkę udostępniania**, a potem **Kopiuj link**.
-2. **Wklej go.** Otwórz [narzędzie do pobierania dźwięku](/pl/instagram-audio-downloader), wklej link w polu i naciśnij Enter.
+2. **Wklej go.** Otwórz [narzędzie do pobierania dźwięku](/pl/audio), wklej link w polu i naciśnij Enter.
 3. **Zapisz MP3.** Po kilku sekundach stuknij **Pobierz MP3**.
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Stuknij nazwę dźwięku w rolce na Instagramie, aby otworzyć stronę dźwięku" width="1440" height="1039" loading="lazy" decoding="async" />

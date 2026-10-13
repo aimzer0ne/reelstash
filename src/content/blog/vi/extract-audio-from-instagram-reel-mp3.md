@@ -36,7 +36,7 @@ faq:
     a: "Bài hát trong Reels được bảo hộ bản quyền. Giữ một đoạn để nghe cá nhân khác với việc tải lại lên hoặc dùng trong nội dung của bạn, vốn thường cần giấy phép hoặc sự cho phép của chủ sở hữu. Đây là thông tin chung, không phải tư vấn pháp lý."
 ---
 
-Để tách âm thanh từ Reels Instagram, hãy sao chép liên kết của Reels, dán vào [trình tải âm thanh Reels Instagram](/vi/instagram-audio-downloader) và chạm **Tải MP3**. Bạn nhận được toàn bộ phần âm thanh của Reels — bài hát, lời thuyết minh hoặc âm thanh gốc — dưới dạng tệp MP3 thông thường để lưu giữ, phát ở bất cứ đâu hoặc đặt làm nhạc chuông.
+Để tách âm thanh từ Reels Instagram, hãy sao chép liên kết của Reels, dán vào [trình tải âm thanh Reels Instagram](/vi/audio) và chạm **Tải MP3**. Bạn nhận được toàn bộ phần âm thanh của Reels — bài hát, lời thuyết minh hoặc âm thanh gốc — dưới dạng tệp MP3 thông thường để lưu giữ, phát ở bất cứ đâu hoặc đặt làm nhạc chuông.
 
 ## "Lưu âm thanh" trong Instagram không phải là tải xuống
 
@@ -55,7 +55,7 @@ Vì vậy, nếu bạn cần âm thanh cho một Reels mới tạo ngay trong In
 ## Tách âm thanh từ Reels trong ba bước
 
 1. **Sao chép liên kết.** Trên Reels, chạm **dấu ba chấm** hoặc **mũi tên chia sẻ**, rồi chạm **Sao chép liên kết**.
-2. **Dán liên kết.** Mở [trình tải âm thanh](/vi/instagram-audio-downloader), dán liên kết vào ô và nhấn Enter.
+2. **Dán liên kết.** Mở [trình tải âm thanh](/vi/audio), dán liên kết vào ô và nhấn Enter.
 3. **Lưu MP3.** Sau vài giây, chạm **Tải MP3**.
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Chạm vào tên âm thanh trên Reels Instagram để mở trang âm thanh" width="1440" height="1039" loading="lazy" decoding="async" />

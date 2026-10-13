@@ -79,7 +79,7 @@ Dosya bilgisayarınızda sessiz görünüyorsa:
 - Dosyayı başka bir oynatıcıda açın. **VLC** neredeyse her MP4'ü oynatır.
 - Orijinal Reels'in Instagram'da hâlâ sesli olduğundan emin olun.
 
-Yalnızca müziğe ihtiyacınız olduğunda [Reels ses indiricisi](/tr/instagram-audio-downloader) aynı bağlantıyı MP3 olarak kaydeder. [Instagram Reels'ten ses nasıl çıkarılır](/tr/blog/extract-audio-from-instagram-reel-mp3) rehberine bakın.
+Yalnızca müziğe ihtiyacınız olduğunda [Reels ses indiricisi](/tr/audio) aynı bağlantıyı MP3 olarak kaydeder. [Instagram Reels'ten ses nasıl çıkarılır](/tr/blog/extract-audio-from-instagram-reel-mp3) rehberine bakın.
 
 ## Diğer yöntemler ve neden daha kötüler
 

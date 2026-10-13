@@ -79,7 +79,7 @@ faq:
 - 別のプレーヤーでファイルを開く。**VLC**はほぼすべてのMP4を再生できます。
 - 元のリールがInstagramで今も音付きで再生されるか確認する。
 
-音楽だけが必要なら、[リール音声ダウンローダー](/ja/instagram-audio-downloader)で同じリンクをMP3として保存できます。[Instagramリールから音声を抽出する方法](/ja/blog/extract-audio-from-instagram-reel-mp3)をご覧ください。
+音楽だけが必要なら、[リール音声ダウンローダー](/ja/audio)で同じリンクをMP3として保存できます。[Instagramリールから音声を抽出する方法](/ja/blog/extract-audio-from-instagram-reel-mp3)をご覧ください。
 
 ## ほかの方法と、それらが劣る理由
 

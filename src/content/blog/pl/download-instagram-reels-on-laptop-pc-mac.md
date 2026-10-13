@@ -79,7 +79,7 @@ Jeśli plik wydaje się niemy na komputerze:
 - Otwórz plik w innym odtwarzaczu. **VLC** odtwarza niemal każdy plik MP4.
 - Upewnij się, że oryginalna rolka nadal ma dźwięk na Instagramie.
 
-Gdy potrzebujesz tylko muzyki, [narzędzie do pobierania dźwięku z rolek](/pl/instagram-audio-downloader) zapisze ten sam link jako MP3. Zobacz [jak wyodrębnić dźwięk z rolki na Instagramie](/pl/blog/extract-audio-from-instagram-reel-mp3).
+Gdy potrzebujesz tylko muzyki, [narzędzie do pobierania dźwięku z rolek](/pl/audio) zapisze ten sam link jako MP3. Zobacz [jak wyodrębnić dźwięk z rolki na Instagramie](/pl/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Inne metody i dlaczego są gorsze
 

@@ -105,7 +105,7 @@ Chrome은 MP4를 **Download** 폴더에 저장합니다. 대부분의 갤러리 
 
 ## 노래만 필요하다면
 
-동영상이 아니라 음악이 필요하다면 갤러리 단계를 건너뛰세요. [릴스 오디오 다운로더](/ko/instagram-audio-downloader)가 같은 링크를 MP3로 바꿔 줍니다. 벨소리로 쓰는 방법을 포함한 전체 과정은 [인스타그램 릴스에서 오디오를 추출하는 방법](/ko/blog/extract-audio-from-instagram-reel-mp3)에 있습니다.
+동영상이 아니라 음악이 필요하다면 갤러리 단계를 건너뛰세요. [릴스 오디오 다운로더](/ko/audio)가 같은 링크를 MP3로 바꿔 줍니다. 벨소리로 쓰는 방법을 포함한 전체 과정은 [인스타그램 릴스에서 오디오를 추출하는 방법](/ko/blog/extract-audio-from-instagram-reel-mp3)에 있습니다.
 
 ## 저장한 릴스 사용에 관해
 

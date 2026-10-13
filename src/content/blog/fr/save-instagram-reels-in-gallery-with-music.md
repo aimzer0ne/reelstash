@@ -105,7 +105,7 @@ D'autres solutions figurent dans le guide [Reels Instagram qui ne s'enregistrent
 
 ## Vous voulez seulement la chanson ?
 
-Si c'est la musique qui vous intéresse et non la vidéo, sautez l'étape de la galerie. Le [téléchargeur d'audio de Reels](/fr/instagram-audio-downloader) transforme le même lien en MP3. La marche à suivre complète, y compris pour en faire une sonnerie, se trouve dans [comment extraire l'audio d'un Reel Instagram](/fr/blog/extract-audio-from-instagram-reel-mp3).
+Si c'est la musique qui vous intéresse et non la vidéo, sautez l'étape de la galerie. Le [téléchargeur d'audio de Reels](/fr/audio) transforme le même lien en MP3. La marche à suivre complète, y compris pour en faire une sonnerie, se trouve dans [comment extraire l'audio d'un Reel Instagram](/fr/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Un mot sur l'utilisation des Reels enregistrés
 

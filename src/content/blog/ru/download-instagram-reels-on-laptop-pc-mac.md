@@ -79,7 +79,7 @@ faq:
 - Откройте файл в другом плеере. **VLC** воспроизводит почти любой MP4.
 - Убедитесь, что у оригинального Reels в Instagram всё ещё есть звук.
 
-Если нужна только музыка, [загрузчик аудио из Reels](/ru/instagram-audio-downloader) сохранит ту же ссылку как MP3. Смотрите [как извлечь аудио из Reels в Instagram](/ru/blog/extract-audio-from-instagram-reel-mp3).
+Если нужна только музыка, [загрузчик аудио из Reels](/ru/audio) сохранит ту же ссылку как MP3. Смотрите [как извлечь аудио из Reels в Instagram](/ru/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Другие способы и почему они хуже
 

@@ -105,7 +105,7 @@ More fixes are in the guide to [Instagram Reels not saving to the camera roll](/
 
 ## Only want the song?
 
-If it is the music you are after and not the video, skip the gallery step. The [Reel audio downloader](/instagram-audio-downloader) turns the same link into an MP3. The full walkthrough, including how to use it as a ringtone, is in [how to extract audio from an Instagram Reel](/blog/extract-audio-from-instagram-reel-mp3).
+If it is the music you are after and not the video, skip the gallery step. The [Reel audio downloader](/audio) turns the same link into an MP3. The full walkthrough, including how to use it as a ringtone, is in [how to extract audio from an Instagram Reel](/blog/extract-audio-from-instagram-reel-mp3).
 
 ## A note on using saved Reels
 

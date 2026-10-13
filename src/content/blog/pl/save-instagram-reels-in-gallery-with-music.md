@@ -105,7 +105,7 @@ Więcej rozwiązań znajdziesz w poradniku [rolki z Instagrama nie zapisują si�
 
 ## Chcesz tylko piosenkę?
 
-Jeśli zależy ci na muzyce, a nie na wideo, pomiń krok z galerią. [Narzędzie do pobierania dźwięku z rolek](/pl/instagram-audio-downloader) zamienia ten sam link w MP3. Pełna instrukcja, łącznie z ustawieniem jako dzwonek, jest w artykule [jak wyodrębnić dźwięk z rolki na Instagramie](/pl/blog/extract-audio-from-instagram-reel-mp3).
+Jeśli zależy ci na muzyce, a nie na wideo, pomiń krok z galerią. [Narzędzie do pobierania dźwięku z rolek](/pl/audio) zamienia ten sam link w MP3. Pełna instrukcja, łącznie z ustawieniem jako dzwonek, jest w artykule [jak wyodrębnić dźwięk z rolki na Instagramie](/pl/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Uwaga o korzystaniu z zapisanych rolek
 

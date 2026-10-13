@@ -29,7 +29,7 @@ Then visit [http://localhost:4321](http://localhost:4321). Set a long random `DO
    - `SITE_URL=https://reelsdl.net`
    - `NEXT_PUBLIC_API_URL=https://get.reelsdl.net`
 
-There is a dedicated Instagram audio page at `/instagram-audio-downloader` that extracts MP3 soundtracks from public reels (ffmpeg) or downloads direct audio streams when available.
+There is a dedicated Instagram audio page at `/audio` that extracts MP3 soundtracks from public reels (ffmpeg) or downloads direct audio streams when available.
 
 ## Domains
 

@@ -105,7 +105,7 @@ ChromeはMP4を**Download**フォルダに保存します。ほとんどのギ�
 
 ## 曲だけが欲しい場合
 
-動画ではなく音楽が目的なら、ギャラリーへの保存は省けます。[リール音声ダウンローダー](/ja/instagram-audio-downloader)を使えば、同じリンクをMP3に変換できます。着信音にする方法を含む詳しい手順は[Instagramリールから音声を抽出する方法](/ja/blog/extract-audio-from-instagram-reel-mp3)をご覧ください。
+動画ではなく音楽が目的なら、ギャラリーへの保存は省けます。[リール音声ダウンローダー](/ja/audio)を使えば、同じリンクをMP3に変換できます。着信音にする方法を含む詳しい手順は[Instagramリールから音声を抽出する方法](/ja/blog/extract-audio-from-instagram-reel-mp3)をご覧ください。
 
 ## 保存したリールの使い方について
 

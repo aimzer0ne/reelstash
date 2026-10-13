@@ -79,7 +79,7 @@ Jika file terasa tanpa suara di komputer:
 - Buka file di pemutar lain. **VLC** bisa memutar hampir semua MP4.
 - Pastikan Reels aslinya masih bersuara di Instagram.
 
-Kalau hanya butuh musiknya, [pengunduh audio Reels](/id/instagram-audio-downloader) menyimpan link yang sama sebagai MP3. Lihat [cara mengambil audio dari Reels Instagram](/id/blog/extract-audio-from-instagram-reel-mp3).
+Kalau hanya butuh musiknya, [pengunduh audio Reels](/id/audio) menyimpan link yang sama sebagai MP3. Lihat [cara mengambil audio dari Reels Instagram](/id/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Cara lain, dan kenapa kurang baik
 

@@ -36,7 +36,7 @@ faq:
     a: "Le canzoni nei Reels sono protette da copyright. Tenere una clip per l'ascolto personale è diverso dal ricaricarla o usarla nei propri contenuti, cosa che di norma richiede una licenza o il permesso del titolare. Informazione generale, non una consulenza legale."
 ---
 
-Per estrarre l'audio da un Reel di Instagram, copia il link del Reel, incollalo nel [downloader dell'audio dei Reels di Instagram](/it/instagram-audio-downloader) e tocca **Scarica MP3**. Ottieni l'intera colonna sonora del Reel — la canzone, la voce fuori campo o il suono originale — come un normale file MP3 da conservare, riprodurre ovunque o impostare come suoneria.
+Per estrarre l'audio da un Reel di Instagram, copia il link del Reel, incollalo nel [downloader dell'audio dei Reels di Instagram](/it/audio) e tocca **Scarica MP3**. Ottieni l'intera colonna sonora del Reel — la canzone, la voce fuori campo o il suono originale — come un normale file MP3 da conservare, riprodurre ovunque o impostare come suoneria.
 
 ## "Salva audio" in Instagram non è un download
 
@@ -55,7 +55,7 @@ Quindi, se vuoi il suono per un nuovo Reel creato dentro Instagram, *Salva audio
 ## Estrarre l'audio da un Reel in tre passaggi
 
 1. **Copia il link.** Sul Reel, tocca i **tre puntini** o la **freccia di condivisione**, poi **Copia link**.
-2. **Incollalo.** Apri il [downloader audio](/it/instagram-audio-downloader), incolla il link nel campo e premi Invio.
+2. **Incollalo.** Apri il [downloader audio](/it/audio), incolla il link nel campo e premi Invio.
 3. **Salva l'MP3.** Dopo qualche secondo, tocca **Scarica MP3**.
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Tocca il nome dell'audio su un Reel di Instagram per aprire la sua pagina audio" width="1440" height="1039" loading="lazy" decoding="async" />

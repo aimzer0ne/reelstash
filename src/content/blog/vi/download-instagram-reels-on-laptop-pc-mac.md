@@ -79,7 +79,7 @@ Nếu tệp có vẻ không có tiếng trên máy tính:
 - Mở tệp bằng trình phát khác. **VLC** phát được gần như mọi tệp MP4.
 - Đảm bảo Reels gốc vẫn còn tiếng trên Instagram.
 
-Khi chỉ cần nhạc, [trình tải âm thanh Reels](/vi/instagram-audio-downloader) lưu chính liên kết đó thành MP3. Xem [cách tách âm thanh từ Reels Instagram](/vi/blog/extract-audio-from-instagram-reel-mp3).
+Khi chỉ cần nhạc, [trình tải âm thanh Reels](/vi/audio) lưu chính liên kết đó thành MP3. Xem [cách tách âm thanh từ Reels Instagram](/vi/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Các cách khác, và vì sao chúng kém hơn
 

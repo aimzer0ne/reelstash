@@ -105,7 +105,7 @@ Solusi lainnya ada di panduan [Reels Instagram tidak tersimpan ke rol kamera](/i
 
 ## Hanya mau lagunya?
 
-Kalau yang Anda cari adalah musiknya, bukan videonya, lewati langkah galeri. [Pengunduh audio Reels](/id/instagram-audio-downloader) mengubah link yang sama menjadi MP3. Panduan lengkapnya, termasuk cara menjadikannya nada dering, ada di [cara mengambil audio dari Reels Instagram](/id/blog/extract-audio-from-instagram-reel-mp3).
+Kalau yang Anda cari adalah musiknya, bukan videonya, lewati langkah galeri. [Pengunduh audio Reels](/id/audio) mengubah link yang sama menjadi MP3. Panduan lengkapnya, termasuk cara menjadikannya nada dering, ada di [cara mengambil audio dari Reels Instagram](/id/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Catatan tentang penggunaan Reels yang disimpan
 

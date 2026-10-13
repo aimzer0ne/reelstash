@@ -79,7 +79,7 @@ Se il file sembra muto sul computer:
 - Apri il file con un altro lettore. **VLC** riproduce quasi ogni MP4.
 - Verifica che il Reel originale abbia ancora l'audio su Instagram.
 
-Quando ti serve solo la musica, il [downloader dell'audio dei Reels](/it/instagram-audio-downloader) salva lo stesso link in MP3. Leggi [come estrarre l'audio da un Reel di Instagram](/it/blog/extract-audio-from-instagram-reel-mp3).
+Quando ti serve solo la musica, il [downloader dell'audio dei Reels](/it/audio) salva lo stesso link in MP3. Leggi [come estrarre l'audio da un Reel di Instagram](/it/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Altri metodi, e perché sono peggiori
 

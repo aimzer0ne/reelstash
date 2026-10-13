@@ -105,7 +105,7 @@ Há mais soluções no guia sobre [Reels do Instagram que não salvam no rolo da
 
 ## Quer só a música?
 
-Se o que você quer é a música e não o vídeo, pule a etapa da galeria. O [downloader de áudio de Reels](/pt/instagram-audio-downloader) transforma o mesmo link em um MP3. O passo a passo completo, incluindo como usar como toque, está em [como extrair o áudio de um Reel do Instagram](/pt/blog/extract-audio-from-instagram-reel-mp3).
+Se o que você quer é a música e não o vídeo, pule a etapa da galeria. O [downloader de áudio de Reels](/pt/audio) transforma o mesmo link em um MP3. O passo a passo completo, incluindo como usar como toque, está em [como extrair o áudio de um Reel do Instagram](/pt/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Uma observação sobre o uso de Reels salvos
 

@@ -36,7 +36,7 @@ faq:
     a: "As músicas dos Reels têm direitos autorais. Guardar um clipe para ouvir é diferente de reenviar ou usar no seu próprio conteúdo, o que normalmente exige licença ou permissão do titular. Esta é uma informação geral, não aconselhamento jurídico."
 ---
 
-Para extrair o áudio de um Reel do Instagram, copie o link do Reel, cole no [downloader de áudio de Reels do Instagram](/pt/instagram-audio-downloader) e toque em **Baixar MP3**. Você recebe a trilha sonora completa do Reel — a música, a narração ou o som original — como um arquivo MP3 comum, que dá para guardar, tocar em qualquer lugar ou usar como toque.
+Para extrair o áudio de um Reel do Instagram, copie o link do Reel, cole no [downloader de áudio de Reels do Instagram](/pt/audio) e toque em **Baixar MP3**. Você recebe a trilha sonora completa do Reel — a música, a narração ou o som original — como um arquivo MP3 comum, que dá para guardar, tocar em qualquer lugar ou usar como toque.
 
 ## “Salvar áudio” no Instagram não é um download
 
@@ -55,7 +55,7 @@ Então, se você quer o som para um novo Reel feito dentro do Instagram, *Salvar
 ## Extrair o áudio de um Reel em três passos
 
 1. **Copie o link.** No Reel, toque nos **três pontos** ou na **seta de compartilhar** e depois em **Copiar link**.
-2. **Cole.** Abra o [downloader de áudio](/pt/instagram-audio-downloader), cole o link na caixa e pressione Enter.
+2. **Cole.** Abra o [downloader de áudio](/pt/audio), cole o link na caixa e pressione Enter.
 3. **Salve o MP3.** Depois de alguns segundos, toque em **Baixar MP3**.
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Toque no nome do áudio em um Reel do Instagram para abrir a página do áudio" width="1440" height="1039" loading="lazy" decoding="async" />

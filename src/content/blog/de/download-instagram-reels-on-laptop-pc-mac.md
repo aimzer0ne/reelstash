@@ -79,7 +79,7 @@ Wirkt die Datei auf deinem Computer stumm:
 - Öffne die Datei in einem anderen Player. **VLC** spielt fast jedes MP4 ab.
 - Vergewissere dich, dass das Original-Reel auf Instagram noch Ton hat.
 
-Brauchst du nur die Musik, speichert der [Reel-Audio-Downloader](/de/instagram-audio-downloader) denselben Link als MP3. Siehe [Audio aus einem Instagram Reel extrahieren](/de/blog/extract-audio-from-instagram-reel-mp3).
+Brauchst du nur die Musik, speichert der [Reel-Audio-Downloader](/de/audio) denselben Link als MP3. Siehe [Audio aus einem Instagram Reel extrahieren](/de/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Andere Methoden – und warum sie schlechter sind
 

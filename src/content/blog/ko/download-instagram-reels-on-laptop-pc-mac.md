@@ -79,7 +79,7 @@ faq:
 - 다른 플레이어에서 파일을 엽니다. **VLC**는 거의 모든 MP4를 재생합니다.
 - 원본 릴스가 인스타그램에서 여전히 소리가 나는지 확인합니다.
 
-음악만 필요할 때는 [릴스 오디오 다운로더](/ko/instagram-audio-downloader)가 같은 링크를 MP3로 저장해 줍니다. [인스타그램 릴스에서 오디오를 추출하는 방법](/ko/blog/extract-audio-from-instagram-reel-mp3)을 참고하세요.
+음악만 필요할 때는 [릴스 오디오 다운로더](/ko/audio)가 같은 링크를 MP3로 저장해 줍니다. [인스타그램 릴스에서 오디오를 추출하는 방법](/ko/blog/extract-audio-from-instagram-reel-mp3)을 참고하세요.
 
 ## 다른 방법들과 그 방법이 더 나쁜 이유
 

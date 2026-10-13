@@ -105,7 +105,7 @@ Weitere Lösungen findest du im Ratgeber [Instagram Reels werden nicht in den Au
 
 ## Du willst nur den Song?
 
-Geht es dir um die Musik und nicht ums Video, überspringe den Galerie-Schritt. Der [Reel-Audio-Downloader](/de/instagram-audio-downloader) macht aus demselben Link eine MP3. Die komplette Anleitung, inklusive Nutzung als Klingelton, steht in [Audio aus einem Instagram Reel extrahieren](/de/blog/extract-audio-from-instagram-reel-mp3).
+Geht es dir um die Musik und nicht ums Video, überspringe den Galerie-Schritt. Der [Reel-Audio-Downloader](/de/audio) macht aus demselben Link eine MP3. Die komplette Anleitung, inklusive Nutzung als Klingelton, steht in [Audio aus einem Instagram Reel extrahieren](/de/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Ein Hinweis zur Nutzung gespeicherter Reels
 

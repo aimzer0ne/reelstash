@@ -105,7 +105,7 @@ Xem thêm cách khắc phục trong hướng dẫn [Reels Instagram không lưu 
 
 ## Chỉ muốn lấy bài hát?
 
-Nếu bạn cần nhạc chứ không cần video, hãy bỏ qua bước thư viện. [Trình tải âm thanh Reels](/vi/instagram-audio-downloader) chuyển chính liên kết đó thành MP3. Hướng dẫn đầy đủ, gồm cả cách đặt làm nhạc chuông, có trong bài [cách tách âm thanh từ Reels Instagram](/vi/blog/extract-audio-from-instagram-reel-mp3).
+Nếu bạn cần nhạc chứ không cần video, hãy bỏ qua bước thư viện. [Trình tải âm thanh Reels](/vi/audio) chuyển chính liên kết đó thành MP3. Hướng dẫn đầy đủ, gồm cả cách đặt làm nhạc chuông, có trong bài [cách tách âm thanh từ Reels Instagram](/vi/blog/extract-audio-from-instagram-reel-mp3).
 
 ## Lưu ý về việc sử dụng Reels đã lưu
 

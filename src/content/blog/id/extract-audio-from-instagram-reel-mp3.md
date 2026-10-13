@@ -36,7 +36,7 @@ faq:
     a: "Lagu di Reels dilindungi hak cipta. Menyimpan klip untuk didengarkan sendiri berbeda dengan mengunggah ulang atau memakainya di konten Anda, yang biasanya memerlukan lisensi atau izin pemiliknya. Ini informasi umum, bukan nasihat hukum."
 ---
 
-Untuk mengambil audio dari Reels Instagram, salin link Reels, tempel di [pengunduh audio Reels Instagram](/id/instagram-audio-downloader), lalu ketuk **Unduh MP3**. Anda mendapatkan seluruh audio Reels — lagu, sulih suara, atau suara asli — sebagai file MP3 biasa yang bisa disimpan, diputar di mana saja, atau dijadikan nada dering.
+Untuk mengambil audio dari Reels Instagram, salin link Reels, tempel di [pengunduh audio Reels Instagram](/id/audio), lalu ketuk **Unduh MP3**. Anda mendapatkan seluruh audio Reels — lagu, sulih suara, atau suara asli — sebagai file MP3 biasa yang bisa disimpan, diputar di mana saja, atau dijadikan nada dering.
 
 ## "Simpan audio" di Instagram bukan unduhan
 
@@ -55,7 +55,7 @@ Jadi, kalau Anda ingin sound itu untuk Reels baru yang dibuat di dalam Instagram
 ## Mengambil audio Reels dalam tiga langkah
 
 1. **Salin link.** Pada Reels, ketuk **titik tiga** atau **panah bagikan**, lalu **Salin tautan**.
-2. **Tempel.** Buka [pengunduh audio](/id/instagram-audio-downloader), tempel link ke kotak, lalu tekan Enter.
+2. **Tempel.** Buka [pengunduh audio](/id/audio), tempel link ke kotak, lalu tekan Enter.
 3. **Simpan MP3.** Setelah beberapa detik, ketuk **Unduh MP3**.
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Ketuk nama audio pada Reels Instagram untuk membuka halaman audionya" width="1440" height="1039" loading="lazy" decoding="async" />
