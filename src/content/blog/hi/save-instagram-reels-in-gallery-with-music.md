@@ -101,7 +101,7 @@ Chrome MP4 को आपके **Download** फ़ोल्डर में स�
 - **ओरिजिनल रील जाँचें।** अगर Instagram पर रील में "This audio is no longer available" दिखता है, तो आवाज़ स्रोत से ही हटा दी गई है और कोई टूल उसे वापस नहीं ला सकता।
 - **लिंक से दोबारा डाउनलोड करें।** Instagram के Download बटन से सेव हुई कॉपी बिना आवाज़ वाली हो सकती है। लिंक से किया गया नया डाउनलोड उसकी जगह ले लेता है।
 
-और समाधान अंग्रेज़ी गाइड [Instagram Reels not saving to the camera roll](/blog/instagram-reels-not-saving-to-camera-roll) में हैं।
+और समाधान [Instagram रील्स गैलरी में सेव नहीं हो रहीं](/hi/blog/instagram-reels-not-saving-to-camera-roll) वाली गाइड में हैं।
 
 ## सिर्फ़ गाना चाहिए?
 
