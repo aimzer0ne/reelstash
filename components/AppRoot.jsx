@@ -4,11 +4,10 @@ import { I18nProvider } from './I18nProvider';
 import { LegalPage } from './LegalPage';
 import { PrivacyCopy } from './PrivacyCopy';
 import { legalPages } from '@/lib/legal.js';
-import { audioPage, homePage } from '@/lib/site.jsx';
 
-export function AppRoot({ pageId = 'home', initialLocale = 'en', guides = [] }) {
+export function AppRoot({ pageId = 'home', guides = [], ...i18n }) {
   return (
-    <I18nProvider initialLocale={initialLocale}>
+    <I18nProvider {...i18n}>
       {pageId === 'privacy' ? (
         <LegalPage page={legalPages.privacy}>
           <PrivacyCopy />
@@ -19,8 +18,7 @@ export function AppRoot({ pageId = 'home', initialLocale = 'en', guides = [] }) 
           <DisclaimerCopy />
         </LegalPage>
       ) : null}
-      {pageId === 'audio' ? <DownloadPage page={audioPage} guides={guides} /> : null}
-      {pageId === 'home' ? <DownloadPage page={homePage} guides={guides} /> : null}
+      {pageId === 'audio' || pageId === 'home' ? <DownloadPage pageId={pageId} guides={guides} /> : null}
     </I18nProvider>
   );
 }

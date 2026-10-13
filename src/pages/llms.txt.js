@@ -8,6 +8,7 @@ const HEAD = `# ReelsDl.net
 - Website: https://reelsdl.net
 - Audio tool: https://reelsdl.net/instagram-audio-downloader
 - Contact: hello@reelsdl.net
+- Languages: English at the URLs below; translated pages live under a language prefix (for example /es, /pt, /id, /hi) and are listed in https://reelsdl.net/sitemap.xml
 - Not affiliated with Instagram or Meta Platforms
 
 ## Summary

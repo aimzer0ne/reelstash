@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { AppRoot } from '../../components/AppRoot.jsx';
+import { blogLocales, blogPath, getGuideLinks } from '../../lib/blog.js';
+import { DEFAULT_LOCALE } from '../../lib/i18n.js';
+import { toolPage } from '../../lib/site.js';
+
+// pageLocale is the language of the URL; uiLocale only differs on English URLs, where
+// languages without their own URL still swap the interface strings.
+const { pageId, pageLocale = DEFAULT_LOCALE, uiLocale = pageLocale } = Astro.props;
+const page = toolPage(pageId, pageLocale);
+const hasBlog = (await blogLocales()).includes(pageLocale);
+const guides = hasBlog ? await getGuideLinks(pageLocale) : [];
+---
+<Base
+  locale={uiLocale}
+  pageLocale={pageLocale}
+  alternates={page.alternates}
+  canonical={page.path}
+  {...page.metadata}
+>
+  {page.jsonLd.map((block) => (
+    <script type="application/ld+json" set:html={JSON.stringify(block)} />
+  ))}
+  <AppRoot
+    client:load
+    pageId={pageId}
+    initialLocale={uiLocale}
+    pageLocale={pageLocale}
+    alternates={page.alternates}
+    blogHref={blogPath(hasBlog ? pageLocale : DEFAULT_LOCALE)}
+    content={page.content}
+    guides={guides}
+  />
+</Base>

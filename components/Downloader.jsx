@@ -4,18 +4,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
 import { Icon } from './Icons';
 import { useI18n } from './I18nProvider';
+import './audio-preview.css';
 
-export function Downloader({
-  mode,
-  kicker,
-  heading,
-  lede,
-  inputLabel,
-  placeholder,
-  messages,
-  summary
-}) {
-  const { t } = useI18n();
+export function Downloader({ mode, defaultTitle }) {
+  const { t, href } = useI18n();
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -106,12 +98,10 @@ export function Downloader({
   }
 
   const media = Array.isArray(result?.media) ? result.media : [];
-  const count = media.length === 1 ? summary.one : `${media.length}${summary.manySuffix}`;
 
   return (
     <>
       <section className="hero" aria-labelledby="hero-heading">
-        {kicker ? <p className="kicker">{kicker}</p> : null}
         <h1 id="hero-heading">
           <span className="hero-title">{headingText}</span>
         </h1>
@@ -191,7 +181,7 @@ export function Downloader({
         {result ? (
           <>
             <article className={media.length === 1 ? 'ig-post is-single' : 'ig-post'}>
-              <PostByline result={result} fallbackTitle={summary.defaultTitle} />
+              <PostByline result={result} fallbackTitle={defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
                   <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} />
@@ -214,7 +204,7 @@ export function Downloader({
                 </p>
               ) : null}
             </article>
-            <a className="clear-button" href="/">
+            <a className="clear-button" href={href('home')}>
               <Icon name="again" />
               {t('downloadAgain')}
             </a>
@@ -296,11 +286,40 @@ function MediaCard({ item, index, total, mode, t }) {
   const apiHref = item.downloadUrl;
   const primaryUrl = cdnUrl || apiHref;
   const showApiFallback = Boolean(cdnUrl && apiHref && kind !== 'photo');
+  const sources = useMemo(() => playableSources(item, kind), [item, kind]);
+  const [sourceIndex, setSourceIndex] = useState(0);
+  const [ratio, setRatio] = useState(null);
+  const playSrc = sources[sourceIndex] || null;
+  const playerProps = {
+    src: playSrc,
+    controls: true,
+    preload: 'none',
+    onPlay: pauseOthers,
+    onError: () => setSourceIndex((current) => current + 1)
+  };
+  const previewClass = [
+    'media-preview',
+    kind === 'video' ? 'is-video' : isAudio ? 'is-audio' : '',
+    playSrc ? 'has-player' : ''
+  ].filter(Boolean).join(' ');
 
   return (
     <article className="media-card">
-      <div className={kind === 'video' ? 'media-preview is-video' : isAudio ? 'media-preview is-audio' : 'media-preview'}>
-        {thumb ? (
+      <div className={previewClass} style={playSrc && kind === 'video' && ratio ? { aspectRatio: ratio } : undefined}>
+        {playSrc && kind === 'video' ? (
+          <video
+            {...playerProps}
+            poster={thumb || undefined}
+            playsInline
+            aria-label={`Instagram video ${itemNumber}`}
+            onLoadedMetadata={(event) => {
+              const { videoWidth, videoHeight } = event.currentTarget;
+              if (videoWidth && videoHeight) setRatio(`${videoWidth} / ${videoHeight}`);
+            }}
+          />
+        ) : playSrc && isAudio ? (
+          <audio {...playerProps} aria-label={`Instagram audio ${itemNumber}`} />
+        ) : thumb ? (
           <>
             <div className="loading-shimmer" />
             <img
@@ -319,7 +338,7 @@ function MediaCard({ item, index, total, mode, t }) {
           </div>
         )}
         {kind === 'video' ? <span className="media-kind">Video</span> : null}
-        {isAudio ? <span className="media-kind">MP3</span> : null}
+        {isAudio && !playSrc ? <span className="media-kind">MP3</span> : null}
       </div>
       <div className="media-footer">
         <a
@@ -349,6 +368,20 @@ function MediaCard({ item, index, total, mode, t }) {
 
 function isApiAsset(url) {
   return /\/api\/download(?:\?|$)/.test(url) || /(?:^|\/\/)get\.reelsdl\.net\//i.test(url);
+}
+
+// CDN first (supports range/seek), then the site proxy as a fallback.
+function playableSources(item, kind) {
+  if (kind === 'photo') return [];
+  const cdn = [item.directUrl, item.sourceUrl].find((url) => url && /^https:\/\//i.test(url));
+  const proxied = item.downloadUrl ? `${item.downloadUrl}${item.downloadUrl.includes('?') ? '&' : '?'}inline=1` : null;
+  return [cdn, proxied].filter(Boolean);
+}
+
+function pauseOthers(event) {
+  for (const player of document.querySelectorAll('.media-preview video, .media-preview audio')) {
+    if (player !== event.currentTarget) player.pause();
+  }
 }
 
 function lightPreview(item) {
