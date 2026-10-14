@@ -22,6 +22,12 @@ export function Footer({ lead }) {
         <a href={reportHref}>{t('reportIssue')}</a>
       </nav>
       <p>
+        {t('moreTools')}:{' '}
+        <a href="https://vatculator.com/" rel="noopener">{t('vatCalculator')}</a>
+        {' · '}
+        <a href="https://cursivee.app/" rel="noopener">{t('cursiveGenerator')}</a>
+      </p>
+      <p>
         {lead ? (
           <>
             <Link href={lead.href}>{lead.label}</Link>
