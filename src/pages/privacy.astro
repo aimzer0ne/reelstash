@@ -1,15 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import { AppRoot } from '../../components/AppRoot.jsx';
-import { LANG_COOKIE, resolveDefaultRoute } from '../../lib/i18n.js';
+import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../lib/i18n.js';
 import { legalPages } from '../../lib/legal.js';
 
-// English only: the interface strings still follow the visitor's language.
-const { locale } = resolveDefaultRoute({
-  cookie: Astro.cookies.get(LANG_COOKIE)?.value,
-  accept: Astro.request.headers.get('accept-language'),
-  alternates: {}
-});
+const locale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
+  || localeFromAccept(Astro.request.headers.get('accept-language'))
+  || 'en';
 const meta = legalPages.privacy.metadata;
 ---
 <Base

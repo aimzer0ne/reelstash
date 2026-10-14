@@ -8,7 +8,7 @@ import { Icon } from './Icons';
 import { useI18n } from './I18nProvider';
 
 export function Header() {
-  const { t, locale, locales, setLocale, href } = useI18n();
+  const { t, locale, locales, setLocale } = useI18n();
 
   function shareSite(event) {
     event.preventDefault();
@@ -40,7 +40,7 @@ export function Header() {
           </select>
         </label>
       </div>
-      <Link className="wordmark" href={href('home')}>
+      <Link className="wordmark" href="/">
         <Logo className="wordmark-logo" />
         ReelsDl.net
       </Link>

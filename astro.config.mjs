@@ -17,9 +17,8 @@ export default defineConfig({
   redirects: {
     '/audio.html': { status: 301, destination: '/audio' },
     '/instagram-audio-downloader.html': { status: 301, destination: '/audio' },
-    // The audio page used to live at /instagram-audio-downloader, in every language.
+    // The audio page used to live at /instagram-audio-downloader.
     '/instagram-audio-downloader': { status: 301, destination: '/audio' },
-    '/[locale]/instagram-audio-downloader': { status: 301, destination: '/[locale]/audio' },
     '/privacy-policy': { status: 301, destination: '/privacy' },
     '/terms': { status: 301, destination: '/privacy' },
     '/copyright': { status: 301, destination: '/disclaimer' },

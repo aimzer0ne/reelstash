@@ -6,8 +6,17 @@ import { Icon } from './Icons';
 import { useI18n } from './I18nProvider';
 import './audio-preview.css';
 
-export function Downloader({ mode, defaultTitle }) {
-  const { t, href } = useI18n();
+export function Downloader({
+  mode,
+  kicker,
+  heading,
+  lede,
+  inputLabel,
+  placeholder,
+  messages,
+  summary
+}) {
+  const { t } = useI18n();
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -98,10 +107,12 @@ export function Downloader({ mode, defaultTitle }) {
   }
 
   const media = Array.isArray(result?.media) ? result.media : [];
+  const count = media.length === 1 ? summary.one : `${media.length}${summary.manySuffix}`;
 
   return (
     <>
       <section className="hero" aria-labelledby="hero-heading">
+        {kicker ? <p className="kicker">{kicker}</p> : null}
         <h1 id="hero-heading">
           <span className="hero-title">{headingText}</span>
         </h1>
@@ -181,7 +192,7 @@ export function Downloader({ mode, defaultTitle }) {
         {result ? (
           <>
             <article className={media.length === 1 ? 'ig-post is-single' : 'ig-post'}>
-              <PostByline result={result} fallbackTitle={defaultTitle} />
+              <PostByline result={result} fallbackTitle={summary.defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
                   <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} />
@@ -204,7 +215,7 @@ export function Downloader({ mode, defaultTitle }) {
                 </p>
               ) : null}
             </article>
-            <a className="clear-button" href={href('home')}>
+            <a className="clear-button" href="/">
               <Icon name="again" />
               {t('downloadAgain')}
             </a>

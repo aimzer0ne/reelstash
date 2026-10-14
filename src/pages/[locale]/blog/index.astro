@@ -1,9 +1,0 @@
----
-import BlogIndex from '../../../views/BlogIndex.astro';
-import { DEFAULT_LOCALE } from '../../../../lib/i18n.js';
-import { blogLocales } from '../../../../lib/blog.js';
-
-const { locale } = Astro.params;
-if (locale === DEFAULT_LOCALE || !(await blogLocales()).includes(locale)) return new Response('Not found', { status: 404 });
----
-<BlogIndex pageLocale={locale} />

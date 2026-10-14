@@ -401,13 +401,17 @@ h1 {
   line-height: 1.02;
 }
 
-/* English hero titles stay on one line; the size scales down to fit narrow screens.
-   Translated titles can be much longer, so they keep wrapping. */
-html[lang="en"] .hero h1 {
+/* Hero titles use the full width and only wrap when a line runs out of space,
+   never mid-word; "pretty" avoids leaving a single word alone on the last line. */
+.hero h1 {
   max-width: none;
-  font-size: clamp(19px, 6.3vw, 60px);
+  overflow-wrap: normal;
+  text-wrap: pretty;
+}
+
+html[lang="en"] .hero h1 {
+  font-size: clamp(30px, 5.4vw, 52px);
   line-height: 1.1;
-  white-space: nowrap;
 }
 
 .hero-title {

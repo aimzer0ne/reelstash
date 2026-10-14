@@ -2,9 +2,9 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { I18nProvider } from './I18nProvider';
 
-export function BlogShell({ children, ...i18n }) {
+export function BlogShell({ initialLocale = 'en', children }) {
   return (
-    <I18nProvider {...i18n}>
+    <I18nProvider initialLocale={initialLocale}>
       <Header />
       <main className="blog-main">
         {children}

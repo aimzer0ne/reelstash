@@ -1,12 +1,26 @@
 ---
-import ToolPage from '../views/ToolPage.astro';
-import { LANG_COOKIE, pageAlternates, resolveDefaultRoute } from '../../lib/i18n.js';
+import Base from '../layouts/Base.astro';
+import { AppRoot } from '../../components/AppRoot.jsx';
+import { getGuideLinks } from '../../lib/blog.js';
+import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../lib/i18n.js';
+import { homePage } from '../../lib/site.jsx';
 
-const route = resolveDefaultRoute({
-  cookie: Astro.cookies.get(LANG_COOKIE)?.value,
-  accept: Astro.request.headers.get('accept-language'),
-  alternates: pageAlternates('home')
-});
-if (route.redirect) return Astro.redirect(route.redirect, 302);
+const locale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
+  || localeFromAccept(Astro.request.headers.get('accept-language'))
+  || 'en';
+const meta = homePage.metadata;
+const guides = await getGuideLinks();
 ---
-<ToolPage pageId="home" uiLocale={route.locale} />
+<Base
+  locale={locale}
+  title={meta.title}
+  description={meta.description}
+  keywords={meta.keywords}
+  canonical={meta.alternates.canonical}
+  ogTitle={meta.openGraph.title}
+  ogDescription={meta.openGraph.description}
+  twitterTitle={meta.twitter.title}
+  twitterDescription={meta.twitter.description}
+>
+  <AppRoot client:load pageId="home" initialLocale={locale} guides={guides} />
+</Base>

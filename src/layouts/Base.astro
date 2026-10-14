@@ -4,14 +4,11 @@ import '@fontsource-variable/bricolage-grotesque/wght.css';
 import '../styles/globals.css';
 import '../styles/logo-type.css';
 import '../styles/input-hit.css';
-import { DEFAULT_LOCALE, localeMeta, ogLocale } from '../../lib/i18n.js';
+import { localeMeta } from '../../lib/i18n.js';
 import { DEFAULT_OG_IMAGE, OG_IMAGE_PATH } from '../../lib/seo.js';
 
 const {
   locale = 'en',
-  // Language of the URL itself, and the paths of its translations ({ en: '/', es: '/es', … }).
-  pageLocale = DEFAULT_LOCALE,
-  alternates = {},
   title,
   description,
   keywords = [],
@@ -33,8 +30,6 @@ const origin = Astro.site?.href?.replace(/\/$/, '') || 'https://reelsdl.net';
 const canonicalUrl = new URL(canonical, `${origin}/`).href;
 const imageUrl = new URL(image, `${origin}/`).href;
 const { dir } = localeMeta(locale);
-const hreflangs = Object.entries(alternates).map(([code, path]) => ({ code, href: new URL(path, `${origin}/`).href }));
-const xDefault = hreflangs.find((item) => item.code === DEFAULT_LOCALE);
 const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
 ---
 <!doctype html>
@@ -46,8 +41,6 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <meta name="description" content={description} />
     {keywordList ? <meta name="keywords" content={keywordList} /> : null}
     <link rel="canonical" href={canonicalUrl} />
-    {hreflangs.length > 1 ? hreflangs.map((item) => <link rel="alternate" hreflang={item.code} href={item.href} />) : null}
-    {hreflangs.length > 1 && xDefault ? <link rel="alternate" hreflang="x-default" href={xDefault.href} /> : null}
     <meta name="application-name" content="ReelsDl.net" />
     <meta name="author" content="ReelsDl.net" />
     <meta name="creator" content="ReelsDl.net" />
@@ -71,8 +64,7 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="ReelsDl.net" />
-    <meta property="og:locale" content={ogLocale(pageLocale)} />
-    {hreflangs.filter((item) => item.code !== pageLocale).map((item) => <meta property="og:locale:alternate" content={ogLocale(item.code)} />)}
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:url" content={canonicalUrl} />

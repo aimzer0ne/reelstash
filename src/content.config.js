@@ -2,9 +2,8 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// English posts sit at the top level; a translation of <slug>.md lives in <locale>/<slug>.md.
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  loader: glob({ pattern: '*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     seoTitle: z.string().max(60),

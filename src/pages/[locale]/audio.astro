@@ -1,8 +1,0 @@
----
-import ToolPage from '../../views/ToolPage.astro';
-import { DEFAULT_LOCALE, PAGE_LOCALES } from '../../../lib/i18n.js';
-
-const { locale } = Astro.params;
-if (locale === DEFAULT_LOCALE || !PAGE_LOCALES.audio.includes(locale)) return new Response('Not found', { status: 404 });
----
-<ToolPage pageId="audio" pageLocale={locale} />
