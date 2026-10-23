@@ -19,20 +19,38 @@
   transition: border-color .15s ease;
 }
 
-.input-wrap:hover,
+/* Hover only on real pointers: touch screens keep :hover stuck after a tap. */
+@media (hover: hover) {
+  .input-wrap:hover {
+    border-color: var(--text);
+  }
+}
+
 .input-wrap:focus-within {
   border-color: var(--text);
 }
 
-/* Only shown while a link is being fetched. */
+/* Keep the frame quiet while loading so the bar is the only bright edge. */
+.input-wrap.is-loading,
+.input-wrap.is-loading:hover {
+  border-color: var(--line);
+  border-bottom-color: transparent;
+}
+
+/* Only shown while a link is being fetched. Twice as wide as the field with the
+   gradient tiled twice, so sliding it by half loops seamlessly; transform keeps it
+   on the compositor, which mobile browsers animate reliably. */
 .input-wrap.is-loading::after {
   content: '';
   position: absolute;
-  inset: auto 0 0;
-  height: 2px;
-  background: linear-gradient(90deg, #feda75 0%, #fa7e1e 18%, #d62976 42%, #962fbf 68%, #4f5bd5 88%, #feda75 100%);
-  background-size: 240% 100%;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 3px;
+  background: linear-gradient(90deg, #feda75 0%, #fa7e1e 18%, #d62976 42%, #962fbf 68%, #4f5bd5 88%, #feda75 100%) 0 0 / 50% 100% repeat-x;
+  transform: translate3d(0, 0, 0);
   animation: ig-rule-load 1.1s linear infinite;
+  will-change: transform;
   pointer-events: none;
 }
 
@@ -96,7 +114,13 @@
 
 @keyframes ig-rule-load {
   to {
-    background-position: -240% 0;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ig-rule-pulse {
+  50% {
+    opacity: .35;
   }
 }
 
@@ -114,8 +138,9 @@
   }
 }
 
+/* Still signal progress with reduced motion, just without sliding. */
 @media (prefers-reduced-motion: reduce) {
   .input-wrap.is-loading::after {
-    animation: none;
+    animation: ig-rule-pulse 1.4s ease-in-out infinite;
   }
 }
