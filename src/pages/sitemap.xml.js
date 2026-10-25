@@ -1,16 +1,15 @@
 import { absUrl } from '../../lib/seo.js';
 import { BLOG_PATH, getPosts, postImage, postPath } from '../../lib/blog.js';
-import { illustrationSrc, pageOgImage } from '../../lib/images.js';
+import { illustrationSrc, pageOgImage, sceneImage, stepImages } from '../../lib/images.js';
 
 // lastmod is the date the page's content last changed. Bump it when you edit a
 // page; a value that changes on every request teaches crawlers to ignore it.
 const PATHS = [
-  { path: '/', priority: '1.0', updated: '2026-10-25', art: ['video'] },
-  { path: '/reels', priority: '0.9', updated: '2026-10-25', art: ['reels'] },
-  { path: '/photo', priority: '0.9', updated: '2026-10-25', art: ['photo'] },
-  { path: '/stories', priority: '0.9', updated: '2026-10-25', art: ['stories'] },
-  { path: '/audio', priority: '0.9', updated: '2026-10-25', art: ['audio'] },
-  { path: '/how-to', priority: '0.8', updated: '2026-10-25', art: ['iphone', 'android', 'desktop'] },
+  { path: '/', priority: '1.0', updated: '2026-10-25', art: ['video'], scenes: ['watermarkCompare', 'iphoneSaveVideo', 'androidGallery'], steps: 'video' },
+  { path: '/photo', priority: '0.9', updated: '2026-10-25', art: ['photo'], scenes: ['carouselResults'], steps: 'photo' },
+  { path: '/stories', priority: '0.9', updated: '2026-10-25', art: ['stories'], steps: 'stories' },
+  { path: '/audio', priority: '0.9', updated: '2026-10-25', art: ['audio'], steps: 'audio' },
+  { path: '/how-to', priority: '0.8', updated: '2026-10-25', scenes: ['iphoneSafariDownload', 'iphoneFilesDownloads', 'iphoneSaveVideo', 'androidDownloaded', 'androidGallery', 'desktopDownloads'], steps: 'video' },
   { path: '/faq', priority: '0.8', updated: '2026-10-25' },
   { path: '/contact', priority: '0.4', updated: '2026-10-25' },
   { path: '/privacy', priority: '0.3', updated: '2026-10-14' },
@@ -23,11 +22,16 @@ export async function GET() {
   const now = new Date().toISOString();
   const posts = await getPosts();
   const entries = [
-    ...PATHS.map(({ updated, art = [], ...item }) => ({
+    ...PATHS.map(({ updated, art = [], scenes = [], steps, ...item }) => ({
       ...item,
       lastmod: new Date(updated).toISOString(),
       changefreq: 'weekly',
-      images: [...art.map((key) => illustrationSrc(key)), pageOgImage(item.path)?.src].filter(Boolean)
+      images: [
+        ...art.map((key) => illustrationSrc(key)),
+        ...(steps ? stepImages(steps).map((image) => image.src) : []),
+        ...scenes.map((key) => sceneImage(key).src),
+        pageOgImage(item.path)?.src
+      ].filter(Boolean)
     })),
     {
       path: BLOG_PATH,

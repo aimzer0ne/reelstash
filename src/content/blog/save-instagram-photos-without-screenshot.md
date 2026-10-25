@@ -21,7 +21,7 @@ image:
   height: 1024
   alt: "Stack of Instagram carousel photos dropping into a folder, saved as full-quality image files without a screenshot"
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 tool: photo
 faq:
   - q: "Can you save photos from Instagram without a screenshot?"
@@ -64,7 +64,11 @@ The **Save** icon under a post (the bookmark) adds it to your *Saved* collection
 3. Tap **Paste**, or paste the link into the box yourself. The post loads on its own.
 4. Tap **Download photo** under the preview.
 
-<img src="/assets/paste-instagram-link-reelsdl-net.avif" alt="Paste the Instagram link into the downloader" width="786" height="154" loading="lazy" decoding="async" />
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-photos-step-1-copy-link.webp" alt="Step 1: tap Share on the Instagram photo and choose Copy link" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Copy the link</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-photos-step-2-paste-link.webp" alt="Step 2: paste the copied link into the ReelsDl.net Instagram Photo Downloader and tap Paste" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Paste it here</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-photos-step-3-download.webp" alt="Step 3: tap Download photo to save the Instagram photo to your device" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Download</figcaption></figure>
+</div>
 
 ### Getting it into your gallery
 
@@ -79,6 +83,10 @@ Two things to know:
 
 - **Copy the post link, not a slide.** One link covers the whole carousel.
 - **Mixed posts work.** If a carousel has both photos and video clips, the photos save as JPG and the clips as MP4.
+
+<div class="guide-shots">
+<figure><img src="/assets/illustrations/instagram-carousel-downloader-every-slide.webp" alt="Instagram carousel downloaded with ReelsDl.net, every slide listed with its own Download photo button" width="600" height="920" loading="lazy" decoding="async" /><figcaption>One carousel link lists every slide, each with its own button.</figcaption></figure>
+</div>
 
 ## Save Instagram photos on a laptop or PC
 

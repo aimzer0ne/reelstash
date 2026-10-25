@@ -21,7 +21,7 @@ image:
   height: 941
   alt: "Audio waveform flowing from an Instagram Reel into headphones, showing Reel audio extracted as an MP3 for a ringtone"
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 tool: audio
 faq:
   - q: "Can I download the audio from an Instagram Reel?"
@@ -57,6 +57,12 @@ So if you want the sound for a new Reel made inside Instagram, *Save audio* is e
 1. **Copy the link.** On the Reel, tap the **three dots** or the **share arrow**, then **Copy link**.
 2. **Paste it.** Open the [audio downloader](/audio), paste the link into the box, and press Enter.
 3. **Save the MP3.** After a few seconds, tap **Download MP3**.
+
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-reel-audio-mp3-step-1-copy-link.webp" alt="Step 1: tap Share on the Instagram Reel audio and choose Copy link" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Copy the link</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-reel-audio-mp3-step-2-paste-link.webp" alt="Step 2: paste the copied link into the ReelsDl.net Instagram Audio Downloader and tap Paste" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Paste it here</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-reel-audio-mp3-step-3-download.webp" alt="Step 3: tap Download MP3 to save the Instagram Reel audio to your device" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Download</figcaption></figure>
+</div>
 
 <img src="/assets/instagram-reel-audio-track-reelsdl-net.webp" alt="Tap the audio name on an Instagram Reel to open its audio page" width="1440" height="1039" loading="lazy" decoding="async" />
 

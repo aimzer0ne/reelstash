@@ -55,13 +55,19 @@ Downloading by link avoids all three problems: you get the actual MP4 Instagram 
 
 The link looks like `instagram.com/p/…` for a video post or `instagram.com/reel/…` for a Reel. Both work.
 
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-1-copy-link.webp" alt="Step 1: tap Share on the Instagram video or Reel and choose Copy link" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Copy the link</figcaption></figure>
+</div>
+
 ## Step 2: Paste it into the downloader in Safari
 
-1. Open **Safari** and go to [reelsdl.net](/). For Reels you can also use [reelsdl.net/reels](/reels).
+1. Open **Safari** and go to [reelsdl.net](/).
 2. Tap the input box and choose **Paste**, or tap the **Paste** button next to it.
 3. The video preview appears after a second or two.
 
-<img src="/assets/paste-instagram-link-reelsdl-net.avif" alt="Paste the Instagram video link into the downloader in Safari" width="786" height="154" loading="lazy" decoding="async" />
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-2-paste-link.webp" alt="Step 2: paste the copied link into the ReelsDl.net Instagram Video & Reels Downloader and tap Paste" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Paste it here</figcaption></figure>
+</div>
 
 ## Step 3: Download and move it to Photos
 
@@ -71,7 +77,11 @@ The link looks like `instagram.com/p/…` for a video post or `instagram.com/ree
 
 The video is now in the Photos app, in *Recents*, ready to watch offline, trim, or share.
 
-<img src="/assets/download-instagram-reel-reelsdl-net.avif" alt="Tap Download video to save the Instagram video on iPhone" width="941" height="187" loading="lazy" decoding="async" />
+<div class="guide-shots">
+<figure><img src="/assets/illustrations/iphone-safari-download-instagram-video-prompt.webp" alt="Safari on iPhone asking to download the Instagram video, with the Download button highlighted" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Safari asks before saving. Tap Download.</figcaption></figure>
+<figure><img src="/assets/illustrations/iphone-files-app-downloads-instagram-video.webp" alt="Files app on iPhone showing the downloaded Instagram video in the Downloads folder" width="600" height="920" loading="lazy" decoding="async" /><figcaption>The video lands in Files → Downloads.</figcaption></figure>
+<figure><img src="/assets/illustrations/iphone-share-save-video-to-camera-roll.webp" alt="iPhone share sheet with Save Video highlighted to move the Instagram video to the camera roll" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Share → Save Video puts it in Photos.</figcaption></figure>
+</div>
 
 ## Using Chrome instead of Safari
 
@@ -83,8 +93,7 @@ The same three steps work for every public format, with a dedicated page for eac
 
 | You want | Use | Saved as |
 | --- | --- | --- |
-| A video post or IGTV clip | [Video downloader](/) | MP4 |
-| A Reel with its music | [Reels downloader](/reels) | MP4 |
+| A video post, IGTV clip, or Reel | [Video & Reels downloader](/) | MP4 with sound |
 | Photos or a carousel | [Photo downloader](/photo) | JPG (videos in carousels as MP4) |
 | A Story or Highlight | [Story downloader](/stories) | MP4 or JPG |
 | Only the song or voice | [Audio downloader](/audio) | MP3 |

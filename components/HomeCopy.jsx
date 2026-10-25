@@ -2,8 +2,9 @@ import Link from './Link';
 import { FeatureShowcase } from './FeatureShowcase';
 import { GuideLinks } from './GuideLinks';
 import { HowToGuide } from './HowToGuide';
-import { Illustration } from './Illustration';
+import { GuideShots, Illustration } from './Illustration';
 import { DeviceGuide, FaqList, ToolHub } from './ToolSections';
+import { sceneImage } from '@/lib/images.js';
 import './page-arrange.css';
 
 export function HomeCopy({ page, guides }) {
@@ -13,6 +14,7 @@ export function HomeCopy({ page, guides }) {
         <a href="#about">About</a>
         <a href="#how-it-works">How to</a>
         <a href="#features">Features</a>
+        <a href="#reels">Reels</a>
         <a href="#video">Video</a>
         <a href="#tools">Tools</a>
         <a href="#devices">Devices</a>
@@ -22,12 +24,12 @@ export function HomeCopy({ page, guides }) {
       </nav>
 
       <section className="panel article-panel" id="about" aria-labelledby="home-intro-heading">
-        <h2 id="home-intro-heading">Free Instagram Video Downloader</h2>
+        <h2 id="home-intro-heading">Free Instagram Video &amp; Reels Downloader</h2>
         <div className="article-copy">
           <p>
-            <b>ReelsDl.net</b> is a free <b>Instagram video downloader</b>. Paste
-            a public Instagram link to save videos and{' '}
-            <Link href="/reels">Reels</Link> as MP4,{' '}
+            <b>ReelsDl.net</b> is a free <b>Instagram video downloader</b> and{' '}
+            <b>Reels downloader</b> in one. Paste a public Instagram link to save
+            videos and <a href="#reels">Reels</a> as MP4 with their music,{' '}
             <Link href="/photo">photos and carousels</Link> as JPG,{' '}
             <Link href="/stories">Stories</Link> before they expire, or{' '}
             <Link href="/audio">Reel audio as MP3</Link>. No login is required.
@@ -43,9 +45,50 @@ export function HomeCopy({ page, guides }) {
         <Illustration name="video" />
       </section>
 
-      <HowToGuide heading={page.how.heading} type="reels" />
+      <HowToGuide heading={page.how.heading} type="video" />
 
       <FeatureShowcase />
+
+      <section className="panel article-panel" id="reels" aria-labelledby="reels-heading">
+        <h2 id="reels-heading">Instagram Reels Downloader</h2>
+        <div className="article-copy">
+          <p>
+            The same box works as an <b>Instagram Reels downloader</b>. Paste a
+            Reel link and you get the video file Instagram streams in the app,
+            with its original audio track and without the logo overlay that
+            Instagram&apos;s own Download button stamps on top.
+          </p>
+          <p>
+            Reels keep their vertical 9:16 frame, their sound, and their timing
+            exactly as the creator posted them. Nothing is re-encoded, so the
+            file is as sharp as the Reel you watched.
+          </p>
+        </div>
+        <GuideShots images={[sceneImage('watermarkCompare')]} wide />
+        <table className="copy-table">
+          <tbody>
+            <tr>
+              <th scope="row">Resolution</th>
+              <td>The best rendition Instagram stores, usually <b>1080 × 1920</b>. If a Reel looks blurry here, it was uploaded blurry.</td>
+            </tr>
+            <tr>
+              <th scope="row">Music &amp; voice</th>
+              <td>Kept in the MP4. Want only the song? Use the <Link href="/audio">Reel to MP3 converter</Link>.</td>
+            </tr>
+            <tr>
+              <th scope="row">Watermark</th>
+              <td>
+                None added. Instagram only adds its logo when you use the in-app
+                Download button. <Link href="/blog/download-instagram-reels-without-watermark">Why that happens</Link>.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Length</th>
+              <td>Short clips and long Reels both work. Longer ones take a few seconds more.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
       <section className="panel article-panel" id="video" aria-labelledby="video-heading">
         <h2 id="video-heading">Instagram Video Downloader</h2>

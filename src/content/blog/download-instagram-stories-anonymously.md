@@ -75,7 +75,11 @@ If you do not mind appearing as a viewer, open the Story, tap the **three dots**
 
 On **iPhone**, Safari saves files to *Files → Downloads*. Open the file, tap **Share**, and choose **Save Video** or **Save Image** to move it to Photos. On **Android**, files go to the *Download* folder and show up in Gallery or Google Photos.
 
-<img src="/assets/paste-instagram-link-reelsdl-net.avif" alt="Paste the Instagram Story link into the Story downloader" width="786" height="154" loading="lazy" decoding="async" />
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-stories-step-1-copy-link.webp" alt="Step 1: tap Share on the Instagram Story and choose Copy link" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Copy the link</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-stories-step-2-paste-link.webp" alt="Step 2: paste the copied link into the ReelsDl.net Instagram Story Downloader and tap Paste" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Paste it here</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-stories-step-3-download.webp" alt="Step 3: tap Download video to save the Instagram Story to your device" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Download</figcaption></figure>
+</div>
 
 ## Download Instagram Highlights
 
@@ -114,4 +118,4 @@ If the Stories are yours, use Instagram itself:
 
 A public Story is still somebody's work and, often, a glimpse of their personal life. Saving one to remember an event, a recipe, or a sale is normal. Reposting it, especially without credit, or keeping Stories of private individuals to share elsewhere, crosses a line. When in doubt, ask the owner.
 
-For video posts and Reels, use the [Instagram video downloader](/) or the [Reels downloader](/reels); to keep only the soundtrack, use the [audio downloader](/audio).
+For video posts and Reels, use the [Instagram video and Reels downloader](/); to keep only the soundtrack, use the [audio downloader](/audio).

@@ -6,7 +6,7 @@ import { PrivacyCopy } from './PrivacyCopy';
 import { ContactCopy, DmcaCopy, FaqCopy, HowToCopy, TermsCopy } from './InfoCopy';
 import { faqGroups, legalPages } from '@/lib/legal.js';
 import { audioPage, homePage } from '@/lib/site.jsx';
-import { photoPage, reelsPage, storiesPage } from '@/lib/tool-pages.jsx';
+import { photoPage, storiesPage } from '@/lib/tool-pages.jsx';
 
 const INFO_PAGES = {
   faq: [legalPages.faq, () => <FaqCopy groups={faqGroups} />],
@@ -16,7 +16,7 @@ const INFO_PAGES = {
   contact: [legalPages.contact, () => <ContactCopy />]
 };
 
-const TOOL_PAGES = { home: homePage, audio: audioPage, reels: reelsPage, photo: photoPage, stories: storiesPage };
+const TOOL_PAGES = { home: homePage, audio: audioPage, photo: photoPage, stories: storiesPage };
 
 export function AppRoot({ pageId = 'home', initialLocale = 'en', guides = [] }) {
   return (

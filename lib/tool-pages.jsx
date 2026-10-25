@@ -1,5 +1,6 @@
 import Link from '@/components/Link';
-import { illustrationJsonLd } from './images.js';
+import { GuideShots } from '@/components/Illustration';
+import { illustrationJsonLd, sceneImage } from './images.js';
 import { SITE_ORIGIN, absUrl, organizationJsonLd } from './seo';
 
 // Shared schema for a single-purpose downloader page: the page, the app,
@@ -88,131 +89,6 @@ function faq(items) {
   return items.map((item) => ({ ...item, a: item.a || <p>{item.text}</p> }));
 }
 
-export const reelsPage = {
-  path: '/reels',
-  mode: 'media',
-  translate: false,
-  art: 'reels',
-  kind: 'reels',
-  heading: 'Instagram Reels Downloader',
-  lede: 'Download any public Instagram Reel as an HD MP4 with its music. No watermark, no login, no app.',
-  inputLabel: 'Instagram Reel URL',
-  placeholder: 'Paste a Reel link',
-  summary: { defaultTitle: 'Instagram Reel', one: '1 Reel ready', manySuffix: ' items ready' },
-  jump: [['about', 'About'], ['how-it-works', 'How to'], ['quality', 'Quality'], ['devices', 'Devices'], ['tools', 'More tools'], ['faq', 'FAQ']],
-  intro: {
-    heading: 'Save Instagram Reels with music, in HD',
-    body: (
-      <>
-        <p>
-          The <b>ReelsDl.net Reels downloader</b> saves public Instagram Reels
-          as MP4 files you can keep, watch offline, or edit. Paste the Reel
-          link and you get the same video file Instagram streams in the app,
-          with its original audio track and without the logo overlay that
-          Instagram&apos;s own Download button stamps on top.
-        </p>
-        <p>
-          It is built for short vertical video: the 9:16 frame, the sound, and
-          the timing stay exactly as the creator posted them. Nothing is
-          re-encoded, so the file is as sharp as the Reel you watched.
-        </p>
-      </>
-    )
-  },
-  how: {
-    heading: 'How to download Instagram Reels',
-    type: 'reels',
-    steps: [
-      'Open the Reel in Instagram, tap the three dots or the Share arrow, and choose Copy Link.',
-      'Paste the link into the box on reelsdl.net/reels and press Enter.',
-      'Tap Download Video to save the Reel as MP4 to your phone or computer.'
-    ]
-  },
-  sections: [
-    {
-      id: 'quality',
-      heading: 'Reel quality, sound, and watermarks',
-      body: (
-        <>
-          <div className="article-copy">
-            <p>
-              Instagram stores most Reels at <b>1080 × 1920</b> pixels. The Reels
-              downloader picks the highest-quality version Instagram serves for
-              that Reel, so no tool can give you more resolution than this one.
-              If a Reel looks blurry here, it was uploaded blurry.
-            </p>
-          </div>
-          <table className="copy-table">
-            <tbody>
-              <tr>
-                <th scope="row">Resolution</th>
-                <td>The best rendition Instagram has, usually 1080p, in the original 9:16 frame.</td>
-              </tr>
-              <tr>
-                <th scope="row">Music &amp; voice</th>
-                <td>Kept in the MP4. Want only the song? Use the <Link href="/audio">Reel to MP3 converter</Link>.</td>
-              </tr>
-              <tr>
-                <th scope="row">Watermark</th>
-                <td>
-                  None added. Instagram only adds its logo when you use the in-app
-                  Download button. <Link href="/blog/download-instagram-reels-without-watermark">Why that happens</Link>.
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Length</th>
-                <td>Short clips and long Reels both work. Longer ones simply take a few seconds more.</td>
-              </tr>
-            </tbody>
-          </table>
-        </>
-      )
-    }
-  ],
-  features: [
-    'Download Instagram Reels as MP4',
-    'Original Reel audio and music kept',
-    'No watermark added',
-    'Works on iPhone, Android, Windows and Mac',
-    'No Instagram login required'
-  ],
-  faq: {
-    items: faq([
-      {
-        q: 'How do I download an Instagram Reel with music?',
-        text: 'Copy the Reel link in Instagram, paste it into the ReelsDl.net Reels downloader, and tap Download Video. The MP4 keeps the Reel\'s original audio, including licensed music.'
-      },
-      {
-        q: 'Why does a downloaded Reel have no sound?',
-        text: 'The MP4 from ReelsDl.net includes the audio track. If it plays silently, check that your phone is not on silent mode, or open the file in another player such as VLC. A few Reels have their music muted by Instagram for copyright reasons; those stay silent everywhere.'
-      },
-      {
-        q: 'How do I save a Reel to my iPhone camera roll?',
-        text: 'Download the Reel in Safari. It is saved to Files, Downloads. Open it, tap Share, and choose Save Video. The Reel then appears in the Photos app.'
-      },
-      {
-        q: 'Can I download my own Reels?',
-        text: 'Yes, if your account is public. For a private account, use Instagram\'s own Download option in the Reel\'s menu, or the original file you exported before uploading.'
-      },
-      {
-        q: 'Can I download Reels from a private account?',
-        text: 'No. Reels from private accounts are only visible to approved followers, and ReelsDl.net never logs in to Instagram, so it cannot see them.'
-      },
-      {
-        q: 'Does the creator know if I download their Reel?',
-        text: 'No. ReelsDl.net fetches the public Reel without your Instagram account, so nothing links the download to you and the creator is not notified.'
-      }
-    ])
-  },
-  metadata: metadata(
-    '/reels',
-    'Instagram Reels Downloader – Save Reels With Music | ReelsDl.net',
-    'Download Instagram Reels in HD with their music. Free Reels downloader for iPhone, Android and PC — no watermark, no login, no app. Paste a link and save MP4.',
-    ['Instagram Reels downloader', 'Reels downloader', 'download Instagram Reels', 'Instagram Reel download with music', 'save Instagram Reels', 'Reels video download', 'Instagram Reels download HD', 'Reels downloader without watermark']
-  )
-};
-reelsPage.jsonLd = toolJsonLd(reelsPage);
-
 export const photoPage = {
   path: '/photo',
   mode: 'media',
@@ -266,6 +142,7 @@ export const photoPage = {
               in order, so you can save just the slide you want or the whole set.
             </p>
           </div>
+          <GuideShots images={[sceneImage('carouselResults')]} />
           <table className="copy-table">
             <tbody>
               <tr>

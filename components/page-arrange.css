@@ -140,47 +140,47 @@
 
 .how-guide-step {
   min-width: 0;
-  padding: 20px 0 0;
-  border-top: 1px solid var(--line);
-}
-
-.how-guide-num {
-  display: block;
-  margin-bottom: 20px;
-  color: var(--subtle);
-  font-size: 12px;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .14em;
+  text-align: center;
 }
 
 .how-guide-visual {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 0;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  max-width: 260px;
 }
 
 .how-guide-visual img {
   display: block;
   width: 100%;
-  max-width: min(100%, 240px);
   height: auto;
-  object-fit: contain;
-  border-radius: 10px;
 }
 
 .home-copy .how-guide-step h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   margin: 0 0 8px;
   color: var(--text);
-  font-size: 17px;
+  font-size: 18px;
   letter-spacing: -.02em;
+}
+
+.how-guide-num {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ig);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .home-copy .how-guide-step p {
   max-width: 32ch;
-  margin: 0;
+  margin: 0 auto;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
@@ -656,40 +656,8 @@
   line-height: 1.6;
 }
 
-.device-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
-  margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.device-steps li {
-  margin: 0;
-}
-
-.home-copy .device-steps h3 {
-  margin: 0 0 8px;
-  color: var(--text);
-  font-size: 17px;
-}
-
-.home-copy .device-steps ol {
-  margin: 0;
-  padding-inline-start: 1.2em;
-  color: var(--text-2);
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.home-copy .device-steps ol li + li {
-  margin-top: 6px;
-}
-
 @media (max-width: 720px) {
-  .tool-hub-grid,
-  .device-steps {
+  .tool-hub-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -759,7 +727,46 @@
   text-align: center;
 }
 
-.device-steps .tool-figure {
-  max-width: 220px;
-  margin: 0 auto 16px;
+/* --- Guide mockup rows (phones and browser windows) --- */
+
+.guide-shots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 28px;
+  margin: 32px 0 0;
+}
+
+.guide-shots figure {
+  flex: 0 1 210px;
+  margin: 0;
+  text-align: center;
+}
+
+.guide-shots.is-wide figure {
+  flex-basis: 100%;
+}
+
+.guide-shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.guide-shots.is-wide img {
+  max-width: 600px;
+}
+
+.guide-shots figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (max-width: 520px) {
+  .guide-shots figure {
+    flex-basis: calc(50% - 14px);
+  }
 }

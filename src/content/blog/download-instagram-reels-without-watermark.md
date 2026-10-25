@@ -20,7 +20,7 @@ image:
   height: 1024
   alt: "Two Instagram Reel frames side by side: one with a watermark badge in the corner and a clean copy downloaded without a watermark"
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 tool: reels
 faq:
   - q: "Why do downloaded Instagram Reels have a watermark?"
@@ -35,7 +35,7 @@ faq:
     a: "No. A logo or username that the creator placed in the video before uploading is part of the picture. A downloader gives you the file as it was posted."
 ---
 
-Reels saved with Instagram's own **Download** button come with a floating Instagram logo and the creator's username on top of the video. To get a clean copy, download the Reel **by its link** instead: copy the link, paste it into the [Instagram Reels Downloader](/reels), and save the MP4. That file is the video as it was uploaded, with no overlay added.
+Reels saved with Instagram's own **Download** button come with a floating Instagram logo and the creator's username on top of the video. To get a clean copy, download the Reel **by its link** instead: copy the link, paste it into the [Instagram Reels Downloader](/), and save the MP4. That file is the video as it was uploaded, with no overlay added.
 
 ## What the Instagram watermark is
 
@@ -44,6 +44,10 @@ When you tap *Share → Download* on a public Reel, Instagram does not hand you 
 - the Instagram logo,
 - the creator's **@username**,
 - the name of the audio.
+
+<div class="guide-shots is-wide">
+<figure><img src="/assets/illustrations/instagram-reel-download-watermark-vs-no-watermark.webp" alt="Instagram Reel saved with the in-app Download button showing a watermark, next to a clean copy downloaded by link" width="1200" height="800" loading="lazy" decoding="async" /><figcaption>In-app Download adds a logo and username. A copy saved by link has none.</figcaption></figure>
+</div>
 
 <a href="https://help.instagram.com/iphone-app/520831036611383" target="_blank" rel="noopener noreferrer">Instagram's Help Center</a> describes this as standard for every downloaded Reel. There is no switch that turns it off, for viewers or for the creator.
 
@@ -63,11 +67,15 @@ The watermark is not in the Reel itself. The video that plays in your feed is cl
 This is the method for Reels from other public accounts, and for your own Reels once they are posted.
 
 1. Open the Reel in Instagram, tap the **three dots** or the **share arrow**, and choose **Copy link**.
-2. Go to [reelsdl.net/reels](/reels) in your browser.
+2. Go to [reelsdl.net](/) in your browser.
 3. Tap **Paste**, or paste the link into the box yourself. The Reel loads on its own.
 4. Tap **Download video** on the preview.
 
-<img src="/assets/download-instagram-reel-reelsdl-net.avif" alt="Download an Instagram Reel as an MP4 file" width="941" height="187" loading="lazy" decoding="async" />
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-1-copy-link.webp" alt="Step 1: tap Share on the Instagram video or Reel and choose Copy link" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Copy the link</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-2-paste-link.webp" alt="Step 2: paste the copied link into the ReelsDl.net Instagram Video & Reels Downloader and tap Paste" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Paste it here</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-3-download.webp" alt="Step 3: tap Download video to save the Instagram video or Reel to your device" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Download</figcaption></figure>
+</div>
 
 It works the same way in Safari on iPhone, Chrome on Android, and any browser on a computer. There is no app to install and no Instagram login. On iPhone the file goes to the Files app first; the guide to [saving Reels in your gallery](/blog/save-instagram-reels-in-gallery-with-music) shows how to move it to Photos.
 

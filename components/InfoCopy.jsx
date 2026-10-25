@@ -1,7 +1,9 @@
 import Link from './Link';
-import { Illustration } from './Illustration';
+import { HowToGuide } from './HowToGuide';
+import { GuideShots } from './Illustration';
 import { FaqList } from './ToolSections';
 import { SITE_EMAIL } from '@/lib/seo';
+import { sceneImage } from '@/lib/images.js';
 import { NAV } from '@/lib/site.jsx';
 import './page-arrange.css';
 
@@ -9,11 +11,11 @@ export const DEVICE_STEPS = [
   {
     id: 'iphone',
     name: 'iPhone and iPad',
-    art: 'iphone',
+    shots: ['iphoneSafariDownload', 'iphoneFilesDownloads', 'iphoneSaveVideo'],
     steps: [
       'In Instagram, open the post, Reel, or Story and tap the three dots (⋯) or the Share arrow.',
       'Tap Copy Link.',
-      'Open Safari and go to reelsdl.net. Use the tab for the format you want: Video, Reels, Photo, Story, or Audio.',
+      'Open Safari and go to reelsdl.net. Use the tab for the format you want: Video & Reels, Photo, Story, or Audio.',
       'Tap the input box, tap Paste, and wait a second for the preview.',
       'Tap Download, then Download again in the Safari pop-up.',
       'Open the Files app → Downloads. Tap the file, tap Share, and choose Save Video or Save Image to put it in Photos.'
@@ -22,7 +24,7 @@ export const DEVICE_STEPS = [
   {
     id: 'android',
     name: 'Android',
-    art: 'android',
+    shots: ['androidDownloaded', 'androidGallery'],
     steps: [
       'In Instagram, tap the three dots (⋮) or the Share arrow on the post, Reel, or Story.',
       'Tap Copy Link.',
@@ -35,7 +37,8 @@ export const DEVICE_STEPS = [
   {
     id: 'desktop',
     name: 'Windows, Mac, and Linux',
-    art: 'desktop',
+    shots: ['desktopDownloads'],
+    wide: true,
     steps: [
       'Open the post on instagram.com in Chrome, Edge, Safari, or Firefox.',
       'Copy the address from the address bar, or click the three dots on the post and choose Copy link.',
@@ -55,20 +58,17 @@ export function HowToCopy() {
         device, and what to do when a download does not start.
       </p>
 
-      <section className="panel" id="devices" aria-labelledby="devices-heading">
-        <h2 id="devices-heading">Step by step on every device</h2>
-        <ul className="device-steps">
-          {DEVICE_STEPS.map(({ id, name, art, steps }) => (
-            <li key={id} id={id}>
-              <Illustration name={art} caption={false} />
-              <h3>{name}</h3>
-              <ol>
-                {steps.map((step) => <li key={step}>{step}</li>)}
-              </ol>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <HowToGuide heading="Three steps on every device" type="video" />
+
+      {DEVICE_STEPS.map(({ id, name, shots, wide, steps }) => (
+        <section key={id} className="panel" id={id} aria-labelledby={`${id}-heading`}>
+          <h2 id={`${id}-heading`}>How to download on {name}</h2>
+          <GuideShots images={shots.map(sceneImage)} wide={wide} />
+          <ol className="guide-steps">
+            {steps.map((step) => <li key={step}><p>{step}</p></li>)}
+          </ol>
+        </section>
+      ))}
 
       <section className="panel article-panel" id="formats" aria-labelledby="formats-heading">
         <h2 id="formats-heading">Which tool to use</h2>
@@ -246,7 +246,7 @@ export function ContactCopy() {
       </p>
       <h2>Reporting a link that does not work</h2>
       <p>
-        Include the Instagram link, the tool you used (Video, Reels, Photo,
+        Include the Instagram link, the tool you used (Video &amp; Reels, Photo,
         Story, or Audio), your device and browser, and the message you saw.
         That lets us reproduce the problem quickly.
       </p>

@@ -1,6 +1,8 @@
 import Link from './Link';
 import { Icon } from './Icons';
 import { NAV } from '@/lib/site.jsx';
+import { sceneImage } from '@/lib/images.js';
+import { GuideShots } from './Illustration';
 
 // Cards for every other downloader, so each tool page links to the rest.
 export function ToolHub({ current, heading = 'What can you download?' }) {
@@ -73,6 +75,7 @@ export function DeviceGuide({ kind = 'video' }) {
           </tr>
         </tbody>
       </table>
+      {toPhotos ? <GuideShots images={[sceneImage('iphoneSaveVideo'), sceneImage('androidGallery')]} /> : null}
       <p className="copy-note">
         Illustrated steps for each device are in the{' '}
         <Link href="/how-to">complete download guide</Link>.

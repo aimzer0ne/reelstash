@@ -20,7 +20,7 @@ image:
   height: 1024
   alt: "Laptop screen showing an Instagram Reel with a download arrow next to a phone, for downloading Reels on a PC or Mac"
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 tool: reels
 faq:
   - q: "Can I download Instagram Reels on a laptop without software?"
@@ -56,7 +56,9 @@ Open [reelsdl.net](/) in a new tab. Click the box, press **Ctrl + V** (Windows, 
 
 A preview of the Reel appears within a few seconds. Click **Download video**. The file is saved to your Downloads folder.
 
-<img src="/assets/download-instagram-reel-reelsdl-net.avif" alt="Download the Instagram Reel as an MP4" width="941" height="187" loading="lazy" decoding="async" />
+<div class="guide-shots is-wide">
+<figure><img src="/assets/illustrations/pc-mac-browser-downloads-instagram-video-mp4.webp" alt="Desktop browser on Windows or Mac showing the downloaded Instagram MP4 in the downloads panel" width="1200" height="800" loading="lazy" decoding="async" /><figcaption>On a computer the MP4 shows up in the browser’s downloads panel and your Downloads folder.</figcaption></figure>
+</div>
 
 ## Where the file goes
 

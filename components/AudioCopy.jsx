@@ -8,7 +8,7 @@ export function AudioCopy({ page, guides }) {
   return (
     <div className="home-copy">
       <p className="home-audio-cta">
-        <Link href="/reels">+ Reels Downloader</Link>
+        <Link href="/">+ Video &amp; Reels Downloader</Link>
       </p>
 
       <nav className="home-jump home-jump-5" aria-label="On this page">
@@ -46,7 +46,7 @@ export function AudioCopy({ page, guides }) {
             are short videos made with audio, AR effects, and more. When you
             only want the song, music, or voice from one, download the
             Instagram Reels music here. To save the video itself, use the{' '}
-            <Link href="/reels">Instagram Reels Downloader</Link>.
+            <Link href="/">Instagram Reels Downloader</Link>.
           </p>
         </div>
         <Illustration name="audio" />

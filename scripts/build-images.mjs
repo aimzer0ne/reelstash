@@ -2,6 +2,8 @@
 //   public/assets/illustrations/*.webp      tool and device illustrations, light + dark
 //   public/assets/illustrations/og-*.jpg    1200 × 630 share images, one per page
 //   public/assets/blog/<slug>*.webp|jpg     covers for posts that use a drawn cover
+//   public/assets/steps/*.webp              three how-to phone mockups per tool
+//   public/assets/illustrations/<scene>.webp guide mockups (saving on iPhone, Android, desktop, …)
 // Run after changing components/Illustrations.jsx or lib/images.js:
 //   node scripts/build-images.mjs
 import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
@@ -9,12 +11,17 @@ import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import sharp from 'sharp';
-import { ILLUSTRATIONS, ILLUSTRATION_DIR, OG_SIZE, PAGE_OG } from '../lib/images.js';
+import { ILLUSTRATIONS, ILLUSTRATION_DIR, OG_SIZE, PAGE_OG, SCENES, STEP_DIR, STEP_TYPES, stepImages } from '../lib/images.js';
+import { stepSvgs } from './step-art.mjs';
+import { sceneSvgs } from './scene-art.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT = join(ROOT, 'public', ILLUSTRATION_DIR);
 const BLOG_OUT = join(ROOT, 'public/assets/blog');
 const FONT = 'Helvetica Neue, Helvetica, Arial, sans-serif';
+// Every page image is WebP. Lossy at maximum effort beats lossless on these flat
+// drawings (about 20% smaller than quality 88, and half the size of lossless).
+const WEBP = { quality: 78, alphaQuality: 80, effort: 6, smartSubsample: true };
 
 // Same values as the tokens in src/styles/globals.css.
 const THEMES = {
@@ -81,7 +88,8 @@ function wrap(text, max) {
 
 function ogSvg(og, sceneMarkup) {
   const c = THEMES.light;
-  const lines = wrap(og.title, 16);
+  const lines = wrap(og.title, 18);
+  const size = Math.max(...lines.map((line) => line.length)) > 15 ? 52 : 60;
   const titleY = 250 - (lines.length - 2) * 34;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${OG_SIZE.width}" height="${OG_SIZE.height}" viewBox="0 0 1200 630">
   <defs>
@@ -95,7 +103,7 @@ function ogSvg(og, sceneMarkup) {
   <rect x="72" y="72" width="44" height="44" rx="12" fill="${c.text}"/>
   <rect x="84" y="84" width="20" height="20" rx="5" fill="none" stroke="#fff" stroke-width="3"/>
   <text x="132" y="104" font-family="${FONT}" font-size="28" font-weight="700" fill="${c.text}">ReelsDl.net</text>
-  ${lines.map((line, i) => `<text x="72" y="${titleY + i * 68}" font-family="${FONT}" font-size="60" font-weight="800" letter-spacing="-1.5" fill="${c.text}">${line}</text>`).join('')}
+  ${lines.map((line, i) => `<text x="72" y="${titleY + i * 68}" font-family="${FONT}" font-size="${size}" font-weight="800" letter-spacing="-1.5" fill="${c.text}">${line.replace('&', '&amp;')}</text>`).join('')}
   ${wrap(og.sub, 30).map((line, i) => `<text x="72" y="${titleY + lines.length * 68 + 22 + i * 38}" font-family="${FONT}" font-size="28" fill="#55555a">${line}</text>`).join('')}
   <rect x="72" y="504" width="252" height="54" rx="27" fill="${c.text}"/>
   <text x="198" y="539" text-anchor="middle" font-family="${FONT}" font-size="22" font-weight="700" fill="#fff">Free · No login</text>
@@ -180,6 +188,7 @@ ${phone(960, 112, 440, 800, `
 
 mkdirSync(OUT, { recursive: true });
 mkdirSync(BLOG_OUT, { recursive: true });
+mkdirSync(join(ROOT, 'public', STEP_DIR), { recursive: true });
 const { render, cleanup } = await loadComponents();
 
 try {
@@ -188,7 +197,7 @@ try {
     for (const theme of ['light', 'dark']) {
       const svg = themed(markup, theme, item);
       const name = `${item.file}${theme === 'dark' ? '-dark' : ''}.webp`;
-      await sharp(Buffer.from(svg)).webp({ quality: 88 }).toFile(join(OUT, name));
+      await sharp(Buffer.from(svg)).webp(WEBP).toFile(join(OUT, name));
     }
     console.log('illustration', key);
   }
@@ -199,10 +208,24 @@ try {
     console.log('og', path);
   }
 
+  for (const type of Object.keys(STEP_TYPES)) {
+    const files = stepImages(type);
+    const svgs = stepSvgs(type);
+    for (let i = 0; i < svgs.length; i += 1) {
+      await sharp(Buffer.from(svgs[i])).webp(WEBP).toFile(join(ROOT, 'public', files[i].src));
+    }
+    console.log('steps', type);
+  }
+
+  for (const [key, svg] of sceneSvgs()) {
+    await sharp(Buffer.from(svg)).webp(WEBP).toFile(join(OUT, `${SCENES[key].file}.webp`));
+    console.log('scene', key);
+  }
+
   for (const [slug, svg] of Object.entries(BLOG_COVERS)) {
     const buf = Buffer.from(svg);
-    await sharp(buf).webp({ quality: 86 }).toFile(join(BLOG_OUT, `${slug}.webp`));
-    await sharp(buf).resize(720).webp({ quality: 82 }).toFile(join(BLOG_OUT, `${slug}-720.webp`));
+    await sharp(buf).webp(WEBP).toFile(join(BLOG_OUT, `${slug}.webp`));
+    await sharp(buf).resize(720).webp(WEBP).toFile(join(BLOG_OUT, `${slug}-720.webp`));
     await sharp(buf).resize(OG_SIZE.width, OG_SIZE.height, { fit: 'cover' }).jpeg({ quality: 84, mozjpeg: true }).toFile(join(BLOG_OUT, `${slug}-og.jpg`));
     console.log('blog cover', slug);
   }

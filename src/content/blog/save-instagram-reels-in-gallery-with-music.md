@@ -20,7 +20,7 @@ image:
   height: 941
   alt: "Instagram Reel on a phone with music notes flowing into a photo gallery, showing a Reel saved to the gallery with its music"
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 tool: reels
 faq:
   - q: "Why does my saved Instagram Reel have no sound?"
@@ -35,7 +35,7 @@ faq:
     a: "Instagram does not send a notification when someone downloads a Reel, either through the app's Download option or through a link downloader."
 ---
 
-To save an Instagram Reel in your gallery **with music**, copy the Reel's link, paste it into the [Instagram Reels Downloader](/reels), and save the MP4. The file keeps the sound exactly as it plays on Instagram. The Download button inside the Instagram app is quicker, but it frequently saves a silent video, which is the reason most people end up searching for this.
+To save an Instagram Reel in your gallery **with music**, copy the Reel's link, paste it into the [Instagram Reels Downloader](/), and save the MP4. The file keeps the sound exactly as it plays on Instagram. The Download button inside the Instagram app is quicker, but it frequently saves a silent video, which is the reason most people end up searching for this.
 
 ## Why Instagram saves Reels without music
 
@@ -50,23 +50,32 @@ The same thing happens to your own Reels. If you add a library song in the edito
 ## Save a Reel with music on Android
 
 1. Open Instagram and find the Reel. Tap the **three dots** (or the share arrow) and choose **Copy link**.
-2. Open Chrome and go to [reelsdl.net/reels](/reels).
+2. Open Chrome and go to [reelsdl.net](/).
 3. Tap **Paste**, or paste the link into the box yourself. The Reel loads on its own.
 4. When the preview appears, tap **Download video**.
 
-<img src="/assets/copy-instagram-reel-link-reelsdl-net.avif" alt="Copy the link of an Instagram Reel from the three dots menu" width="576" height="180" loading="lazy" decoding="async" />
+<div class="guide-shots">
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-1-copy-link.webp" alt="Step 1: tap Share on the Instagram video or Reel and choose Copy link" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Copy the link</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-2-paste-link.webp" alt="Step 2: paste the copied link into the ReelsDl.net Instagram Video & Reels Downloader and tap Paste" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Paste it here</figcaption></figure>
+<figure><img src="/assets/steps/how-to-download-instagram-videos-and-reels-step-3-download.webp" alt="Step 3: tap Download video to save the Instagram video or Reel to your device" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Download</figcaption></figure>
+</div>
 
 Chrome saves the MP4 to your **Download** folder. Most gallery apps show that folder on their own:
 
 - **Google Photos:** open *Collections* (or *Library*), then look under *On this device* for **Download**.
 - **Samsung Gallery:** open *Albums* and look for **Download**.
 
+<div class="guide-shots">
+<figure><img src="/assets/illustrations/android-chrome-instagram-video-downloaded.webp" alt="Chrome on Android showing the Instagram video download complete with an Open button" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Chrome confirms the download. Tap Open.</figcaption></figure>
+<figure><img src="/assets/illustrations/android-gallery-download-album-instagram-video.webp" alt="Android Gallery app with the Download album containing the saved Instagram video" width="600" height="920" loading="lazy" decoding="async" /><figcaption>It also appears in the Gallery’s Download album.</figcaption></figure>
+</div>
+
 If the video does not show up, open the **Files** app, go to *Downloads*, and play it once. That usually makes the gallery pick it up.
 
 ## Save a Reel with music on iPhone
 
 1. In Instagram, tap the **share arrow** on the Reel and choose **Copy link**.
-2. Open Safari and go to [reelsdl.net/reels](/reels).
+2. Open Safari and go to [reelsdl.net](/).
 3. Tap **Paste** to load the Reel, then tap **Download video**.
 4. Safari asks whether you want to download the file. Tap **Download**.
 
@@ -75,6 +84,12 @@ Here is the step that trips people up: on iPhone the video lands in the **Files*
 1. Tap the **download arrow** in Safari's address bar and open the file (or open *Files → Downloads*).
 2. Tap the **Share** button.
 3. Tap **Save Video**.
+
+<div class="guide-shots">
+<figure><img src="/assets/illustrations/iphone-safari-download-instagram-video-prompt.webp" alt="Safari on iPhone asking to download the Instagram video, with the Download button highlighted" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Safari asks before saving. Tap Download.</figcaption></figure>
+<figure><img src="/assets/illustrations/iphone-files-app-downloads-instagram-video.webp" alt="Files app on iPhone showing the downloaded Instagram video in the Downloads folder" width="600" height="920" loading="lazy" decoding="async" /><figcaption>The video lands in Files → Downloads.</figcaption></figure>
+<figure><img src="/assets/illustrations/iphone-share-save-video-to-camera-roll.webp" alt="iPhone share sheet with Save Video highlighted to move the Instagram video to the camera roll" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Share → Save Video puts it in Photos.</figcaption></figure>
+</div>
 
 The Reel is now in Photos, in *Recents*, with its sound.
 

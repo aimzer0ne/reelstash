@@ -1,3 +1,4 @@
+import { stepImages } from '@/lib/images.js';
 import './page-arrange.css';
 
 const PASTE_ICON = (
@@ -7,26 +8,23 @@ const PASTE_ICON = (
 );
 
 const COPY = {
-  reels: {
-    copyTitle: 'Copy the Reel link',
-    pasteTitle: 'Paste the link',
-    downloadTitle: 'Download the Reel',
-    downloadAlt: 'Download an Instagram Reel as MP4 on ReelsDl.net',
+  video: {
+    copyTitle: 'Copy the link',
+    pasteTitle: 'Paste the URL',
+    downloadTitle: 'Download & save',
     copy: (
       <p>
-        In Instagram, tap the three dots (&#8942;) on the Reel, then tap <b>&quot;Copy Link&quot;</b>.
+        Open the video in Instagram, tap the Share arrow or the three dots (&#8942;), then tap <b>&quot;Copy link&quot;</b>.
       </p>
     ),
     paste: (
       <p>
-        Paste the copied link into the box above, or tap the Paste {PASTE_ICON} icon.
-        <br />
-        Then press <kbd className="how-guide-key">Enter</kbd>
+        Come back here and paste the link into the box above, or tap the Paste {PASTE_ICON} button.
       </p>
     ),
     download: (
       <p>
-        Wait a moment for the Reel to load, then click <b>&quot;Download Video&quot;</b> to save it as MP4.
+        Tap <b>&quot;Download video&quot;</b> to save the original-quality MP4, with sound, to your device.
       </p>
     )
   },
@@ -34,7 +32,6 @@ const COPY = {
     copyTitle: 'Copy the post link',
     pasteTitle: 'Paste the link',
     downloadTitle: 'Download the photos',
-    downloadAlt: 'Download Instagram photos and carousel slides as JPG on ReelsDl.net',
     copy: (
       <p>
         In Instagram, tap the three dots (&#8942;) on the photo or carousel, then tap <b>&quot;Copy Link&quot;</b>.
@@ -57,7 +54,6 @@ const COPY = {
     copyTitle: 'Copy the Story link',
     pasteTitle: 'Paste the link',
     downloadTitle: 'Download the Story',
-    downloadAlt: 'Download a public Instagram Story or Highlight on ReelsDl.net',
     copy: (
       <p>
         Open the public Story or Highlight, tap the three dots (&#8942;), then tap <b>&quot;Copy Link&quot;</b>.
@@ -80,7 +76,6 @@ const COPY = {
     copyTitle: 'Copy the Reel or video link',
     pasteTitle: 'Paste the link',
     downloadTitle: 'Download the audio',
-    downloadAlt: 'Download Instagram Reel audio as MP3 on ReelsDl.net',
     copy: (
       <p>
         In Instagram, tap the three dots (&#8942;) on the Reel or video, then tap <b>&quot;Copy Link&quot;</b>.
@@ -101,64 +96,38 @@ const COPY = {
   }
 };
 
-export function HowToGuide({ heading, type = 'reels' }) {
-  const copy = COPY[type] || COPY.reels;
+export function HowToGuide({ heading, type = 'video' }) {
+  const copy = COPY[type] || COPY.video;
+  const images = stepImages(type);
+  const steps = [
+    [copy.copyTitle, copy.copy],
+    [copy.pasteTitle, copy.paste],
+    [copy.downloadTitle, copy.download]
+  ];
 
   return (
     <section className="panel how-guide-panel" id="how-it-works" aria-labelledby="how-heading">
       <h2 id="how-heading">{heading}</h2>
       <ol className="how-guide">
-        <li className="how-guide-step">
-          <span className="how-guide-num">01</span>
-          <div className="how-guide-visual">
-            <img
-              src="/assets/copy-instagram-reel-link-reelsdl-net.avif"
-              alt="Copy an Instagram Reel link from the share menu, then paste it on ReelsDl.net"
-              title="Copy an Instagram Reel link"
-              width="576"
-              height="180"
-              loading="lazy"
-              decoding="async"
-              sizes="(max-width: 720px) 92vw, 240px"
-            />
-          </div>
-          <h3>{copy.copyTitle}</h3>
-          {copy.copy}
-        </li>
-        <li className="how-guide-step">
-          <span className="how-guide-num">02</span>
-          <div className="how-guide-visual">
-            <img
-              src="/assets/paste-instagram-link-reelsdl-net.avif"
-              alt="Paste a public Instagram link into ReelsDl.net and press Get"
-              title="Paste an Instagram link on ReelsDl.net"
-              width="786"
-              height="154"
-              loading="lazy"
-              decoding="async"
-              sizes="(max-width: 720px) 92vw, 240px"
-            />
-          </div>
-          <h3>{copy.pasteTitle}</h3>
-          {copy.paste}
-        </li>
-        <li className="how-guide-step">
-          <span className="how-guide-num">03</span>
-          <div className="how-guide-visual is-download">
-            <img
-              src="/assets/download-instagram-reel-reelsdl-net.avif"
-              alt={copy.downloadAlt}
-              title="Download an Instagram Reel on ReelsDl.net"
-              width="941"
-              height="187"
-              loading="lazy"
-              decoding="async"
-              sizes="(max-width: 720px) 92vw, 240px"
-            />
-          </div>
-          <h3>{copy.downloadTitle}</h3>
-          {copy.download}
-        </li>
+        {steps.map(([title, body], index) => (
+          <li key={title} className="how-guide-step">
+            <div className="how-guide-visual">
+              <img
+                src={images[index].src}
+                alt={images[index].alt}
+                width={images[index].width}
+                height={images[index].height}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3>
+              <span className="how-guide-num" aria-hidden="true">{index + 1}</span>
+              {title}
+            </h3>
+            {body}
+          </li>
+        ))}
       </ol>
     </section>
   );

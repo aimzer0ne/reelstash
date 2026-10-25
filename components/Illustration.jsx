@@ -15,3 +15,17 @@ export function Illustration({ name, caption = true, className = '' }) {
     </figure>
   );
 }
+
+// A row of phone or browser mockups (transparent WebP drawings) with captions.
+export function GuideShots({ images, wide = false }) {
+  return (
+    <div className={wide ? 'guide-shots is-wide' : 'guide-shots'}>
+      {images.map((image) => (
+        <figure key={image.src}>
+          <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
+          {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+        </figure>
+      ))}
+    </div>
+  );
+}

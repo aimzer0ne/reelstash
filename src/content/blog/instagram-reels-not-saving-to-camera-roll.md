@@ -21,7 +21,7 @@ image:
   height: 887
   alt: "Phone with an Instagram Reel and a warning sign beside a wrench, a checkmark, and a muted speaker turning on, for fixing Reels that will not save"
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 tool: reels
 faq:
   - q: "Why is there no Download option on some Instagram Reels?"
@@ -55,7 +55,7 @@ Instagram shows **Download** in the share menu only when all of these are true:
 - the creator has left **downloads enabled** for their Reels,
 - the account holder is not under 18 with the default setting, which is off.
 
-You cannot change someone else's setting. If the Reel is public, though, you can still save it **by link**: tap *Copy link*, paste it into the [Instagram Reels Downloader](/reels), and download the MP4. If the account is private, there is no workaround. Ask the creator for the file.
+You cannot change someone else's setting. If the Reel is public, though, you can still save it **by link**: tap *Copy link*, paste it into the [Instagram Reels Downloader](/), and download the MP4. If the account is private, there is no workaround. Ask the creator for the file.
 
 If the missing option is on **your own** Reels, open Instagram's settings, find the Reels sharing and reuse options, and switch on **Allow people to download your reels**.
 
@@ -63,7 +63,7 @@ If the missing option is on **your own** Reels, open Instagram's settings, find 
 
 This is the most common complaint, and it is not a bug. When a Reel uses a song from Instagram's music library, the copy that Instagram's Download button produces can have the audio removed. The licence covers playback in the app, not a file on your phone.
 
-**Fix:** download the Reel by link. The file you get from the [Reels downloader](/reels) is the video as it plays on Instagram, sound included. Step-by-step instructions are in [how to save Reels in your gallery with music](/blog/save-instagram-reels-in-gallery-with-music).
+**Fix:** download the Reel by link. The file you get from the [Reels downloader](/) is the video as it plays on Instagram, sound included. Step-by-step instructions are in [how to save Reels in your gallery with music](/blog/save-instagram-reels-in-gallery-with-music).
 
 Before you blame the file, rule out the simple thing: the Photos app on iPhone plays videos muted until you tap the speaker icon.
 
@@ -101,6 +101,11 @@ Browsers do not save into the gallery directly.
 
 - **iPhone:** Safari puts downloads in **Files → Downloads**. Open the video, tap **Share**, then **Save Video**.
 - **Android:** the file is in the **Download** folder. In Google Photos look under *Collections → On this device*; in Samsung Gallery look under *Albums*. If it is still missing, open it once from the Files app.
+
+<div class="guide-shots">
+<figure><img src="/assets/illustrations/iphone-files-app-downloads-instagram-video.webp" alt="Files app on iPhone showing the downloaded Instagram video in the Downloads folder" width="600" height="920" loading="lazy" decoding="async" /><figcaption>The video lands in Files → Downloads.</figcaption></figure>
+<figure><img src="/assets/illustrations/iphone-share-save-video-to-camera-roll.webp" alt="iPhone share sheet with Save Video highlighted to move the Instagram video to the camera roll" width="600" height="920" loading="lazy" decoding="async" /><figcaption>Share → Save Video puts it in Photos.</figcaption></figure>
+</div>
 
 ## 7. The downloader says it cannot fetch the link
 
