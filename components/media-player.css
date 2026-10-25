@@ -1,0 +1,503 @@
+/* --- Custom media players (components/MediaPlayer.jsx) --- */
+
+.rp-glyph {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.rp-time {
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.rp-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 3px solid rgba(255, 255, 255, .28);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: rp-spin .8s linear infinite;
+  pointer-events: none;
+}
+
+.rp-spinner.is-small {
+  position: static;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border-width: 2px;
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
+  border-top-color: currentColor;
+}
+
+@keyframes rp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Video --- */
+
+.rp-video {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--video);
+  color: #fff;
+  outline: none;
+}
+
+.rp-video:focus-visible {
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px var(--text);
+}
+
+.rp-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--video);
+  cursor: pointer;
+}
+
+.rp-video:fullscreen video {
+  object-fit: contain;
+}
+
+.rp-video.is-idle,
+.rp-video.is-idle video {
+  cursor: none;
+}
+
+.rp-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.rp-big-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  margin: -34px 0 0 -34px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  cursor: pointer;
+  transition: transform .18s ease, background-color .18s ease;
+}
+
+.rp-big-play .rp-glyph {
+  width: 28px;
+  height: 28px;
+  margin-left: 3px;
+}
+
+.rp-big-play:hover {
+  background: rgba(255, 255, 255, .26);
+  transform: scale(1.06);
+}
+
+.rp-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 36px 10px 8px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .38) 40%, rgba(0, 0, 0, .72));
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.rp-video:not(.is-playing) .rp-bar {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rp-video:not(.is-playing):hover .rp-bar,
+.rp-video:not(.is-playing):focus-within .rp-bar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rp-video.is-idle .rp-bar {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+.rp-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.rp-spacer {
+  flex: 1;
+}
+
+.rp-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+
+.rp-btn:hover,
+.rp-btn:focus-visible {
+  background: rgba(255, 255, 255, .16);
+  outline: none;
+}
+
+.rp-video .rp-time {
+  margin-left: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+}
+
+.rp-time-total {
+  opacity: .7;
+}
+
+/* Seek bar: played / buffered / rest, drawn as one gradient track. */
+.rp-seek {
+  display: block;
+  width: 100%;
+  height: 18px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.rp-seek:disabled {
+  cursor: default;
+}
+
+.rp-seek::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 99px;
+  background: linear-gradient(to right, #fff 0 var(--p), rgba(255, 255, 255, .5) var(--p) var(--b), rgba(255, 255, 255, .22) var(--b) 100%);
+}
+
+.rp-seek::-moz-range-track {
+  height: 4px;
+  border-radius: 99px;
+  background: linear-gradient(to right, #fff 0 var(--p), rgba(255, 255, 255, .5) var(--p) var(--b), rgba(255, 255, 255, .22) var(--b) 100%);
+}
+
+.rp-seek::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+  transform: scale(.75);
+  transition: transform .15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.rp-seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+}
+
+.rp-seek:hover::-webkit-slider-thumb,
+.rp-seek:focus-visible::-webkit-slider-thumb {
+  transform: scale(1);
+}
+
+.rp-seek:focus-visible {
+  outline: none;
+}
+
+.rp-seek:focus-visible::-webkit-slider-runnable-track {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .5);
+}
+
+/* --- Audio --- */
+
+.media-preview.is-audio.has-player {
+  aspect-ratio: auto;
+  background: var(--paper);
+}
+
+.rp-audio {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 18px 18px 16px;
+  color: var(--text);
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, #d62976 16%, transparent), transparent 60%),
+    radial-gradient(120% 90% at 100% 100%, color-mix(in srgb, #4f5bd5 14%, transparent), transparent 60%),
+    var(--paper);
+}
+
+.rp-audio-backdrop {
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  width: calc(100% + 80px);
+  height: calc(100% + 80px);
+  object-fit: cover;
+  opacity: .32;
+  filter: blur(34px) saturate(1.5);
+  pointer-events: none;
+}
+
+.rp-audio::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 30%, transparent), color-mix(in srgb, var(--paper) 78%, transparent));
+  pointer-events: none;
+}
+
+.rp-audio-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.rp-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--ig);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(10, 10, 11, .18);
+}
+
+.rp-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rp-cover .rp-glyph {
+  width: 26px;
+  height: 26px;
+}
+
+/* Little equalizer on the cover while playing. */
+.rp-eq {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  padding: 3px 4px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, .45);
+}
+
+.rp-eq i {
+  display: block;
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: #fff;
+  transform-origin: bottom;
+  animation: rp-eq .9s ease-in-out infinite;
+}
+
+.rp-eq i:nth-child(2) { animation-delay: -.3s; }
+.rp-eq i:nth-child(3) { animation-delay: -.6s; }
+
+@keyframes rp-eq {
+  0%, 100% { transform: scaleY(.3); }
+  50% { transform: scaleY(1); }
+}
+
+.rp-audio-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.rp-audio-meta strong {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rp-audio-meta span {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Waveform: grey bars, played bars share one continuous Instagram gradient. */
+.rp-wave {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 58px;
+  margin: 18px 0 8px;
+  border-radius: 8px;
+}
+
+.rp-wave span {
+  flex: 1 1 0;
+  min-width: 2px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--text) 18%, transparent);
+  transition: background-color .2s ease;
+}
+
+.rp-wave span.is-played {
+  background-image: var(--ig);
+}
+
+.rp-wave-seek {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.rp-wave-seek:disabled {
+  cursor: default;
+}
+
+.rp-wave:focus-within {
+  box-shadow: 0 0 0 2px var(--text);
+}
+
+.rp-audio-controls {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.rp-audio .rp-time {
+  color: var(--muted);
+}
+
+.rp-audio .rp-time.is-end {
+  text-align: end;
+}
+
+.rp-skip {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+
+.rp-skip:hover,
+.rp-skip:focus-visible {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  outline: none;
+}
+
+.rp-audio-play {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: 0 8px 20px rgba(10, 10, 11, .18);
+  cursor: pointer;
+  transition: transform .15s ease, background-color .15s ease;
+}
+
+.rp-audio-play .rp-glyph {
+  width: 24px;
+  height: 24px;
+}
+
+.rp-audio:not(.is-playing) .rp-audio-play .rp-glyph {
+  margin-left: 2px;
+}
+
+.rp-audio-play:hover {
+  background: var(--btn-hover);
+  transform: scale(1.04);
+}
+
+.rp-audio-play:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-spinner,
+  .rp-eq i {
+    animation: none;
+  }
+
+  .rp-big-play,
+  .rp-bar,
+  .rp-audio-play,
+  .rp-seek::-webkit-slider-thumb {
+    transition: none;
+  }
+}

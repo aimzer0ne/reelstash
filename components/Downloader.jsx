@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
 import { Icon } from './Icons';
+import { AudioPlayer, VideoPlayer } from './MediaPlayer';
 import { useI18n } from './I18nProvider';
 import './audio-preview.css';
 
@@ -197,7 +198,7 @@ export function Downloader({
               <PostByline result={result} fallbackTitle={summary.defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
-                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} />
+                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} username={postUsername(result)} />
                 ))}
               </div>
               {postCaption(result) ? (
@@ -285,7 +286,7 @@ function downloadFilename(item, index, mode) {
   return `ReelsDl-photo-${itemNumber}.jpg`;
 }
 
-function MediaCard({ item, index, total, mode, t }) {
+function MediaCard({ item, index, total, mode, t, username }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
   const isAudio = mode === 'audio' || item.type === 'audio';
@@ -300,16 +301,9 @@ function MediaCard({ item, index, total, mode, t }) {
   const primaryUrl = cdnUrl || apiHref;
   const showApiFallback = Boolean(cdnUrl && apiHref && kind !== 'photo');
   const sources = useMemo(() => playableSources(item, kind), [item, kind]);
-  const [sourceIndex, setSourceIndex] = useState(0);
   const [ratio, setRatio] = useState(null);
-  const playSrc = sources[sourceIndex] || null;
-  const playerProps = {
-    src: playSrc,
-    controls: true,
-    preload: 'none',
-    onPlay: pauseOthers,
-    onError: () => setSourceIndex((current) => current + 1)
-  };
+  const playSrc = sources[0] || null;
+  const thumbReferrer = thumb && isApiAsset(thumb) ? 'origin' : 'no-referrer';
   const previewClass = [
     'media-preview',
     kind === 'video' ? 'is-video' : isAudio ? 'is-audio' : '',
@@ -320,18 +314,22 @@ function MediaCard({ item, index, total, mode, t }) {
     <article className="media-card">
       <div className={previewClass} style={playSrc && kind === 'video' && ratio ? { aspectRatio: ratio } : undefined}>
         {playSrc && kind === 'video' ? (
-          <video
-            {...playerProps}
-            poster={thumb || undefined}
-            playsInline
-            aria-label={`Instagram video ${itemNumber}`}
-            onLoadedMetadata={(event) => {
-              const { videoWidth, videoHeight } = event.currentTarget;
-              if (videoWidth && videoHeight) setRatio(`${videoWidth} / ${videoHeight}`);
-            }}
+          <VideoPlayer
+            sources={sources}
+            poster={thumb}
+            posterReferrer={thumbReferrer}
+            label={`Instagram video ${itemNumber}`}
+            onRatio={setRatio}
           />
         ) : playSrc && isAudio ? (
-          <audio {...playerProps} aria-label={`Instagram audio ${itemNumber}`} />
+          <AudioPlayer
+            sources={sources}
+            cover={thumb}
+            coverReferrer={thumbReferrer}
+            title={username ? `Audio from @${username}` : 'Instagram audio'}
+            subtitle={total > 1 ? `Track ${itemNumber} of ${total}` : isOriginalAudio ? 'Original audio' : 'MP3 from the Reel'}
+            label={`Instagram audio ${itemNumber}`}
+          />
         ) : thumb ? (
           <>
             <div className="loading-shimmer" />
@@ -340,7 +338,7 @@ function MediaCard({ item, index, total, mode, t }) {
               alt={isAudio ? `Instagram reel cover ${itemNumber}` : kind === 'video' ? `Instagram video cover ${itemNumber}` : `Instagram photo ${itemNumber}`}
               loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
-              referrerPolicy={isApiAsset(thumb) ? 'origin' : 'no-referrer'}
+              referrerPolicy={thumbReferrer}
               onLoad={clearShimmer}
               onError={() => setPreviewFailed(true)}
             />
@@ -350,7 +348,7 @@ function MediaCard({ item, index, total, mode, t }) {
             <Icon name={isAudio ? 'audio' : kind === 'video' ? 'reels' : 'download'} />
           </div>
         )}
-        {kind === 'video' ? <span className="media-kind">Video</span> : null}
+        {kind === 'video' && !playSrc ? <span className="media-kind">Video</span> : null}
         {isAudio && !playSrc ? <span className="media-kind">MP3</span> : null}
       </div>
       <div className="media-footer">
@@ -389,12 +387,6 @@ function playableSources(item, kind) {
   const cdn = [item.directUrl, item.sourceUrl].find((url) => url && /^https:\/\//i.test(url));
   const proxied = item.downloadUrl ? `${item.downloadUrl}${item.downloadUrl.includes('?') ? '&' : '?'}inline=1` : null;
   return [cdn, proxied].filter(Boolean);
-}
-
-function pauseOthers(event) {
-  for (const player of document.querySelectorAll('.media-preview video, .media-preview audio')) {
-    if (player !== event.currentTarget) player.pause();
-  }
 }
 
 function lightPreview(item) {
