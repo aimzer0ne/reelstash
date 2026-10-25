@@ -22,7 +22,7 @@ image:
   alt: "Stack of Instagram carousel photos dropping into a folder, saved as full-quality image files without a screenshot"
 published: 2026-10-12
 updated: 2026-10-12
-tool: reels
+tool: photo
 faq:
   - q: "Can you save photos from Instagram without a screenshot?"
     a: "Yes. Copy the link of a public post, paste it into ReelsDl.net, and download the JPG. You get the image file itself, without the app's buttons or caption on top."
@@ -36,7 +36,7 @@ faq:
     a: "Turn on Save original photos in Instagram's settings to keep a copy of everything you post from now on. For older posts, use Download your information in Accounts Center to export your whole archive."
 ---
 
-Instagram has no download button for photos. The fastest way to save one without a screenshot is to copy the post's link, paste it into the [Instagram video and photo downloader](/), and save the JPG. You get the real image file at the largest size Instagram stores, and for carousel posts you get every slide.
+Instagram has no download button for photos. The fastest way to save one without a screenshot is to copy the post's link, paste it into the [Instagram photo downloader](/photo), and save the JPG. You get the real image file at the largest size Instagram stores, and for carousel posts you get every slide.
 
 ## Why a screenshot is the worst option
 
@@ -60,7 +60,7 @@ The **Save** icon under a post (the bookmark) adds it to your *Saved* collection
 ## Save an Instagram photo by link
 
 1. Open the post in Instagram. Tap the **three dots** at the top right and choose **Copy link** (or tap the share arrow, then *Copy link*).
-2. Open [reelsdl.net](/) in your browser.
+2. Open [reelsdl.net/photo](/photo) in your browser.
 3. Tap **Paste**, or paste the link into the box yourself. The post loads on its own.
 4. Tap **Download photo** under the preview.
 
@@ -86,7 +86,7 @@ On a computer the process is the same, and finding the link is easier.
 
 1. Open the post on **instagram.com**.
 2. Copy the address from the browser's address bar. It looks like `instagram.com/p/…`.
-3. Paste it into [reelsdl.net](/) and download.
+3. Paste it into [reelsdl.net/photo](/photo) and download.
 
 The file goes to your Downloads folder. Right-clicking a photo on instagram.com does not offer *Save image as*, because the image sits behind other page elements. That is by design, and it is why a link downloader is the practical route on desktop. The full desktop walkthrough is in [how to download Instagram Reels on a laptop or PC](/blog/download-instagram-reels-on-laptop-pc-mac).
 

@@ -6,8 +6,9 @@ import { PwaRegister } from './PwaRegister';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icons';
 import { useI18n } from './I18nProvider';
+import { NAV } from '@/lib/site.jsx';
 
-export function Header() {
+export function Header({ active }) {
   const { t, locale, locales, setLocale } = useI18n();
 
   function shareSite(event) {
@@ -51,6 +52,18 @@ export function Header() {
         </button>
         <PwaRegister />
       </div>
+      <nav className="tool-nav" aria-label="Instagram downloaders">
+        {NAV.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            title={item.name}
+            aria-current={item.href === active ? 'page' : undefined}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

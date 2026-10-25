@@ -4,6 +4,7 @@ import Link from './Link';
 import { Logo } from './Logo';
 import { useI18n } from './I18nProvider';
 import { SITE_EMAIL } from '@/lib/seo';
+import { LEGAL_LINKS, NAV, RESOURCE_LINKS } from '@/lib/site.jsx';
 
 export function Footer({ lead }) {
   const { t } = useI18n();
@@ -15,12 +16,36 @@ export function Footer({ lead }) {
         <Logo className="footer-logo" />
         ReelsDl.net
       </Link>
-      <nav className="legal-nav" aria-label={t('legal')}>
-        <Link href="/blog">{t('blog')}</Link>
-        <Link href="/privacy">{t('privacy')}</Link>
-        <Link href="/disclaimer">{t('disclaimer')}</Link>
-        <a href={reportHref}>{t('reportIssue')}</a>
-      </nav>
+      <p className="footer-about">
+        Free Instagram downloader for public videos, Reels, photos, carousels, Stories, and audio. No login, no app.
+      </p>
+      <div className="footer-cols">
+        <nav aria-label="Tools">
+          <h2>Tools</h2>
+          <ul>
+            {NAV.map((item) => (
+              <li key={item.href}><Link href={item.href}>{item.name}</Link></li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Resources">
+          <h2>Resources</h2>
+          <ul>
+            {RESOURCE_LINKS.map((item) => (
+              <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
+            ))}
+            <li><a href={reportHref}>{t('reportIssue')}</a></li>
+          </ul>
+        </nav>
+        <nav aria-label={t('legal')}>
+          <h2>{t('legal')}</h2>
+          <ul>
+            {LEGAL_LINKS.map((item) => (
+              <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
       <p>
         {t('moreTools')}:{' '}
         <a href="https://vatculator.com/" rel="noopener">{t('vatCalculator')}</a>

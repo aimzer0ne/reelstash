@@ -600,3 +600,166 @@
     padding-left: 40px;
   }
 }
+
+/* --- Tool hub: cards linking to the other downloaders --- */
+
+.tool-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-hub-grid li {
+  margin: 0;
+}
+
+.tool-hub-card {
+  display: block;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .15s ease, transform .15s ease;
+}
+
+.tool-hub-card:hover {
+  border-color: var(--text);
+}
+
+.tool-hub-icon {
+  display: flex;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.tool-hub-icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.home-copy .tool-hub-card h3 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 17px;
+  letter-spacing: -.02em;
+}
+
+.home-copy .tool-hub-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.device-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.device-steps li {
+  margin: 0;
+}
+
+.home-copy .device-steps h3 {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 17px;
+}
+
+.home-copy .device-steps ol {
+  margin: 0;
+  padding-inline-start: 1.2em;
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.home-copy .device-steps ol li + li {
+  margin-top: 6px;
+}
+
+@media (max-width: 720px) {
+  .tool-hub-grid,
+  .device-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-hub-card {
+    transition: none;
+  }
+}
+
+/* Help pages reuse the section styles but have no downloader above them. */
+.home-copy.info-copy {
+  margin-top: 28px;
+}
+
+.info-copy > .copy-lede {
+  font-size: 17px;
+}
+
+.info-copy .copy-lede a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Illustration files: light and dark pair, captioned --- */
+
+.tool-figure {
+  max-width: 560px;
+  margin: 32px auto 0;
+}
+
+.art-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.art-img-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .art-img-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .art-img-dark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .art-img-light {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .art-img-dark {
+    display: block;
+  }
+}
+
+.tool-figure figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.device-steps .tool-figure {
+  max-width: 220px;
+  margin: 0 auto 16px;
+}

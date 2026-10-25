@@ -1,21 +1,66 @@
 import { SITE_ORIGIN, absUrl, organizationJsonLd, homeHowToJsonLd, audioHowToJsonLd, DEFAULT_OG_IMAGE, OG_IMAGE_PATH } from './seo';
+import { illustrationJsonLd } from './images.js';
 
+// One entry per downloader page: the header tabs, the footer, and the
+// "What can you download?" hub on every tool page all read from this list.
 export const NAV = [
-  { href: '/', label: 'Reels Downloader', icon: 'reels' },
-  { href: '/audio', label: 'Audio MP3', icon: 'audio' }
+  {
+    href: '/',
+    label: 'Video',
+    name: 'Instagram Video Downloader',
+    icon: 'reels',
+    text: 'Save any public Instagram video post or IGTV clip as an HD MP4 with its original sound and no watermark.'
+  },
+  {
+    href: '/reels',
+    label: 'Reels',
+    name: 'Instagram Reels Downloader',
+    icon: 'reels',
+    text: 'Download vertical Reels with their music to your camera roll, gallery, or computer in the quality Instagram serves.'
+  },
+  {
+    href: '/photo',
+    label: 'Photo',
+    name: 'Instagram Photo & Carousel Downloader',
+    icon: 'copy',
+    text: 'Save full-resolution JPG photos instead of screenshots, and every slide of a carousel post from one link.'
+  },
+  {
+    href: '/stories',
+    label: 'Story',
+    name: 'Instagram Story & Highlights Downloader',
+    icon: 'again',
+    text: 'Keep public Stories before they expire after 24 hours, and save whole Highlight albums as video or photo.'
+  },
+  {
+    href: '/audio',
+    label: 'Audio',
+    name: 'Instagram Audio Downloader (MP3)',
+    icon: 'audio',
+    text: 'Convert a Reel or video to MP3, or paste an Instagram audio link to keep only the song, music, or voice.'
+  }
+];
+
+export const RESOURCE_LINKS = [
+  { href: '/how-to', label: 'How to download' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/blog', label: 'Blog & guides' },
+  { href: '/contact', label: 'Contact us' }
 ];
 
 export const LEGAL_LINKS = [
   { href: '/privacy', label: 'Privacy Policy' },
-  { href: '/disclaimer', label: 'Disclaimer' }
+  { href: '/terms', label: 'Terms of Service' },
+  { href: '/disclaimer', label: 'Disclaimer' },
+  { href: '/dmca', label: 'DMCA & copyright' }
 ];
 
 export const homePage = {
   path: '/',
   mode: 'media',
   kicker: null,
-  heading: 'Instagram Reels Downloader',
-  lede: 'Free Instagram video downloader. Paste a link to save any Reel, video, photo, or carousel.',
+  heading: 'Instagram Video Downloader',
+  lede: 'Free Instagram downloader. Paste a link to save any Reel, video, photo, or carousel.',
   inputLabel: 'Instagram reel or post URL',
   placeholder: 'Paste an Instagram URL',
   downloadLabel: 'Download',
@@ -57,7 +102,7 @@ export const homePage = {
     ]
   },
   how: {
-    heading: 'How to use the Instagram Reels Downloader',
+    heading: 'How to download Instagram videos',
     steps: [
       {
         icon: 'copy',
@@ -211,6 +256,7 @@ export const homePage = {
           name: 'Instagram Video Downloader – Reels Downloader | ReelsDl.net',
           isPartOf: { '@id': absUrl('/#website') },
           about: { '@id': absUrl('/#app') },
+          primaryImageOfPage: illustrationJsonLd('video', SITE_ORIGIN),
           inLanguage: 'en-US',
           description: 'Free Instagram video downloader and Reels downloader. Paste a link to save Reels, videos, photos, and carousels in HD — no login, no app, no watermark.'
         }
@@ -334,7 +380,7 @@ export const audioPage = {
             </p>
             <p>
               The tool works on iPhone, Android, PC, and Mac. To save the
-              video instead, use the <a href="/">Reels Downloader</a>.
+              video instead, use the <a href="/reels">Reels Downloader</a>.
             </p>
           </>
         )
@@ -432,6 +478,7 @@ export const audioPage = {
           name: 'Instagram Audio Downloader – Reel to MP3',
           description: 'Free Instagram audio downloader. Convert any Reel or video to MP3, or download a sound from its audio link. Works on iPhone, Android and PC, no login.',
           isPartOf: { '@id': absUrl('/#website') },
+          primaryImageOfPage: illustrationJsonLd('audio', SITE_ORIGIN),
           inLanguage: 'en-US'
         },
         {

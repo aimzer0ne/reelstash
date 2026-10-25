@@ -5,6 +5,7 @@ import { JsonLd } from './JsonLd';
 import { AudioCopy } from './AudioCopy';
 import { HomeCopy } from './HomeCopy';
 import { PageCopy } from './PageCopy';
+import { ToolCopy } from './ToolCopy';
 import { Downloader } from './Downloader';
 
 export function DownloadPage({ page, guides = [] }) {
@@ -13,13 +14,14 @@ export function DownloadPage({ page, guides = [] }) {
       {page.jsonLd.map((block, index) => (
         <JsonLd key={index} data={block} />
       ))}
-      <Header />
+      <Header active={page.path} />
       <main id="home">
         <Downloader
           mode={page.mode}
           kicker={page.kicker}
           heading={page.heading}
           lede={page.lede}
+          translate={page.translate !== false}
           inputLabel={page.inputLabel}
           placeholder={page.placeholder}
           messages={page.messages}
@@ -29,6 +31,8 @@ export function DownloadPage({ page, guides = [] }) {
           <HomeCopy page={page} guides={guides} />
         ) : page.path === '/audio' ? (
           <AudioCopy page={page} guides={guides} />
+        ) : page.intro ? (
+          <ToolCopy page={page} guides={guides} />
         ) : (
           <>
             {page.why ? (

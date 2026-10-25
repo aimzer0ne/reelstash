@@ -35,7 +35,7 @@ faq:
     a: "Instagram does not send a notification when someone downloads a Reel, either through the app's Download option or through a link downloader."
 ---
 
-To save an Instagram Reel in your gallery **with music**, copy the Reel's link, paste it into the [Instagram Reels Downloader](/), and save the MP4. The file keeps the sound exactly as it plays on Instagram. The Download button inside the Instagram app is quicker, but it frequently saves a silent video, which is the reason most people end up searching for this.
+To save an Instagram Reel in your gallery **with music**, copy the Reel's link, paste it into the [Instagram Reels Downloader](/reels), and save the MP4. The file keeps the sound exactly as it plays on Instagram. The Download button inside the Instagram app is quicker, but it frequently saves a silent video, which is the reason most people end up searching for this.
 
 ## Why Instagram saves Reels without music
 
@@ -50,7 +50,7 @@ The same thing happens to your own Reels. If you add a library song in the edito
 ## Save a Reel with music on Android
 
 1. Open Instagram and find the Reel. Tap the **three dots** (or the share arrow) and choose **Copy link**.
-2. Open Chrome and go to [reelsdl.net](/).
+2. Open Chrome and go to [reelsdl.net/reels](/reels).
 3. Tap **Paste**, or paste the link into the box yourself. The Reel loads on its own.
 4. When the preview appears, tap **Download video**.
 
@@ -66,7 +66,7 @@ If the video does not show up, open the **Files** app, go to *Downloads*, and pl
 ## Save a Reel with music on iPhone
 
 1. In Instagram, tap the **share arrow** on the Reel and choose **Copy link**.
-2. Open Safari and go to [reelsdl.net](/).
+2. Open Safari and go to [reelsdl.net/reels](/reels).
 3. Tap **Paste** to load the Reel, then tap **Download video**.
 4. Safari asks whether you want to download the file. Tap **Download**.
 

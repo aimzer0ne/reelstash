@@ -35,7 +35,7 @@ faq:
     a: "No. A logo or username that the creator placed in the video before uploading is part of the picture. A downloader gives you the file as it was posted."
 ---
 
-Reels saved with Instagram's own **Download** button come with a floating Instagram logo and the creator's username on top of the video. To get a clean copy, download the Reel **by its link** instead: copy the link, paste it into the [Instagram Reels Downloader](/), and save the MP4. That file is the video as it was uploaded, with no overlay added.
+Reels saved with Instagram's own **Download** button come with a floating Instagram logo and the creator's username on top of the video. To get a clean copy, download the Reel **by its link** instead: copy the link, paste it into the [Instagram Reels Downloader](/reels), and save the MP4. That file is the video as it was uploaded, with no overlay added.
 
 ## What the Instagram watermark is
 
@@ -63,7 +63,7 @@ The watermark is not in the Reel itself. The video that plays in your feed is cl
 This is the method for Reels from other public accounts, and for your own Reels once they are posted.
 
 1. Open the Reel in Instagram, tap the **three dots** or the **share arrow**, and choose **Copy link**.
-2. Go to [reelsdl.net](/) in your browser.
+2. Go to [reelsdl.net/reels](/reels) in your browser.
 3. Tap **Paste**, or paste the link into the box yourself. The Reel loads on its own.
 4. Tap **Download video** on the preview.
 

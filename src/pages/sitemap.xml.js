@@ -1,23 +1,40 @@
 import { absUrl } from '../../lib/seo.js';
 import { BLOG_PATH, getPosts, postImage, postPath } from '../../lib/blog.js';
+import { illustrationSrc, pageOgImage } from '../../lib/images.js';
 
+// lastmod is the date the page's content last changed. Bump it when you edit a
+// page; a value that changes on every request teaches crawlers to ignore it.
 const PATHS = [
-  { path: '/', priority: '1.0' },
-  { path: '/audio', priority: '0.9' },
-  { path: '/privacy', priority: '0.3' },
-  { path: '/disclaimer', priority: '0.3' }
+  { path: '/', priority: '1.0', updated: '2026-10-25', art: ['video'] },
+  { path: '/reels', priority: '0.9', updated: '2026-10-25', art: ['reels'] },
+  { path: '/photo', priority: '0.9', updated: '2026-10-25', art: ['photo'] },
+  { path: '/stories', priority: '0.9', updated: '2026-10-25', art: ['stories'] },
+  { path: '/audio', priority: '0.9', updated: '2026-10-25', art: ['audio'] },
+  { path: '/how-to', priority: '0.8', updated: '2026-10-25', art: ['iphone', 'android', 'desktop'] },
+  { path: '/faq', priority: '0.8', updated: '2026-10-25' },
+  { path: '/contact', priority: '0.4', updated: '2026-10-25' },
+  { path: '/privacy', priority: '0.3', updated: '2026-10-14' },
+  { path: '/terms', priority: '0.3', updated: '2026-10-25' },
+  { path: '/disclaimer', priority: '0.3', updated: '2026-10-14' },
+  { path: '/dmca', priority: '0.3', updated: '2026-10-25' }
 ];
 
 export async function GET() {
   const now = new Date().toISOString();
   const posts = await getPosts();
   const entries = [
-    ...PATHS.map((item) => ({ ...item, lastmod: now, changefreq: 'weekly' })),
+    ...PATHS.map(({ updated, art = [], ...item }) => ({
+      ...item,
+      lastmod: new Date(updated).toISOString(),
+      changefreq: 'weekly',
+      images: [...art.map((key) => illustrationSrc(key)), pageOgImage(item.path)?.src].filter(Boolean)
+    })),
     {
       path: BLOG_PATH,
       priority: '0.7',
       changefreq: 'weekly',
-      lastmod: posts.length ? new Date(Math.max(...posts.map((post) => post.data.updated))).toISOString() : now
+      lastmod: posts.length ? new Date(Math.max(...posts.map((post) => post.data.updated))).toISOString() : now,
+      images: [pageOgImage(BLOG_PATH)?.src].filter(Boolean)
     },
     // Posts report their real edit date, so crawlers only refetch what changed.
     ...posts.map((post) => ({
@@ -25,14 +42,14 @@ export async function GET() {
       priority: '0.6',
       changefreq: 'monthly',
       lastmod: post.data.updated.toISOString(),
-      image: postImage(post)?.src
+      images: [postImage(post)?.src].filter(Boolean)
     }))
   ];
-  const urls = entries.map(({ path, priority, lastmod, changefreq, image }) => `  <url>
-    <loc>${absUrl(path)}</loc>${image ? `
+  const urls = entries.map(({ path, priority, lastmod, changefreq, images = [] }) => `  <url>
+    <loc>${absUrl(path)}</loc>${images.map((image) => `
     <image:image>
       <image:loc>${absUrl(image)}</image:loc>
-    </image:image>` : ''}
+    </image:image>`).join('')}
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>

@@ -1,0 +1,211 @@
+// Renders the site's illustrations to image files:
+//   public/assets/illustrations/*.webp      tool and device illustrations, light + dark
+//   public/assets/illustrations/og-*.jpg    1200 × 630 share images, one per page
+//   public/assets/blog/<slug>*.webp|jpg     covers for posts that use a drawn cover
+// Run after changing components/Illustrations.jsx or lib/images.js:
+//   node scripts/build-images.mjs
+import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { build } from 'esbuild';
+import sharp from 'sharp';
+import { ILLUSTRATIONS, ILLUSTRATION_DIR, OG_SIZE, PAGE_OG } from '../lib/images.js';
+
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
+const OUT = join(ROOT, 'public', ILLUSTRATION_DIR);
+const BLOG_OUT = join(ROOT, 'public/assets/blog');
+const FONT = 'Helvetica Neue, Helvetica, Arial, sans-serif';
+
+// Same values as the tokens in src/styles/globals.css.
+const THEMES = {
+  light: { bg: '#ffffff', paper: '#ffffff', surface: '#f5f5f4', line: '#e9e9e7', text: '#0a0a0b', subtle: '#8e8e93' },
+  dark: { bg: '#0a0a0b', paper: '#111113', surface: '#18181b', line: '#242427', text: '#f5f5f6', subtle: '#6c6c73' }
+};
+
+async function loadComponents() {
+  // Inside node_modules so the bundle can import the project's own react packages.
+  mkdirSync(join(ROOT, 'node_modules/.cache'), { recursive: true });
+  const dir = mkdtempSync(join(ROOT, 'node_modules/.cache/reelsdl-art-'));
+  const outfile = join(dir, 'art.mjs');
+  await build({
+    stdin: {
+      contents: `
+        import { renderToStaticMarkup } from 'react-dom/server';
+        import { createElement } from 'react';
+        import * as art from './components/Illustrations.jsx';
+        export function render(name) { return renderToStaticMarkup(createElement(art[name])); }
+      `,
+      resolveDir: ROOT,
+      loader: 'jsx'
+    },
+    bundle: true,
+    format: 'esm',
+    platform: 'node',
+    packages: 'external',
+    jsx: 'automatic',
+    outfile,
+    logLevel: 'warning'
+  });
+  const mod = await import(pathToFileURL(outfile).href);
+  return { render: mod.render, cleanup: () => rmSync(dir, { recursive: true, force: true }) };
+}
+
+// Swap the CSS classes and variables the page uses for fixed colors.
+function themed(markup, theme, { width, height } = {}) {
+  const c = THEMES[theme];
+  const style = `<style>
+    .art-bg{fill:${c.surface}} .art-paper{fill:${c.paper}} .art-line{stroke:${c.line}}
+    .art-ink{fill:${c.text}} .art-ink-stroke{stroke:${c.text}} .art-muted{fill:${c.subtle}}
+  </style>`;
+  let svg = markup
+    .replaceAll('var(--bg)', c.bg)
+    .replaceAll('system-ui, sans-serif', FONT)
+    .replace(/<title>.*?<\/title>/, '')
+    .replace(/<svg([^>]*)>/, (_, attrs) => `<svg${attrs} xmlns="http://www.w3.org/2000/svg"${width ? ` width="${width}" height="${height}"` : ''}>${style}`);
+  return svg;
+}
+
+function innerOf(svg) {
+  return svg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+}
+
+function wrap(text, max) {
+  const lines = [];
+  for (const word of text.split(' ')) {
+    const last = lines[lines.length - 1];
+    if (last && `${last} ${word}`.length <= max) lines[lines.length - 1] = `${last} ${word}`;
+    else lines.push(word);
+  }
+  return lines;
+}
+
+function ogSvg(og, sceneMarkup) {
+  const c = THEMES.light;
+  const lines = wrap(og.title, 16);
+  const titleY = 250 - (lines.length - 2) * 34;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${OG_SIZE.width}" height="${OG_SIZE.height}" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="og-ig" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#feda75"/><stop offset=".25" stop-color="#fa7e1e"/><stop offset=".5" stop-color="#d62976"/>
+      <stop offset=".75" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#fbfbfa"/>
+  <rect x="0" y="0" width="1200" height="8" fill="url(#og-ig)"/>
+  <rect x="72" y="72" width="44" height="44" rx="12" fill="${c.text}"/>
+  <rect x="84" y="84" width="20" height="20" rx="5" fill="none" stroke="#fff" stroke-width="3"/>
+  <text x="132" y="104" font-family="${FONT}" font-size="28" font-weight="700" fill="${c.text}">ReelsDl.net</text>
+  ${lines.map((line, i) => `<text x="72" y="${titleY + i * 68}" font-family="${FONT}" font-size="60" font-weight="800" letter-spacing="-1.5" fill="${c.text}">${line}</text>`).join('')}
+  ${wrap(og.sub, 30).map((line, i) => `<text x="72" y="${titleY + lines.length * 68 + 22 + i * 38}" font-family="${FONT}" font-size="28" fill="#55555a">${line}</text>`).join('')}
+  <rect x="72" y="504" width="252" height="54" rx="27" fill="${c.text}"/>
+  <text x="198" y="539" text-anchor="middle" font-family="${FONT}" font-size="22" font-weight="700" fill="#fff">Free · No login</text>
+  <svg x="610" y="150" width="560" height="300" viewBox="0 0 560 300">${innerOf(sceneMarkup)}</svg>
+</svg>`;
+}
+
+// --- Blog covers drawn for specific posts (1536 × 1024) ---
+
+const BLOG_DEFS = `<defs>
+  <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#feda75"/><stop offset=".25" stop-color="#fa7e1e"/>
+    <stop offset=".5" stop-color="#d62976"/><stop offset=".75" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/>
+  </linearGradient>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfbfa"/><stop offset="1" stop-color="#efeeec"/></linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0a0a0b" flood-opacity=".16"/></filter>
+</defs>`;
+
+function phone(x, y, w, h, inner) {
+  return `<g filter="url(#sh)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${w * .16}" fill="#0a0a0b"/>
+  <rect x="${x + 14}" y="${y + 14}" width="${w - 28}" height="${h - 28}" rx="${w * .13}" fill="#ffffff"/>
+  <rect x="${x + w / 2 - 50}" y="${y + 30}" width="100" height="26" rx="13" fill="#0a0a0b"/></g>${inner}`;
+}
+
+function arrow(x, y) {
+  // A straight line has a zero-height bounding box, so its gradient must use user space.
+  return `<linearGradient id="line${x}" gradientUnits="userSpaceOnUse" x1="${x}" y1="0" x2="${x + 210}" y2="0">
+    <stop offset="0" stop-color="#fa7e1e"/><stop offset=".5" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient>
+  <g fill="none" stroke="url(#line${x})" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M${x} ${y}h200"/><path d="M${x + 150} ${y - 56}l56 56-56 56"/></g>`;
+}
+
+function check(cx, cy) {
+  return `<circle cx="${cx}" cy="${cy}" r="40" fill="#0a0a0b"/><path d="M${cx - 18} ${cy}l12 12 24-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+
+function play(cx, cy, r) {
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#0a0a0b" opacity=".88"/><path d="M${cx - r * .3} ${cy - r * .45}v${r * .9}l${r * .75}-${r * .45}z" fill="#fff"/>`;
+}
+
+const BLOG_COVERS = {
+  'download-instagram-stories-anonymously': `<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">${BLOG_DEFS}
+<rect width="1536" height="1024" fill="url(#bg)"/>
+${phone(250, 112, 440, 800, `
+  ${[0, 1, 2, 3].map((i) => `<rect x="${300 + i * 88}" y="186" width="78" height="9" rx="4.5" fill="${i ? '#d6d5d2' : '#0a0a0b'}"/>`).join('')}
+  <circle cx="330" cy="246" r="28" fill="none" stroke="url(#ig)" stroke-width="7"/><circle cx="330" cy="246" r="19" fill="#e9e9e7"/>
+  <rect x="374" y="234" width="150" height="22" rx="11" fill="#c9c8c4"/>
+  <rect x="298" y="300" width="344" height="480" rx="30" fill="#f2f1ef"/>
+  ${play(470, 540, 62)}
+  <rect x="298" y="810" width="344" height="54" rx="27" fill="none" stroke="#e1e0dd" stroke-width="4"/>`)}
+${arrow(770, 512)}
+<g filter="url(#sh)"><rect x="1050" y="250" width="300" height="524" rx="40" fill="#ffffff"/></g>
+${[0, 1, 2].map((i) => `<circle cx="${1118 + i * 82}" cy="350" r="34" fill="none" stroke="url(#ig)" stroke-width="7"/><circle cx="${1118 + i * 82}" cy="350" r="24" fill="#e9e9e7"/>`).join('')}
+<rect x="1088" y="430" width="224" height="200" rx="22" fill="#f2f1ef"/>${play(1200, 530, 44)}
+<rect x="1088" y="664" width="120" height="58" rx="29" fill="url(#ig)"/>
+<text x="1148" y="703" text-anchor="middle" font-family="${FONT}" font-size="30" font-weight="700" fill="#fff">MP4</text>
+${check(1278, 693)}
+<g transform="translate(1180 160)"><circle r="58" fill="#ffffff" filter="url(#sh)"/><circle r="40" fill="none" stroke="#0a0a0b" stroke-width="7"/><path d="M0 -24v26l16 10" fill="none" stroke="#0a0a0b" stroke-width="7" stroke-linecap="round"/></g>
+</svg>`,
+  'download-instagram-videos-on-iphone': `<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">${BLOG_DEFS}
+<rect width="1536" height="1024" fill="url(#bg)"/>
+${phone(200, 112, 440, 800, `
+  <circle cx="290" cy="216" r="24" fill="url(#ig)"/><rect x="328" y="204" width="170" height="24" rx="12" fill="#c9c8c4"/>
+  <rect x="214" y="266" width="412" height="412" fill="#f2f1ef"/>${play(420, 472, 66)}
+  <rect x="250" y="712" width="240" height="22" rx="11" fill="#c9c8c4"/><rect x="250" y="752" width="320" height="22" rx="11" fill="#e1e0dd"/>`)}
+${arrow(700, 512)}
+${phone(960, 112, 440, 800, `
+  <rect x="1010" y="196" width="340" height="56" rx="28" fill="#f2f1ef"/>
+  <text x="1040" y="233" font-family="${FONT}" font-size="26" font-weight="600" fill="#0a0a0b">Photos</text>
+  ${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => {
+    const x = 1010 + (i % 3) * 116;
+    const y = 290 + Math.floor(i / 3) * 150;
+    return i === 4
+      ? `<rect x="${x}" y="${y}" width="104" height="138" rx="14" fill="url(#ig)"/>${play(x + 52, y + 69, 26)}`
+      : `<rect x="${x}" y="${y}" width="104" height="138" rx="14" fill="#ecebe8"/>`;
+  }).join('')}
+  ${check(1180, 800)}`)}
+</svg>`
+};
+
+// --- Output ---
+
+mkdirSync(OUT, { recursive: true });
+mkdirSync(BLOG_OUT, { recursive: true });
+const { render, cleanup } = await loadComponents();
+
+try {
+  for (const [key, item] of Object.entries(ILLUSTRATIONS)) {
+    const markup = render(item.component);
+    for (const theme of ['light', 'dark']) {
+      const svg = themed(markup, theme, item);
+      const name = `${item.file}${theme === 'dark' ? '-dark' : ''}.webp`;
+      await sharp(Buffer.from(svg)).webp({ quality: 88 }).toFile(join(OUT, name));
+    }
+    console.log('illustration', key);
+  }
+
+  for (const [path, og] of Object.entries(PAGE_OG)) {
+    const scene = themed(render(ILLUSTRATIONS[og.art].component), 'light');
+    await sharp(Buffer.from(ogSvg(og, scene))).jpeg({ quality: 86, mozjpeg: true }).toFile(join(OUT, `${og.file}.jpg`));
+    console.log('og', path);
+  }
+
+  for (const [slug, svg] of Object.entries(BLOG_COVERS)) {
+    const buf = Buffer.from(svg);
+    await sharp(buf).webp({ quality: 86 }).toFile(join(BLOG_OUT, `${slug}.webp`));
+    await sharp(buf).resize(720).webp({ quality: 82 }).toFile(join(BLOG_OUT, `${slug}-720.webp`));
+    await sharp(buf).resize(OG_SIZE.width, OG_SIZE.height, { fit: 'cover' }).jpeg({ quality: 84, mozjpeg: true }).toFile(join(BLOG_OUT, `${slug}-og.jpg`));
+    console.log('blog cover', slug);
+  }
+} finally {
+  cleanup();
+}

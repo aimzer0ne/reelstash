@@ -11,6 +11,7 @@ export function Downloader({
   kicker,
   heading,
   lede,
+  translate = true,
   inputLabel,
   placeholder,
   messages,
@@ -25,8 +26,9 @@ export function Downloader({
   const inputRef = useRef(null);
   const hasUrl = Boolean(url.trim());
   const audio = mode === 'audio';
-  const headingText = t(audio ? 'audioHeading' : 'mediaHeading');
-  const ledeText = t(audio ? 'audioLede' : 'mediaLede');
+  // Tool pages without translations (Reels, Photo, Stories) keep their own English hero.
+  const headingText = translate ? t(audio ? 'audioHeading' : 'mediaHeading') : heading;
+  const ledeText = translate ? t(audio ? 'audioLede' : 'mediaLede') : lede;
   const placeholderText = t(audio ? 'audioPlaceholder' : 'mediaPlaceholder');
   const inputLabelText = t(audio ? 'audioInputLabel' : 'mediaInputLabel');
   const copy = {

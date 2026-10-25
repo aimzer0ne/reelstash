@@ -15,7 +15,7 @@ const blog = defineCollection({
     takeaways: z.array(z.string()).default([]),
     published: z.coerce.date(),
     updated: z.coerce.date(),
-    tool: z.enum(['reels', 'audio']).default('reels'),
+    tool: z.enum(['video', 'reels', 'photo', 'stories', 'audio']).default('reels'),
     draft: z.boolean().default(false),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([])
   })

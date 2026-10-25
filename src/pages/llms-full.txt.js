@@ -18,12 +18,14 @@ ReelsDl.net (https://reelsdl.net) is a free, browser-based Instagram media downl
 
 ## Features
 
-1. Instagram Reels downloader (MP4) at /
-2. Instagram photo downloader at /
-3. Instagram carousel / multi-item post downloader at /
-4. Instagram Reel audio downloader (MP3) at /audio
-5. No account creation
-6. Public posts only
+1. Instagram video downloader (MP4) at /
+2. Instagram Reels downloader (MP4 with music) at /reels
+3. Instagram photo and carousel downloader (JPG) at /photo
+4. Instagram Story and Highlights downloader at /stories
+5. Instagram Reel audio downloader (MP3) at /audio
+6. Device guide at /how-to and FAQ at /faq
+7. No account creation
+8. Public posts only
 
 ## How it works (user)
 

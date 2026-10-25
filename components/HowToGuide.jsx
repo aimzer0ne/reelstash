@@ -30,6 +30,52 @@ const COPY = {
       </p>
     )
   },
+  photo: {
+    copyTitle: 'Copy the post link',
+    pasteTitle: 'Paste the link',
+    downloadTitle: 'Download the photos',
+    downloadAlt: 'Download Instagram photos and carousel slides as JPG on ReelsDl.net',
+    copy: (
+      <p>
+        In Instagram, tap the three dots (&#8942;) on the photo or carousel, then tap <b>&quot;Copy Link&quot;</b>.
+      </p>
+    ),
+    paste: (
+      <p>
+        Paste the copied link into the box above, or tap the Paste {PASTE_ICON} icon.
+        <br />
+        Then press <kbd className="how-guide-key">Enter</kbd>
+      </p>
+    ),
+    download: (
+      <p>
+        Every photo and slide is listed. Click <b>&quot;Download Photo&quot;</b> on the ones you want to save them as JPG.
+      </p>
+    )
+  },
+  stories: {
+    copyTitle: 'Copy the Story link',
+    pasteTitle: 'Paste the link',
+    downloadTitle: 'Download the Story',
+    downloadAlt: 'Download a public Instagram Story or Highlight on ReelsDl.net',
+    copy: (
+      <p>
+        Open the public Story or Highlight, tap the three dots (&#8942;), then tap <b>&quot;Copy Link&quot;</b>.
+      </p>
+    ),
+    paste: (
+      <p>
+        Paste the copied link into the box above, or tap the Paste {PASTE_ICON} icon.
+        <br />
+        Then press <kbd className="how-guide-key">Enter</kbd>
+      </p>
+    ),
+    download: (
+      <p>
+        Each Story is listed. Click <b>&quot;Download&quot;</b> to save it as MP4 video or JPG photo.
+      </p>
+    )
+  },
   audio: {
     copyTitle: 'Copy the Reel or video link',
     pasteTitle: 'Paste the link',

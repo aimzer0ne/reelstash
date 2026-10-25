@@ -20,7 +20,11 @@ export default defineConfig({
     // The audio page used to live at /instagram-audio-downloader.
     '/instagram-audio-downloader': { status: 301, destination: '/audio' },
     '/privacy-policy': { status: 301, destination: '/privacy' },
-    '/terms': { status: 301, destination: '/privacy' },
+    '/terms-and-conditions': { status: 301, destination: '/terms' },
+    '/contact-us': { status: 301, destination: '/contact' },
+    '/reels-downloader': { status: 301, destination: '/reels' },
+    '/story': { status: 301, destination: '/stories' },
+    '/photos': { status: 301, destination: '/photo' },
     '/copyright': { status: 301, destination: '/disclaimer' },
     '/reelsdl-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.jpg' },
     '/reelstash-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.jpg' },

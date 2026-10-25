@@ -262,6 +262,54 @@ strong {
   justify-content: flex-end;
 }
 
+/* Tool tabs: one per downloader page, full row under the logo. Scrolls
+   sideways instead of wrapping when a narrow screen runs out of room. */
+.tool-nav {
+  grid-column: 1 / -1;
+  justify-self: center;
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tool-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.tool-nav a {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  border-radius: var(--pill);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color .15s ease, background-color .15s ease;
+}
+
+.tool-nav a:hover {
+  color: var(--text);
+}
+
+.tool-nav a[aria-current="page"] {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+@media (max-width: 380px) {
+  .tool-nav a {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
 .header-action {
   display: inline-flex;
   align-items: center;
@@ -934,6 +982,60 @@ footer p a {
   width: 20px;
   height: 20px;
   border-radius: 6px;
+}
+
+.footer-about {
+  max-width: 46ch;
+  margin: 0 auto !important;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 24px;
+  margin: 36px 0 12px;
+  text-align: start;
+}
+
+.footer-cols h2 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.footer-cols ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-cols li + li {
+  margin-top: 9px;
+}
+
+.footer-cols a {
+  color: var(--muted);
+  line-height: 1.4;
+  transition: color .15s ease;
+}
+
+.footer-cols a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .footer-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-cols nav:first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 .legal-nav {

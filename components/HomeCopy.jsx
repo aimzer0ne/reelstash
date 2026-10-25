@@ -2,43 +2,45 @@ import Link from './Link';
 import { FeatureShowcase } from './FeatureShowcase';
 import { GuideLinks } from './GuideLinks';
 import { HowToGuide } from './HowToGuide';
+import { Illustration } from './Illustration';
+import { DeviceGuide, FaqList, ToolHub } from './ToolSections';
 import './page-arrange.css';
 
 export function HomeCopy({ page, guides }) {
   return (
     <div className="home-copy">
-      <p className="home-audio-cta">
-        <Link href="/audio">+ Reels Audio - mp3 Download</Link>
-      </p>
-
       <nav className="home-jump" aria-label="On this page">
         <a href="#about">About</a>
         <a href="#how-it-works">How to</a>
         <a href="#features">Features</a>
         <a href="#video">Video</a>
-        <a href="#formats">Formats</a>
+        <a href="#tools">Tools</a>
+        <a href="#devices">Devices</a>
         <a href="#why">Why</a>
         <a href="#guides">Guides</a>
         <a href="#faq">FAQ</a>
       </nav>
 
       <section className="panel article-panel" id="about" aria-labelledby="home-intro-heading">
-        <h2 id="home-intro-heading">Free Instagram Reels Downloader</h2>
+        <h2 id="home-intro-heading">Free Instagram Video Downloader</h2>
         <div className="article-copy">
           <p>
-            <b>ReelsDl.net</b> is a free <b>Instagram Reels downloader</b> and{' '}
-            <b>Instagram video downloader</b>. Paste a public Instagram link to
-            save Reels and videos as MP4, photos as JPG, carousel posts, or
-            convert Reel audio to MP3. No login is required. Private posts
-            cannot be downloaded.
+            <b>ReelsDl.net</b> is a free <b>Instagram video downloader</b>. Paste
+            a public Instagram link to save videos and{' '}
+            <Link href="/reels">Reels</Link> as MP4,{' '}
+            <Link href="/photo">photos and carousels</Link> as JPG,{' '}
+            <Link href="/stories">Stories</Link> before they expire, or{' '}
+            <Link href="/audio">Reel audio as MP3</Link>. No login is required.
+            Private posts cannot be downloaded.
           </p>
           <p>
-            Use the <b>Reels downloader</b> to watch Reels offline or to keep a
-            collection you can share later. The three steps below show how to{' '}
-            <b>download Instagram Reels</b> and save any{' '}
-            <b>Instagram video as MP4</b> on a phone or computer.
+            Instagram has no download button for other people&apos;s posts, and
+            screen recording loses quality and sound. ReelsDl.net saves the
+            original file Instagram stores, in HD, with its audio, on a phone or
+            computer, with nothing to install.
           </p>
         </div>
+        <Illustration name="video" />
       </section>
 
       <HowToGuide heading={page.how.heading} type="reels" />
@@ -81,57 +83,12 @@ export function HomeCopy({ page, guides }) {
         </table>
       </section>
 
-      <section className="panel article-panel" id="formats" aria-labelledby="formats-heading">
-        <h2 id="formats-heading">What you can download from Instagram</h2>
-        <div className="article-copy">
-          <p>
-            The <b>Reels downloader</b> saves public posts in{' '}
-            <b>HD</b>, in the same quality{' '}
-            <a
-              href="https://about.instagram.com/blog/announcements/introducing-instagram-reels-announcement"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram
-            </a>{' '}
-            shows them. One link covers every format below.
-          </p>
-        </div>
-        <table className="copy-table">
-          <tbody>
-            <tr>
-              <th scope="row">Reels</th>
-              <td>Saved as MP4 video, without a watermark.</td>
-            </tr>
-            <tr>
-              <th scope="row">Instagram videos</th>
-              <td><b>Instagram video download MP4</b> for any public video post.</td>
-            </tr>
-            <tr>
-              <th scope="row">Photos</th>
-              <td>Single photo posts, saved as JPG.</td>
-            </tr>
-            <tr>
-              <th scope="row">Carousel posts</th>
-              <td>Several photos, several videos, or a mix of both from one post.</td>
-            </tr>
-            <tr>
-              <th scope="row">Stories</th>
-              <td>Public Stories, saved as video or photo.</td>
-            </tr>
-            <tr>
-              <th scope="row">Reel audio</th>
-              <td>
-                <Link href="/audio">Convert video to audio (MP3)</Link>{' '}
-                to keep only the soundtrack.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      <ToolHub current="/" />
+
+      <DeviceGuide kind="video" />
 
       <section className="panel article-panel" id="why" aria-labelledby="why-heading">
-        <h2 id="why-heading">Why use the ReelsDl Reels Downloader</h2>
+        <h2 id="why-heading">Why use ReelsDl.net</h2>
         <div className="article-copy">
           <p>
             <b>ReelsDl.net</b> is a fast way to <b>save Instagram videos</b> —
@@ -160,17 +117,7 @@ export function HomeCopy({ page, guides }) {
 
       <GuideLinks guides={guides} />
 
-      <section className="panel" id="faq" aria-labelledby="faq-heading">
-        <h2 id="faq-heading">{page.faq.heading}</h2>
-        <div className="faq-list">
-          {page.faq.items.map((item) => (
-            <details key={item.q} open={item.open}>
-              <summary>{item.q}</summary>
-              <div className="faq-answer">{item.a}</div>
-            </details>
-          ))}
-        </div>
-      </section>
+      <FaqList heading={page.faq.heading} items={page.faq.items} />
     </div>
   );
 }
