@@ -26,6 +26,8 @@ export function Footer({ lead }) {
         <a href="https://vatculator.com/" rel="noopener">{t('vatCalculator')}</a>
         {' · '}
         <a href="https://cursivee.app/" rel="noopener">{t('cursiveGenerator')}</a>
+        {' · '}
+        <a href="https://capcutx.app/" rel="noopener">{t('capcutGuide')}</a>
       </p>
       <p>
         {lead ? (
