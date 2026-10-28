@@ -716,28 +716,6 @@ a.ig-username:hover {
   transform: scale(.985);
 }
 
-.download-direct {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  margin: 12px 0 4px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-  transition: color .15s ease;
-}
-
-.download-direct .icon {
-  width: 13px;
-  height: 13px;
-}
-
-.download-direct:hover {
-  color: var(--text);
-}
-
 /* --- Content --- */
 
 .home-copy {

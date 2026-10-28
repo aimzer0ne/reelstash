@@ -1,25 +1,38 @@
+/* Minimal system: monochrome surfaces and hairlines, generous space, one signature
+   accent (the Instagram gradient) kept to thin details: the scroll rule and step numbers. */
+
 :root {
-  --ig-pink: #d62976;
-  --ig-soft: linear-gradient(135deg, rgba(254, 218, 117, .22), rgba(214, 41, 118, .16) 50%, rgba(79, 91, 213, .18));
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --dot: rgba(10, 10, 11, .13);
+  --ring: rgba(10, 10, 11, .07);
+  --shadow-soft: 0 1px 2px rgba(10, 10, 11, .04), 0 14px 36px -18px rgba(10, 10, 11, .18);
+  --live: #16a34a;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
 }
 
 :root[data-theme="dark"] {
-  --ig-pink: #ff5fa2;
+  --dot: rgba(255, 255, 255, .11);
+  --ring: rgba(255, 255, 255, .09);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .7);
+  --live: #4ade80;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ig-pink: #ff5fa2;
+    --dot: rgba(255, 255, 255, .11);
+    --ring: rgba(255, 255, 255, .09);
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 40px -20px rgba(0, 0, 0, .7);
+    --live: #4ade80;
   }
 }
 
-/* --- Scroll progress: a thin Instagram-gradient rule across the top --- */
+/* --- Scroll progress: the one place the gradient runs full width --- */
 
 .scroll-progress {
   position: fixed;
   inset: 0 0 auto;
   z-index: 70;
-  height: 3px;
+  height: 2px;
   background: var(--ig);
   transform: scaleX(var(--scroll, 0));
   transform-origin: left;
@@ -30,115 +43,143 @@ html[dir="rtl"] .scroll-progress {
   transform-origin: right;
 }
 
-/* --- Hero: a soft colour glow behind the title and a hand-drawn swash under it --- */
+/* --- Hero: a dot grid that fades out from the centre, big tight type --- */
 
 .hero {
   position: relative;
   isolation: isolate;
+  padding-top: clamp(56px, 11vh, 120px);
 }
 
 .hero::before {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: 0 -24px auto;
-  height: min(560px, 100%);
-  background:
-    radial-gradient(38% 46% at 22% 34%, rgba(250, 126, 30, var(--glow)), transparent 70%),
-    radial-gradient(36% 44% at 78% 30%, rgba(79, 91, 213, var(--glow)), transparent 70%),
-    radial-gradient(42% 40% at 50% 62%, rgba(214, 41, 118, var(--glow)), transparent 72%);
-  filter: blur(28px);
-  animation: hero-drift 14s ease-in-out infinite alternate;
+  inset: -40px -24px auto;
+  height: calc(100% + 80px);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 58% 52% at 50% 42%, #000 20%, transparent 72%);
+  mask-image: radial-gradient(ellipse 58% 52% at 50% 42%, #000 20%, transparent 72%);
   pointer-events: none;
 }
 
-@keyframes hero-drift {
-  to {
-    transform: translate3d(0, 18px, 0) scale(1.06) rotate(2deg);
-  }
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 6px 14px 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  animation: rise-in .6s var(--ease-out) both;
 }
 
-.hero h1 {
+.hero-pill > span[aria-hidden] {
+  color: var(--subtle);
+}
+
+.hero-pill-dot {
   position: relative;
-  padding-bottom: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
 }
 
-.hero h1::after {
+.hero-pill-dot::after {
   content: "";
-  display: block;
-  width: min(260px, 52%);
-  height: 14px;
-  margin: 10px auto 0;
-  background: url("/assets/hero-underline.svg") center / 100% 100% no-repeat;
-  clip-path: inset(0 100% 0 0);
-  animation: swash-draw .9s .25s cubic-bezier(.65, 0, .35, 1) forwards;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--live);
+  animation: live-ping 2.2s ease-out infinite;
 }
 
-@keyframes swash-draw {
-  to {
-    clip-path: inset(0 0 0 0);
+@keyframes live-ping {
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
   }
+}
+
+html[lang] .hero h1 {
+  max-width: 20ch;
+  margin-inline: auto;
+  font-size: clamp(32px, 5.2vw, 56px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.045em;
+  text-wrap: balance;
 }
 
 .hero .lede {
-  margin-top: 14px;
+  max-width: 46ch;
+  margin: 22px auto 40px;
+  font-size: clamp(16px, 1.9vw, 18px);
 }
 
-/* --- Link box: rounded, gradient ring on focus --- */
+/* --- Link box: one quiet field, a solid Paste button inside it --- */
+
+.link-form {
+  animation: rise-in .7s .15s var(--ease-out) both;
+}
 
 .link-form .input-wrap {
-  min-height: 62px;
-  border: 1.5px solid var(--line);
-  border-radius: 18px;
+  min-height: 64px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
   background: var(--paper);
-  box-shadow: 0 10px 40px -18px rgba(10, 10, 11, .22);
+  box-shadow: var(--shadow-soft);
   transition: border-color .15s ease, box-shadow .2s ease;
 }
 
+@media (hover: hover) {
+  .link-form .input-wrap:hover {
+    border-color: color-mix(in srgb, var(--text) 30%, var(--line));
+  }
+}
+
 .link-form .input-wrap:focus-within {
-  border-color: transparent;
-  background:
-    linear-gradient(var(--paper), var(--paper)) padding-box,
-    var(--ig) border-box;
-  box-shadow: 0 14px 50px -16px rgba(214, 41, 118, .35);
+  border-color: var(--text);
+  box-shadow: 0 0 0 4px var(--ring), var(--shadow-soft);
 }
 
-.link-form .input-wrap.is-loading,
-.link-form .input-wrap.is-loading:hover {
-  border-bottom-color: var(--line);
+.link-form .input-wrap input {
+  padding-inline: 20px 12px;
+  font-size: 16px;
 }
 
-/* --- Trust chips and the paste tip under the box --- */
-
-.trust-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 22px auto 0;
-  padding: 0;
-  list-style: none;
+.link-form .paste-button {
+  margin: 7px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 14px;
+  transition: background-color .15s ease, transform .15s ease;
 }
 
-.trust-chips li {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px 6px 10px;
-  border: 1px solid var(--line);
-  border-radius: var(--pill);
-  background: color-mix(in srgb, var(--paper) 70%, transparent);
-  color: var(--text-2);
-  font-size: 13px;
-  font-weight: 500;
-  backdrop-filter: blur(6px);
+.link-form .paste-button .icon {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 
-.trust-chips .icon {
-  width: 14px;
-  height: 14px;
-  color: var(--ig-pink);
-  stroke-width: 2.4;
+.link-form .paste-button:hover {
+  background: var(--btn-hover);
+}
+
+.link-form .paste-button:active {
+  transform: scale(.97);
 }
 
 .paste-hint {
@@ -146,9 +187,10 @@ html[dir="rtl"] .scroll-progress {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  margin: 16px 0 0;
+  margin: 18px 0 0;
   color: var(--subtle);
   font-size: 12.5px;
+  animation: rise-in .7s .2s var(--ease-out) both;
 }
 
 .paste-hint kbd {
@@ -169,127 +211,11 @@ html[dir="rtl"] .scroll-progress {
   margin-inline-end: 4px;
 }
 
-/* --- Recent links (stored in this browser only) --- */
-
-.recent {
-  max-width: 640px;
-  margin: 48px auto 0;
-  animation: rise-in .4s ease both;
-}
-
-.recent-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.recent-head h2 {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.recent-clear {
-  padding: 4px 0;
-  border: 0;
-  background: none;
-  color: var(--subtle);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.recent-clear:hover {
-  color: var(--text);
-}
-
-.recent-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.recent-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--paper);
-  text-align: start;
-  transition: border-color .15s ease, transform .15s ease;
-}
-
-.recent-item:hover {
-  border-color: var(--subtle);
-  transform: translateY(-1px);
-}
-
-.recent-item .ig-avatar {
-  width: 32px;
-  height: 32px;
-  font-size: 13px;
-}
-
-.recent-meta {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.recent-meta b {
-  overflow: hidden;
-  color: var(--text);
-  font-size: 14px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.recent-meta span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.recent-meta .icon {
-  width: 12px;
-  height: 12px;
-}
-
-.recent-go {
-  width: 16px;
-  height: 16px;
-  color: var(--subtle);
-}
-
-.recent-item:hover .recent-go {
-  color: var(--text);
-}
-
-@media (max-width: 520px) {
-  .recent-list {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 /* --- Loading skeleton in place of the result --- */
 
-.result-skeleton .media-card {
-  border-style: dashed;
-}
-
-.skeleton-dot {
+.skeleton-dot,
+.skeleton-line,
+.skeleton-button {
   background: var(--surface);
   animation: pulse 1.2s ease-in-out infinite;
 }
@@ -298,22 +224,19 @@ html[dir="rtl"] .scroll-progress {
   width: 120px;
   height: 12px;
   border-radius: 6px;
-  background: var(--surface);
-  animation: pulse 1.2s ease-in-out infinite;
 }
 
 .skeleton-button {
   display: block;
   height: 50px;
   border-radius: var(--pill);
-  background: var(--surface);
-  animation: pulse 1.2s ease-in-out infinite;
 }
 
 .skeleton-status {
   margin: 14px 0 0;
   color: var(--muted);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   text-align: center;
 }
 
@@ -323,30 +246,25 @@ html[dir="rtl"] .scroll-progress {
   }
 }
 
-/* Results arrive with a small lift instead of popping in. */
 .results-section .ig-post {
-  animation: rise-in .45s cubic-bezier(.2, .8, .2, 1) both;
+  animation: rise-in .45s var(--ease-out) both;
 }
 
-.results-section .download-button {
-  background: var(--ig);
-  background-size: 160% 100%;
-  color: #fff;
-  box-shadow: 0 10px 30px -12px rgba(214, 41, 118, .55);
-  transition: background-position .4s ease, transform .15s ease;
-}
-
-.results-section .download-button:hover {
-  background: var(--ig);
-  background-size: 160% 100%;
-  background-position: 100% 0;
+.results-section .media-card {
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
 }
 
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(12px);
   }
+}
+
+/* The site-proxy fallback looks exactly like the main download button, stacked under it. */
+.download-button.download-alt {
+  margin-top: 10px;
 }
 
 /* --- Toast after a download starts --- */
@@ -361,30 +279,32 @@ html[dir="rtl"] .scroll-progress {
   gap: 12px;
   width: max-content;
   max-width: calc(100% - 24px);
-  padding: 10px 10px 10px 12px;
+  padding: 8px 8px 8px 10px;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--paper);
-  box-shadow: 0 18px 50px -14px rgba(10, 10, 11, .35);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   transform: translateX(-50%);
-  animation: toast-in .4s cubic-bezier(.2, .9, .3, 1.2) both;
+  animation: toast-in .4s var(--ease-out) both;
 }
 
 .save-toast-icon {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
   border-radius: 50%;
-  background: var(--ig);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
 }
 
 .save-toast-icon .icon {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2.6;
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.4;
 }
 
 .save-toast-text {
@@ -409,12 +329,16 @@ html[dir="rtl"] .scroll-progress {
   gap: 6px;
   flex: 0 0 auto;
   padding: 9px 14px;
-  border: 0;
-  border-radius: var(--pill);
-  background: var(--btn-bg);
-  color: var(--btn-text);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--bg);
+  color: var(--text);
   font-size: 13px;
   font-weight: 600;
+}
+
+.save-toast-share:hover {
+  border-color: var(--text);
 }
 
 .save-toast-share .icon {
@@ -425,7 +349,7 @@ html[dir="rtl"] .scroll-progress {
 @keyframes toast-in {
   from {
     opacity: 0;
-    transform: translate(-50%, -16px) scale(.96);
+    transform: translate(-50%, -12px);
   }
 }
 
@@ -448,18 +372,18 @@ html[dir="rtl"] .scroll-progress {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 22px;
+  padding: 12px 20px;
   border: 0;
   border-radius: var(--pill);
-  background: var(--ig);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   font-size: 14px;
-  font-weight: 700;
-  box-shadow: 0 14px 34px -10px rgba(214, 41, 118, .6);
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
   opacity: 0;
   transform: translate(-50%, 140%);
   pointer-events: none;
-  transition: transform .35s cubic-bezier(.2, .9, .3, 1.2), opacity .2s ease;
+  transition: transform .35s var(--ease-out), opacity .2s ease, background-color .15s ease;
 }
 
 .jump-to-box.is-shown {
@@ -468,13 +392,16 @@ html[dir="rtl"] .scroll-progress {
   pointer-events: auto;
 }
 
-.jump-to-box .icon {
-  width: 16px;
-  height: 16px;
-  stroke-width: 2.2;
+.jump-to-box:hover {
+  background: var(--btn-hover);
 }
 
-/* --- Sticky jump nav that highlights the section in view --- */
+.jump-to-box .icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* --- Sticky jump nav that tracks the section in view --- */
 
 .home-copy .home-jump {
   position: sticky;
@@ -482,9 +409,10 @@ html[dir="rtl"] .scroll-progress {
   z-index: 40;
   margin-inline: -24px;
   padding: 10px 24px;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(1.4) blur(12px);
-  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid transparent;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
 }
 
 .home-jump a {
@@ -499,11 +427,11 @@ html[dir="rtl"] .scroll-progress {
   content: "";
   position: absolute;
   inset: auto 0 0;
-  height: 2px;
+  height: 1.5px;
   border-radius: 2px;
-  background: var(--ig);
+  background: currentColor;
   transform: scaleX(0);
-  transition: transform .25s ease;
+  transition: transform .25s var(--ease-out);
 }
 
 .home-jump a.is-active::after {
@@ -529,12 +457,55 @@ html[dir="rtl"] .scroll-progress {
   }
 }
 
+/* --- Sections: a numbered mono eyebrow and big, tight headings --- */
+
+.home-copy {
+  counter-reset: section;
+}
+
+.home-copy > section {
+  counter-increment: section;
+}
+
+.home-copy > section::before {
+  content: counter(section, decimal-leading-zero);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: var(--subtle);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+}
+
+.home-copy > .copy-split::before {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.home-copy .panel h2,
+.home-copy .feature-showcase h2,
+.home-copy .copy-split h2 {
+  font-family: var(--font-hero);
+  font-size: clamp(28px, 4.2vw, 42px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.feature-showcase-kicker,
+.home-copy .feature-showcase > .feature-showcase-kicker,
+.guides-kicker {
+  display: none;
+}
+
 /* --- Sections fade up as they scroll in (only when JS marks them) --- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity .6s ease var(--reveal-delay, 0ms), transform .6s cubic-bezier(.2, .8, .2, 1) var(--reveal-delay, 0ms);
+  transform: translateY(16px);
+  transition: opacity .7s ease var(--reveal-delay, 0ms), transform .7s var(--ease-out) var(--reveal-delay, 0ms);
 }
 
 .reveal.is-in {
@@ -542,67 +513,100 @@ html[dir="rtl"] .scroll-progress {
   transform: none;
 }
 
-/* --- Feature and tool cards: colour, depth, and a lift on hover --- */
+/* --- Features: one hairline grid instead of separate cards --- */
+
+.home-copy .feature-showcase-grid,
+.feature-showcase-grid {
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--line);
+}
 
 .feature-showcase-grid > li {
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper);
-  transition: border-color .2s ease, box-shadow .2s ease, translate .2s ease;
+  padding: 28px 26px;
+  background: var(--bg);
+  transition: background-color .2s ease;
 }
 
 .feature-showcase-grid > li:hover {
-  border-color: var(--subtle);
-  box-shadow: 0 16px 40px -22px rgba(10, 10, 11, .3);
-  translate: 0 -3px;
+  background: var(--paper);
 }
 
 .feature-showcase-icon,
 .tool-hub-icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
-  background: var(--ig-soft);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
   color: var(--text);
+  transition: transform .3s var(--ease-out);
 }
 
-.feature-showcase-grid > li:nth-child(6n + 1) .feature-showcase-icon { color: #e1306c; }
-.feature-showcase-grid > li:nth-child(6n + 2) .feature-showcase-icon { color: #fa7e1e; }
-.feature-showcase-grid > li:nth-child(6n + 3) .feature-showcase-icon { color: #962fbf; }
-.feature-showcase-grid > li:nth-child(6n + 4) .feature-showcase-icon { color: #4f5bd5; }
-.feature-showcase-grid > li:nth-child(6n + 5) .feature-showcase-icon { color: #d62976; }
-.feature-showcase-grid > li:nth-child(6n + 6) .feature-showcase-icon { color: #c48a00; }
-
-.home-copy .feature-showcase-grid,
-.feature-showcase-grid {
-  gap: 14px;
+.feature-showcase-icon .icon,
+.tool-hub-icon .icon {
+  width: 19px;
+  height: 19px;
 }
+
+.feature-showcase-grid > li:hover .feature-showcase-icon,
+.tool-hub-card:hover .tool-hub-icon {
+  transform: translateY(-2px) rotate(-4deg);
+}
+
+/* --- Tool cards: hairline, darkens on hover --- */
 
 .tool-hub-card {
   border: 1px solid var(--line);
-  background: var(--paper);
-  transition: box-shadow .2s ease, translate .2s ease;
+  border-radius: 18px;
+  background: var(--bg);
+  transition: border-color .2s ease, background-color .2s ease;
 }
 
 .tool-hub-card:hover {
-  border-color: transparent;
-  background:
-    linear-gradient(var(--paper), var(--paper)) padding-box,
-    var(--ig) border-box;
-  box-shadow: 0 16px 40px -20px rgba(214, 41, 118, .45);
-  translate: 0 -3px;
+  border-color: var(--text);
+  background: var(--paper);
 }
 
-/* FAQ rows tint on hover so the long list feels clickable. */
+/* Three tools sit on one row; the generic list indent never applies to the grid. */
+.home-copy .tool-hub-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0;
+}
+
+.home-copy .tool-hub-grid li {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .home-copy .tool-hub-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The wide comparison art has dark labels on a transparent background, so it keeps a light card in dark mode. */
+:root[data-theme="dark"] .guide-shots.is-wide img {
+  padding: 14px;
+  border-radius: 16px;
+  background: #f5f5f4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .guide-shots.is-wide img {
+    padding: 14px;
+    border-radius: 16px;
+    background: #f5f5f4;
+  }
+}
+
+/* --- FAQ: quiet rows, the open one gets weight --- */
+
 .faq-list summary {
-  transition: color .15s ease, padding .2s ease;
-}
-
-.faq-list summary:hover {
-  padding-inline-start: 6px;
+  transition: color .15s ease;
 }
 
 .faq-list details[open] summary {
@@ -611,27 +615,32 @@ html[dir="rtl"] .scroll-progress {
 }
 
 .faq-list details[open] summary::after {
-  color: var(--ig-pink);
+  color: var(--text);
+}
+
+/* Illustrations sit on the same quiet card as everything else. */
+.home-copy .guide-image,
+.home-copy .how-guide-visual img {
+  border-radius: 16px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero::before,
+  .hero-pill,
+  .hero-pill-dot::after,
+  .link-form,
+  .paste-hint,
   .skeleton-dot,
   .skeleton-line,
   .skeleton-button,
-  .recent,
   .results-section .ig-post,
   .save-toast {
     animation: none;
   }
 
-  .hero h1::after {
-    animation: none;
-    clip-path: none;
-  }
-
   .jump-to-box,
   .feature-showcase-grid > li,
+  .feature-showcase-icon,
+  .tool-hub-icon,
   .tool-hub-card {
     transition: none;
   }
