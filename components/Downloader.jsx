@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
+import { burstConfetti } from '@/lib/confetti';
 import { Icon } from './Icons';
 import { AudioPlayer, VideoPlayer } from './MediaPlayer';
 import { useI18n } from './I18nProvider';
@@ -23,8 +24,13 @@ export function Downloader({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
+  const [recent, setRecent] = useState([]);
+  const [toast, setToast] = useState(null);
+  const [desktop, setDesktop] = useState(false);
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
+  const resolveRef = useRef(null);
+  const toastTimer = useRef(0);
   const hasUrl = Boolean(url.trim());
   const audio = mode === 'audio';
   // Tool pages without translations (Reels, Photo, Stories) keep their own English hero.
@@ -41,9 +47,30 @@ export function Downloader({
   };
 
   useEffect(() => {
-    const desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!desktop) return;
+    setRecent(readRecent(mode));
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    setDesktop(fine);
+    if (!fine) return;
     inputRef.current?.focus({ preventScroll: true });
+  }, [mode]);
+
+  // Paste an Instagram link anywhere on the page, not only into the box.
+  useEffect(() => {
+    function onDocumentPaste(event) {
+      const target = event.target;
+      if (target?.closest?.('input, textarea, select, [contenteditable="true"]')) return;
+      const text = extractInstagramUrl(event.clipboardData?.getData('text'));
+      if (!text || !looksLikeInstagramUrl(text)) return;
+      event.preventDefault();
+      setUrl(text);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      requestAnimationFrame(() => void resolveRef.current?.(text));
+    }
+    document.addEventListener('paste', onDocumentPaste);
+    return () => {
+      document.removeEventListener('paste', onDocumentPaste);
+      clearTimeout(toastTimer.current);
+    };
   }, []);
 
   async function resolveUrl(nextUrl) {
@@ -70,6 +97,7 @@ export function Downloader({
       } else {
         writeClientPostCache(value, mode, mapped);
       }
+      setRecent(writeRecent(mode, value, mapped));
       setUrl('');
       setResult(mapped);
       requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
@@ -78,6 +106,26 @@ export function Downloader({
     } finally {
       setLoading(false);
     }
+  }
+
+  resolveRef.current = resolveUrl;
+
+  function onSaved(event) {
+    const box = event.currentTarget.getBoundingClientRect();
+    burstConfetti(box.left + box.width / 2, box.top + box.height / 2);
+    const total = bumpSavedCount();
+    clearTimeout(toastTimer.current);
+    setToast({ total, key: Date.now() });
+    toastTimer.current = setTimeout(() => setToast(null), 5200);
+  }
+
+  function shareSite() {
+    const url = window.location.origin + window.location.pathname;
+    if (typeof navigator.share === 'function') {
+      navigator.share({ title: 'ReelsDl.net', text: t('shareText'), url }).catch(() => {});
+      return;
+    }
+    navigator.clipboard?.writeText(url).then(() => setToast((prev) => prev && { ...prev, copied: true })).catch(() => {});
   }
 
   async function pasteLink() {
@@ -183,6 +231,20 @@ export function Downloader({
           </button>
         </form>
 
+        <ul className="trust-chips" aria-label="ReelsDl.net">
+          <li><Icon name="check" />{t('trustHd')}</li>
+          {audio ? null : <li><Icon name="check" />{t('trustNoWatermark')}</li>}
+          <li><Icon name="check" />{t('trustNoLogin')}</li>
+          <li><Icon name="check" />{t('trustFree')}</li>
+        </ul>
+        {desktop ? (
+          <p className="paste-hint">
+            <kbd>{/Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl'}</kbd>
+            <kbd>V</kbd>
+            {t('pasteAnywhere')}
+          </p>
+        ) : null}
+
         {error ? (
           <div className="error-message" role="alert">
             <Icon name="alert" />
@@ -191,6 +253,59 @@ export function Downloader({
         ) : null}
       </section>
 
+      {recent.length && !result ? (
+        <section className="recent" aria-labelledby="recent-heading">
+          <div className="recent-head">
+            <h2 id="recent-heading">{t('recentTitle')}</h2>
+            <button
+              type="button"
+              className="recent-clear"
+              onClick={() => {
+                clearRecent(mode);
+                setRecent([]);
+              }}
+            >
+              {t('recentClear')}
+            </button>
+          </div>
+          <ul className="recent-list">
+            {recent.map((entry) => (
+              <li key={entry.url}>
+                <button type="button" className="recent-item" disabled={loading} onClick={() => void resolveUrl(entry.url)}>
+                  <span className="ig-avatar" aria-hidden="true">{(entry.username || 'R').slice(0, 1).toUpperCase()}</span>
+                  <span className="recent-meta">
+                    <b>{entry.username ? `@${entry.username}` : summary.defaultTitle}</b>
+                    <span>
+                      <Icon name={entry.kind === 'video' ? 'reels' : entry.kind === 'audio' ? 'audio' : 'copy'} />
+                      {entry.count > 1 ? `${entry.count} ${entry.kind === 'audio' ? 'MP3' : 'files'}` : entry.kind === 'video' ? 'MP4' : entry.kind === 'audio' ? 'MP3' : 'JPG'}
+                      {' · '}
+                      {timeAgo(entry.at)}
+                    </span>
+                  </span>
+                  <Icon name="again" className="recent-go" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {loading && !result ? (
+        <section className="results-section" aria-hidden="true">
+          <div className="ig-post is-single result-skeleton">
+            <div className="ig-post-head">
+              <span className="ig-avatar skeleton-dot" />
+              <span className="skeleton-line" />
+            </div>
+            <div className="media-card">
+              <div className="media-preview"><div className="loading-shimmer" /></div>
+              <div className="media-footer"><span className="skeleton-button" /></div>
+            </div>
+            <p className="skeleton-status">{t(audio ? 'loaderStatusAudio' : 'loaderStatus')}</p>
+          </div>
+        </section>
+      ) : null}
+
       <section className="results-section" ref={resultsRef} aria-live="polite" hidden={!result}>
         {result ? (
           <>
@@ -198,7 +313,7 @@ export function Downloader({
               <PostByline result={result} fallbackTitle={summary.defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
-                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} username={postUsername(result)} />
+                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} username={postUsername(result)} onSaved={onSaved} />
                 ))}
               </div>
               {postCaption(result) ? (
@@ -225,8 +340,83 @@ export function Downloader({
           </>
         ) : null}
       </section>
+
+      {toast ? (
+        <div className="save-toast" role="status" key={toast.key}>
+          <span className="save-toast-icon" aria-hidden="true"><Icon name="check" /></span>
+          <span className="save-toast-text">
+            <b>{t('savedToast')}</b>
+            <span>{toast.copied ? t('shareCopied') : toast.total > 1 ? `${toast.total} ${t('savedCount')}` : t('shareText')}</span>
+          </span>
+          <button type="button" className="save-toast-share" onClick={shareSite}>
+            <Icon name="share" />
+            {t('share')}
+          </button>
+        </div>
+      ) : null}
     </>
   );
+}
+
+const RECENT_LIMIT = 6;
+const SAVED_KEY = 'reelsdl_saved_count';
+
+function recentKey(mode) {
+  return `reelsdl_recent_${mode}`;
+}
+
+// Recent links live only in this browser, so a returning visitor can reopen them in one tap.
+function readRecent(mode) {
+  try {
+    const list = JSON.parse(localStorage.getItem(recentKey(mode)) || '[]');
+    return Array.isArray(list) ? list.filter((entry) => entry?.url && looksLikeInstagramUrl(entry.url)).slice(0, RECENT_LIMIT) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeRecent(mode, url, result) {
+  const media = Array.isArray(result?.media) ? result.media : [];
+  const entry = {
+    url,
+    username: postUsername(result),
+    kind: mode === 'audio' ? 'audio' : media.some((item) => item.type === 'video') ? 'video' : 'photo',
+    count: media.length,
+    at: Date.now()
+  };
+  const next = [entry, ...readRecent(mode).filter((item) => item.url !== url)].slice(0, RECENT_LIMIT);
+  try {
+    localStorage.setItem(recentKey(mode), JSON.stringify(next));
+  } catch {
+    /* ignore quota or blocked storage */
+  }
+  return next;
+}
+
+function clearRecent(mode) {
+  try {
+    localStorage.removeItem(recentKey(mode));
+  } catch {
+    /* ignore */
+  }
+}
+
+function bumpSavedCount() {
+  try {
+    const total = (Number(localStorage.getItem(SAVED_KEY)) || 0) + 1;
+    localStorage.setItem(SAVED_KEY, String(total));
+    return total;
+  } catch {
+    return 1;
+  }
+}
+
+function timeAgo(at) {
+  const minutes = Math.round((Date.now() - at) / 60000);
+  const format = new Intl.RelativeTimeFormat(document.documentElement.lang || 'en', { numeric: 'auto', style: 'short' });
+  if (minutes < 60) return format.format(-minutes, 'minute');
+  if (minutes < 60 * 24) return format.format(-Math.round(minutes / 60), 'hour');
+  return format.format(-Math.round(minutes / 1440), 'day');
 }
 
 function PostByline({ result, fallbackTitle }) {
@@ -286,7 +476,7 @@ function downloadFilename(item, index, mode) {
   return `ReelsDl-photo-${itemNumber}.jpg`;
 }
 
-function MediaCard({ item, index, total, mode, t, username }) {
+function MediaCard({ item, index, total, mode, t, username, onSaved }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
   const isAudio = mode === 'audio' || item.type === 'audio';
@@ -357,6 +547,7 @@ function MediaCard({ item, index, total, mode, t, username }) {
           href={primaryUrl}
           download={downloadName}
           aria-label={label}
+          onClick={onSaved}
           {...(cdnUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
         >
           <Icon name="download" />
@@ -367,6 +558,7 @@ function MediaCard({ item, index, total, mode, t, username }) {
             className="download-direct"
             href={apiHref}
             download={downloadName}
+            onClick={onSaved}
           >
             <Icon name="link" />
             {t('viaSite')}

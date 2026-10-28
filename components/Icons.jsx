@@ -159,6 +159,14 @@ function IconDevice({ className }) {
   );
 }
 
+function IconCheck({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </Svg>
+  );
+}
+
 function IconSun({ className }) {
   return (
     <Svg className={className}>
@@ -191,6 +199,7 @@ const ICONS = {
   share: IconShare,
   unlock: IconUnlock,
   device: IconDevice,
+  check: IconCheck,
   sun: IconSun,
   moon: IconMoon
 };

@@ -7,6 +7,7 @@ import { HomeCopy } from './HomeCopy';
 import { PageCopy } from './PageCopy';
 import { ToolCopy } from './ToolCopy';
 import { Downloader } from './Downloader';
+import { Engage } from './Engage';
 
 export function DownloadPage({ page, guides = [] }) {
   return (
@@ -15,6 +16,7 @@ export function DownloadPage({ page, guides = [] }) {
         <JsonLd key={index} data={block} />
       ))}
       <Header active={page.path} />
+      <Engage />
       <main id="home">
         <Downloader
           mode={page.mode}

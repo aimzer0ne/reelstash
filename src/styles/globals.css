@@ -741,7 +741,7 @@ a.ig-username:hover {
 /* --- Content --- */
 
 .home-copy {
-  margin-top: 20em;
+  margin-top: clamp(72px, 12vh, 140px);
 }
 
 .home-copy ul {

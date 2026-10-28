@@ -1,0 +1,638 @@
+:root {
+  --ig-pink: #d62976;
+  --ig-soft: linear-gradient(135deg, rgba(254, 218, 117, .22), rgba(214, 41, 118, .16) 50%, rgba(79, 91, 213, .18));
+}
+
+:root[data-theme="dark"] {
+  --ig-pink: #ff5fa2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ig-pink: #ff5fa2;
+  }
+}
+
+/* --- Scroll progress: a thin Instagram-gradient rule across the top --- */
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 70;
+  height: 3px;
+  background: var(--ig);
+  transform: scaleX(var(--scroll, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+html[dir="rtl"] .scroll-progress {
+  transform-origin: right;
+}
+
+/* --- Hero: a soft colour glow behind the title and a hand-drawn swash under it --- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 -24px auto;
+  height: min(560px, 100%);
+  background:
+    radial-gradient(38% 46% at 22% 34%, rgba(250, 126, 30, var(--glow)), transparent 70%),
+    radial-gradient(36% 44% at 78% 30%, rgba(79, 91, 213, var(--glow)), transparent 70%),
+    radial-gradient(42% 40% at 50% 62%, rgba(214, 41, 118, var(--glow)), transparent 72%);
+  filter: blur(28px);
+  animation: hero-drift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes hero-drift {
+  to {
+    transform: translate3d(0, 18px, 0) scale(1.06) rotate(2deg);
+  }
+}
+
+.hero h1 {
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.hero h1::after {
+  content: "";
+  display: block;
+  width: min(260px, 52%);
+  height: 14px;
+  margin: 10px auto 0;
+  background: url("/assets/hero-underline.svg") center / 100% 100% no-repeat;
+  clip-path: inset(0 100% 0 0);
+  animation: swash-draw .9s .25s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
+@keyframes swash-draw {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.hero .lede {
+  margin-top: 14px;
+}
+
+/* --- Link box: rounded, gradient ring on focus --- */
+
+.link-form .input-wrap {
+  min-height: 62px;
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: 0 10px 40px -18px rgba(10, 10, 11, .22);
+  transition: border-color .15s ease, box-shadow .2s ease;
+}
+
+.link-form .input-wrap:focus-within {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    var(--ig) border-box;
+  box-shadow: 0 14px 50px -16px rgba(214, 41, 118, .35);
+}
+
+.link-form .input-wrap.is-loading,
+.link-form .input-wrap.is-loading:hover {
+  border-bottom-color: var(--line);
+}
+
+/* --- Trust chips and the paste tip under the box --- */
+
+.trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 22px auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trust-chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+
+.trust-chips .icon {
+  width: 14px;
+  height: 14px;
+  color: var(--ig-pink);
+  stroke-width: 2.4;
+}
+
+.paste-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 16px 0 0;
+  color: var(--subtle);
+  font-size: 12.5px;
+}
+
+.paste-hint kbd {
+  min-width: 22px;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.paste-hint kbd + kbd {
+  margin-inline-end: 4px;
+}
+
+/* --- Recent links (stored in this browser only) --- */
+
+.recent {
+  max-width: 640px;
+  margin: 48px auto 0;
+  animation: rise-in .4s ease both;
+}
+
+.recent-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.recent-head h2 {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.recent-clear {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--subtle);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.recent-clear:hover {
+  color: var(--text);
+}
+
+.recent-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  text-align: start;
+  transition: border-color .15s ease, transform .15s ease;
+}
+
+.recent-item:hover {
+  border-color: var(--subtle);
+  transform: translateY(-1px);
+}
+
+.recent-item .ig-avatar {
+  width: 32px;
+  height: 32px;
+  font-size: 13px;
+}
+
+.recent-meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.recent-meta b {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.recent-meta .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.recent-go {
+  width: 16px;
+  height: 16px;
+  color: var(--subtle);
+}
+
+.recent-item:hover .recent-go {
+  color: var(--text);
+}
+
+@media (max-width: 520px) {
+  .recent-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Loading skeleton in place of the result --- */
+
+.result-skeleton .media-card {
+  border-style: dashed;
+}
+
+.skeleton-dot {
+  background: var(--surface);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-line {
+  width: 120px;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--surface);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-button {
+  display: block;
+  height: 50px;
+  border-radius: var(--pill);
+  background: var(--surface);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-status {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Results arrive with a small lift instead of popping in. */
+.results-section .ig-post {
+  animation: rise-in .45s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.results-section .download-button {
+  background: var(--ig);
+  background-size: 160% 100%;
+  color: #fff;
+  box-shadow: 0 10px 30px -12px rgba(214, 41, 118, .55);
+  transition: background-position .4s ease, transform .15s ease;
+}
+
+.results-section .download-button:hover {
+  background: var(--ig);
+  background-size: 160% 100%;
+  background-position: 100% 0;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* --- Toast after a download starts --- */
+
+.save-toast {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: 50%;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  padding: 10px 10px 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: 0 18px 50px -14px rgba(10, 10, 11, .35);
+  transform: translateX(-50%);
+  animation: toast-in .4s cubic-bezier(.2, .9, .3, 1.2) both;
+}
+
+.save-toast-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--ig);
+  color: #fff;
+}
+
+.save-toast-icon .icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.6;
+}
+
+.save-toast-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.save-toast-text b {
+  font-size: 14px;
+}
+
+.save-toast-text span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.save-toast-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 9px 14px;
+  border: 0;
+  border-radius: var(--pill);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.save-toast-share .icon {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -16px) scale(.96);
+  }
+}
+
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* --- Floating button back to the link box --- */
+
+.jump-to-box {
+  position: fixed;
+  left: 50%;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border: 0;
+  border-radius: var(--pill);
+  background: var(--ig);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 14px 34px -10px rgba(214, 41, 118, .6);
+  opacity: 0;
+  transform: translate(-50%, 140%);
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.2, .9, .3, 1.2), opacity .2s ease;
+}
+
+.jump-to-box.is-shown {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.jump-to-box .icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+}
+
+/* --- Sticky jump nav that highlights the section in view --- */
+
+.home-copy .home-jump {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin-inline: -24px;
+  padding: 10px 24px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.home-jump a {
+  position: relative;
+}
+
+.home-jump a.is-active {
+  color: var(--text);
+}
+
+.home-jump a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ig);
+  transform: scaleX(0);
+  transition: transform .25s ease;
+}
+
+.home-jump a.is-active::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 720px) {
+  .home-copy .home-jump {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+
+  .home-copy .home-jump::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-jump a {
+    flex: 0 0 auto;
+  }
+}
+
+/* --- Sections fade up as they scroll in (only when JS marks them) --- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .6s ease var(--reveal-delay, 0ms), transform .6s cubic-bezier(.2, .8, .2, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Feature and tool cards: colour, depth, and a lift on hover --- */
+
+.feature-showcase-grid > li {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  transition: border-color .2s ease, box-shadow .2s ease, translate .2s ease;
+}
+
+.feature-showcase-grid > li:hover {
+  border-color: var(--subtle);
+  box-shadow: 0 16px 40px -22px rgba(10, 10, 11, .3);
+  translate: 0 -3px;
+}
+
+.feature-showcase-icon,
+.tool-hub-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--ig-soft);
+  color: var(--text);
+}
+
+.feature-showcase-grid > li:nth-child(6n + 1) .feature-showcase-icon { color: #e1306c; }
+.feature-showcase-grid > li:nth-child(6n + 2) .feature-showcase-icon { color: #fa7e1e; }
+.feature-showcase-grid > li:nth-child(6n + 3) .feature-showcase-icon { color: #962fbf; }
+.feature-showcase-grid > li:nth-child(6n + 4) .feature-showcase-icon { color: #4f5bd5; }
+.feature-showcase-grid > li:nth-child(6n + 5) .feature-showcase-icon { color: #d62976; }
+.feature-showcase-grid > li:nth-child(6n + 6) .feature-showcase-icon { color: #c48a00; }
+
+.home-copy .feature-showcase-grid,
+.feature-showcase-grid {
+  gap: 14px;
+}
+
+.tool-hub-card {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  transition: box-shadow .2s ease, translate .2s ease;
+}
+
+.tool-hub-card:hover {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    var(--ig) border-box;
+  box-shadow: 0 16px 40px -20px rgba(214, 41, 118, .45);
+  translate: 0 -3px;
+}
+
+/* FAQ rows tint on hover so the long list feels clickable. */
+.faq-list summary {
+  transition: color .15s ease, padding .2s ease;
+}
+
+.faq-list summary:hover {
+  padding-inline-start: 6px;
+}
+
+.faq-list details[open] summary {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.faq-list details[open] summary::after {
+  color: var(--ig-pink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .skeleton-dot,
+  .skeleton-line,
+  .skeleton-button,
+  .recent,
+  .results-section .ig-post,
+  .save-toast {
+    animation: none;
+  }
+
+  .hero h1::after {
+    animation: none;
+    clip-path: none;
+  }
+
+  .jump-to-box,
+  .feature-showcase-grid > li,
+  .tool-hub-card {
+    transition: none;
+  }
+}
