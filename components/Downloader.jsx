@@ -251,6 +251,10 @@ export function Downloader({
             <span>{error}</span>
           </div>
         ) : null}
+
+        <p className="partner-link">
+          <a href="https://vatculator.com" target="_blank" rel="noopener">VAT Calculator</a>
+        </p>
       </section>
 
       {loading && !result ? (
