@@ -295,7 +295,7 @@ html[lang] .hero h1 {
   gap: 12px;
   width: max-content;
   max-width: calc(100% - 24px);
-  padding: 8px 8px 8px 10px;
+  padding: 8px 16px 8px 10px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: color-mix(in srgb, var(--paper) 88%, transparent);
@@ -339,29 +339,6 @@ html[lang] .hero h1 {
   font-size: 12px;
 }
 
-.save-toast-share {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex: 0 0 auto;
-  padding: 9px 14px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.save-toast-share:hover {
-  border-color: var(--text);
-}
-
-.save-toast-share .icon {
-  width: 14px;
-  height: 14px;
-}
-
 @keyframes toast-in {
   from {
     opacity: 0;
@@ -376,45 +353,6 @@ html[lang] .hero h1 {
   width: 100%;
   height: 100%;
   pointer-events: none;
-}
-
-/* --- Floating button back to the link box --- */
-
-.jump-to-box {
-  position: fixed;
-  left: 50%;
-  bottom: max(18px, env(safe-area-inset-bottom));
-  z-index: 60;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border: 0;
-  border-radius: var(--pill);
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: var(--shadow-soft);
-  opacity: 0;
-  transform: translate(-50%, 140%);
-  pointer-events: none;
-  transition: transform .35s var(--ease-out), opacity .2s ease, background-color .15s ease;
-}
-
-.jump-to-box.is-shown {
-  opacity: 1;
-  transform: translate(-50%, 0);
-  pointer-events: auto;
-}
-
-.jump-to-box:hover {
-  background: var(--btn-hover);
-}
-
-.jump-to-box .icon {
-  width: 15px;
-  height: 15px;
 }
 
 /* --- Sticky jump nav that tracks the section in view --- */
@@ -653,7 +591,6 @@ html[lang] .hero h1 {
     animation: none;
   }
 
-  .jump-to-box,
   .feature-showcase-grid > li,
   .feature-showcase-icon,
   .tool-hub-icon,

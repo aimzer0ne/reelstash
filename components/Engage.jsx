@@ -1,17 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Icon } from './Icons';
-import { useI18n } from './I18nProvider';
+import { useEffect } from 'react';
 import './engage.css';
 
 // Page-wide polish for the long tool pages: a scroll progress rule, sections that
-// fade in as they arrive, a jump nav that tracks the section in view, and a
-// floating button back to the link box once it has scrolled away.
+// fade in as they arrive, and a jump nav that tracks the section in view.
 export function Engage() {
-  const { t } = useI18n();
-  const [showJump, setShowJump] = useState(false);
-
   useEffect(() => {
     const root = document.documentElement;
     let frame = 0;
@@ -78,35 +72,5 @@ export function Engage() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const form = document.querySelector('.link-form');
-    if (!form || !('IntersectionObserver' in window)) return undefined;
-    const observer = new IntersectionObserver(([entry]) => {
-      setShowJump(!entry.isIntersecting && entry.boundingClientRect.top < 0);
-    });
-    observer.observe(form);
-    return () => observer.disconnect();
-  }, []);
-
-  function backToBox() {
-    const input = document.getElementById('instagram-url');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => input?.focus({ preventScroll: true }), 450);
-  }
-
-  return (
-    <>
-      <div className="scroll-progress" aria-hidden="true" />
-      <button
-        className={showJump ? 'jump-to-box is-shown' : 'jump-to-box'}
-        type="button"
-        onClick={backToBox}
-        tabIndex={showJump ? 0 : -1}
-        aria-hidden={!showJump}
-      >
-        <Icon name="download" />
-        {t('newDownload')}
-      </button>
-    </>
-  );
+  return <div className="scroll-progress" aria-hidden="true" />;
 }

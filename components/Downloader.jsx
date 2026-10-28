@@ -116,15 +116,6 @@ export function Downloader({
     toastTimer.current = setTimeout(() => setToast(null), 5200);
   }
 
-  function shareSite() {
-    const url = window.location.origin + window.location.pathname;
-    if (typeof navigator.share === 'function') {
-      navigator.share({ title: 'ReelsDl.net', text: t('shareText'), url }).catch(() => {});
-      return;
-    }
-    navigator.clipboard?.writeText(url).then(() => setToast((prev) => prev && { ...prev, copied: true })).catch(() => {});
-  }
-
   async function pasteLink() {
     try {
       const text = await navigator.clipboard.readText();
@@ -313,12 +304,8 @@ export function Downloader({
           <span className="save-toast-icon" aria-hidden="true"><Icon name="check" /></span>
           <span className="save-toast-text">
             <b>{t('savedToast')}</b>
-            <span>{toast.copied ? t('shareCopied') : toast.total > 1 ? `${toast.total} ${t('savedCount')}` : t('shareText')}</span>
+            {toast.total > 1 ? <span>{`${toast.total} ${t('savedCount')}`}</span> : null}
           </span>
-          <button type="button" className="save-toast-share" onClick={shareSite}>
-            <Icon name="share" />
-            {t('share')}
-          </button>
         </div>
       ) : null}
     </>
