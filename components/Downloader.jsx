@@ -599,7 +599,7 @@ function fetchResolvedPost(value, mode, resolveFailed) {
       'content-type': 'application/json',
       'x-reelsdl-client': 'web'
     },
-    body: JSON.stringify(mode === 'audio' ? { url: value, mode: 'audio' } : { url: value })
+    body: JSON.stringify(mode === 'media' ? { url: value } : { url: value, mode })
   }).then(async (response) => {
     const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error || resolveFailed);

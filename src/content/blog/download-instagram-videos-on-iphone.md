@@ -93,7 +93,7 @@ The same three steps work for every public format, with a dedicated page for eac
 
 | You want | Use | Saved as |
 | --- | --- | --- |
-| A video post, IGTV clip, or Reel | [Video & Reels downloader](/) | MP4 with sound |
+| A video post, IGTV clip, or Reel | [Instagram Reels downloader](/) | MP4 with sound |
 | Photos or a carousel | [Photo downloader](/photo) | JPG (videos in carousels as MP4) |
 | A Story or Highlight | [Story downloader](/stories) | MP4 or JPG |
 | Only the song or voice | [Audio downloader](/audio) | MP3 |

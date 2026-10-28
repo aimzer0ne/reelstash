@@ -37,7 +37,7 @@ export function FeatureShowcase() {
   return (
     <section className="feature-showcase" id="features" aria-labelledby="features-heading">
       <p className="feature-showcase-kicker">What you get</p>
-      <h2 id="features-heading">Instagram downloader features</h2>
+      <h2 id="features-heading">Reels downloader features</h2>
       <ul className="feature-showcase-grid">
         {FEATURES.map((item) => (
           <li key={item.title}>

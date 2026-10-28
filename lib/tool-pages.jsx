@@ -91,7 +91,7 @@ function faq(items) {
 
 export const photoPage = {
   path: '/photo',
-  mode: 'media',
+  mode: 'photo',
   translate: false,
   art: 'photo',
   kind: 'photo',
@@ -115,7 +115,9 @@ export const photoPage = {
         <p>
           Paste the link of a public photo post and it is ready to save in a
           second. Paste a <b>carousel</b> link and every slide is listed with its
-          own download button, photos as JPG and video slides as MP4.
+          own download button as a JPG. Paste a <b>Reel or video</b> link and
+          you get its cover image (thumbnail) as a JPG; to save the video
+          itself, use the <Link href="/">Instagram Reels downloader</Link>.
         </p>
       </>
     )
@@ -155,7 +157,11 @@ export const photoPage = {
               </tr>
               <tr>
                 <th scope="row">Mixed carousel</th>
-                <td>Photos save as JPG, videos as MP4, from the same link.</td>
+                <td>Photos save as JPG, and each video slide saves as its cover image.</td>
+              </tr>
+              <tr>
+                <th scope="row">Reel or video</th>
+                <td>Saves the thumbnail as a JPG. For the MP4, use the <Link href="/">Reels downloader</Link>.</td>
               </tr>
               <tr>
                 <th scope="row">Profile picture</th>
@@ -186,7 +192,11 @@ export const photoPage = {
       },
       {
         q: 'Can I download all photos from a carousel at once?',
-        text: 'One link lists every slide of the carousel. Each photo and video has its own Download button, so you can save the ones you want or all of them.'
+        text: 'One link lists every slide of the carousel. Each slide has its own Download button, so you can save the ones you want or all of them. Video slides are saved as their cover image.'
+      },
+      {
+        q: 'Can I download the thumbnail of an Instagram Reel?',
+        text: 'Yes. Paste a Reel or video link into the photo downloader and it returns only the cover image, saved as a JPG. To download the video itself, use the Instagram Reels downloader on the home page.'
       },
       {
         q: 'What resolution are downloaded Instagram photos?',

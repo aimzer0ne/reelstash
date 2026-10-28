@@ -24,12 +24,13 @@ export function HomeCopy({ page, guides }) {
       </nav>
 
       <section className="panel article-panel" id="about" aria-labelledby="home-intro-heading">
-        <h2 id="home-intro-heading">Free Instagram Video &amp; Reels Downloader</h2>
+        <h2 id="home-intro-heading">Free Reels Downloader for Instagram</h2>
         <div className="article-copy">
           <p>
-            <b>ReelsDl.net</b> is a free <b>Instagram video downloader</b> and{' '}
-            <b>Reels downloader</b> in one. Paste a public Instagram link to save
-            videos and <a href="#reels">Reels</a> as MP4 with their music,{' '}
+            <b>ReelsDl.net</b> is a free <b>Instagram Reels downloader</b>. Paste a
+            public Reel link to download <a href="#reels">Instagram Reels</a> as
+            MP4 with their music. The same <b>Reels downloader</b> is also an{' '}
+            <a href="#video">Instagram video downloader</a> for video posts, and saves{' '}
             <Link href="/photo">photos and carousels</Link> as JPG,{' '}
             <Link href="/stories">Stories</Link> before they expire, or{' '}
             <Link href="/audio">Reel audio as MP3</Link>. No login is required.
@@ -50,11 +51,11 @@ export function HomeCopy({ page, guides }) {
       <FeatureShowcase />
 
       <section className="panel article-panel" id="reels" aria-labelledby="reels-heading">
-        <h2 id="reels-heading">Instagram Reels Downloader</h2>
+        <h2 id="reels-heading">Download Instagram Reels in HD with music</h2>
         <div className="article-copy">
           <p>
-            The same box works as an <b>Instagram Reels downloader</b>. Paste a
-            Reel link and you get the video file Instagram streams in the app,
+            As a <b>Reels downloader</b>, ReelsDl.net gives you the actual Reel
+            file. Paste a Reel link and you get the video Instagram streams in the app,
             with its original audio track and without the logo overlay that
             Instagram&apos;s own Download button stamps on top.
           </p>

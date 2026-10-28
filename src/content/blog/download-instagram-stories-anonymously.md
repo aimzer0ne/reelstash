@@ -118,4 +118,4 @@ If the Stories are yours, use Instagram itself:
 
 A public Story is still somebody's work and, often, a glimpse of their personal life. Saving one to remember an event, a recipe, or a sale is normal. Reposting it, especially without credit, or keeping Stories of private individuals to share elsewhere, crosses a line. When in doubt, ask the owner.
 
-For video posts and Reels, use the [Instagram video and Reels downloader](/); to keep only the soundtrack, use the [audio downloader](/audio).
+For video posts and Reels, use the [Instagram Reels downloader](/); to keep only the soundtrack, use the [audio downloader](/audio).

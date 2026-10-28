@@ -8,7 +8,7 @@ export function AudioCopy({ page, guides }) {
   return (
     <div className="home-copy">
       <p className="home-audio-cta">
-        <Link href="/">+ Video &amp; Reels Downloader</Link>
+        <Link href="/">+ Instagram Reels Downloader</Link>
       </p>
 
       <nav className="home-jump home-jump-5" aria-label="On this page">

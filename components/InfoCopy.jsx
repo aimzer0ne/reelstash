@@ -15,7 +15,7 @@ export const DEVICE_STEPS = [
     steps: [
       'In Instagram, open the post, Reel, or Story and tap the three dots (⋯) or the Share arrow.',
       'Tap Copy Link.',
-      'Open Safari and go to reelsdl.net. Use the tab for the format you want: Video & Reels, Photo, Story, or Audio.',
+      'Open Safari and go to reelsdl.net. Use the tab for the format you want: Reels & Video, Photo, Story, or Audio.',
       'Tap the input box, tap Paste, and wait a second for the preview.',
       'Tap Download, then Download again in the Safari pop-up.',
       'Open the Files app → Downloads. Tap the file, tap Share, and choose Save Video or Save Image to put it in Photos.'
@@ -246,7 +246,7 @@ export function ContactCopy() {
       </p>
       <h2>Reporting a link that does not work</h2>
       <p>
-        Include the Instagram link, the tool you used (Video &amp; Reels, Photo,
+        Include the Instagram link, the tool you used (Reels &amp; Video, Photo,
         Story, or Audio), your device and browser, and the message you saw.
         That lets us reproduce the problem quickly.
       </p>
