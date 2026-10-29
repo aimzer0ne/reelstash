@@ -1,10 +1,6 @@
 ---
-import '@fontsource-variable/plus-jakarta-sans/wght.css';
-import '@fontsource-variable/bricolage-grotesque/wght.css';
 import '@fontsource-variable/geist/wght.css';
 import '../styles/globals.css';
-import '../styles/logo-type.css';
-import '../styles/input-hit.css';
 import { localeMeta } from '../../lib/i18n.js';
 import { DEFAULT_OG_IMAGE, OG_IMAGE_PATH } from '../../lib/seo.js';
 import { pageOgImage } from '../../lib/images.js';
@@ -15,6 +11,7 @@ const {
   description,
   keywords = [],
   canonical = '/',
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   ogTitle = title,
   ogDescription = description,
   twitterTitle = title,
@@ -29,11 +26,12 @@ const {
 } = Astro.props;
 
 const origin = Astro.site?.href?.replace(/\/$/, '') || 'https://reelsdl.net';
-const canonicalUrl = new URL(canonical, `${origin}/`).href;
+// Pass canonical={null} for pages that must not be indexed (the 404 page).
+const canonicalUrl = canonical ? new URL(canonical, `${origin}/`).href : null;
 // Pages that pass no image get their own 1200 × 630 share card, or the site default.
 const share = image
   ? { src: image, alt: imageAlt, width: imageWidth, height: imageHeight }
-  : pageOgImage(canonical) || { src: OG_IMAGE_PATH, ...DEFAULT_OG_IMAGE };
+  : (canonical && pageOgImage(canonical)) || { src: OG_IMAGE_PATH, ...DEFAULT_OG_IMAGE };
 const imageUrl = new URL(share.src, `${origin}/`).href;
 const { dir } = localeMeta(locale);
 const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
@@ -46,12 +44,12 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywordList ? <meta name="keywords" content={keywordList} /> : null}
-    <link rel="canonical" href={canonicalUrl} />
+    {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
     <meta name="application-name" content="ReelsDl.net" />
     <meta name="author" content="ReelsDl.net" />
     <meta name="creator" content="ReelsDl.net" />
     <meta name="publisher" content="ReelsDl.net" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content={robots} />
     <meta name="referrer" content="origin" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
@@ -73,7 +71,7 @@ const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
-    <meta property="og:url" content={canonicalUrl} />
+    {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:alt" content={share.alt} />
     <meta property="og:image:width" content={share.width} />

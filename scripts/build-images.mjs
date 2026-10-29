@@ -6,6 +6,8 @@
 //   public/assets/illustrations/<scene>.webp guide mockups (saving on iPhone, Android, desktop, …)
 // Run after changing components/Illustrations.jsx or lib/images.js:
 //   node scripts/build-images.mjs
+// Or build only some groups (illustrations, og, steps, scenes, blog):
+//   node scripts/build-images.mjs blog og
 import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -140,6 +142,24 @@ function check(cx, cy) {
   return `<circle cx="${cx}" cy="${cy}" r="40" fill="#0a0a0b"/><path d="M${cx - 18} ${cy}l12 12 24-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`;
 }
 
+function cross(cx, cy) {
+  return `<circle cx="${cx}" cy="${cy}" r="40" fill="#e9e9e7"/><path d="M${cx - 15} ${cy - 15}l30 30M${cx + 15} ${cy - 15}l-30 30" fill="none" stroke="#0a0a0b" stroke-width="9" stroke-linecap="round"/>`;
+}
+
+// Android-style phone: a punch-hole camera instead of the iPhone's pill.
+function android(x, y, w, h, inner) {
+  return `<g filter="url(#sh)"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${w * .1}" fill="#0a0a0b"/>
+  <rect x="${x + 14}" y="${y + 14}" width="${w - 28}" height="${h - 28}" rx="${w * .08}" fill="#ffffff"/>
+  <circle cx="${x + w / 2}" cy="${y + 42}" r="11" fill="#0a0a0b"/></g>${inner}`;
+}
+
+function reel(x, y, w, h) {
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="26" fill="url(#ig)" opacity=".9"/>
+  ${play(x + w / 2, y + h / 2, 58)}
+  <circle cx="${x + 46}" cy="${y + h - 52}" r="22" fill="#ffffff" opacity=".9"/>
+  <rect x="${x + 80}" y="${y + h - 64}" width="140" height="22" rx="11" fill="#ffffff" opacity=".85"/>`;
+}
+
 function play(cx, cy, r) {
   return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#0a0a0b" opacity=".88"/><path d="M${cx - r * .3} ${cy - r * .45}v${r * .9}l${r * .75}-${r * .45}z" fill="#fff"/>`;
 }
@@ -181,6 +201,46 @@ ${phone(960, 112, 440, 800, `
       : `<rect x="${x}" y="${y}" width="104" height="138" rx="14" fill="#ecebe8"/>`;
   }).join('')}
   ${check(1180, 800)}`)}
+</svg>`,
+  'download-instagram-videos-on-android': `<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">${BLOG_DEFS}
+<rect width="1536" height="1024" fill="url(#bg)"/>
+${android(200, 112, 440, 800, reel(240, 190, 360, 640))}
+${arrow(700, 512)}
+${android(960, 112, 440, 800, `
+  <text x="1010" y="230" font-family="${FONT}" font-size="30" font-weight="700" fill="#0a0a0b">Gallery</text>
+  <rect x="1010" y="262" width="164" height="164" rx="18" fill="url(#ig)"/>${play(1092, 344, 30)}
+  <rect x="1186" y="262" width="164" height="164" rx="18" fill="#ecebe8"/>
+  <rect x="1010" y="438" width="164" height="164" rx="18" fill="#ecebe8"/>
+  <rect x="1186" y="438" width="164" height="164" rx="18" fill="#ecebe8"/>
+  <path d="M1010 650h70l18 20h234a18 18 0 0 1 18 18v70a18 18 0 0 1-18 18H1028a18 18 0 0 1-18-18z" fill="#f2f1ef"/>
+  <text x="1040" y="728" font-family="${FONT}" font-size="28" font-weight="600" fill="#0a0a0b">Download</text>
+  ${check(1300, 718)}`)}
+</svg>`,
+  'is-it-legal-to-download-instagram-reels': `<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">${BLOG_DEFS}
+<rect width="1536" height="1024" fill="url(#bg)"/>
+${phone(180, 112, 440, 800, reel(220, 190, 360, 640))}
+<g filter="url(#sh)"><rect x="720" y="236" width="660" height="552" rx="40" fill="#ffffff"/></g>
+${check(810, 346)}<text x="878" y="358" font-family="${FONT}" font-size="36" font-weight="700" fill="#0a0a0b">Watch offline</text>
+${check(810, 512)}<text x="878" y="524" font-family="${FONT}" font-size="36" font-weight="700" fill="#0a0a0b">Save your own Reels</text>
+${cross(810, 678)}<text x="878" y="690" font-family="${FONT}" font-size="36" font-weight="700" fill="#0a0a0b">Repost without asking</text>
+<rect x="760" y="420" width="580" height="4" rx="2" fill="#efeeec"/><rect x="760" y="586" width="580" height="4" rx="2" fill="#efeeec"/>
+</svg>`,
+  'download-instagram-reels-in-hd': `<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">${BLOG_DEFS}
+<rect width="1536" height="1024" fill="url(#bg)"/>
+${phone(200, 112, 440, 800, `
+  ${Array.from({ length: 42 }, (_, i) => {
+    const col = i % 6;
+    const row = Math.floor(i / 6);
+    const tone = ['#d9d7d3', '#c9c6c1', '#e4e2de', '#bdb9b3'][(col * 3 + row * 5) % 4];
+    return `<rect x="${240 + col * 60}" y="${190 + row * 83}" width="60" height="83" fill="${tone}"/>`;
+  }).join('')}
+  <rect x="300" y="790" width="240" height="58" rx="29" fill="#ffffff" stroke="#e1e0dd" stroke-width="4"/>
+  <text x="420" y="829" text-anchor="middle" font-family="${FONT}" font-size="26" font-weight="700" fill="#8e8e93">Blurry</text>`)}
+${arrow(700, 512)}
+${phone(960, 112, 440, 800, `
+  ${reel(1000, 190, 360, 580)}
+  <rect x="1060" y="790" width="240" height="58" rx="29" fill="#0a0a0b"/>
+  <text x="1180" y="829" text-anchor="middle" font-family="${FONT}" font-size="28" font-weight="800" fill="#ffffff">HD MP4</text>`)}
 </svg>`
 };
 
@@ -190,9 +250,11 @@ mkdirSync(OUT, { recursive: true });
 mkdirSync(BLOG_OUT, { recursive: true });
 mkdirSync(join(ROOT, 'public', STEP_DIR), { recursive: true });
 const { render, cleanup } = await loadComponents();
+const GROUPS = process.argv.slice(2);
+const want = (group) => !GROUPS.length || GROUPS.includes(group);
 
 try {
-  for (const [key, item] of Object.entries(ILLUSTRATIONS)) {
+  for (const [key, item] of want('illustrations') ? Object.entries(ILLUSTRATIONS) : []) {
     const markup = render(item.component);
     for (const theme of ['light', 'dark']) {
       const svg = themed(markup, theme, item);
@@ -202,13 +264,13 @@ try {
     console.log('illustration', key);
   }
 
-  for (const [path, og] of Object.entries(PAGE_OG)) {
+  for (const [path, og] of want('og') ? Object.entries(PAGE_OG) : []) {
     const scene = themed(render(ILLUSTRATIONS[og.art].component), 'light');
     await sharp(Buffer.from(ogSvg(og, scene))).jpeg({ quality: 86, mozjpeg: true }).toFile(join(OUT, `${og.file}.jpg`));
     console.log('og', path);
   }
 
-  for (const type of Object.keys(STEP_TYPES)) {
+  for (const type of want('steps') ? Object.keys(STEP_TYPES) : []) {
     const files = stepImages(type);
     const svgs = stepSvgs(type);
     for (let i = 0; i < svgs.length; i += 1) {
@@ -217,12 +279,12 @@ try {
     console.log('steps', type);
   }
 
-  for (const [key, svg] of sceneSvgs()) {
+  for (const [key, svg] of want('scenes') ? sceneSvgs() : []) {
     await sharp(Buffer.from(svg)).webp(WEBP).toFile(join(OUT, `${SCENES[key].file}.webp`));
     console.log('scene', key);
   }
 
-  for (const [slug, svg] of Object.entries(BLOG_COVERS)) {
+  for (const [slug, svg] of want('blog') ? Object.entries(BLOG_COVERS) : []) {
     const buf = Buffer.from(svg);
     await sharp(buf).webp(WEBP).toFile(join(BLOG_OUT, `${slug}.webp`));
     await sharp(buf).resize(720).webp(WEBP).toFile(join(BLOG_OUT, `${slug}-720.webp`));

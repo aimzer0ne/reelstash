@@ -7,18 +7,7 @@ import './page-arrange.css';
 export function AudioCopy({ page, guides }) {
   return (
     <div className="home-copy">
-      <p className="home-audio-cta">
-        <Link href="/">+ Instagram Reels Downloader</Link>
-      </p>
 
-      <nav className="home-jump home-jump-5" aria-label="On this page">
-        <a href="#about">About</a>
-        <a href="#how-it-works">How to</a>
-        <a href="#reel-to-mp3">Video to MP3</a>
-        <a href="#audio-guide">Audio link</a>
-        <a href="#audio-music">Music</a>
-        <a href="#faq">FAQ</a>
-      </nav>
 
       <section className="panel article-panel" id="about" aria-labelledby="audio-intro-heading">
         <h2 id="audio-intro-heading">Free Instagram Audio Downloader for Reels and Videos</h2>

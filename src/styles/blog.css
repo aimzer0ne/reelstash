@@ -95,11 +95,10 @@
 
 .blog-takeaways h2 {
   margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
 }
 
 .blog-takeaways ul {
@@ -127,11 +126,10 @@
 
 .blog-toc > p {
   margin: 0 0 10px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
 }
 
 .blog-toc ol {
@@ -279,8 +277,8 @@
 
 .blog-cta-btn {
   flex: 0 0 auto;
-  padding: 12px 22px;
-  border-radius: var(--pill);
+  padding: 12px 20px;
+  border-radius: 11px;
   background: var(--btn-bg);
   color: var(--btn-text);
   font-size: 14px;

@@ -29,6 +29,8 @@ Then visit [http://localhost:4321](http://localhost:4321). Set a long random `DO
    - `SITE_URL=https://reelsdl.net`
    - `NEXT_PUBLIC_API_URL=https://get.reelsdl.net`
 
+After a production deploy, run `node scripts/indexnow.mjs` to tell Bing and the other IndexNow engines which pages changed (pass paths such as `/blog/new-post` to submit only those). The key file is `public/<key>.txt`.
+
 There is a dedicated Instagram audio page at `/audio` that extracts MP3 soundtracks from public reels (ffmpeg) or downloads direct audio streams when available.
 
 ## Domains
@@ -53,13 +55,17 @@ The API only accepts traffic on `get.reelsdl.net` and only from `https://reelsdl
 
 | Path | Role |
 |------|------|
-| `src/pages/` | Astro pages, `/api/*` endpoints, `robots.txt`, `sitemap.xml` |
+| `src/pages/` | Astro pages, `/api/*` endpoints, `404`, `robots.txt`, `sitemap.xml` |
+| `src/layouts/` | `Base.astro` (head and meta tags); `ToolPage.astro` and `InfoPage.astro` assemble each page |
 | `src/middleware.js` | Host routing, redirects, security headers |
-| `components/` | Shared UI (`DownloadPage`, `Downloader`, header, footer, FAQ) |
+| `components/` | Shared UI. Only `HeaderIsland` and `DownloaderIsland` hydrate; page bodies (`ToolBody`, `InfoBody`) are static HTML |
 | `lib/site.jsx` | Page copy, SEO, and FAQ |
+| `lib/nav.js` | Header tabs and footer links |
+| `lib/messages.js` | UI strings in 31 languages; pages pass one language to the islands |
 | `lib/reelstash.js` | Resolve/download logic (GraphQL, HTML, ffmpeg) |
 | `lib/api-guard.js` | API host/origin/cookie checks |
 | `worker.js` | Cloudflare Worker: reelsdl.net → Vercel proxy |
+| `scripts/` | `build-images.mjs` (illustrations, share cards, blog covers), `indexnow.mjs` |
 
 ## How it works
 

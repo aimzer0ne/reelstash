@@ -1,17 +1,19 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { BlogShell } from '../../../components/BlogShell.jsx';
-import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../../lib/i18n.js';
+import { SiteFooter } from '../../../components/Footer.jsx';
+import { HeaderIsland } from '../../../components/HeaderIsland.jsx';
+import { requestLocale } from '../../../lib/i18n.js';
+import { messagesFor } from '../../../lib/messages.js';
 import { BLOG_PATH, OG_SIZE, formatDate, getPost, getPosts, postImage, postJsonLd, postPath, postTool, readingMinutes } from '../../../lib/blog.js';
 import '../../styles/blog.css';
 
 const post = await getPost(Astro.params.slug);
-if (!post) return new Response('Not found', { status: 404 });
+if (!post) return Astro.rewrite('/404');
 
-const uiLocale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
-  || localeFromAccept(Astro.request.headers.get('accept-language'))
-  || 'en';
+// Posts are English; only the header and footer follow the visitor's language.
+const uiLocale = requestLocale(Astro.cookies, Astro.request.headers);
+const messages = messagesFor(uiLocale);
 const { Content, headings } = await render(post);
 const sections = headings.filter((heading) => heading.depth === 2);
 const tool = postTool(post);
@@ -37,7 +39,8 @@ const social = hero ? { image: hero.og, imageAlt: hero.alt, imageWidth: OG_SIZE.
   {postJsonLd(post).map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
-  <BlogShell client:load initialLocale={uiLocale}>
+  <HeaderIsland client:load locale={uiLocale} messages={messages} />
+  <main class="blog-main">
     <article class="blog-post">
       <nav class="blog-crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
@@ -122,5 +125,6 @@ const social = hero ? { image: hero.og, imageAlt: hero.alt, imageWidth: OG_SIZE.
         </ul>
       </section>
     </article>
-  </BlogShell>
+    <SiteFooter locale={uiLocale} messages={messages} />
+  </main>
 </Base>

@@ -1,26 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
-import { AppRoot } from '../../components/AppRoot.jsx';
-import { getGuideLinks } from '../../lib/blog.js';
-import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../lib/i18n.js';
+import ToolPage from '../layouts/ToolPage.astro';
 import { photoPage } from '../../lib/tool-pages.jsx';
-
-const locale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
-  || localeFromAccept(Astro.request.headers.get('accept-language'))
-  || 'en';
-const meta = photoPage.metadata;
-const guides = await getGuideLinks();
 ---
-<Base
-  locale={locale}
-  title={meta.title}
-  description={meta.description}
-  keywords={meta.keywords}
-  canonical={meta.alternates.canonical}
-  ogTitle={meta.openGraph.title}
-  ogDescription={meta.openGraph.description}
-  twitterTitle={meta.twitter.title}
-  twitterDescription={meta.twitter.description}
->
-  <AppRoot client:load pageId="photo" initialLocale={locale} guides={guides} />
-</Base>
+<ToolPage page={photoPage} />

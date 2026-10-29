@@ -1,6 +1,6 @@
 import Link from './Link';
 import { Icon } from './Icons';
-import { NAV } from '@/lib/site.jsx';
+import { NAV } from '@/lib/nav.js';
 import { sceneImage } from '@/lib/images.js';
 import { GuideShots } from './Illustration';
 

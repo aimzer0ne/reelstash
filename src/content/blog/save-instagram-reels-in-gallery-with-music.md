@@ -72,6 +72,8 @@ Chrome saves the MP4 to your **Download** folder. Most gallery apps show that fo
 
 If the video does not show up, open the **Files** app, go to *Downloads*, and play it once. That usually makes the gallery pick it up.
 
+Other browsers and more fixes are in the full guide to [downloading Instagram videos on Android](/blog/download-instagram-videos-on-android).
+
 ## Save a Reel with music on iPhone
 
 1. In Instagram, tap the **share arrow** on the Reel and choose **Copy link**.

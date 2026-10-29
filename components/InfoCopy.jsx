@@ -4,7 +4,7 @@ import { GuideShots } from './Illustration';
 import { FaqList } from './ToolSections';
 import { SITE_EMAIL } from '@/lib/seo';
 import { sceneImage } from '@/lib/images.js';
-import { NAV } from '@/lib/site.jsx';
+import { NAV } from '@/lib/nav.js';
 import './page-arrange.css';
 
 export const DEVICE_STEPS = [

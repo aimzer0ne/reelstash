@@ -100,7 +100,6 @@ export const photoPage = {
   inputLabel: 'Instagram photo or carousel URL',
   placeholder: 'Paste a photo or post link',
   summary: { defaultTitle: 'Instagram post', one: '1 photo ready', manySuffix: ' items ready' },
-  jump: [['about', 'About'], ['how-it-works', 'How to'], ['carousel', 'Carousels'], ['devices', 'Devices'], ['tools', 'More tools'], ['faq', 'FAQ']],
   intro: {
     heading: 'Full-size Instagram photos, not screenshots',
     body: (
@@ -232,7 +231,6 @@ export const storiesPage = {
   inputLabel: 'Instagram Story or Highlight URL',
   placeholder: 'Paste a Story or Highlight link',
   summary: { defaultTitle: 'Instagram Story', one: '1 Story ready', manySuffix: ' Stories ready' },
-  jump: [['about', 'About'], ['how-it-works', 'How to'], ['links', 'Links'], ['devices', 'Devices'], ['tools', 'More tools'], ['faq', 'FAQ']],
   intro: {
     heading: 'Keep Stories after the 24 hours are up',
     body: (

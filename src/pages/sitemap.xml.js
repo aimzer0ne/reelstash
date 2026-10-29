@@ -5,12 +5,13 @@ import { illustrationSrc, pageOgImage, sceneImage, stepImages } from '../../lib/
 // lastmod is the date the page's content last changed. Bump it when you edit a
 // page; a value that changes on every request teaches crawlers to ignore it.
 const PATHS = [
-  { path: '/', priority: '1.0', updated: '2026-10-25', art: ['video'], scenes: ['watermarkCompare', 'iphoneSaveVideo', 'androidGallery'], steps: 'video' },
+  { path: '/', priority: '1.0', updated: '2026-10-29', art: ['video'], scenes: ['watermarkCompare', 'iphoneSaveVideo', 'androidGallery'], steps: 'video' },
   { path: '/photo', priority: '0.9', updated: '2026-10-25', art: ['photo'], scenes: ['carouselResults'], steps: 'photo' },
   { path: '/stories', priority: '0.9', updated: '2026-10-25', art: ['stories'], steps: 'stories' },
   { path: '/audio', priority: '0.9', updated: '2026-10-25', art: ['audio'], steps: 'audio' },
-  { path: '/how-to', priority: '0.8', updated: '2026-10-25', scenes: ['iphoneSafariDownload', 'iphoneFilesDownloads', 'iphoneSaveVideo', 'androidDownloaded', 'androidGallery', 'desktopDownloads'], steps: 'video' },
-  { path: '/faq', priority: '0.8', updated: '2026-10-25' },
+  { path: '/how-to', priority: '0.8', updated: '2026-10-29', scenes: ['iphoneSafariDownload', 'iphoneFilesDownloads', 'iphoneSaveVideo', 'androidDownloaded', 'androidGallery', 'desktopDownloads'], steps: 'video' },
+  { path: '/faq', priority: '0.8', updated: '2026-10-29' },
+  { path: '/about', priority: '0.5', updated: '2026-10-29' },
   { path: '/contact', priority: '0.4', updated: '2026-10-25' },
   { path: '/privacy', priority: '0.3', updated: '2026-10-14' },
   { path: '/terms', priority: '0.3', updated: '2026-10-25' },

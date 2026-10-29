@@ -1,13 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { BlogShell } from '../../../components/BlogShell.jsx';
-import { LANG_COOKIE, localeFromAccept, localeFromValue } from '../../../lib/i18n.js';
+import { SiteFooter } from '../../../components/Footer.jsx';
+import { HeaderIsland } from '../../../components/HeaderIsland.jsx';
+import { requestLocale } from '../../../lib/i18n.js';
+import { messagesFor } from '../../../lib/messages.js';
 import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE, blogIndexJsonLd, formatDate, getPosts, postImage, postPath, readingMinutes } from '../../../lib/blog.js';
 import '../../styles/blog.css';
 
-const uiLocale = localeFromValue(Astro.cookies.get(LANG_COOKIE)?.value)
-  || localeFromAccept(Astro.request.headers.get('accept-language'))
-  || 'en';
+// Posts are English; only the header and footer follow the visitor's language.
+const uiLocale = requestLocale(Astro.cookies, Astro.request.headers);
+const messages = messagesFor(uiLocale);
 const posts = await getPosts();
 ---
 <Base
@@ -20,7 +22,8 @@ const posts = await getPosts();
   {blogIndexJsonLd(posts).map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
-  <BlogShell client:load initialLocale={uiLocale}>
+  <HeaderIsland client:load locale={uiLocale} messages={messages} />
+  <main class="blog-main">
     <div class="blog-index">
       <nav class="blog-crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
@@ -65,5 +68,6 @@ const posts = await getPosts();
         })}
       </ol>
     </div>
-  </BlogShell>
+    <SiteFooter locale={uiLocale} messages={messages} />
+  </main>
 </Base>

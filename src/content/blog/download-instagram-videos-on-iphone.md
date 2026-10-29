@@ -85,7 +85,7 @@ The video is now in the Photos app, in *Recents*, ready to watch offline, trim, 
 
 ## Using Chrome instead of Safari
 
-The steps are the same, but Chrome on iPhone keeps downloads in its own folder: *Files → On My iPhone → Chrome*. Open the file there and use **Share → Save Video** to move it to Photos. Safari is a little simpler because its downloads button sits in the address bar.
+The steps are the same, but Chrome on iPhone keeps downloads in its own folder: *Files → On My iPhone → Chrome*. Open the file there and use **Share → Save Video** to move it to Photos. Safari is a little simpler because its downloads button sits in the address bar. On an Android phone, follow [how to download Instagram videos on Android](/blog/download-instagram-videos-on-android) instead.
 
 ## Saving Reels, carousels, and Stories
 
@@ -116,4 +116,4 @@ Tap the **Share** button in Safari while on reelsdl.net and choose **Add to Home
 
 ## Use downloads responsibly
 
-Saving a video to watch offline or keep as a reference is common. Re-uploading someone else's video, or using it in your own content, requires the creator's permission. Credit them when they say yes.
+Saving a video to watch offline or keep as a reference is common. Re-uploading someone else's video, or using it in your own content, requires the creator's permission. Credit them when they say yes. [Is it legal to download Instagram Reels?](/blog/is-it-legal-to-download-instagram-reels) explains where the line is.

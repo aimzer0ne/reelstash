@@ -1,0 +1,7 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import { notFoundPage } from '../../lib/site.jsx';
+
+Astro.response.status = 404;
+---
+<ToolPage page={notFoundPage} canonical={null} robots="noindex, follow" />

@@ -7,11 +7,6 @@ import './page-arrange.css';
 export function ToolCopy({ page, guides }) {
   return (
     <div className="home-copy">
-      <nav className="home-jump" aria-label="On this page">
-        {page.jump.map(([id, label]) => (
-          <a key={id} href={`#${id}`}>{label}</a>
-        ))}
-      </nav>
 
       <section className="panel article-panel" id="about" aria-labelledby="about-heading">
         <h2 id="about-heading">{page.intro.heading}</h2>

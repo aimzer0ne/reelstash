@@ -18,11 +18,6 @@ function redirectToSite(url, headers = {}) {
   });
 }
 
-function isPageRequest(request, pathname) {
-  if (request.method !== 'GET' && request.method !== 'HEAD') return false;
-  return !/\.[a-z0-9]+$/i.test(pathname);
-}
-
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url } = context;
   const { pathname } = url;
@@ -52,15 +47,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return withHeaders(Response.json({ error: 'Use https://get.reelsdl.net' }, { status: 404 }), API_SECURITY_HEADERS);
   }
 
+  // Unknown pages render src/pages/404.astro with a real 404 status. (Redirecting
+  // them to the homepage made Google report soft 404s, and on Vercel the 404 status
+  // was kept, so visitors saw a blank page.)
   const response = await next();
-  // Unknown pages go to the homepage. Missing files (anything with an extension) and
-  // non-GET requests keep their real 404 so broken assets stay visible.
-  if (response.status === 404 && isPageRequest(context.request, pathname)) {
-    return new Response(null, {
-      status: 302,
-      headers: { location: '/', 'cache-control': 'no-store' }
-    });
-  }
   if (import.meta.env.PROD) {
     applyHeaders(response.headers, SITE_SECURITY_HEADERS);
     if (pathname === '/sw.js') {

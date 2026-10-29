@@ -109,4 +109,4 @@ For your own content the picture is simpler: a clean file is exactly what you wa
 
 ## If the download does not work
 
-A link that fails is almost always private, deleted, or copied from the wrong place. The checklist in [Instagram Reels not saving](/blog/instagram-reels-not-saving-to-camera-roll) covers each case. If you are on a computer, see [how to download Instagram Reels on a laptop or PC](/blog/download-instagram-reels-on-laptop-pc-mac).
+A link that fails is almost always private, deleted, or copied from the wrong place. The checklist in [Instagram Reels not saving](/blog/instagram-reels-not-saving-to-camera-roll) covers each case. If you are on a computer, see [how to download Instagram Reels on a laptop or PC](/blog/download-instagram-reels-on-laptop-pc-mac). If the clean copy looks soft, [how to download Instagram Reels in HD](/blog/download-instagram-reels-in-hd) explains why and what to try.

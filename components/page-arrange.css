@@ -1,138 +1,32 @@
-/* --- Jump links under the hero --- */
+/* Content sections under the downloader: text, steps, tables, and cards.
+   No boxes around sections; space and hairlines do the separating. */
 
-.home-audio-cta {
-  margin: 0;
-  text-align: center;
-  font-size: 13px;
-}
-
-.home-audio-cta a {
-  display: inline-block;
-  padding: 9px 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--pill);
-  color: var(--text);
-  font-weight: 600;
-  text-decoration: none;
-  transition: border-color .15s ease;
-}
-
-.home-audio-cta a:hover {
-  border-color: var(--text);
-}
-
-.home-jump {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px 28px;
-  margin: 28px 0 0;
-}
-
-.home-jump a {
-  padding: 6px 0;
+.copy-lede {
+  max-width: 60ch;
+  margin: 12px 0 0;
   color: var(--muted);
-  font-size: 13px;
-  font-weight: 500;
-  transition: color .15s ease;
-}
-
-.home-jump a:hover {
-  color: var(--text);
-}
-
-/* --- Sections: no boxes, a hairline and room to breathe --- */
-
-.home-copy .panel,
-.home-copy .feature-showcase,
-.home-copy .copy-split {
-  margin-top: var(--section);
-  padding-top: var(--section);
-  border-top: 1px solid var(--line);
-  scroll-margin-top: 0;
-}
-
-.home-copy .home-jump + .panel {
-  margin-top: 56px;
-}
-
-.home-copy .panel h2,
-.home-copy .feature-showcase h2,
-.home-copy .copy-split h2 {
-  margin: 0 0 18px;
-  color: var(--text);
-  font-size: clamp(26px, 4vw, 36px);
-  line-height: 1.1;
-}
-
-.home-copy .article-copy {
-  max-width: 64ch;
-  margin-top: 0;
-}
-
-.home-copy .article-copy p:first-child {
-  color: var(--text);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
-.home-copy .copy-follow {
-  margin-top: 32px;
-}
-
-.home-copy .copy-follow p:first-child {
-  color: var(--text-2);
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-.copy-lede,
 .copy-note {
   max-width: 64ch;
-  margin: 16px 0 0;
-  color: var(--text-2);
-  font-size: 15px;
-  line-height: 1.65;
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-.home-copy .copy-note {
-  margin-top: 28px;
-  padding: 2px 0 2px 18px;
-  border-inline-start: 1px solid var(--text);
+.copy-follow {
+  margin-top: 24px;
 }
 
-.home-copy .copy-note b,
-.home-copy .copy-table b,
-.home-copy .copy-grid b,
-.home-copy .guide-steps b,
-.home-copy .how-guide-step p b {
-  color: var(--text);
-  font-weight: 600;
-}
-
-.copy-split {
-  display: grid;
-  grid-template-columns: minmax(11em, .85fr) minmax(0, 1.15fr);
-  gap: 16px 40px;
-}
-
-.home-copy .copy-split h2 {
-  margin: 0;
-}
-
-.copy-split p {
-  margin: 0;
-  color: var(--text-2);
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-/* --- How-to steps --- */
+/* --- How-to: three phone screens with a numbered caption --- */
 
 .how-guide {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px 32px;
+  gap: 32px 24px;
   margin: 32px 0 0;
   padding: 0;
   list-style: none;
@@ -144,8 +38,8 @@
 }
 
 .how-guide-visual {
-  margin: 0 auto 20px;
-  max-width: 260px;
+  max-width: 240px;
+  margin: 0 auto 18px;
 }
 
 .how-guide-visual img {
@@ -154,42 +48,47 @@
   height: auto;
 }
 
-.home-copy .how-guide-step h3 {
+.how-guide-step h3 {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin: 0 0 8px;
+  gap: 8px;
+  margin: 0;
   color: var(--text);
-  font-size: 18px;
-  letter-spacing: -.02em;
+  font-size: 16px;
+  letter-spacing: -.015em;
 }
 
 .how-guide-num {
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: var(--ig);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0;
 }
 
-.home-copy .how-guide-step p {
-  max-width: 32ch;
-  margin: 0 auto;
+.how-guide-step p {
+  max-width: 30ch;
+  margin: 6px auto 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
 }
 
+.how-guide-step p b {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .how-guide-paste-icon {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   fill: currentColor;
   vertical-align: -3px;
 }
@@ -197,72 +96,64 @@
 .how-guide-key {
   display: inline-block;
   margin-inline-start: 2px;
-  padding: 1px 8px 2px;
+  padding: 0 6px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 5px;
   color: var(--text);
-  font: inherit;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
 }
 
-/* --- Features --- */
+/* --- Features: icon, title, one line --- */
 
-.feature-showcase-kicker,
-.home-copy .feature-showcase > .feature-showcase-kicker {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.home-copy .feature-showcase-grid,
 .feature-showcase-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 44px 32px;
-  margin: 36px 0 0;
+  gap: 36px 32px;
+  margin: 32px 0 0;
   padding: 0;
   list-style: none;
-  color: inherit;
 }
 
-.home-copy .feature-showcase-grid li,
 .feature-showcase-grid li {
   min-width: 0;
   margin: 0;
 }
 
+.feature-showcase-icon,
+.tool-hub-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+
 .feature-showcase-icon {
-  display: flex;
-  margin-bottom: 16px;
-  color: var(--text);
+  margin-bottom: 14px;
 }
 
-.feature-showcase-icon .icon {
-  width: 22px;
-  height: 22px;
+.feature-showcase-icon .icon,
+.tool-hub-icon .icon {
+  width: 18px;
+  height: 18px;
 }
 
-.home-copy .feature-showcase h3 {
-  margin: 0 0 6px;
-  color: var(--text);
-  font-size: 17px;
-  letter-spacing: -.02em;
+.feature-showcase h3 {
+  font-size: 16px;
+  letter-spacing: -.015em;
 }
 
-.home-copy .feature-showcase p {
-  margin: 0;
+.feature-showcase p {
+  margin: 6px 0 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
 }
 
-/* --- Tables and lists: rows on hairlines --- */
+/* --- Tables: rows on hairlines --- */
 
 .copy-table {
   width: 100%;
@@ -273,19 +164,18 @@
 
 .copy-table th,
 .copy-table td {
-  padding: 16px 0;
+  padding: 14px 0;
   border-bottom: 1px solid var(--line);
   text-align: start;
   vertical-align: top;
 }
 
 .copy-table th {
-  width: 34%;
+  width: 32%;
   padding-inline-end: 24px;
   color: var(--text);
   font-size: 15px;
   font-weight: 600;
-  letter-spacing: -.01em;
 }
 
 .copy-table td {
@@ -294,16 +184,64 @@
   line-height: 1.6;
 }
 
+.copy-table b {
+  color: var(--text);
+}
+
 .copy-table-links th {
   width: 48%;
 }
+
+/* Comparison table: real columns on every screen, scrolling sideways on phones. */
+.copy-table-scroll {
+  margin-top: 28px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.copy-table-scroll .copy-table {
+  margin-top: 0;
+}
+
+.copy-table-compare {
+  min-width: 600px;
+  table-layout: fixed;
+}
+
+.copy-table-compare th,
+.copy-table-compare td {
+  padding-inline-end: 16px;
+}
+
+.copy-table-compare th[scope="row"] {
+  width: 19%;
+}
+
+.copy-table-compare thead th {
+  width: auto;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.copy-table-compare td {
+  font-size: 14px;
+}
+
+.copy-table-compare thead th:last-child,
+.copy-table-compare td:last-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* --- Short lists --- */
 
 .home-copy .copy-grid,
 .home-copy .copy-stack {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 40px;
-  margin: 28px 0 0;
+  gap: 0 32px;
+  margin: 24px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -315,297 +253,192 @@
 .home-copy .copy-grid li,
 .home-copy .copy-stack li {
   margin: 0;
-  padding: 16px 0;
+  padding: 14px 0;
   border-top: 1px solid var(--line);
   color: var(--text-2);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
+.home-copy .copy-grid b,
+.home-copy .copy-stack b {
+  color: var(--text);
+}
+
+/* Numbered device steps on the how-to page. */
 .home-copy .guide-steps {
   max-width: 64ch;
-  margin: 28px 0 0;
+  margin: 24px 0 0;
   padding: 0;
   list-style: none;
-  counter-reset: guide-step;
+  counter-reset: step;
 }
 
 .home-copy .guide-steps li {
   position: relative;
-  margin: 0;
-  padding: 0 0 28px 44px;
-  counter-increment: guide-step;
+  margin: 0 0 14px;
+  padding-inline-start: 38px;
+  counter-increment: step;
 }
 
 .home-copy .guide-steps li:last-child {
-  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .home-copy .guide-steps li::before {
-  content: counter(guide-step);
+  content: counter(step);
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--line);
+  inset-inline-start: 0;
+  top: 1px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
+  background: var(--surface);
   color: var(--text);
   font-size: 12px;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  line-height: 26px;
-  text-align: center;
 }
 
 .home-copy .guide-steps p {
   margin: 0;
-  padding-top: 2px;
   color: var(--text-2);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .home-copy .guide-steps .guide-image {
-  margin: 16px 0 0;
+  margin-inline: 0;
 }
 
 /* --- Guides from the blog --- */
 
 .guides-head {
   display: flex;
-  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 16px 24px;
-}
-
-.guides-kicker {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.home-copy .guides-panel h2 {
-  margin: 0;
+  gap: 16px;
 }
 
 .guides-all {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--pill);
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 600;
-  transition: border-color .15s ease;
+  gap: 6px;
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color .15s ease;
 }
 
 .guides-all:hover {
-  border-color: var(--text);
-}
-
-.home-copy .guide-cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 36px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.home-copy .guide-cards li {
-  display: flex;
-  min-width: 0;
-  margin: 0;
-}
-
-.guide-cards .guide-card {
-  position: relative;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 24px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper);
   color: var(--text);
-  font-weight: 400;
-  text-decoration: none;
-  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
-}
-
-/* Instagram-gradient hairline that draws in on hover. */
-.guide-cards .guide-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 1;
-  height: 2px;
-  background: var(--ig);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-.guide-cards .guide-card:hover,
-.guide-cards .guide-card:focus-visible {
-  border-color: var(--subtle);
-  background: var(--surface);
-  transform: translateY(-2px);
-}
-
-.guide-cards .guide-card:hover::before,
-.guide-cards .guide-card:focus-visible::before {
-  transform: scaleX(1);
-}
-
-.guide-card-thumb {
-  display: block;
-  margin: -24px -24px 22px;
-  overflow: hidden;
-  background: var(--surface);
-}
-
-.guide-card-thumb img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  transition: transform .3s ease;
-}
-
-.guide-card:hover .guide-card-thumb img {
-  transform: scale(1.03);
-}
-
-.guide-card-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--subtle);
-  font-size: 12px;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-
-.guide-card-num {
-  letter-spacing: .14em;
-}
-
-.home-copy .guide-card h3 {
-  margin: 18px 0 0;
-  color: var(--text);
-  font-size: 19px;
-  line-height: 1.25;
-  letter-spacing: -.025em;
-}
-
-.home-copy .guide-card p {
-  display: -webkit-box;
-  margin: 10px 0 0;
-  overflow: hidden;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-}
-
-.guide-card-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 22px;
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 600;
 }
 
 .guide-card-arrow {
-  flex: 0 0 auto;
-  transition: transform .2s ease;
+  width: 15px;
+  height: 15px;
+  transition: transform .2s var(--ease);
 }
 
-.guide-card:hover .guide-card-arrow,
 .guides-all:hover .guide-card-arrow {
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
 [dir="rtl"] .guide-card-arrow {
   transform: scaleX(-1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .guide-cards .guide-card,
-  .guide-cards .guide-card::before,
-  .guide-card-arrow {
-    transition: none;
-  }
-
-  .guide-cards .guide-card:hover {
-    transform: none;
-  }
+[dir="rtl"] .guides-all:hover .guide-card-arrow {
+  transform: scaleX(-1) translateX(2px);
 }
 
-@media (max-width: 720px) {
-  .home-jump {
-    gap: 4px 22px;
-  }
-
-  .copy-split,
-  .how-guide,
-  .home-copy .guide-cards,
-  .home-copy .copy-grid,
-  .home-copy .feature-showcase-grid,
-  .feature-showcase-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .how-guide,
-  .home-copy .feature-showcase-grid,
-  .feature-showcase-grid {
-    gap: 32px;
-  }
-
-  .home-copy .how-guide-step p {
-    max-width: none;
-  }
-
-  .copy-table th,
-  .copy-table td {
-    display: block;
-    width: 100%;
-  }
-
-  .copy-table th {
-    padding-bottom: 2px;
-    border-bottom: 0;
-  }
-
-  .copy-table td {
-    padding-top: 0;
-  }
-
-  .home-copy .guide-steps li {
-    padding-left: 40px;
-  }
+.guide-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 24px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* --- Tool hub: cards linking to the other downloaders --- */
+.guide-cards li {
+  min-width: 0;
+  margin: 0;
+}
+
+/* Whole-card links: no prose underline on the text inside. */
+.guide-card,
+.tool-hub-card {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.guide-card {
+  display: block;
+}
+
+.guide-card-thumb {
+  display: block;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.guide-card-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s var(--ease);
+}
+
+.guide-card:hover .guide-card-thumb img {
+  transform: scale(1.03);
+}
+
+.guide-card h3 {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: -.015em;
+}
+
+.guide-card:hover h3 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.guide-card p {
+  display: -webkit-box;
+  margin: 6px 0 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.guide-card-meta {
+  display: block;
+  margin-top: 8px;
+  color: var(--subtle);
+  font-size: 13px;
+}
+
+/* --- Tool hub: one card per other downloader --- */
 
 .tool-hub-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
   margin: 28px 0 0;
   padding: 0;
@@ -613,59 +446,41 @@
 }
 
 .tool-hub-grid li {
+  min-width: 0;
   margin: 0;
 }
 
 .tool-hub-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 20px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  color: inherit;
-  text-decoration: none;
-  transition: border-color .15s ease, transform .15s ease;
+  border-radius: 16px;
+  background: var(--paper);
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 .tool-hub-card:hover {
-  border-color: var(--text);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
 }
 
 .tool-hub-icon {
-  display: flex;
-  margin-bottom: 14px;
-  color: var(--text);
+  margin-bottom: 16px;
 }
 
-.tool-hub-icon .icon {
-  width: 22px;
-  height: 22px;
+.tool-hub-card h3 {
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -.015em;
 }
 
-.home-copy .tool-hub-card h3 {
-  margin: 0 0 6px;
-  color: var(--text);
-  font-size: 17px;
-  letter-spacing: -.02em;
-}
-
-.home-copy .tool-hub-card p {
-  margin: 0;
+.tool-hub-card p {
+  margin: 6px 0 0;
   color: var(--muted);
   font-size: 14px;
-  line-height: 1.6;
-}
-
-@media (max-width: 720px) {
-  .tool-hub-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tool-hub-card {
-    transition: none;
-  }
+  line-height: 1.55;
 }
 
 /* Help pages reuse the section styles but have no downloader above them. */
@@ -674,16 +489,17 @@
 }
 
 .info-copy > .copy-lede {
+  max-width: 62ch;
+  margin-top: 0;
+  color: var(--text-2);
   font-size: 17px;
 }
 
 .info-copy .copy-lede a {
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  white-space: nowrap;
 }
 
-/* --- Illustration files: light and dark pair, captioned --- */
+/* --- Illustrations: light and dark pair, captioned --- */
 
 .tool-figure {
   max-width: 560px;
@@ -719,16 +535,16 @@
   }
 }
 
-.tool-figure figcaption {
-  margin-top: 12px;
+.tool-figure figcaption,
+.guide-shots figcaption {
+  margin-top: 10px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
   text-align: center;
 }
 
-/* --- Guide mockup rows (phones and browser windows) --- */
-
+/* Phone and browser mockups in a row. */
 .guide-shots {
   display: flex;
   flex-wrap: wrap;
@@ -740,7 +556,6 @@
 .guide-shots figure {
   flex: 0 1 210px;
   margin: 0;
-  text-align: center;
 }
 
 .guide-shots.is-wide figure {
@@ -758,15 +573,125 @@
   max-width: 600px;
 }
 
-.guide-shots figcaption {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
+/* The wide comparison art has dark labels on a transparent background,
+   so it keeps a light card in dark mode. */
+:root[data-theme="dark"] .guide-shots.is-wide img {
+  padding: 14px;
+  border-radius: var(--radius);
+  background: #f4f4f5;
 }
 
-@media (max-width: 520px) {
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .guide-shots.is-wide img {
+    padding: 14px;
+    border-radius: var(--radius);
+    background: #f4f4f5;
+  }
+}
+
+/* --- Phones: rows of cards scroll sideways instead of stacking very tall --- */
+
+@media (max-width: 760px) {
+  .how-guide,
+  .guide-cards {
+    display: flex;
+    gap: 16px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: 6px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .how-guide::-webkit-scrollbar,
+  .guide-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .how-guide > li,
+  .guide-cards > li {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+  }
+
+  .guide-cards > li {
+    flex-basis: 78%;
+  }
+
+  .how-guide-visual {
+    max-width: 200px;
+  }
+
+  .feature-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
+  }
+
+  .copy-table th,
+  .copy-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .copy-table th {
+    padding-bottom: 2px;
+    border-bottom: 0;
+  }
+
+  .copy-table td {
+    padding-top: 0;
+  }
+
+  .copy-table-compare th,
+  .copy-table-compare td {
+    display: table-cell;
+    padding: 14px 0;
+    padding-inline-end: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .copy-table-compare th[scope="row"] {
+    width: 19%;
+  }
+
+  .home-copy .copy-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .feature-showcase-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  /* One column: icon beside the text instead of above it. */
+  .feature-showcase-grid li {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 14px;
+  }
+
+  .feature-showcase-icon {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+
+  .feature-showcase h3 {
+    align-self: end;
+  }
+
   .guide-shots figure {
     flex-basis: calc(50% - 14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-card-thumb img,
+  .guide-card-arrow {
+    transition: none;
   }
 }

@@ -135,6 +135,15 @@ export function Downloader({
     inputRef.current?.focus();
   }
 
+  // Back to an empty box on the same tool, ready for the next link.
+  function startOver() {
+    setResult(null);
+    setUrl('');
+    setError('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    inputRef.current?.focus({ preventScroll: true });
+  }
+
   function onPaste(event) {
     const raw = event.clipboardData?.getData('text');
     if (!raw?.trim()) return;
@@ -151,16 +160,7 @@ export function Downloader({
   return (
     <>
       <section className="hero" aria-labelledby="hero-heading">
-        {kicker ? <p className="kicker">{kicker}</p> : (
-          <p className="hero-pill">
-            <span className="hero-pill-dot" aria-hidden="true" />
-            {t('trustFree')}
-            <span aria-hidden="true">·</span>
-            {t('trustNoLogin')}
-            <span aria-hidden="true">·</span>
-            {t(audio ? 'trustHd' : 'trustNoWatermark')}
-          </p>
-        )}
+        {kicker ? <p className="kicker">{kicker}</p> : null}
         <h1 id="hero-heading">
           <span className="hero-title">{headingText}</span>
         </h1>
@@ -212,9 +212,15 @@ export function Downloader({
               }}
             />
             {hasUrl ? (
-              <button className="paste-button" type="button" disabled={loading} onClick={clearField}>
+              <button className="clear-field" type="button" disabled={loading} onClick={clearField} aria-label={t('clear')} title={t('clear')}>
                 <Icon name="clear" />
-                {t('clear')}
+              </button>
+            ) : null}
+            {/* One button: Paste while the box is empty, Download once it holds a link. */}
+            {hasUrl ? (
+              <button className="paste-button" type="submit" disabled={loading}>
+                <Icon name="download" />
+                {audio ? t('downloadMp3') : t('download')}
               </button>
             ) : (
               <button className="paste-button" type="button" disabled={loading} onClick={() => void pasteLink()}>
@@ -223,10 +229,13 @@ export function Downloader({
               </button>
             )}
           </div>
-          <button className="sr-only" type="submit" tabIndex={-1}>
-            Get
-          </button>
         </form>
+
+        <ul className="hero-trust">
+          <li><Icon name="check" />{t('trustFree')}</li>
+          <li><Icon name="check" />{t('trustNoLogin')}</li>
+          <li><Icon name="check" />{t(audio ? 'trustHd' : 'trustNoWatermark')}</li>
+        </ul>
 
         {desktop ? (
           <p className="paste-hint">
@@ -242,10 +251,6 @@ export function Downloader({
             <span>{error}</span>
           </div>
         ) : null}
-
-        <p className="partner-link">
-          <a href="https://vatculator.com" target="_blank" rel="noopener">VAT Calculator</a>
-        </p>
       </section>
 
       {loading && !result ? (
@@ -275,26 +280,13 @@ export function Downloader({
                 ))}
               </div>
               {postCaption(result) ? (
-                <p className="ig-caption">
-                  {postUsername(result) ? (
-                    <a
-                      className="ig-username"
-                      href={profileHref(result)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {postUsername(result)}
-                    </a>
-                  ) : null}
-                  {' '}
-                  {postCaption(result)}
-                </p>
+                <p className="ig-caption" title={postCaption(result)}>{postCaption(result)}</p>
               ) : null}
             </article>
-            <a className="clear-button" href="/">
+            <button className="clear-button" type="button" onClick={startOver}>
               <Icon name="again" />
               {t('downloadAgain')}
-            </a>
+            </button>
           </>
         ) : null}
       </section>
@@ -338,12 +330,9 @@ function PostByline({ result, fallbackTitle }) {
   return (
     <header className="ig-post-head">
       <span className="ig-avatar" aria-hidden="true">{username.slice(0, 1).toUpperCase()}</span>
-      <div className="ig-post-meta">
-        <a className="ig-username" href={profileHref(result)} target="_blank" rel="noopener noreferrer">
-          {username}
-        </a>
-        <span className="ig-handle">@{username}</span>
-      </div>
+      <a className="ig-username" href={profileHref(result)} target="_blank" rel="noopener noreferrer">
+        {username}
+      </a>
     </header>
   );
 }
