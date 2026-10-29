@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiUrl, withApiHost } from '@/lib/api';
-import { burstConfetti } from '@/lib/confetti';
 import { Icon } from './Icons';
 import { AudioPlayer, VideoPlayer } from './MediaPlayer';
 import { useI18n } from './I18nProvider';
@@ -24,12 +23,10 @@ export function Downloader({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
-  const [toast, setToast] = useState(null);
   const [desktop, setDesktop] = useState(false);
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
   const resolveRef = useRef(null);
-  const toastTimer = useRef(0);
   const hasUrl = Boolean(url.trim());
   const audio = mode === 'audio';
   // Tool pages without translations (Reels, Photo, Stories) keep their own English hero.
@@ -65,10 +62,7 @@ export function Downloader({
       requestAnimationFrame(() => void resolveRef.current?.(text));
     }
     document.addEventListener('paste', onDocumentPaste);
-    return () => {
-      document.removeEventListener('paste', onDocumentPaste);
-      clearTimeout(toastTimer.current);
-    };
+    return () => document.removeEventListener('paste', onDocumentPaste);
   }, []);
 
   async function resolveUrl(nextUrl) {
@@ -106,15 +100,6 @@ export function Downloader({
   }
 
   resolveRef.current = resolveUrl;
-
-  function onSaved(event) {
-    const box = event.currentTarget.getBoundingClientRect();
-    burstConfetti(box.left + box.width / 2, box.top + box.height / 2);
-    const total = bumpSavedCount();
-    clearTimeout(toastTimer.current);
-    setToast({ total, key: Date.now() });
-    toastTimer.current = setTimeout(() => setToast(null), 5200);
-  }
 
   async function pasteLink() {
     try {
@@ -276,7 +261,7 @@ export function Downloader({
               <PostByline result={result} fallbackTitle={summary.defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
-                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} username={postUsername(result)} onSaved={onSaved} />
+                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} username={postUsername(result)} />
                 ))}
               </div>
               {postCaption(result) ? (
@@ -290,30 +275,8 @@ export function Downloader({
           </>
         ) : null}
       </section>
-
-      {toast ? (
-        <div className="save-toast" role="status" key={toast.key}>
-          <span className="save-toast-icon" aria-hidden="true"><Icon name="check" /></span>
-          <span className="save-toast-text">
-            <b>{t('savedToast')}</b>
-            {toast.total > 1 ? <span>{`${toast.total} ${t('savedCount')}`}</span> : null}
-          </span>
-        </div>
-      ) : null}
     </>
   );
-}
-
-const SAVED_KEY = 'reelsdl_saved_count';
-
-function bumpSavedCount() {
-  try {
-    const total = (Number(localStorage.getItem(SAVED_KEY)) || 0) + 1;
-    localStorage.setItem(SAVED_KEY, String(total));
-    return total;
-  } catch {
-    return 1;
-  }
 }
 
 function PostByline({ result, fallbackTitle }) {
@@ -370,7 +333,7 @@ function downloadFilename(item, index, mode) {
   return `ReelsDl-photo-${itemNumber}.jpg`;
 }
 
-function MediaCard({ item, index, total, mode, t, username, onSaved }) {
+function MediaCard({ item, index, total, mode, t, username }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
   const isAudio = mode === 'audio' || item.type === 'audio';
@@ -441,7 +404,6 @@ function MediaCard({ item, index, total, mode, t, username, onSaved }) {
           href={primaryUrl}
           download={downloadName}
           aria-label={label}
-          onClick={onSaved}
           {...(cdnUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
         >
           <Icon name="download" />
@@ -452,7 +414,6 @@ function MediaCard({ item, index, total, mode, t, username, onSaved }) {
             className="download-button download-alt"
             href={apiHref}
             download={downloadName}
-            onClick={onSaved}
           >
             <Icon name="link" />
             {t('viaSite')}
