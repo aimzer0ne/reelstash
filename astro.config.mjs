@@ -1,7 +1,15 @@
+import { readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 import { defineConfig } from 'astro/config';
+
+// Share images used to be JPEG; old URLs point at the WebP copies.
+const jpegShareRedirects = (dir, pattern) => Object.fromEntries(
+  readdirSync(new URL(`./public${dir}`, import.meta.url))
+    .filter((file) => pattern.test(file))
+    .map((file) => [`${dir}/${file.replace(/\.webp$/, '.jpg')}`, { status: 301, destination: `${dir}/${file}` }])
+);
 
 export default defineConfig({
   site: 'https://reelsdl.net',
@@ -28,8 +36,14 @@ export default defineConfig({
     '/story': { status: 301, destination: '/stories' },
     '/photos': { status: 301, destination: '/photo' },
     '/copyright': { status: 301, destination: '/disclaimer' },
-    '/reelsdl-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.jpg' },
-    '/reelstash-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.jpg' },
+    '/reelsdl-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.webp' },
+    '/reelstash-home.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.webp' },
+    '/instagram-reels-downloader-reelsdl-net.jpg': { status: 301, destination: '/instagram-reels-downloader-reelsdl-net.webp' },
+    '/apple-touch-icon.png': { status: 301, destination: '/apple-touch-icon.webp' },
+    '/icon-192.png': { status: 301, destination: '/icon-192.webp' },
+    '/icon-512.png': { status: 301, destination: '/icon-512.webp' },
+    ...jpegShareRedirects('/assets/illustrations', /^og-.*\.webp$/),
+    ...jpegShareRedirects('/assets/blog', /-og\.webp$/),
     // Page images are WebP; old AVIF names point at the WebP copies.
     '/assets/link-ReelsDownloader-io.avif': { status: 301, destination: '/assets/copy-instagram-reel-link-reelsdl-net.webp' },
     '/assets/paste-ReelsDownloader-io.avif': { status: 301, destination: '/assets/paste-instagram-link-reelsdl-net.webp' },

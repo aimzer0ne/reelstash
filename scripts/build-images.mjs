@@ -1,7 +1,7 @@
 // Renders the site's illustrations to image files:
 //   public/assets/illustrations/*.webp      tool and device illustrations, light + dark
-//   public/assets/illustrations/og-*.jpg    1200 × 630 share images, one per page
-//   public/assets/blog/<slug>*.webp|jpg     covers for posts that use a drawn cover
+//   public/assets/illustrations/og-*.webp   1200 × 630 share images, one per page
+//   public/assets/blog/<slug>*.webp          covers for posts that use a drawn cover
 //   public/assets/steps/*.webp              three how-to phone mockups per tool
 //   public/assets/illustrations/<scene>.webp guide mockups (saving on iPhone, Android, desktop, …)
 // Run after changing components/Illustrations.jsx or lib/images.js:
@@ -266,7 +266,7 @@ try {
 
   for (const [path, og] of want('og') ? Object.entries(PAGE_OG) : []) {
     const scene = themed(render(ILLUSTRATIONS[og.art].component), 'light');
-    await sharp(Buffer.from(ogSvg(og, scene))).jpeg({ quality: 86, mozjpeg: true }).toFile(join(OUT, `${og.file}.jpg`));
+    await sharp(Buffer.from(ogSvg(og, scene))).webp(WEBP).toFile(join(OUT, `${og.file}.webp`));
     console.log('og', path);
   }
 
@@ -288,7 +288,7 @@ try {
     const buf = Buffer.from(svg);
     await sharp(buf).webp(WEBP).toFile(join(BLOG_OUT, `${slug}.webp`));
     await sharp(buf).resize(720).webp(WEBP).toFile(join(BLOG_OUT, `${slug}-720.webp`));
-    await sharp(buf).resize(OG_SIZE.width, OG_SIZE.height, { fit: 'cover' }).jpeg({ quality: 84, mozjpeg: true }).toFile(join(BLOG_OUT, `${slug}-og.jpg`));
+    await sharp(buf).resize(OG_SIZE.width, OG_SIZE.height, { fit: 'cover' }).webp(WEBP).toFile(join(BLOG_OUT, `${slug}-og.webp`));
     console.log('blog cover', slug);
   }
 } finally {

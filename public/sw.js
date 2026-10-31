@@ -1,7 +1,7 @@
-const CACHE = 'reelsdl-v3';
+const CACHE = 'reelsdl-v4';
 const PRECACHE = [
   '/favicon.svg',
-  '/icon-192.png'
+  '/icon-192.webp'
 ];
 
 self.addEventListener('install', (event) => {
@@ -30,7 +30,8 @@ self.addEventListener('fetch', (event) => {
   if (request.destination === 'video' || request.destination === 'audio') return;
   if (/\.(mp4|webm|mov|mp3|m4a)$/i.test(url.pathname)) return;
   if (
-    url.pathname === '/instagram-reels-downloader-reelsdl-net.jpg'
+    url.pathname === '/instagram-reels-downloader-reelsdl-net.webp'
+    || url.pathname === '/instagram-reels-downloader-reelsdl-net.jpg'
     || url.pathname === '/reelsdl-home.jpg'
     || url.pathname === '/reelstash-home.jpg'
   ) return;

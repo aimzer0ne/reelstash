@@ -10,7 +10,7 @@ const blog = defineCollection({
     description: z.string().max(160),
     excerpt: z.string(),
     keywords: z.array(z.string()).default([]),
-    // Files live in public/assets/blog/<slug>.webp, with -720.webp and -og.jpg variants.
+    // Files live in public/assets/blog/<slug>.webp, with -720.webp and -og.webp variants.
     image: z.object({ width: z.number(), height: z.number(), alt: z.string() }).optional(),
     takeaways: z.array(z.string()).default([]),
     published: z.coerce.date(),
