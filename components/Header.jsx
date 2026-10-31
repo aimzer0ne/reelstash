@@ -5,19 +5,16 @@ import { Logo } from './Logo';
 import { PwaRegister } from './PwaRegister';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icons';
-import { useI18n } from './I18nProvider';
 import { NAV } from '@/lib/nav.js';
 
 export function Header({ active }) {
-  const { t, locale, locales, setLocale } = useI18n();
-
   function shareSite(event) {
     event.preventDefault();
     if (typeof navigator.share !== 'function') return;
     const url = window.location.href.split('#')[0];
     navigator.share({
       title: 'ReelsDl.net',
-      text: t('shareText'),
+      text: 'Share this website!',
       url
     }).catch((error) => {
       if (error?.name === 'AbortError') return;
@@ -45,22 +42,8 @@ export function Header({ active }) {
           ))}
         </nav>
         <div className="header-tools">
-          {/* The native select stays on top (invisible) so the picker is the browser's own. */}
-          <label className="lang-select" title={t('language')}>
-            <Icon name="globe" />
-            <span className="lang-code" aria-hidden="true">{locale.toUpperCase()}</span>
-            <select
-              value={locale}
-              onChange={(event) => setLocale(event.target.value)}
-              aria-label={t('language')}
-            >
-              {locales.map((item) => (
-                <option key={item.id} value={item.id}>{item.label}</option>
-              ))}
-            </select>
-          </label>
-          <ThemeToggle label={t('themeToggle')} />
-          <button className="share-btn" type="button" onClick={shareSite} aria-label={t('share')} title={t('share')}>
+          <ThemeToggle label="Switch light / dark mode" />
+          <button className="share-btn" type="button" onClick={shareSite} aria-label="Share" title="Share">
             <Icon name="share" />
           </button>
           <PwaRegister />

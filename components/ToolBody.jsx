@@ -1,5 +1,4 @@
 import { Footer } from './Footer';
-import { I18nProvider } from './I18nProvider';
 import { Icon } from './Icons';
 import { AudioCopy } from './AudioCopy';
 import { GuideLinks } from './GuideLinks';
@@ -10,9 +9,9 @@ import { ToolHub } from './ToolSections';
 
 // Everything under the hero on a tool page. Rendered to HTML on the server and
 // never hydrated: the downloader above it is the page's only island.
-export function ToolBody({ page, guides = [], locale, messages }) {
+export function ToolBody({ page, guides = [] }) {
   return (
-    <I18nProvider locale={locale} messages={messages}>
+    <>
       {page.notFound ? (
         <div className="home-copy">
           <ToolHub current={null} heading="Pick a downloader" />
@@ -44,6 +43,6 @@ export function ToolBody({ page, guides = [], locale, messages }) {
         </>
       )}
       <Footer lead={page.footerLead} />
-    </I18nProvider>
+    </>
   );
 }

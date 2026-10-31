@@ -1,21 +1,13 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import { SiteFooter } from '../../../../components/Footer.jsx';
-import { HeaderIsland } from '../../../../components/HeaderIsland.jsx';
-import { localeFromParam, localeStaticPaths } from '../../../../lib/i18n.js';
-import { messagesFor } from '../../../../lib/messages.js';
-import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE, blogIndexJsonLd, formatDate, getPosts, postImage, postPath, readingMinutes } from '../../../../lib/blog.js';
-import '../../../styles/blog.css';
+import Base from '../../layouts/Base.astro';
+import { Footer } from '../../../components/Footer.jsx';
+import { Header } from '../../../components/Header.jsx';
+import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE, blogIndexJsonLd, formatDate, getPosts, postImage, postPath, readingMinutes } from '../../../lib/blog.js';
+import '../../styles/blog.css';
 
-export const getStaticPaths = localeStaticPaths;
-
-// Posts are English; only the header and footer follow the visitor's language.
-const uiLocale = localeFromParam(Astro.params.locale);
-const messages = messagesFor(uiLocale);
 const posts = await getPosts();
 ---
 <Base
-  locale="en"
   title={BLOG_TITLE}
   description={BLOG_DESCRIPTION}
   keywords={['Instagram download guides', 'how to save Instagram Reels', 'Instagram Reels tips', 'ReelsDl.net blog']}
@@ -24,7 +16,7 @@ const posts = await getPosts();
   {blogIndexJsonLd(posts).map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
-  <HeaderIsland client:load locale={uiLocale} messages={messages} />
+  <Header client:load />
   <main class="blog-main">
     <div class="blog-index">
       <nav class="blog-crumbs" aria-label="Breadcrumb">
@@ -70,6 +62,6 @@ const posts = await getPosts();
         })}
       </ol>
     </div>
-    <SiteFooter locale={uiLocale} messages={messages} />
+    <Footer />
   </main>
 </Base>

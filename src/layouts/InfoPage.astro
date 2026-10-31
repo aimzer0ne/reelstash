@@ -1,19 +1,14 @@
 ---
 // A help or legal page: only the header hydrates; the article is static HTML.
 import Base from './Base.astro';
-import { HeaderIsland } from '../../components/HeaderIsland.jsx';
+import { Header } from '../../components/Header.jsx';
 import { INFO_PAGES, InfoBody } from '../../components/InfoBody.jsx';
-import { localeFromParam } from '../../lib/i18n.js';
-import { messagesFor } from '../../lib/messages.js';
 
 const { pageId } = Astro.props;
 const [page] = INFO_PAGES[pageId];
-const locale = localeFromParam(Astro.params.locale);
-const messages = messagesFor(locale);
 const meta = page.metadata;
 ---
 <Base
-  locale={locale}
   title={meta.title}
   description={meta.description}
   keywords={meta.keywords}
@@ -26,6 +21,6 @@ const meta = page.metadata;
   {(page.jsonLd || []).map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
-  <HeaderIsland client:load active={page.path} locale={locale} messages={messages} />
-  <InfoBody pageId={pageId} locale={locale} messages={messages} />
+  <Header client:load active={page.path} />
+  <InfoBody pageId={pageId} />
 </Base>

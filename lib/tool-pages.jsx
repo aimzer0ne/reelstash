@@ -92,7 +92,6 @@ function faq(items) {
 export const photoPage = {
   path: '/photo',
   mode: 'photo',
-  translate: false,
   art: 'photo',
   kind: 'photo',
   heading: 'Instagram Photo Downloader',
@@ -223,7 +222,6 @@ photoPage.jsonLd = toolJsonLd(photoPage);
 export const storiesPage = {
   path: '/stories',
   mode: 'media',
-  translate: false,
   art: 'stories',
   kind: 'stories',
   heading: 'Instagram Story Downloader',

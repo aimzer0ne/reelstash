@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { apiUrl, withApiHost } from '@/lib/api';
+import { saveAsMp3 } from './mp3';
 import { Icon } from './Icons';
 import { AudioPlayer, VideoPlayer } from './MediaPlayer';
-import { useI18n } from './I18nProvider';
 import './audio-preview.css';
 
 export function Downloader({
@@ -12,13 +11,8 @@ export function Downloader({
   kicker,
   heading,
   lede,
-  translate = true,
-  inputLabel,
-  placeholder,
-  messages,
   summary
 }) {
-  const { t } = useI18n();
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -29,17 +23,14 @@ export function Downloader({
   const resolveRef = useRef(null);
   const hasUrl = Boolean(url.trim());
   const audio = mode === 'audio';
-  // Tool pages without translations (Reels, Photo, Stories) keep their own English hero.
-  const headingText = translate ? t(audio ? 'audioHeading' : 'mediaHeading') : heading;
-  const ledeText = translate ? t(audio ? 'audioLede' : 'mediaLede') : lede;
-  const placeholderText = t(audio ? 'audioPlaceholder' : 'mediaPlaceholder');
-  const inputLabelText = t(audio ? 'audioInputLabel' : 'mediaInputLabel');
+  const placeholderText = audio ? 'Paste a reel or audio URL and press Enter' : 'Paste an Instagram URL';
+  const inputLabelText = audio ? 'Instagram reel, video, or audio URL' : 'Instagram reel or post URL';
   const copy = {
-    emptyUrl: t(audio ? 'emptyUrlAudio' : 'emptyUrl'),
-    invalidUrl: t('invalidUrl'),
-    resolveFailed: t(audio ? 'resolveFailedAudio' : 'resolveFailed'),
-    unexpected: t(audio ? 'unexpectedAudio' : 'unexpected'),
-    clipboardBlocked: t('clipboardBlocked')
+    emptyUrl: audio ? 'Paste a public Instagram reel, video, or audio link first.' : 'Paste a public Instagram reel or post link first.',
+    invalidUrl: 'NOT an Instagram link ;(',
+    resolveFailed: audio ? 'We could not extract audio from that link.' : 'We could not fetch that link right now.',
+    unexpected: audio ? 'Something went wrong while extracting audio.' : 'Something went wrong while fetching that link.',
+    clipboardBlocked: 'Clipboard access was blocked. Paste the Instagram link into the field instead.'
   };
 
   useEffect(() => {
@@ -147,9 +138,9 @@ export function Downloader({
       <section className="hero" aria-labelledby="hero-heading">
         {kicker ? <p className="kicker">{kicker}</p> : null}
         <h1 id="hero-heading">
-          <span className="hero-title">{headingText}</span>
+          <span className="hero-title">{heading}</span>
         </h1>
-        <p className="lede">{ledeText}</p>
+        <p className="lede">{lede}</p>
 
         <form
           className="link-form"
@@ -197,7 +188,7 @@ export function Downloader({
               }}
             />
             {hasUrl ? (
-              <button className="clear-field" type="button" disabled={loading} onClick={clearField} aria-label={t('clear')} title={t('clear')}>
+              <button className="clear-field" type="button" disabled={loading} onClick={clearField} aria-label="Clear" title="Clear">
                 <Icon name="clear" />
               </button>
             ) : null}
@@ -205,28 +196,28 @@ export function Downloader({
             {hasUrl ? (
               <button className="paste-button" type="submit" disabled={loading}>
                 <Icon name="download" />
-                {audio ? t('downloadMp3') : t('download')}
+                {audio ? 'Download MP3' : 'Download'}
               </button>
             ) : (
               <button className="paste-button" type="button" disabled={loading} onClick={() => void pasteLink()}>
                 <Icon name="paste" />
-                {t('paste')}
+                Paste
               </button>
             )}
           </div>
         </form>
 
         <ul className="hero-trust">
-          <li><Icon name="check" />{t('trustFree')}</li>
-          <li><Icon name="check" />{t('trustNoLogin')}</li>
-          <li><Icon name="check" />{t(audio ? 'trustHd' : 'trustNoWatermark')}</li>
+          <li><Icon name="check" />100% free</li>
+          <li><Icon name="check" />No login</li>
+          <li><Icon name="check" />{audio ? 'HD quality' : 'No watermark'}</li>
         </ul>
 
         {desktop ? (
           <p className="paste-hint">
             <kbd>{/Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl'}</kbd>
             <kbd>V</kbd>
-            {t('pasteAnywhere')}
+            anywhere on this page to download
           </p>
         ) : null}
 
@@ -249,7 +240,7 @@ export function Downloader({
               <div className="media-preview"><div className="loading-shimmer" /></div>
               <div className="media-footer"><span className="skeleton-button" /></div>
             </div>
-            <p className="skeleton-status">{t(audio ? 'loaderStatusAudio' : 'loaderStatus')}</p>
+            <p className="skeleton-status">{audio ? 'Extracting audio…' : 'Finding media…'}</p>
           </div>
         </section>
       ) : null}
@@ -261,7 +252,7 @@ export function Downloader({
               <PostByline result={result} fallbackTitle={summary.defaultTitle} />
               <div className={media.length === 1 ? 'media-grid is-single' : 'media-grid'}>
                 {media.map((item, index) => (
-                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} t={t} username={postUsername(result)} />
+                  <MediaCard key={`${item.downloadUrl}-${index}`} item={item} index={index} total={media.length} mode={mode} username={postUsername(result)} />
                 ))}
               </div>
               {postCaption(result) ? (
@@ -270,7 +261,7 @@ export function Downloader({
             </article>
             <button className="clear-button" type="button" onClick={startOver}>
               <Icon name="again" />
-              {t('downloadAgain')}
+              Download again
             </button>
           </>
         ) : null}
@@ -333,13 +324,15 @@ function downloadFilename(item, index, mode) {
   return `ReelsDl-photo-${itemNumber}.jpg`;
 }
 
-function MediaCard({ item, index, total, mode, t, username }) {
+function MediaCard({ item, index, total, mode, username }) {
   const itemNumber = index + 1;
   const suffix = total > 1 ? ` ${itemNumber}` : '';
   const isAudio = mode === 'audio' || item.type === 'audio';
   const isOriginalAudio = isAudio && item.original;
   const kind = item.type === 'video' ? 'video' : item.type === 'audio' ? 'audio' : 'photo';
-  const label = `${isOriginalAudio ? t('downloadAudio') : isAudio ? t('downloadMp3') : kind === 'video' ? t('downloadVideo') : t('downloadPhoto')}${suffix}`;
+  const makesMp3 = isAudio && !isOriginalAudio;
+  const [mp3Status, setMp3Status] = useState('');
+  const label = mp3Status || `${isOriginalAudio ? 'Download audio' : isAudio ? 'Download MP3' : kind === 'video' ? 'Download video' : 'Download photo'}${suffix}`;
   const downloadName = useMemo(() => downloadFilename(item, index, mode), [item, index, mode]);
   const [previewFailed, setPreviewFailed] = useState(false);
   const thumb = previewFailed ? null : lightPreview(item);
@@ -351,6 +344,19 @@ function MediaCard({ item, index, total, mode, t, username }) {
   const [ratio, setRatio] = useState(null);
   const playSrc = sources[0] || null;
   const thumbReferrer = thumb && isApiAsset(thumb) ? 'origin' : 'no-referrer';
+
+  async function downloadMp3(event) {
+    event.preventDefault();
+    if (mp3Status === 'Converting…') return;
+    setMp3Status('Converting…');
+    try {
+      await saveAsMp3(item.downloadUrl, downloadName);
+      setMp3Status('');
+    } catch (error) {
+      setMp3Status(error.message);
+    }
+  }
+
   const previewClass = [
     'media-preview',
     kind === 'video' ? 'is-video' : isAudio ? 'is-audio' : '',
@@ -404,6 +410,7 @@ function MediaCard({ item, index, total, mode, t, username }) {
           href={primaryUrl}
           download={downloadName}
           aria-label={label}
+          {...(makesMp3 ? { onClick: downloadMp3 } : {})}
           {...(cdnUrl ? { rel: 'noreferrer', referrerPolicy: 'no-referrer' } : {})}
         >
           <Icon name="download" />
@@ -416,7 +423,7 @@ function MediaCard({ item, index, total, mode, t, username }) {
             download={downloadName}
           >
             <Icon name="link" />
-            {t('viaSite')}
+            Download via ReelsDl.net
           </a>
         ) : null}
       </div>
@@ -425,7 +432,7 @@ function MediaCard({ item, index, total, mode, t, username }) {
 }
 
 function isApiAsset(url) {
-  return /\/api\/download(?:\?|$)/.test(url) || /(?:^|\/\/)get\.reelsdl\.net\//i.test(url);
+  return /\/api\/download(?:\?|$)/.test(url);
 }
 
 // CDN first (supports range/seek), then the site proxy as a fallback.
@@ -447,9 +454,8 @@ function clearShimmer(event) {
 }
 
 function fetchResolvedPost(value, mode, resolveFailed) {
-  return fetch(apiUrl('/api/resolve'), {
+  return fetch('/api/resolve', {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'content-type': 'application/json',
       'x-reelsdl-client': 'web'
@@ -458,17 +464,7 @@ function fetchResolvedPost(value, mode, resolveFailed) {
   }).then(async (response) => {
     const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error || resolveFailed);
-    const mapped = {
-      ...body,
-      media: Array.isArray(body.media) ? body.media.map((item) => ({
-        ...item,
-        previewUrl: withApiHost(item.previewUrl),
-        coverUrl: withApiHost(item.coverUrl),
-        sourceUrl: item.sourceUrl?.startsWith('/') ? withApiHost(item.sourceUrl) : item.sourceUrl,
-        downloadUrl: withApiHost(item.downloadUrl),
-        directUrl: item.directUrl && /^https:\/\//i.test(item.directUrl) ? item.directUrl : null
-      })) : []
-    };
+    const mapped = { ...body, media: Array.isArray(body.media) ? body.media : [] };
     if (!mapped.media.length) throw new Error(resolveFailed);
     return mapped;
   });

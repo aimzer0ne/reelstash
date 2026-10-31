@@ -323,8 +323,7 @@ kbd {
 }
 
 .share-btn,
-.theme-toggle,
-.lang-select {
+.theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -344,15 +343,13 @@ kbd {
 }
 
 .share-btn .icon,
-.theme-toggle .icon,
-.lang-select .icon {
+.theme-toggle .icon {
   width: 18px;
   height: 18px;
 }
 
 .share-btn:hover,
-.theme-toggle:hover,
-.lang-select:hover {
+.theme-toggle:hover {
   background: var(--surface);
   color: var(--text);
 }
@@ -374,36 +371,6 @@ kbd {
   :root:not([data-theme="light"]) .theme-toggle .theme-icon-sun {
     display: block;
   }
-}
-
-/* Globe and language code on show; the real select sits on top, invisible. */
-.lang-select {
-  position: relative;
-  gap: 6px;
-  padding: 0 10px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: .02em;
-  cursor: pointer;
-}
-
-.lang-select select {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  opacity: 0;
-  font-size: 16px;
-  cursor: pointer;
-  appearance: none;
-}
-
-.lang-select:has(select:focus-visible) {
-  outline: 2px solid var(--text);
-  outline-offset: 2px;
 }
 
 .header-action {
@@ -1407,10 +1374,6 @@ a.ig-username:hover {
     font-size: 13px;
   }
 
-  .lang-select {
-    padding: 0 8px;
-  }
-
   .paste-button {
     padding: 0 14px;
   }
@@ -1421,8 +1384,7 @@ a.ig-username:hover {
 }
 
 @media (max-width: 350px) {
-  .paste-button .icon,
-  .lang-select .lang-code {
+  .paste-button .icon {
     display: none;
   }
 }

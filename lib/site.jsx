@@ -13,14 +13,6 @@ export const homePage = {
   placeholder: 'Paste an Instagram URL',
   downloadLabel: 'Download',
   footerLead: null,
-  messages: {
-    emptyUrl: 'Paste a public Instagram reel or post link first.',
-    invalidUrl: 'NOT an Instagram link ;(',
-    resolveFailed: 'We could not fetch that link right now.',
-    unexpected: 'Something went wrong while fetching that link.',
-    clipboardBlocked: 'Clipboard access was blocked. Paste the Instagram link into the field instead.',
-    loaderStatus: 'Finding media…'
-  },
   summary: {
     defaultTitle: 'Public Instagram post',
     one: '1 item ready',
@@ -285,14 +277,6 @@ export const audioPage = {
   placeholder: 'Paste a reel or audio URL and press Enter',
   downloadLabel: 'Download MP3',
   footerLead: null,
-  messages: {
-    emptyUrl: 'Paste a public Instagram reel, video, or audio link first.',
-    invalidUrl: 'That does not look like an Instagram link.',
-    resolveFailed: 'We could not extract audio from that link.',
-    unexpected: 'Something went wrong while extracting audio.',
-    clipboardBlocked: 'Clipboard access was blocked. Paste the Instagram link into the field instead.',
-    loaderStatus: 'Extracting audio…'
-  },
   summary: {
     defaultTitle: 'Instagram audio',
     one: '1 MP3 ready',
@@ -556,7 +540,6 @@ export const notFoundPage = {
   path: '/404',
   notFound: true,
   mode: 'media',
-  translate: false,
   heading: 'Page not found',
   lede: 'This page does not exist or has moved. Paste an Instagram link below to download a Reel, video, photo, or Story.',
   inputLabel: 'Instagram reel or post URL',

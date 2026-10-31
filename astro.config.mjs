@@ -1,46 +1,45 @@
+import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
 import { defineConfig } from 'astro/config';
-import { isPagePath, localizedPath, requestLocale } from './lib/i18n.js';
 
-// `astro dev` stands in for the Worker's language routing (worker.js).
-const devLocaleRouting = {
-  name: 'dev-locale-routing',
+
+// `astro dev` serves the API too; in production worker.js does.
+const devApi = {
+  name: 'dev-api',
   configureServer(server) {
-    server.middlewares.use((req, _res, next) => {
-      const { pathname, search } = new URL(req.url, 'http://localhost');
-      if (isPagePath(pathname) && !/^\/(@|_|api\/|i18n\/)/.test(pathname)) {
-        const locale = requestLocale({ get: (name) => req.headers[name] });
-        req.url = `${localizedPath(locale, pathname)}${search}`;
-      }
-      next();
+    server.middlewares.use(async (req, res, next) => {
+      if (!req.url.startsWith('/api/')) return next();
+      const { handleApiRequest } = await server.ssrLoadModule('/lib/reelstash.js');
+      const hasBody = !['GET', 'HEAD'].includes(req.method);
+      const response = await handleApiRequest(new Request(`http://${req.headers.host}${req.url}`, {
+        method: req.method,
+        headers: Object.entries(req.headers).filter(([, value]) => typeof value === 'string'),
+        ...(hasBody ? { body: Readable.toWeb(req), duplex: 'half' } : {})
+      }));
+      res.writeHead(response.status, Object.fromEntries(response.headers));
+      if (response.body) Readable.fromWeb(response.body).pipe(res);
+      else res.end();
     });
   }
 };
 
 export default defineConfig({
   site: 'https://reelsdl.net',
-  // Pages are prerendered and served by Cloudflare (worker.js). Only the /api/*
-  // routes run on Vercel; scripts/split-output.mjs separates the two after the build.
+  // worker.js serves these prerendered pages and runs /api/*.
   output: 'static',
   build: {
     // Removes render-blocking stylesheet requests on first load.
     inlineStylesheets: 'always'
   },
-  adapter: vercel({
-    maxDuration: 60,
-    includeFiles: ['./node_modules/ffmpeg-static/ffmpeg']
-  }),
   integrations: [react()],
   security: {
     checkOrigin: false
   },
   vite: {
-    plugins: [devLocaleRouting],
+    plugins: [devApi],
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV === 'production' ? 'production' : 'development'),
-      'process.env.NEXT_PUBLIC_API_URL': JSON.stringify(process.env.NEXT_PUBLIC_API_URL || ''),
       'process.env.SITE_URL': JSON.stringify(process.env.SITE_URL || 'https://reelsdl.net')
     },
     resolve: {

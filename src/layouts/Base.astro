@@ -1,12 +1,10 @@
 ---
 import '@fontsource-variable/geist/wght.css';
 import '../styles/globals.css';
-import { localeMeta } from '../../lib/i18n.js';
 import { DEFAULT_OG_IMAGE, OG_IMAGE_PATH } from '../../lib/seo.js';
 import { pageOgImage } from '../../lib/images.js';
 
 const {
-  locale = 'en',
   title,
   description,
   keywords = [],
@@ -33,11 +31,10 @@ const share = image
   ? { src: image, alt: imageAlt, width: imageWidth, height: imageHeight }
   : (canonical && pageOgImage(canonical)) || { src: OG_IMAGE_PATH, ...DEFAULT_OG_IMAGE };
 const imageUrl = new URL(share.src, `${origin}/`).href;
-const { dir } = localeMeta(locale);
 const keywordList = Array.isArray(keywords) ? keywords.join(', ') : keywords;
 ---
 <!doctype html>
-<html lang={locale} dir={dir}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

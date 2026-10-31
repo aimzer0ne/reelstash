@@ -1,22 +1,11 @@
 import Link from './Link';
 import { Logo } from './Logo';
-import { I18nProvider, useI18n } from './I18nProvider';
 import { SITE_EMAIL } from '@/lib/seo';
 import { LEGAL_LINKS, NAV, RESOURCE_LINKS } from '@/lib/nav.js';
 
-// For pages that render the footer on its own (blog), outside any page body.
-export function SiteFooter({ locale, messages, lead }) {
-  return (
-    <I18nProvider locale={locale} messages={messages}>
-      <Footer lead={lead} />
-    </I18nProvider>
-  );
-}
-
 export function Footer({ lead }) {
-  const { t } = useI18n();
   const year = new Date().getFullYear();
-  const reportHref = `mailto:${SITE_EMAIL}?subject=${encodeURIComponent(`ReelsDl.net — ${t('reportIssue')}`)}&body=${encodeURIComponent('What went wrong:\n\nInstagram link (if any):\n')}`;
+  const reportHref = `mailto:${SITE_EMAIL}?subject=${encodeURIComponent(`ReelsDl.net — Report an issue`)}&body=${encodeURIComponent('What went wrong:\n\nInstagram link (if any):\n')}`;
   return (
     <footer className="site-footer">
       <div className="footer-top">
@@ -44,11 +33,11 @@ export function Footer({ lead }) {
               {RESOURCE_LINKS.map((item) => (
                 <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
               ))}
-              <li><a href={reportHref}>{t('reportIssue')}</a></li>
+              <li><a href={reportHref}>Report an issue</a></li>
             </ul>
           </nav>
-          <nav aria-label={t('legal')}>
-            <h2>{t('legal')}</h2>
+          <nav aria-label="Legal">
+            <h2>Legal</h2>
             <ul>
               {LEGAL_LINKS.map((item) => (
                 <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
@@ -59,12 +48,12 @@ export function Footer({ lead }) {
       </div>
       <div className="footer-bottom">
         <p>
-          {t('moreTools')}:{' '}
-          <a href="https://vatculator.com/" rel="noopener">{t('vatCalculator')}</a>
+          More free tools:{' '}
+          <a href="https://vatculator.com/" rel="noopener">VAT calculator</a>
           {' · '}
-          <a href="https://cursivee.app/" rel="noopener">{t('cursiveGenerator')}</a>
+          <a href="https://cursivee.app/" rel="noopener">Cursive text generator</a>
           {' · '}
-          <a href="https://capcutx.app/" rel="noopener">{t('capcutGuide')}</a>
+          <a href="https://capcutx.app/" rel="noopener">CapCut APK guide</a>
         </p>
         <p>
           {lead ? (
@@ -73,7 +62,7 @@ export function Footer({ lead }) {
               {' · '}
             </>
           ) : null}
-          {t('notAffiliated')} · © {year} ReelsDl.net
+          Not affiliated with Instagram or Meta · © {year} ReelsDl.net
         </p>
       </div>
     </footer>

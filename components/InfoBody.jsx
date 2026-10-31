@@ -17,10 +17,10 @@ export const INFO_PAGES = {
   disclaimer: [legalPages.disclaimer, () => <DisclaimerCopy />]
 };
 
-export function InfoBody({ pageId, locale, messages }) {
+export function InfoBody({ pageId }) {
   const [page, render] = INFO_PAGES[pageId];
   return (
-    <LegalPage page={page} locale={locale} messages={messages}>
+    <LegalPage page={page}>
       {render()}
     </LegalPage>
   );

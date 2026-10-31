@@ -2,10 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { Icon } from './Icons';
-import { useI18n } from './I18nProvider';
 
 export function PwaRegister() {
-  const { t } = useI18n();
   const [installEvent, setInstallEvent] = useState(null);
 
   useEffect(() => {
@@ -41,7 +39,7 @@ export function PwaRegister() {
   return (
     <button className="header-action" type="button" onClick={() => void installApp()}>
       <Icon name="download" />
-      {t('install')}
+      Install
     </button>
   );
 }

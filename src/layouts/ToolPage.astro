@@ -2,21 +2,16 @@
 // A downloader page: header and downloader hydrate as islands; the copy,
 // FAQ, and footer below them are static HTML.
 import Base from './Base.astro';
-import { DownloaderIsland } from '../../components/DownloaderIsland.jsx';
-import { HeaderIsland } from '../../components/HeaderIsland.jsx';
+import { Downloader } from '../../components/Downloader.jsx';
+import { Header } from '../../components/Header.jsx';
 import { ToolBody } from '../../components/ToolBody.jsx';
 import { getGuideLinks } from '../../lib/blog.js';
-import { localeFromParam } from '../../lib/i18n.js';
-import { messagesFor } from '../../lib/messages.js';
 
 const { page, robots, canonical = page.metadata.alternates.canonical } = Astro.props;
-const locale = localeFromParam(Astro.params.locale);
-const messages = messagesFor(locale);
 const guides = await getGuideLinks();
 const meta = page.metadata;
 ---
 <Base
-  locale={locale}
   title={meta.title}
   description={meta.description}
   keywords={meta.keywords}
@@ -30,21 +25,16 @@ const meta = page.metadata;
   {(page.jsonLd || []).map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
-  <HeaderIsland client:load active={page.path} locale={locale} messages={messages} />
+  <Header client:load active={page.path} />
   <main id="home">
-    <DownloaderIsland
+    <Downloader
       client:load
-      locale={locale}
-      messages={messages}
       mode={page.mode}
       kicker={page.kicker}
       heading={page.heading}
       lede={page.lede}
-      translate={page.translate !== false}
-      inputLabel={page.inputLabel}
-      placeholder={page.placeholder}
       summary={page.summary}
     />
-    <ToolBody page={page} guides={guides} locale={locale} messages={messages} />
+    <ToolBody page={page} guides={guides} />
   </main>
 </Base>
