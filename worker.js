@@ -1,5 +1,9 @@
-// Cloudflare Worker for https://reelsdl.net — proxies the website to the Vercel origin.
+// Cloudflare Worker for https://reelsdl.net: serves the prerendered site from Workers
+// Static Assets, choosing each page's language per request. No request reaches Vercel.
 // The API lives on https://get.reelsdl.net, which points at Vercel directly (DNS only).
+import { isPagePath, LOCALE_PREFIX, localizedPath, requestLocale } from './lib/i18n.js';
+import { SITE_SECURITY_HEADERS, applyHeaders } from './lib/security.js';
+
 const SITE_HOST = 'reelsdl.net';
 const SITE_ORIGIN = `https://${SITE_HOST}`;
 
@@ -22,77 +26,49 @@ export default {
       });
     }
 
-    return proxyToOrigin(request, incoming, env.API_ORIGIN);
+    const { pathname } = incoming;
+    const response = isPagePath(pathname)
+      ? await servePage(request, incoming, env)
+      : await env.ASSETS.fetch(request);
+    return withSiteHeaders(pathname, response);
   }
 };
 
-async function proxyToOrigin(request, incoming, configuredOrigin) {
-  let origin;
-  try {
-    origin = new URL(configuredOrigin);
-    if (origin.protocol !== 'https:' || origin.username || origin.password) throw new Error();
-  } catch {
-    return Response.json({
-      error: 'Cloudflare proxy is not configured. Set API_ORIGIN to the production Vercel URL.'
-    }, { status: 503 });
+async function servePage(request, incoming, env) {
+  const locale = requestLocale(request.headers);
+  // The language folders are internal: their pages are only served at the public URLs.
+  const internal = incoming.pathname.startsWith(LOCALE_PREFIX);
+  const target = localizedPath(locale, internal ? '/no-such-page' : incoming.pathname);
+  let response = await env.ASSETS.fetch(new Request(new URL(target, incoming), request));
+
+  if (locale !== 'en' && response.status === 404) {
+    // Old URLs only have redirect rules at their public path.
+    const fallback = internal ? response : await env.ASSETS.fetch(request);
+    if (fallback.status === 404) {
+      const notFound = await env.ASSETS.fetch(new URL(localizedPath(locale, '/404'), incoming));
+      response = new Response(notFound.body, { status: 404, headers: notFound.headers });
+    } else {
+      response = fallback;
+    }
   }
 
-  const target = new URL(`${incoming.pathname}${incoming.search}`, origin);
-  const headers = new Headers(request.headers);
-  headers.set('x-reelsdl-host', SITE_HOST);
-  headers.set('x-forwarded-host', SITE_HOST);
-  headers.delete('host');
-
-  const hashedAsset = incoming.pathname.startsWith('/_astro/');
-
-  try {
-    const upstream = await fetch(new Request(target, {
-      method: request.method,
-      headers,
-      body: request.method === 'GET' || request.method === 'HEAD' ? undefined : request.body,
-      redirect: 'manual',
-      cf: {
-        cacheEverything: hashedAsset,
-        cacheTtl: hashedAsset ? 31_536_000 : 0
-      }
-    }));
-
-    return withSiteHeaders(incoming.pathname, upstream, origin);
-  } catch {
-    return Response.json({
-      error: 'The site is temporarily unavailable.'
-    }, { status: 502 });
-  }
+  const headers = new Headers(response.headers);
+  headers.append('vary', 'accept-language, cookie');
+  // A trailing-slash redirect from a language folder must not reveal the folder.
+  const location = headers.get('location');
+  if (location) headers.set('location', location.replace(`${LOCALE_PREFIX}${locale}`, '') || '/');
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
 
-function withSiteHeaders(pathname, upstream, origin) {
-  const headers = new Headers(upstream.headers);
-  headers.delete('age');
-  headers.delete('cf-cache-status');
-  headers.set('x-content-type-options', 'nosniff');
-  headers.set('x-frame-options', 'DENY');
-  headers.set('strict-transport-security', 'max-age=63072000; includeSubDomains; preload');
+function withSiteHeaders(pathname, response) {
+  const headers = new Headers(response.headers);
+  applyHeaders(headers, SITE_SECURITY_HEADERS);
 
-  // Never leak the Vercel hostname in a redirect.
-  const location = headers.get('location');
-  if (location) {
-    try {
-      const target = new URL(location, origin);
-      if (target.host === origin.host) headers.set('location', `${SITE_ORIGIN}${target.pathname}${target.search}`);
-    } catch {}
+  // The HTML article stays the canonical page for search engines.
+  if (pathname.endsWith('.md')) {
+    headers.set('link', `<${SITE_ORIGIN}${pathname.slice(0, -3)}>; rel="canonical"`);
+    headers.set('x-robots-tag', 'noindex, follow');
   }
 
-  if (pathname.startsWith('/_astro/')) {
-    headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-    headers.set('CDN-Cache-Control', 'public, max-age=31536000, immutable');
-  } else {
-    headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
-    headers.set('CDN-Cache-Control', 'no-store');
-  }
-
-  return new Response(upstream.body, {
-    status: upstream.status,
-    statusText: upstream.statusText,
-    headers
-  });
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }

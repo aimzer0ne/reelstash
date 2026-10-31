@@ -1,15 +1,13 @@
-import { absUrl } from '../../../lib/seo.js';
-import { getPost, postMarkdown, postPath } from '../../../lib/blog.js';
+import { getPosts, postMarkdown } from '../../../lib/blog.js';
 
-export async function GET({ params }) {
-  const post = await getPost(params.slug);
-  if (!post) return new Response('Not found', { status: 404 });
-  return new Response(postMarkdown(post), {
-    headers: {
-      'content-type': 'text/markdown; charset=utf-8',
-      // The HTML article stays the canonical page for search engines.
-      link: `<${absUrl(postPath(post))}>; rel="canonical"`,
-      'x-robots-tag': 'noindex, follow'
-    }
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+// The Worker (worker.js) adds the canonical link and noindex headers.
+export function GET({ props }) {
+  return new Response(postMarkdown(props.post), {
+    headers: { 'content-type': 'text/markdown; charset=utf-8' }
   });
 }

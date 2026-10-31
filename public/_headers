@@ -1,0 +1,17 @@
+# Cloudflare Workers static assets: response headers.
+# https://developers.cloudflare.com/workers/static-assets/headers/
+
+# Fingerprinted build output (JS, fonts) never changes: cache for a year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images keep their names when rebuilt, so refresh them in the background.
+/assets/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/sw.js
+  Service-Worker-Allowed: /
+
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff

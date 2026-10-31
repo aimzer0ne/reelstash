@@ -6,11 +6,11 @@ import { DownloaderIsland } from '../../components/DownloaderIsland.jsx';
 import { HeaderIsland } from '../../components/HeaderIsland.jsx';
 import { ToolBody } from '../../components/ToolBody.jsx';
 import { getGuideLinks } from '../../lib/blog.js';
-import { requestLocale } from '../../lib/i18n.js';
+import { localeFromParam } from '../../lib/i18n.js';
 import { messagesFor } from '../../lib/messages.js';
 
 const { page, robots, canonical = page.metadata.alternates.canonical } = Astro.props;
-const locale = requestLocale(Astro.cookies, Astro.request.headers);
+const locale = localeFromParam(Astro.params.locale);
 const messages = messagesFor(locale);
 const guides = await getGuideLinks();
 const meta = page.metadata;

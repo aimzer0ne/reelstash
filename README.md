@@ -20,14 +20,15 @@ npm run dev
 
 Then visit [http://localhost:4321](http://localhost:4321). Set a long random `DOWNLOAD_TOKEN_SECRET` for any deployment; it signs the short-lived download URLs.
 
-## Deploy on Vercel
+## Deploy
 
-1. Install the [Vercel CLI](https://vercel.com/docs/cli) and log in.
-2. From this folder: `vercel` for a preview, or `vercel --prod` for production.
-3. In the Vercel project settings add:
-   - `DOWNLOAD_TOKEN_SECRET` — long random string that signs download tickets
-   - `SITE_URL=https://reelsdl.net`
-   - `NEXT_PUBLIC_API_URL=https://get.reelsdl.net`
+The website and the API deploy separately, and `npm run deploy` does both:
+
+- **Website** (`npx wrangler deploy`): prerendered pages and assets from `dist/client`, served by Cloudflare. Deploy it after any change to a page, its copy, or its styles.
+- **API** (`vercel --prod`): the `/api/*` function on Vercel. Deploy it after any change to `lib/reelstash.js` or the API guards. Its project settings need:
+  - `DOWNLOAD_TOKEN_SECRET` — long random string that signs download tickets
+  - `SITE_URL=https://reelsdl.net`
+  - `NEXT_PUBLIC_API_URL=https://get.reelsdl.net`
 
 After a production deploy, run `node scripts/indexnow.mjs` to tell Bing and the other IndexNow engines which pages changed (pass paths such as `/blog/new-post` to submit only those). The key file is `public/<key>.txt`.
 
@@ -37,35 +38,37 @@ There is a dedicated Instagram audio page at `/audio` that extracts MP3 soundtra
 
 | Host | Role |
 |------|------|
-| `https://reelsdl.net` | Public website (Cloudflare Worker → Vercel) |
+| `https://reelsdl.net` | Public website (Cloudflare Worker + static assets) |
 | `https://get.reelsdl.net` | API only (`/api/resolve`, `/api/download`, `/api/health`) on Vercel |
 
-- **reelsdl.net** — Cloudflare Worker route `reelsdl.net/*` (and `www.reelsdl.net/*`). The Worker proxies to `API_ORIGIN = https://get.reelsdl.net` and adds `x-reelsdl-host: reelsdl.net`, which makes Vercel serve the website rather than redirect. Never set it to `reelsdl.net` (loop).
+- **reelsdl.net** — Cloudflare Worker route `reelsdl.net/*` (and `www.reelsdl.net/*`). Pages are prerendered once per language: English at the public URL, the others under the internal `/i18n/<id>` folders. The Worker picks the language from the `reelsdl_lang` cookie or `Accept-Language` and serves that copy at the same URL.
 - **get.reelsdl.net** — added as a domain on the Vercel project. Cloudflare DNS: **CNAME** `get` → `cname.vercel-dns.com`, **DNS only** (grey cloud).
 
 Duplicate-content protection — every non-canonical host answers with a **301 to the same path on `https://reelsdl.net`**:
 
 - `get.reelsdl.net/*` except the three API paths (its `robots.txt` only blocks `/api/`, so Google can see the redirects)
 - `www.reelsdl.net/*`
-- the production `*.vercel.app` hostname, unless the request came through the Worker (`x-reelsdl-host` header)
+- the `*.vercel.app` hostnames
 
-The API only accepts traffic on `get.reelsdl.net` and only from `https://reelsdl.net`: locked CORS, a signed `__Secure-` site cookie, a required `x-reelsdl-client` header, JSON-only resolve bodies, and HMAC download tickets. API responses carry `X-Robots-Tag: noindex`.
+The API only accepts traffic on `get.reelsdl.net` and only from `https://reelsdl.net`: locked CORS, a required `x-reelsdl-client` header, JSON-only resolve bodies, and HMAC download tickets. API responses carry `X-Robots-Tag: noindex`.
 
 ## Project layout
 
 | Path | Role |
 |------|------|
-| `src/pages/` | Astro pages, `/api/*` endpoints, `404`, `robots.txt`, `sitemap.xml` |
+| `src/pages/` | Astro pages (`[...locale]/` builds each page in every language), `/api/*` endpoints, `404`, `robots.txt`, `sitemap.xml` |
 | `src/layouts/` | `Base.astro` (head and meta tags); `ToolPage.astro` and `InfoPage.astro` assemble each page |
-| `src/middleware.js` | Host routing, redirects, security headers |
+| `src/middleware.js` | API host routing and headers; language routing under `astro dev` |
 | `components/` | Shared UI. Only `HeaderIsland` and `DownloaderIsland` hydrate; page bodies (`ToolBody`, `InfoBody`) are static HTML |
 | `lib/site.jsx` | Page copy, SEO, and FAQ |
 | `lib/nav.js` | Header tabs and footer links |
 | `lib/messages.js` | UI strings in 31 languages; pages pass one language to the islands |
 | `lib/reelstash.js` | Resolve/download logic (GraphQL, HTML, ffmpeg) |
 | `lib/api-guard.js` | API host/origin/cookie checks |
-| `worker.js` | Cloudflare Worker: reelsdl.net → Vercel proxy |
-| `scripts/` | `build-images.mjs` (illustrations, share cards, blog covers), `indexnow.mjs` |
+| `lib/redirects.mjs` | Old URL → current URL (301s) |
+| `worker.js` | Cloudflare Worker: serves the static site, picks the language, sets security headers |
+| `public/_headers` | Cache rules for static assets |
+| `scripts/` | `split-output.mjs` (separates the Cloudflare and Vercel builds), `build-images.mjs` (illustrations, share cards, blog covers), `indexnow.mjs` |
 
 ## How it works
 

@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "NODE_ENV=production astro build && node scripts/split-output.mjs",
+    "preview": "astro preview",
+    "deploy": "npm run build && npx wrangler deploy && vercel --prod"
   },
   "engines": {
     "node": "22.x"

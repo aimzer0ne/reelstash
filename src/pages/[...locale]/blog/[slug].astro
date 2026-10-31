@@ -1,18 +1,25 @@
 ---
 import { render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import { SiteFooter } from '../../../components/Footer.jsx';
-import { HeaderIsland } from '../../../components/HeaderIsland.jsx';
-import { requestLocale } from '../../../lib/i18n.js';
-import { messagesFor } from '../../../lib/messages.js';
-import { BLOG_PATH, OG_SIZE, formatDate, getPost, getPosts, postImage, postJsonLd, postPath, postTool, readingMinutes } from '../../../lib/blog.js';
-import '../../styles/blog.css';
+import Base from '../../../layouts/Base.astro';
+import { SiteFooter } from '../../../../components/Footer.jsx';
+import { HeaderIsland } from '../../../../components/HeaderIsland.jsx';
+import { localeFromParam, localeStaticPaths } from '../../../../lib/i18n.js';
+import { messagesFor } from '../../../../lib/messages.js';
+import { BLOG_PATH, OG_SIZE, formatDate, getPosts, postImage, postJsonLd, postPath, postTool, readingMinutes } from '../../../../lib/blog.js';
+import '../../../styles/blog.css';
 
-const post = await getPost(Astro.params.slug);
-if (!post) return Astro.rewrite('/404');
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return localeStaticPaths().flatMap(({ params }) => posts.map((post) => ({
+    params: { ...params, slug: post.id },
+    props: { post }
+  })));
+}
+
+const { post } = Astro.props;
 
 // Posts are English; only the header and footer follow the visitor's language.
-const uiLocale = requestLocale(Astro.cookies, Astro.request.headers);
+const uiLocale = localeFromParam(Astro.params.locale);
 const messages = messagesFor(uiLocale);
 const { Content, headings } = await render(post);
 const sections = headings.filter((heading) => heading.depth === 2);

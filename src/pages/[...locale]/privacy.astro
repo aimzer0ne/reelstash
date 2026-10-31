@@ -1,0 +1,7 @@
+---
+import InfoPage from '../../layouts/InfoPage.astro';
+import { localeStaticPaths } from '../../../lib/i18n.js';
+
+export const getStaticPaths = localeStaticPaths;
+---
+<InfoPage pageId="privacy" />

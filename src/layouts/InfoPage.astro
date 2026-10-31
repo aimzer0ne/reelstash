@@ -3,12 +3,12 @@
 import Base from './Base.astro';
 import { HeaderIsland } from '../../components/HeaderIsland.jsx';
 import { INFO_PAGES, InfoBody } from '../../components/InfoBody.jsx';
-import { requestLocale } from '../../lib/i18n.js';
+import { localeFromParam } from '../../lib/i18n.js';
 import { messagesFor } from '../../lib/messages.js';
 
 const { pageId } = Astro.props;
 const [page] = INFO_PAGES[pageId];
-const locale = requestLocale(Astro.cookies, Astro.request.headers);
+const locale = localeFromParam(Astro.params.locale);
 const messages = messagesFor(locale);
 const meta = page.metadata;
 ---

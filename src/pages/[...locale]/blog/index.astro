@@ -1,14 +1,16 @@
 ---
-import Base from '../../layouts/Base.astro';
-import { SiteFooter } from '../../../components/Footer.jsx';
-import { HeaderIsland } from '../../../components/HeaderIsland.jsx';
-import { requestLocale } from '../../../lib/i18n.js';
-import { messagesFor } from '../../../lib/messages.js';
-import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE, blogIndexJsonLd, formatDate, getPosts, postImage, postPath, readingMinutes } from '../../../lib/blog.js';
-import '../../styles/blog.css';
+import Base from '../../../layouts/Base.astro';
+import { SiteFooter } from '../../../../components/Footer.jsx';
+import { HeaderIsland } from '../../../../components/HeaderIsland.jsx';
+import { localeFromParam, localeStaticPaths } from '../../../../lib/i18n.js';
+import { messagesFor } from '../../../../lib/messages.js';
+import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE, blogIndexJsonLd, formatDate, getPosts, postImage, postPath, readingMinutes } from '../../../../lib/blog.js';
+import '../../../styles/blog.css';
+
+export const getStaticPaths = localeStaticPaths;
 
 // Posts are English; only the header and footer follow the visitor's language.
-const uiLocale = requestLocale(Astro.cookies, Astro.request.headers);
+const uiLocale = localeFromParam(Astro.params.locale);
 const messages = messagesFor(uiLocale);
 const posts = await getPosts();
 ---

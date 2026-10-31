@@ -1,0 +1,8 @@
+---
+import ToolPage from '../../layouts/ToolPage.astro';
+import { storiesPage } from '../../../lib/tool-pages.jsx';
+import { localeStaticPaths } from '../../../lib/i18n.js';
+
+export const getStaticPaths = localeStaticPaths;
+---
+<ToolPage page={storiesPage} />

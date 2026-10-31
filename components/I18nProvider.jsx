@@ -5,9 +5,9 @@ import { LANG_COOKIE, LOCALES, localeFromValue, localeMeta } from '@/lib/i18n';
 
 const I18nContext = createContext(null);
 
-// The server picks the language (saved cookie, else Accept-Language) and passes
-// that locale's strings in `messages`. Choosing another language saves the
-// cookie and reloads, so every part of the page re-renders in it.
+// The Worker picks the language (saved cookie, else Accept-Language) and serves
+// that language's page, with its strings in `messages`. Choosing another language saves the
+// cookie and reloads, which fetches that copy of the page.
 function persistLocale(id) {
   document.cookie = `${LANG_COOKIE}=${id}; path=/; max-age=31536000; samesite=lax`;
 }

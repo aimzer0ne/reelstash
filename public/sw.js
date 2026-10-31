@@ -1,4 +1,4 @@
-const CACHE = 'reelsdl-v4';
+const CACHE = 'reelsdl-v5';
 const PRECACHE = [
   '/favicon.svg',
   '/icon-192.webp'
@@ -16,6 +16,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then(() => self.registration.navigationPreload?.enable())
       .then(() => self.clients.claim())
   );
 });
@@ -37,17 +38,19 @@ self.addEventListener('fetch', (event) => {
   ) return;
 
   if (request.mode === 'navigate') {
-    event.respondWith(networkFirst(request));
+    event.respondWith(networkFirst(event));
     return;
   }
 
   event.respondWith(cacheFirst(request));
 });
 
-async function networkFirst(request) {
+async function networkFirst(event) {
+  const { request } = event;
   const cache = await caches.open(CACHE);
   try {
-    const response = await fetch(request);
+    // The preload starts with the navigation, so waiting for this worker to boot adds no delay.
+    const response = (await event.preloadResponse) || await fetch(request);
     if (response.ok) cache.put(request, response.clone());
     return response;
   } catch {

@@ -1,0 +1,11 @@
+---
+import ToolPage from '../../layouts/ToolPage.astro';
+import { notFoundPage } from '../../../lib/site.jsx';
+import { localeStaticPaths } from '../../../lib/i18n.js';
+
+// English uses ../404.astro; the Worker serves these with a 404 status.
+export function getStaticPaths() {
+  return localeStaticPaths().filter(({ params }) => params.locale);
+}
+---
+<ToolPage page={notFoundPage} canonical={null} robots="noindex, follow" />
